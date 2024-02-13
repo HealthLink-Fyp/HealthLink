@@ -1,8 +1,5 @@
-# HealthLink
 
-
-
-## Features
+## HealthLink Features
 
 - User registration and authentication
 - Patient and doctor profiles
@@ -14,7 +11,3 @@
 - LLM (Language Learning Model)
 - Payment processing
 - Admin dashboard for managing users, appointments, and payments
-
-## LLM Model
-
-The HealthLink platform incorporates the LLM (Language Learning Model) to enhance communication between patients and doctors. The LLM model utilizes advanced natural language processing techniques to facilitate accurate and efficient language translation during consultations.
