@@ -1,6 +1,6 @@
 # HealthLink
 
-HealthLink is a telemedicine platform built with Django and Angular.
+
 
 ## Features
 
