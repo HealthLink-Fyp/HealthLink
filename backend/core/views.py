@@ -104,7 +104,7 @@ class ForgotView(APIView):
         if email:
             user = User.objects.filter(email=email).first()
 
-        forgot_url = "https://localhost:3000/reset/" + token
+        forgot_url = "https://localhost:4200/reset/" + token
 
         subject = "Reset your HealthLink Password"
         message = f"Dear {user.first_name}, To select a new password, click on thie below link:\n {forgot_url}"
