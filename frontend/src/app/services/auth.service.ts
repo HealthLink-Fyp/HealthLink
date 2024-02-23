@@ -15,12 +15,12 @@ export class AuthService {
 
   register(body:any)
   {
-    return this.http.post(`${environment.api}/register`,body);
+    return this.http.post(`${environment.api}/auth/register`,body);
   }
 
   login(body:any)
   {
-    return this.http.post(`${environment.api}/login`,body,{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/login`,body,{withCredentials:true});
   }
 
   user()

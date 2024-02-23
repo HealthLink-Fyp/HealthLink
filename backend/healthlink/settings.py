@@ -21,10 +21,16 @@ EMAIL_USE_TLS = True
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'https://opulent-barnacle-j9gp65g9ggvf5wp6-4200.app.github.dev',
+]
+
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -33,9 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
     "core",
-    "corsheaders",
 ]
 
 MIDDLEWARE = [
