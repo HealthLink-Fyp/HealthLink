@@ -1,0 +1,43 @@
+<form [formGroup]="form" (submit)="submit()">
+
+<h1 >Please register</h1>
+
+<div>
+    <label>First Name</label>
+<input  placeholder="First Name"> 
+
+</div>
+
+<div >
+
+    <label>Last Name</label>
+<input formControlName="first_name" class="form-control" placeholder="Last Name"> 
+
+</div>
+
+<div class="form-floating">
+
+    <label>Email address</label>
+<input formControlName="last_name" type="email"  placeholder="name@example.com"> 
+
+</div>
+
+<div>
+
+    <label>Password</label>
+<input formControlName="password" type="password"  placeholder="Password"> 
+
+</div>
+
+<div>
+
+    <label>Password</label>
+<input formControlName="password_confirm" type="password"  placeholder="Password Confirm"> 
+
+</div>
+
+I
+
+<button  type="submit">Submit</button> 
+
+</form>

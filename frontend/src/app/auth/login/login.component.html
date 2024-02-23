@@ -1,0 +1,27 @@
+<form [formGroup]="form" (submit)="submit()">
+
+    <h1 >Please register</h1>
+    
+  
+    
+    <div >
+    
+        <label>Email address</label>
+    <input formControlName="last_name" type="email"  placeholder="name@example.com"> 
+    
+    </div>
+    
+    <div>
+    
+        <label>Password</label>
+    <input formControlName="password" type="password"  placeholder="Password"> 
+    
+    </div>
+
+    <div>
+        <a routerLink="/forgot">Forgot your password</a>
+    </div>
+    
+    <button  type="submit">Submit</button> 
+    
+    </form>
