@@ -1,6 +1,5 @@
-import secrets
-
 from django.conf import settings
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
@@ -13,7 +12,7 @@ from .authentication import (
     JWTAuthentication,
     create_access_token,
     create_refresh_token,
-    decode_refrsh_token,
+    decode_refresh_token,
 )
 from .models import User, UserForgot, UserToken
 from .serializers import UserSerializer
@@ -86,14 +85,14 @@ class LoginView(APIView):
                     },
                     status=status.HTTP_403_FORBIDDEN,
                 )
-        else:
-            access_token = create_access_token(user.id)
-            refresh_token = create_refresh_token(user.id)
-            UserToken.objects.create(
-                user_id=user.id,
-                token=refresh_token,
-                expire_at=timezone.now() + timezone.timedelta(days=7),
-            )
+
+        access_token = create_access_token(user.id)
+        refresh_token = create_refresh_token(user.id)
+        UserToken.objects.create(
+            user_id=user.id,
+            token=refresh_token,
+            expire_at=timezone.now() + timezone.timedelta(days=7),
+        )
 
         response = Response()
         response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
@@ -111,13 +110,16 @@ class UserView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def get(self, request):
-        return Response(UserSerializer(request.user).data)
+        return Response(
+            UserSerializer(request.user).data,
+            status=status.HTTP_200_OK,
+        )
 
 
 class RefreshView(APIView):
     def post(self, request):
         refresh_token = request.COOKIES.get("refresh_token")
-        id = decode_refrsh_token(token=refresh_token)
+        id = decode_refresh_token(token=refresh_token)
 
         if not UserToken.objects.filter(
             user_id=id,
@@ -128,12 +130,12 @@ class RefreshView(APIView):
 
         access_token = create_access_token(id=id)
 
-        return Response({"access_token": access_token})
+        return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
 
 class LogoutView(APIView):
     def post(self, request):
-        refesh_token = request.COOKIES.get("refesh_token", False)
+        refesh_token = request.COOKIES.get("refresh_token", False)
 
         if not refesh_token:
             return Response(
@@ -149,17 +151,27 @@ class LogoutView(APIView):
 
 class ForgotView(APIView):
     def post(self, request):
-        token = secrets.token_hex(15)
         email = request.data["email"]
-        UserForgot.objects.create(email=email, token=token)
 
-        if not email:
+        try:
+            validate_email(email)
+        except ValidationError:
             return Response(
-                {"error", "Your email was incorrect. Please try again."},
+                {"error", "Please provide a valid email address"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         user = User.objects.filter(email=email).first()
+
+        token = PasswordResetTokenGenerator().make_token(user)
+
+        UserForgot.objects.create(email=email, token=token)
+
+        if not user:
+            return Response(
+                {"error", "Your email was incorrect. Please try again."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         frontend_url = settings.FRONTEND_URL
 
@@ -168,7 +180,7 @@ class ForgotView(APIView):
         else:
             forgot_url = "https://localhost:4200/reset/" + token
 
-        subject = "Link to Reset your HealthLink Password"
+        subject = "A new password to your HealthLink account has been requested"
         message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
         send_mail(
             subject=subject,
@@ -178,25 +190,25 @@ class ForgotView(APIView):
             fail_silently=False,
         )
 
-        return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(
+            {"message": "Check your email to reset your password"},
+            status=status.HTTP_200_OK,
+        )
 
 
 class ResetView(APIView):
     def post(self, request):
-        data = request.data
+        token = request.data.get("token")
+        password = request.data.get("password")
 
-        if data["password"] != data["password_confirm"]:
-            raise exceptions.APIException("Passwords do not match!")
+        user_reset = UserForgot.objects.filter(token=token).first()
+        user = User.objects.filter(email=user_reset.email).first()
 
-        reset_password = UserForgot.objects.filter(token=data["token"]).first()
-
-        if not reset_password:
+        if not PasswordResetTokenGenerator().check_token(user, token):
             return Response(
-                {"error", "Your password reset link was incorrect. Please try again."},
-                status=status.HTTP_400_BAD_REQUEST,
+                {"error", "Token is invalid."},
+                status=status.HTTP_401_UNAUTHORIZED,
             )
-
-        user = User.objects.filter(email=reset_password.email).first()
 
         if not user:
             return Response(
@@ -204,7 +216,7 @@ class ResetView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user.set_password(data["password"])
+        user.set_password(password)
         user.save()
 
         return Response({"message": "Success"}, status=status.HTTP_200_OK)

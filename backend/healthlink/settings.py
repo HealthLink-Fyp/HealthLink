@@ -49,14 +49,14 @@ else:
 
 # Application definition
 INSTALLED_APPS = [
+    # In-house apps
+    "backend.apps.core",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # In-house apps
-    "core",
     # Third-Party apps
     "corsheaders",
     "rest_framework",
