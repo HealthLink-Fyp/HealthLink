@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "healthlink"
+version = "0.1.0"
+description = "HealthLink, A telemedicine plateform."
+authors = ["Faisal Fida <69955157+faisal-fida@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0.2"
+django-cors-headers = "^4.3.1"
+djangorestframework = "^3.14.0"
+PyJWT = "^2.8.0"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
