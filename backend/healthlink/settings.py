@@ -1,16 +1,28 @@
+"""Global Settings"""
+
+# Python imports
 import os
 from pathlib import Path
 
+import dj_database_url
+
+# Third party imports
 import dotenv
+
+# Django imports
+from django.core.management.utils import get_random_secret_key
 
 dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+# Secret Key
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
+
+# Frontend URL
+FRONTEND_URL = os.environ.get("FRONTEND_URL", False)
 
 # Email Settings
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
@@ -19,19 +31,23 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 EMAIL_USE_TLS = True
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Allowed Hosts
 ALLOWED_HOSTS = ["*"]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS Settings
 CORS_ALLOW_CREDENTIALS = True
+cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
+if cors_allowed_origins:
+    CORS_ALLOWED_ORIGINS = cors_allowed_origins.split(",")
 
-CORS_ALLOWED_ORIGINS = [
-    'https://opulent-barnacle-j9gp65g9ggvf5wp6-4200.app.github.dev',
-]
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 
-
+# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -39,9 +55,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # In-house apps
+    "core",
+    # Third-Party apps
     "corsheaders",
     "rest_framework",
-    "core",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +72,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
+
+# Rest Framework settings
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": (
+#         "rest_framework_simplejwt.authentication.JWTAuthentication",
+#     ),
+#     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+#     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+# }
+
+# Django Auth Backend
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
+# Cookie Settings
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = "healthlink.urls"
 
@@ -75,12 +109,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "healthlink.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+# Database
+if bool(os.environ.get("DATABASE_URL")):
+    DATABASES = {
+        "default": dj_database_url.config(),
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
