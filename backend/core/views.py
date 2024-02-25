@@ -86,24 +86,32 @@ class LoginView(APIView):
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
-        access_token = create_access_token(user.id)
-        refresh_token = create_refresh_token(user.id)
-        UserToken.objects.create(
-            user_id=user.id,
-            token=refresh_token,
-            expire_at=timezone.now() + timezone.timedelta(days=7),
-        )
+            access_token = create_access_token(user.id)
+            refresh_token = create_refresh_token(user.id)
+            UserToken.objects.create(
+                user_id=user.id,
+                token=refresh_token,
+                expire_at=timezone.now() + timezone.timedelta(days=7),
+            )
 
-        response = Response()
-        response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
-        response.data = {
-            "access_token": access_token,
-            "refresh_token": refresh_token,
-        }
+            response = Response()
+            response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
+            response.data = {
+                "access_token": access_token,
+                "refresh_token": refresh_token,
+            }
 
-        response.status_code = status.HTTP_200_OK
+            response.status_code = status.HTTP_200_OK
 
-        return response
+            return response
+        else:
+            return Response(
+                    {
+                        "error": "Sorry, we could not find a user with the provided credentials. Please try again.",
+                    },
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
 
 
 class UserView(APIView):

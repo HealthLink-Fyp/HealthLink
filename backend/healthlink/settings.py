@@ -29,10 +29,11 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = int(os.getenv("EMAIL_USE_TLS", 0)) == 1
+EMAIL_USE_SSL = int(os.getenv("EMAIL_USE_SSL", 0)) == 1
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.getenv("DEBUG", 0)) == 1
 
 # Allowed Hosts
 ALLOWED_HOSTS = ["*"]
@@ -50,7 +51,7 @@ else:
 # Application definition
 INSTALLED_APPS = [
     # In-house apps
-    "backend.apps.core",
+    "core",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -115,6 +116,7 @@ if bool(os.environ.get("DATABASE_URL")):
     DATABASES = {
         "default": dj_database_url.config(),
     }
+    print(DATABASES)
 else:
     DATABASES = {
         "default": {
