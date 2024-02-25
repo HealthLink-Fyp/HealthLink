@@ -1,4 +1,4 @@
 export const environment={
  production:false,
- api : 'https://opulent-barnacle-j9gp65g9ggvf5wp6-8000.app.github.dev'
+ api : 'https://curly-space-spork-7v95g6qq4r6whgj-8000.app.github.dev'
 };
