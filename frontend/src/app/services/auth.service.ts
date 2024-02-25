@@ -25,16 +25,16 @@ export class AuthService {
 
   user()
   {
-    return this.http.get(`${environment.api}/register`);
+    return this.http.get(`${environment.api}/auth/user`);
   }
 
   refresh()
   {
-    return this.http.post(`${environment.api}/refresh`,{},{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/refresh`,{},{withCredentials:true});
   }
 
   logout()
   {
-    return this.http.post(`${environment.api}/logout`,{},{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/logout`,{},{withCredentials:true});
   }
 }
