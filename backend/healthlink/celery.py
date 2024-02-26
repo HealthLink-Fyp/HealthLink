@@ -3,9 +3,9 @@ import os
 from celery import Celery
 
 # Django settings for celery
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "healthlink.settings")
 
-app = Celery("backend")
+app = Celery("healthlink")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
 

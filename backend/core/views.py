@@ -196,7 +196,6 @@ class ForgotView(APIView):
 
         message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
 
-        print("Sending mail")
         send_mail_task.delay(email=email, message=message)
 
         return Response(

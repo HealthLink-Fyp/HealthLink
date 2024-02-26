@@ -36,7 +36,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
       args:
-        DOKER_BUILDKIT: 1
+        DOCKER_BUILDKIT: 1
     restart: unless-stopped
     networks:
       - dev_env
@@ -50,4 +50,24 @@ services:
     depends_on:
       - health-db
       - health-redis
+
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        DOCKER_BUILDKIT: 1
+    restart: unless-stopped
+    networks:
+      - dev_env
+    volumes:
+      - ./backend:/app
+    command: sh -c "poetry run celery -A healthlink worker -l info"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - health-backend
+      - health-db
+      - health-redis
+
 
