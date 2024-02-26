@@ -4,12 +4,15 @@ WORKDIR /app/
 
 COPY poetry.lock pyproject.toml /app/
 
-# For pg_config executable to be available
-RUN apk --no-cache add "postgresql-dev" "gcc" "g++"
+# psycopg2 prerequisites
+RUN apk add --no-cache postgresql-dev gcc g++ python3-dev
+
 
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install --no-dev --no-interaction --no-ansi
+    poetry install --no-dev --no-interaction --no-ansi --no-root && \
+    # remove cache to reduce image size
+    rm -rf /root/.cache 
 
 RUN touch /app/README.md
 

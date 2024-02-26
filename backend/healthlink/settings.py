@@ -38,6 +38,10 @@ DEBUG = int(os.getenv("DEBUG", 0)) == 1
 # Allowed Hosts
 ALLOWED_HOSTS = ["*"]
 
+# Timezones
+USE_TZ = True
+TIME_ZONE = "UTC"
+
 # CORS Settings
 CORS_ALLOW_CREDENTIALS = True
 cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
@@ -89,6 +93,12 @@ AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 # Cookie Settings
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+# Celery Configuration
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
 ROOT_URLCONF = "healthlink.urls"
 

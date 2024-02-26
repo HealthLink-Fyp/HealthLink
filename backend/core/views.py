@@ -1,9 +1,11 @@
+# Django Imports
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.utils import timezone
+
+# Rest Framework Imports
 from rest_framework import exceptions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,8 +16,13 @@ from .authentication import (
     create_refresh_token,
     decode_refresh_token,
 )
+
+# Local Imports
 from .models import User, UserForgot, UserToken
 from .serializers import UserSerializer
+
+# Third Part Imports
+from .tasks import send_mail_task
 
 
 # Create your views here.
@@ -106,12 +113,11 @@ class LoginView(APIView):
             return response
         else:
             return Response(
-                    {
-                        "error": "Sorry, we could not find a user with the provided credentials. Please try again.",
-                    },
-                    status=status.HTTP_403_FORBIDDEN,
-                )
-
+                {
+                    "error": "Sorry, we could not find a user with the provided credentials. Please try again.",
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
 
 class UserView(APIView):
@@ -188,18 +194,13 @@ class ForgotView(APIView):
         else:
             forgot_url = "https://localhost:4200/reset/" + token
 
-        subject = "A new password to your HealthLink account has been requested"
         message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=None,
-            recipient_list=[email],
-            fail_silently=False,
-        )
+
+        print("Sending mail")
+        send_mail_task.delay(email=email, message=message)
 
         return Response(
-            {"message": "Check your email to reset your password"},
+            {"message": f"Check your {email} - {message} to reset your password"},
             status=status.HTTP_200_OK,
         )
 

@@ -1,11 +1,18 @@
+import os
+
 from celery import Celery
-from plane.settings.redis import redis_instance
 
 # Django settings for celery
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "plane.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 
-ri = redis_instance()
-
-app = Celery("plane")
+app = Celery("backend")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
+
+# Load task modules from all registered Django apps.
+app.autodiscover_tasks()
+
+
+@app.task(bind=True, ignore_result=True)
+def debug_task(self):
+    print(f"Request: {self.request!r}")
