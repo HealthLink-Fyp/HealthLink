@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthComponent } from './auth/auth/auth.component';
 import { ResetComponent } from './auth/auth/reset/reset.component';
 import { ForgotComponent } from './auth/auth/forgot/forgot.component';
+import { MaterialModule } from './material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { ForgotComponent } from './auth/auth/forgot/forgot.component';
     NavComponent,
     AuthComponent,
     ResetComponent,
-    ForgotComponent
+    ForgotComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,10 @@ import { ForgotComponent } from './auth/auth/forgot/forgot.component';
     BrowserAnimationsModule,
     RouterOutlet,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
+   
+    
     
   ],
   providers: [
