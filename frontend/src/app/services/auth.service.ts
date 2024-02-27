@@ -15,26 +15,26 @@ export class AuthService {
 
   register(body:any)
   {
-    return this.http.post(`${environment.api}/auth/register`,body);
+    return this.http.post(`${environment.api}/auth/register/`,body);
   }
 
   login(body:any)
   {
-    return this.http.post(`${environment.api}/auth/login`,body,{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/login/`,body,{withCredentials:true});
   }
 
   user()
   {
-    return this.http.get(`${environment.api}/auth/user`);
+    return this.http.get(`${environment.api}/auth/user/`);
   }
 
   refresh()
   {
-    return this.http.post(`${environment.api}/auth/refresh`,{},{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/refresh/`,{},{withCredentials:true});
   }
 
   logout()
   {
-    return this.http.post(`${environment.api}/auth/logout`,{},{withCredentials:true});
+    return this.http.post(`${environment.api}/auth/logout/`,{},{withCredentials:true});
   }
 }

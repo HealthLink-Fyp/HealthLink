@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
           return this.authService.refresh().pipe(
             switchMap((res: any) => {
-              this.authService.accessToken = res.token;
+              this.authService.accessToken = res.access_token;
               return next.handle(req.clone({
                 setHeaders: {
                   Authorization: `Bearer ${this.authService.accessToken}`

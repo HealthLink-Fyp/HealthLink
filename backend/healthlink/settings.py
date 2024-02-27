@@ -43,14 +43,16 @@ TIME_ZONE = "UTC"
 
 # CORS Settings
 CORS_ALLOW_CREDENTIALS = True
-cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
-if cors_allowed_origins:
-    CORS_ALLOWED_ORIGINS = cors_allowed_origins.split(",")
+# cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
+# if cors_allowed_origins:
+#     CORS_ALLOWED_ORIGINS = cors_allowed_origins.split(",")
 
-else:
-    CORS_ALLOW_ALL_ORIGINS = True
+# else:
+#     CORS_ALLOW_ALL_ORIGINS = True
 
-
+# print(CORS_ALLOWED_ORIGINS)
+CORS_ALLOWED_ORIGINS = ['https://curly-space-spork-7v95g6qq4r6whgj-4200.app.github.dev']
+CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 INSTALLED_APPS = [
     # In-house apps
