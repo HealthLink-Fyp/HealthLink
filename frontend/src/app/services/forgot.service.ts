@@ -11,12 +11,12 @@ export class ForgotService {
 
   forgot(body:any)
   {
-    return this.http.post(`${environment.api}/forgot`,body);
+    return this.http.post(`${environment.api}/auth/forget`,body);
   }
 
   reset(body:any)
   {
-    return this.http.post(`${environment.api}/reset`,body);
+    return this.http.post(`${environment.api}/auth/reset`,body);
   }
 
 }

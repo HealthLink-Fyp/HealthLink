@@ -35,17 +35,16 @@ export class ResetComponent implements OnInit {
   
   
   submit() {
-    const formData=this.form.getRawValue;
+    const formData=this.form.getRawValue();
 
     const data={
       ...formData,
       token:this.route.snapshot.params['token']
     }
+    
     this.forgotService.reset(data).subscribe(
-      () => {
-        this.router.navigate(['/login']);
-      },
-      
+      () => 
+        this.router.navigate(['/login'])  
     );
   }
    
