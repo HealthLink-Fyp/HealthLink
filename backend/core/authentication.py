@@ -53,7 +53,7 @@ def create_refresh_token(id):
     )
 
 
-def decode_refrsh_token(token):
+def decode_refresh_token(token):
     try:
         payload = jwt.decode(token, "refresh_secret", algorithms=["HS256"])
         return payload["user_id"]
