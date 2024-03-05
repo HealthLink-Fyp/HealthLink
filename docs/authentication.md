@@ -13,6 +13,7 @@ API Endpoints
   "password": "password123"
 }
 ```
+
 * **Response**:
 ```json
 {
@@ -20,19 +21,23 @@ API Endpoints
   "message": "Account created successfully"
 }
 ```
+
 ### Login
 
 * **Method**: POST
 * **Endpoint**: `/api/v1/login/`
 * **Description**: Logs in an existing user
 * **Request Body**:
+
 ```json
 {
   "email": "user@example.com",
   "password": "password123"
 }
 ```
+
 * **Response**:
+
 ```json
 {
   "success": true,
@@ -40,6 +45,7 @@ API Endpoints
   "access_token": "eyJrZXkiOiAidmFsdWUiOlt7IlJlc29sdmFsImlzcyI6Imh0dHA6Ly9zdGF0aWMuY29tL3F1ZXN0aW9ucyIsInVzZXJfaWQiOiAifQ=="
 }
 ```
+
 ### Get User
 
 * **Method**: GET
@@ -47,6 +53,7 @@ API Endpoints
 * **Description**: Retrieves the current user's information
 * **Auth**: Bearer Token
 * **Response**:
+
 ```json
 {
   "success": true,
