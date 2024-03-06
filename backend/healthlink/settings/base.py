@@ -20,19 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
 # Frontend URL
-FRONTEND_URL = os.environ.get("FRONTEND_URL", False)
+FRONTEND_URL = os.environ.get("FRONTEND_URL", default="https://localhost:4200/reset/")
 
 # Email Settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG", 0)) == 1
+DEBUG = False
 
 # Allowed Hosts
 ALLOWED_HOSTS = ["*"]
@@ -43,16 +37,6 @@ TIME_ZONE = "UTC"
 
 # CORS Settings
 CORS_ALLOW_CREDENTIALS = True
-# cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
-# if cors_allowed_origins:
-#     CORS_ALLOWED_ORIGINS = cors_allowed_origins.split(",")
-
-# else:
-#     CORS_ALLOW_ALL_ORIGINS = True
-
-# print(CORS_ALLOWED_ORIGINS)
-CORS_ALLOWED_ORIGINS = ['https://curly-space-spork-7v95g6qq4r6whgj-4200.app.github.dev']
-CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 INSTALLED_APPS = [
@@ -80,27 +64,12 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-# Rest Framework settings
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": (
-#         "rest_framework_simplejwt.authentication.JWTAuthentication",
-#     ),
-#     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-#     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
-# }
-
 # Django Auth Backend
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
 # Cookie Settings
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-
-# Celery Configuration
-CELERY_TIMEZONE = TIME_ZONE
-CELERY_TASK_SERIALIZER = "json"
-CELERY_ACCEPT_CONTENT = ["application/json"]
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
 ROOT_URLCONF = "healthlink.urls"
 

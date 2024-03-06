@@ -6,4 +6,7 @@
 */__pycache__/
 .pytest_cache/
 **/__pycache__/*
+*/*/__pycache__/*
 .vscode/*
+*/Justfile
+*/poetry.lock

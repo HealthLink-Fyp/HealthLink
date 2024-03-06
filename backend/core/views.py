@@ -187,16 +187,11 @@ class ForgotView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        frontend_url = settings.FRONTEND_URL
-
-        if frontend_url:
-            forgot_url = frontend_url + "/" + token
-        else:
-            forgot_url = "https://localhost:4200/reset/" + token
+        forgot_url = settings.FRONTEND_URL + "/" + token
 
         message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
 
-        send_mail_task.delay(email=email, message=message)
+        # send_mail_task.delay(email=email, message=message)
 
         return Response(
             {"message": f"Check your {email} - {message} to reset your password"},
