@@ -58,32 +58,31 @@ class RegisterView(APIView):
 class LoginView(APIView):
     def post(self, request):
 
-        email = request.data.get("email", False)
-        password = request.data.get("password", False)
+        email = request.data.get("email", "")
+        password = request.data.get("password", "")
 
         email = email.strip().lower()
-        user = User.objects.filter(email=email).first()
+        
 
         missing_data__exception(email, password)
         validate_email__exception(email)
 
-        if user:
-            invalid_credentials__exception(user, password)
-            access_token = create_access_token(user.id)
-            refresh_token = create_refresh_token(user.id)
-            UserToken.objects.create(
-                user_id=user.id,
-                token=refresh_token,
-                expire_at=timezone.now() + timezone.timedelta(days=7),
-            )
-
-            response = Response()
-            response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
-            response.data = {"access_token": access_token, "refresh_token": refresh_token}
-            response.status_code = status.HTTP_200_OK
-            return response
-
+        user = User.objects.filter(email=email).first()
         invalid_credentials__exception(user, password)
+
+        access_token = create_access_token(user.id)
+        refresh_token = create_refresh_token(user.id)
+        UserToken.objects.create(
+            user_id=user.id,
+            token=refresh_token,
+            expire_at=timezone.now() + timezone.timedelta(days=7),
+        )
+
+        response = Response()
+        response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
+        response.data = {"access_token": access_token, "refresh_token": refresh_token}
+        response.status_code = status.HTTP_200_OK
+        return response
 
 
 class UserView(APIView):

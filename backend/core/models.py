@@ -104,7 +104,7 @@ class DoctorProfile(models.Model):
     recommendation_percent = models.IntegerField(null=True, blank=True)
     patients_count = models.IntegerField(null=True, blank=True)
     reviews_count = models.IntegerField(null=True, blank=True)
-    profile_photo_url = models.ImageField(upload_to='static/media', null=True, blank=True)
+    profile_photo_url = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return (self.user.first_name + " " + self.user.last_name + " - " + self.user.email)

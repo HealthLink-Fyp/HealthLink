@@ -9,4 +9,4 @@ urlpatterns = [
     path("auth/", include("core.urls.authentication")),
     path("api/", include("core.urls.profile")),
     # Add media photos path
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
