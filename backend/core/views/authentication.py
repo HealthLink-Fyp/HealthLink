@@ -34,7 +34,6 @@ from .exceptions import (
 )
 
 
-# Create your views here.
 class RegisterView(APIView):
     def post(self, request):
 
@@ -48,10 +47,12 @@ class RegisterView(APIView):
         user_exists__exception(User, email, username)
 
         serializer = UserSerializer(data=request.data)
-        serializer.is_valid()
-        serializer.save()
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
@@ -78,7 +79,7 @@ class LoginView(APIView):
 
             response = Response()
             response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
-            response.data = { "access_token": access_token, "refresh_token": refresh_token, }
+            response.data = {"access_token": access_token, "refresh_token": refresh_token}
             response.status_code = status.HTTP_200_OK
             return response
 
@@ -97,28 +98,17 @@ class UserView(APIView):
 
 class RefreshView(APIView):
     def post(self, request):
+
         refresh_token = request.COOKIES.get("refresh_token")
         id = decode_refresh_token(token=refresh_token)
 
-        if not UserToken.objects.filter(
-            user_id=id,
-            token=refresh_token,
-            expire_at__gt=timezone.now(),
-        ).exists():
+        filter_params = {'user_id': id, 'token': refresh_token, 'expire_at__gt': timezone.now()}
+
+        if not UserToken.objects.filter(**filter_params).exists():
             raise exceptions.AuthenticationFailed("Unauthenticated")
 
         access_token = create_access_token(id=id)
-
-        response = Response()
-        response.set_cookie(key="access_token", value=access_token, httponly=True)
-
-        response.data = {
-        "access_token": access_token,
-        }
-
-        response.status_code = status.HTTP_200_OK
-
-        return response
+        return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
 
 class LogoutView(APIView):
@@ -133,7 +123,7 @@ class LogoutView(APIView):
         response.delete_cookie(key="refresh_token")
         response.data = {"message": "Success"}
         response.status_code = status.HTTP_200_OK
-        
+
         return response
 
 

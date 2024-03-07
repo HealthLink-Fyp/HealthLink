@@ -11,12 +11,8 @@ class JWTAuthentication(BaseAuthentication):
     def authenticate(self, request):
         auth_data = get_authorization_header(request).split()
 
-        if auth_data and len(auth_data) == 2:
+        if len(auth_data) == 2:
             access_token = auth_data[1].decode("utf-8")
-        else:
-            access_token = request.COOKIES.get("access_token")
-
-        if access_token:
             user = User.objects.get(pk=decode_access_token(access_token))
             return (user, auth_data)
 

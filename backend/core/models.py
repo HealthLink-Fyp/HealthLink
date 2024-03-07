@@ -51,7 +51,7 @@ class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
-    role = models.CharField(max_length=255, choices=ROLE_CHOICES, null=False, blank=False, default="patient")
+    role = models.CharField(max_length=255, choices=ROLE_CHOICES, null=False, blank=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -104,11 +104,10 @@ class DoctorProfile(models.Model):
     recommendation_percent = models.IntegerField(null=True, blank=True)
     patients_count = models.IntegerField(null=True, blank=True)
     reviews_count = models.IntegerField(null=True, blank=True)
-    profile_photo_url = models.ImageField(upload_to='doctor_profile_photos/', null=True, blank=True)
+    profile_photo_url = models.ImageField(upload_to='static/media', null=True, blank=True)
 
     def __str__(self):
         return (self.user.first_name + " " + self.user.last_name + " - " + self.user.email)
-
 
 ##------------- Patient Profile Model --------------##
     

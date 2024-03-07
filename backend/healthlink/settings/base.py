@@ -95,6 +95,7 @@ WSGI_APPLICATION = "healthlink.wsgi.application"
 
 # Database
 if bool(os.environ.get("DATABASE_URL")):
+    print(os.environ.get("DATABASE_URL"))
     DATABASES = {
         "default": dj_database_url.config(),
     }
@@ -131,6 +132,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+
+STATIC_ROOT = BASE_DIR / "static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

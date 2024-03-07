@@ -24,7 +24,7 @@ def missing_data__exception(email, password):
 def user_exists__exception(User, email, username):
     if User.objects.filter(email=email).exists() or User.objects.filter(username=username).exists():
             return Response(
-                {"error", "User with this email already exists"},
+                {"error", "User already exists"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
