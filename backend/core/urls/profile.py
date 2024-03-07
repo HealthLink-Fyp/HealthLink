@@ -1,11 +1,7 @@
 from django.urls import path
 
-from core.views.profile import (
-    DoctorProfileView,
-    PatientProfileView
-)
+from core.views.profile import ProfileView
 
 urlpatterns = [
-    path("doctor/", DoctorProfileView.as_view(), name="doctor"),
-    path("patient/", PatientProfileView.as_view(), name="patient"),
+    path("profile/", ProfileView.as_view(), name="profile"),
 ]

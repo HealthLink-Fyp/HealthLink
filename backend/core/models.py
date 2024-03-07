@@ -1,8 +1,44 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 # Local Imports
 from .choices import SPECIALIZATION_CHOICES, QUALIFICATION_CHOICES, ROLE_CHOICES
+
+##------------- Base User Manager --------------##
+
+class MyUserManager(BaseUserManager):
+    def create_user(self, first_name, last_name, email, username, password, role, phone_number=None, address=None, city=None):
+        if not email:
+            raise ValueError("Users must have an email address")
+
+        user = self.model(
+            first_name=first_name,
+            last_name=last_name,
+            email=self.normalize_email(email),
+            username=username,
+            role=role,
+            phone_number=phone_number,
+            address=address,
+            city=city
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, username=None, role="admin"):
+        user = self.create_user(
+            first_name="admin",
+            last_name="admin",
+            email=email,
+            username=username,
+            password=password,
+            role=role
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
 
 ##------------- User Authentication Model --------------##
 
@@ -16,13 +52,27 @@ class User(AbstractBaseUser):
     address = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     role = models.CharField(max_length=255, choices=ROLE_CHOICES, null=False, blank=False, default="patient")
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
-    REQUIRED_FIELDS = ["first_name", "last_name", "username", "role"]
+    REQUIRED_FIELDS = ["username", "role"]
     USERNAME_FIELD = "email"
+
+    objects = MyUserManager()
 
     def __str__(self):
         return self.email
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return True
+
 
 
 class UserToken(models.Model):
@@ -65,7 +115,7 @@ class DoctorProfile(models.Model):
 class PatientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     age = models.IntegerField(null=True, blank=True)
-    sex = models.CharField(max_length=255, null=True, blank=True)
+    sex = models.BooleanField(null=True, blank=True)
     blood_group = models.CharField(max_length=255, null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
@@ -75,3 +125,6 @@ class PatientProfile(models.Model):
         if self.height and self.weight:
             self.bmi = self.weight / (self.height / 100) ** 2
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return (self.user.first_name + " " + self.user.last_name + " - " + self.user.email)

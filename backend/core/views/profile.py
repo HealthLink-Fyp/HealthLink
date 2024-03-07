@@ -2,40 +2,51 @@ from core.models import DoctorProfile, PatientProfile
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
 
+from django.core.exceptions import ObjectDoesNotExist
 
-class DoctorProfileView(APIView):
+from core.authentication import JWTAuthentication
+
+class ProfileView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
-        profile = DoctorProfile.objects.filter(pk=request.user.pk)
+        user = request.user
 
-        if profile.exists():
-            serializer = PatientProfileSerializer(profile.first())
+        try:
+            if user.role == 'doctor':
+                profile = DoctorProfile.objects.get(user=user)
+                serializer = DoctorProfileSerializer(profile)
+            elif user.role == 'patient':
+                profile = PatientProfile.objects.get(user=user)
+                serializer = PatientProfileSerializer(profile)
+            else:
+                return Response({"detail","Only doctor and patient allowed!"}, status=status.HTTP_403_FORBIDDEN)
+
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response({"detail": "Doctor Profile not found."}, status=status.HTTP_400_BAD_REQUEST)
+            
+        except ObjectDoesNotExist:
+            return Response({"detail","Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
     def post(self, request):
-        serializer = DoctorProfileSerializer(data=request.data)
-        if serializer.is_valid():
+        user = request.user
+        payload = request.data
+        payload['user'] = user.id
+
+        if user.role == 'doctor':
+            serializer = DoctorProfileSerializer(data=payload)
+        elif user.role == 'patient':
+            serializer = PatientProfileSerializer(data=payload)
+        else:
+            return Response({"detail": "Only doctor and patient allowed!"}, status=status.HTTP_403_FORBIDDEN)
+            
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
-
-class PatientProfileView(APIView):
-    def get(self, request):
-        profile = PatientProfile.objects.filter(pk=request.user.pk)
-        if profile.exists():
-            serializer = PatientProfileSerializer(profile.first())
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response({"detail": "Patient Profile not found."}, status=status.HTTP_400_BAD_REQUEST)
-
-    def post(self, request):
-        serializer = PatientProfileSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
