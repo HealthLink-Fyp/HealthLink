@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (
+from core.views.authentication import (
     ForgotView,
     LoginView,
     LogoutView,

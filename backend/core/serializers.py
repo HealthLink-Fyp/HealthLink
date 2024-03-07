@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import User
+from .models import User, DoctorProfile, PatientProfile
 
 
 class UserSerializer(ModelSerializer):
@@ -17,3 +17,15 @@ class UserSerializer(ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class DoctorProfileSerializer(ModelSerializer):
+    class Meta:
+        model = DoctorProfile
+        fields = "__all__"
+
+
+class PatientProfileSerializer(ModelSerializer):
+    class Meta:
+        model = PatientProfile
+        fields = "__all__"

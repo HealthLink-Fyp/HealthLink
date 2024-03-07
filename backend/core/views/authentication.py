@@ -10,7 +10,7 @@ from rest_framework import exceptions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .authentication import (
+from core.authentication import (
     JWTAuthentication,
     create_access_token,
     create_refresh_token,
@@ -18,11 +18,11 @@ from .authentication import (
 )
 
 # Local Imports
-from .models import User, UserForgot, UserToken
-from .serializers import UserSerializer
+from core.models import User, UserForgot, UserToken
+from core.serializers import UserSerializer
 
 # Third Part Imports
-from .tasks import send_mail_task
+from core.tasks import send_mail_task  # noqa: F401
 
 
 # Create your views here.
