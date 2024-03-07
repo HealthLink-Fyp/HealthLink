@@ -15,6 +15,8 @@ import { AuthComponent } from './auth/auth/auth.component';
 import { ResetComponent } from './auth/auth/reset/reset.component';
 import { ForgotComponent } from './auth/auth/forgot/forgot.component';
 import { MaterialModule } from './material/material/material.module';
+import { DoctorComponent } from './doctor/doctor.component';
+import { PatientComponent } from './patient/patient.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MaterialModule } from './material/material/material.module';
     AuthComponent,
     ResetComponent,
     ForgotComponent,
+    DoctorComponent,
+    PatientComponent,
     
     
   ],
