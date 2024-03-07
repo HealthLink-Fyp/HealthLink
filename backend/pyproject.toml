@@ -5,6 +5,7 @@ description = "HealthLink, A telemedicine plateform."
 authors = ["Faisal Fida <69955157+faisal-fida@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -17,6 +18,7 @@ dj-database-url = "^2.1.0"
 psycopg2 = "^2.9.9"
 celery = "^5.3.6"
 redis = "^5.0.1"
+pillow = "^10.2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.1"

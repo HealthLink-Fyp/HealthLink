@@ -1,9 +1,6 @@
 .env
-/.vs
-*/.venv
-/.venv*
-/venv
-*/__pycache__/
-.pytest_cache/
-**/__pycache__/*
+.venv/
 .vscode/*
+*/Justfile
+*/poetry.lock
+__pycache__/

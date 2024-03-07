@@ -12,10 +12,12 @@ class JWTAuthentication(BaseAuthentication):
         auth_data = get_authorization_header(request).split()
 
         if auth_data and len(auth_data) == 2:
-            token = auth_data[1].decode("utf-8")
-            id = decode_access_token(token)
-            user = User.objects.get(pk=id)
+            access_token = auth_data[1].decode("utf-8")
+        else:
+            access_token = request.COOKIES.get("access_token")
 
+        if access_token:
+            user = User.objects.get(pk=decode_access_token(access_token))
             return (user, auth_data)
 
         raise exceptions.AuthenticationFailed("Invalid token")
