@@ -16,7 +16,7 @@ class JWTAuthentication(BaseAuthentication):
             user = User.objects.get(pk=decode_access_token(access_token))
             return (user, auth_data)
 
-        raise exceptions.AuthenticationFailed("Invalid token")
+        raise exceptions.AuthenticationFailed("Not authenticated")
 
 
 def create_access_token(id):
