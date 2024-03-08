@@ -1,5 +1,4 @@
 from .base import AuthenticatedApiTest
-from core.models import User
 from django.urls import reverse
 from rest_framework import status
 
