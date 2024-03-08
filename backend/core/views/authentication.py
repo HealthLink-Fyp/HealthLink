@@ -84,13 +84,11 @@ class LoginView(APIView):
 
 
 class UserView(APIView):
-    """
-    Get the user's information
-    """
-
     authentication_classes = [JWTAuthentication]
-
     def get(self, request):
+        """
+        Get the user's information
+        """ 
         return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 
@@ -160,7 +158,7 @@ class ForgotView(APIView):
         # send_mail_task.delay(email=email, message=message)
 
         return Response(
-            {"message": f"Check your email: {email} to reset your password"},
+            {"message": f"Check your email: {email} to reset your password. Token: {token}"},
             status=status.HTTP_200_OK,
         )
 

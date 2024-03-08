@@ -97,8 +97,8 @@ class UserToken(models.Model):
 
 
 class UserForgot(models.Model):
-    email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
-    token = models.CharField(max_length=255, unique=True, null=False, blank=False)
+    email = models.EmailField(max_length=255, null=False, blank=False)
+    token = models.CharField(max_length=255, null=False, blank=False)
 
 
 ##------------- Doctor Profile Model --------------##
@@ -115,7 +115,7 @@ class DoctorProfile(models.Model):
     experience_years = models.IntegerField()
     city = models.CharField(max_length=255)
     available_timings = models.TimeField(null=False, blank=False)
-    available_days = models.JSONField(null=False, blank=False)
+    available_days = models.JSONField(null=True, blank=True)
     consultation_fees = models.IntegerField(null=False, blank=False)
     summary = models.TextField(max_length=255, null=False, blank=False)
     wait_time = models.IntegerField(null=True, blank=True)

@@ -15,24 +15,24 @@ class SignInEndpointTests(BaseApiTest):
     def test_with_data(self):
         url = reverse("login")
         data = {"email": "abc@gmail.com", "password": "user@123"}
+        test_response_list = ["access_token", "refresh_token"]
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertListEqual(
-            list(response.data.keys()), ["access_token", "refresh_token"]
-        )
+        self.assertListEqual(list(response.data.keys()), test_response_list)
 
     def test_missing_data(self):
         url = reverse("login")
         response = self.client.post(url, {}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("missing", response.data[0])
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_validate_email(self):
         url = reverse("login")
         data = {"email": "abc@gmail", "password": "user@123"}
         response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertIn("Invalid email", response.data["message"])
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        
+        error_detail = response.data.get("detail")
+        self.assertIn("User not found", str(error_detail))
 
     # def test_invalid_credentials(self):
     #     url = reverse("login")

@@ -1,7 +1,7 @@
 import datetime
 
 import jwt
-from rest_framework import exceptions
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authentication import BaseAuthentication, get_authorization_header
 
 from .models import User
@@ -16,7 +16,7 @@ class JWTAuthentication(BaseAuthentication):
             user = User.objects.get(pk=decode_access_token(access_token))
             return (user, auth_data)
 
-        raise exceptions.AuthenticationFailed("Not authenticated")
+        raise AuthenticationFailed("Not authenticated")
 
 
 def create_access_token(id):
@@ -36,7 +36,7 @@ def decode_access_token(token):
         payload = jwt.decode(token, "access_secret", algorithms=["HS256"])
         return payload["user_id"]
     except:  # noqa: E722
-        raise exceptions.AuthenticationFailed("Unauthenticated")
+        raise AuthenticationFailed("Unauthenticated")
 
 
 def create_refresh_token(id):
@@ -56,4 +56,4 @@ def decode_refresh_token(token):
         payload = jwt.decode(token, "refresh_secret", algorithms=["HS256"])
         return payload["user_id"]
     except:  # noqa: E722
-        raise exceptions.AuthenticationFailed("Unauthenticated")
+        raise AuthenticationFailed("Unauthenticated")
