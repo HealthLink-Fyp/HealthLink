@@ -120,7 +120,7 @@ class DoctorProfile(models.Model):
     summary = models.TextField(max_length=255, null=False, blank=False)
     wait_time = models.IntegerField(null=True, blank=True)
     recommendation_percent = models.IntegerField(null=True, blank=True)
-    patients_count = models.IntegerField(null=True, blank=True)
+    patients_count = models.IntegerField(null=True, blank=True) 
     reviews_count = models.IntegerField(null=True, blank=True)
     profile_photo_url = models.ImageField(null=True, blank=True)
 

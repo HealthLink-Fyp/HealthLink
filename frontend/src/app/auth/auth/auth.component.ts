@@ -1,7 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-auth',
@@ -10,36 +10,28 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  amWho !:string;
-
-
-  onSubmitWho(){
-    if(this.amWho=='doctor'){
-          this.shareService.amDoctor=true;
-          this.router.navigate(['/doctor']);
-    }
-     else
-     {
-      this.shareService.amPatient=true;
-      this.router.navigate(['/patient']);
-     }
-
-  
-     console.log(this.shareService.amDoctor);
-     console.log(this.shareService.amPatient);
-    
-  }
+ 
 
 
 
   message='';
 
-  constructor(private authService:AuthService,private shareService:SharedService,private router:Router){}
+  amWho='';
+
+  constructor(private authService:AuthService,private router:Router){}
 
   ngOnInit(): void {
     this.authService.user().subscribe({
       next:(res:any)=>{
          this.message=`Hi ${res.first_name} ${res.last_name}`;
+
+         this.amWho=res.role
+         if(this.amWho=='doctor'){
+          this.router.navigate(['/doctor'])
+         }
+         else{
+          this.router.navigate(['/patient'])
+         }
          AuthService.authEmitter.emit(true);
       },
       error:err=>{
