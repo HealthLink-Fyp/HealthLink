@@ -6,12 +6,26 @@ from .models import User, DoctorProfile, PatientProfile
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "username",
+            "role",
+            "phone_number",
+            "address",
+            "city",
+            "password",
+        )
 
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         password = validated_data.pop("password", None)
+        email = validated_data.get("email")
+        email = email.lower().strip()
+        validated_data["email"] = email
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)

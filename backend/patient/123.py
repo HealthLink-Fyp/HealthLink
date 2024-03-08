@@ -3,6 +3,7 @@ from core.models import User
 from django.urls import reverse
 from rest_framework import status
 
+
 class ProfileTests(AuthenticatedApiTest):
     def setUp(self):
         super().setUp("patient")

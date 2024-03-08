@@ -17,7 +17,9 @@ class SignInEndpointTests(BaseApiTest):
         data = {"email": "abc@gmail.com", "password": "user@123"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertListEqual(list(response.data.keys()), ["access_token", "refresh_token"])
+        self.assertListEqual(
+            list(response.data.keys()), ["access_token", "refresh_token"]
+        )
 
     def test_missing_data(self):
         url = reverse("login")

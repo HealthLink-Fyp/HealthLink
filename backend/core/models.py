@@ -6,8 +6,20 @@ from .choices import SPECIALIZATION_CHOICES, QUALIFICATION_CHOICES, ROLE_CHOICES
 
 ##------------- Base User Manager --------------##
 
+
 class MyUserManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email, username, password, role, phone_number=None, address=None, city=None):
+    def create_user(
+        self,
+        first_name,
+        last_name,
+        email,
+        username,
+        password,
+        role,
+        phone_number=None,
+        address=None,
+        city=None,
+    ):
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -19,7 +31,7 @@ class MyUserManager(BaseUserManager):
             role=role,
             phone_number=phone_number,
             address=address,
-            city=city
+            city=city,
         )
 
         user.set_password(password)
@@ -33,7 +45,7 @@ class MyUserManager(BaseUserManager):
             email=email,
             username=username,
             password=password,
-            role=role
+            role=role,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -42,16 +54,19 @@ class MyUserManager(BaseUserManager):
 
 ##------------- User Authentication Model --------------##
 
+
 class User(AbstractBaseUser):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255, unique=True)
-    username = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255, null=False, blank=False)
+    last_name = models.CharField(max_length=255, null=False, blank=False)
+    email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
+    username = models.CharField(max_length=255, unique=True, null=False, blank=False)
+    password = models.CharField(max_length=255, null=False, blank=False)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
-    role = models.CharField(max_length=255, choices=ROLE_CHOICES, null=False, blank=False)
+    role = models.CharField(
+        max_length=255, choices=ROLE_CHOICES, null=False, blank=False
+    )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -74,32 +89,35 @@ class User(AbstractBaseUser):
         return True
 
 
-
 class UserToken(models.Model):
     user_id = models.IntegerField()
-    token = models.CharField(max_length=255)
+    token = models.CharField(max_length=255, unique=True, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     expire_at = models.DateTimeField()
 
 
 class UserForgot(models.Model):
-    email = models.CharField(max_length=255)
-    token = models.CharField(max_length=255, unique=True)
-
+    email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
+    token = models.CharField(max_length=255, unique=True, null=False, blank=False)
 
 
 ##------------- Doctor Profile Model --------------##
-    
+
+
 class DoctorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    specialization = models.CharField(max_length=255, choices=SPECIALIZATION_CHOICES, null=False, blank=False)
-    qualification = models.CharField(max_length=255, choices=QUALIFICATION_CHOICES, null=False, blank=False)
+    specialization = models.CharField(
+        max_length=255, choices=SPECIALIZATION_CHOICES, null=False, blank=False
+    )
+    qualification = models.CharField(
+        max_length=255, choices=QUALIFICATION_CHOICES, null=False, blank=False
+    )
     experience_years = models.IntegerField()
     city = models.CharField(max_length=255)
-    available_timings = models.TimeField(null=True, blank=True)
-    available_days = models.JSONField(null=True, blank=True)
+    available_timings = models.TimeField(null=False, blank=False)
+    available_days = models.JSONField(null=False, blank=False)
     consultation_fees = models.IntegerField(null=False, blank=False)
-    summary = models.TextField()
+    summary = models.TextField(max_length=255, null=False, blank=False)
     wait_time = models.IntegerField(null=True, blank=True)
     recommendation_percent = models.IntegerField(null=True, blank=True)
     patients_count = models.IntegerField(null=True, blank=True)
@@ -107,18 +125,23 @@ class DoctorProfile(models.Model):
     profile_photo_url = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return (self.user.first_name + " " + self.user.last_name + " - " + self.user.email)
+        return (
+            self.user.first_name + " " + self.user.last_name + " - " + self.user.email
+        )
+
 
 ##------------- Patient Profile Model --------------##
-    
+
+
 class PatientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    age = models.IntegerField(null=True, blank=True)
-    sex = models.BooleanField(null=True, blank=True)
-    blood_group = models.CharField(max_length=255, null=True, blank=True)
-    weight = models.IntegerField(null=True, blank=True)
-    height = models.IntegerField(null=True, blank=True)
+    age = models.IntegerField(null=False, blank=False)
+    sex = models.BooleanField(null=False, blank=False)
+    blood_group = models.CharField(max_length=255, null=False, blank=False)
+    weight = models.IntegerField(null=False, blank=False)
+    height = models.IntegerField(null=False, blank=False)
     bmi = models.FloatField(null=True, blank=True)
+
     # Caluclate BMI and store it in the database
     def save(self, *args, **kwargs):
         if self.height and self.weight:
@@ -126,4 +149,6 @@ class PatientProfile(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return (self.user.first_name + " " + self.user.last_name + " - " + self.user.email)
+        return (
+            self.user.first_name + " " + self.user.last_name + " - " + self.user.email
+        )

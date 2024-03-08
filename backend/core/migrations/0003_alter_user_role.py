@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0002_doctorprofile_patientprofile_user_address_user_city_and_more"),
     ]

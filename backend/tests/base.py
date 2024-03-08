@@ -6,6 +6,7 @@ class BaseApiTest(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
+
 class AuthenticatedApiTest(BaseApiTest):
     def setUp(self, role):
         super().setUp()
@@ -18,4 +19,3 @@ class AuthenticatedApiTest(BaseApiTest):
             role=role,
         )
         self.client.force_authenticate(user=self.user)
-
