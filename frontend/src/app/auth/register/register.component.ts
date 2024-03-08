@@ -35,7 +35,13 @@ email: '',
 
 password: '',
 
-password_confirm:''
+phone_number:'',
+
+address:'',
+
+city:'',
+
+role:''
 
 });
 

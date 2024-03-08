@@ -45,15 +45,53 @@
   </div>
 
   <div>
-    <label>Password</label>
+    <label>Phone Number</label>
     <input
-      formControlName="password_confirm"
-      type="password"
-      placeholder="Password Confirm"
+      formControlName="phone_number"
+      type="tel"
+      placeholder="Phone number"
     />
   </div>
 
-  I
+  <div>
+    <label>Address</label>
+    <input
+      formControlName="address"
+      type="address"
+      
+    />
+  </div>
+
+  <div>
+    <label>city</label>
+    <input
+      formControlName="city"
+      type="text"
+    />
+  </div>
+
+  <div>
+    <label>Role</label>
+    <input
+      formControlName="role"
+      type="radio"
+      name="RoleSelection"
+      value="doctor"
+    />
+    <label>I am A Doctor!</label>
+
+    <input
+    formControlName="role"
+    type="radio"
+    name="RoleSelection"
+    value="patient"
+  />
+  <label>I am A Patient</label>
+  </div>
+
+  
+
+  
 
   <button type="submit">Submit</button>
 </form>

@@ -1,1 +1,48 @@
-<p>patient works!</p>
+<form [formGroup]="form" (submit)="submit()">
+
+    <h1>patient form : </h1>
+ 
+    
+ 
+     
+ 
+     <div>
+             <label>Please tell us you age : </label>
+             <input type="number" formControlName="experience_years">
+     </div>
+ 
+     <div>
+        <label>select your sex</label>
+        <input type="radio" name="sex" value="true" name="selectsex" formControlName="sex"> Male
+        <input type="radio" name="sex" value="false" name="selectsex" formControlName="sex"> Female
+
+     </div>
+ 
+     <div>
+         <label>Please tell your blood group : </label>
+         <input type="text" formControlName="blood_group">
+     </div>
+ 
+ 
+     <div>
+         <label>Please tell us your weight : </label>
+         <input type="number" formControlName="weight">
+     </div>
+ 
+     <div>
+         <label>Please tell us your height : </label>
+         <input type="number" formControlName="height">
+     </div>
+ 
+     <div>
+         <label>Please tell us your maximum bmi : </label>
+         <input type="number" formControlName="bmi">
+     </div>
+ 
+    
+         
+     <button type="submit">Submit</button>
+ 
+ 
+ 
+ </form>
