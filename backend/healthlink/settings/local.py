@@ -19,3 +19,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 # Quick and dirty way to enable all hosts for development
 ALLOWED_HOSTS = ["*"]
+
+# Rest Framework settings
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "healthlink.utils.custom_exc_handler.custom_exception_handler",
+    
+}

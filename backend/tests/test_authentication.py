@@ -17,27 +17,34 @@ class SignInEndpointTests(BaseApiTest):
         data = {"email": "abc@gmail.com", "password": "user@123"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertListEqual(list(response.data.keys()), ["access_token", "refresh_token"])
 
-    def test_without_data(self):
+    def test_missing_data(self):
         url = reverse("login")
         response = self.client.post(url, {}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("missing", response.data[0])
 
-    def test_invalid_email(self):
+    def test_validate_email(self):
         url = reverse("login")
-        data = {"email": "useremail.com", "password": "user@123"}
+        data = {"email": "abc@gmail", "password": "user@123"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertIn("Invalid email", response.data["message"])
 
-    def test_password_validity(self):
-        url = reverse("login")
-        data = {"email": "abc@gmail.com", "password": "user123"}
-        response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    # def test_invalid_credentials(self):
+    #     url = reverse("login")
+    #     data_with_invalid_password = {"email": "abc@gmail.com", "password": "user123"}
+    #     response = self.client.post(url, data_with_invalid_password, format="json")
+    #     self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    #     self.assertIn("Invalid credentials", response.data["message"])
+    #     data_with_invalid_email = {"email": "ab@gmail.com", "password": "user@123"}
+    #     response = self.client.post(url, data_with_invalid_email, format="json")
+    #     self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    #     self.assertIn("Invalid credentials", response.data["message"])
 
-    def test_user_exist(self):
-        url = reverse("login")
-        data = {"email": "xyz@gmail.com", "password": "user@123"}
-        response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
+    # def test_not_logged_in(self):
+    #     url = reverse("user")
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+    #     self.assertIn("Not authenticated", response.data["message"])

@@ -24,13 +24,13 @@ from core.serializers import UserSerializer
 # from core.tasks import send_mail_task
 
 from .exceptions import (
-    missing_data__exception,
-    validate_email__exception,
-    user_exists__exception,
-    invalid_credentials__exception,
-    invalid_token__exception,
-    not_logged_in__exception,
-    invalid_email__exception
+    missing_data_exception,
+    validate_email_exception,
+    user_exists_exception,
+    invalid_credentials_exception,
+    invalid_token_exception,
+    not_logged_in_exception,
+    user_not_found_exception
 )
 
 
@@ -42,9 +42,9 @@ class RegisterView(APIView):
         username = request.data.get("username", False)
         email = email.strip().lower()
 
-        missing_data__exception(email, password)
-        validate_email__exception(email)
-        user_exists__exception(User, email, username)
+        missing_data_exception(email, password)
+        validate_email_exception(email)
+        user_exists_exception(User, email, username)
 
         serializer = UserSerializer(data=request.data)
         
@@ -64,11 +64,11 @@ class LoginView(APIView):
         email = email.strip().lower()
         
 
-        missing_data__exception(email, password)
-        validate_email__exception(email)
+        missing_data_exception(email, password)
+        validate_email_exception(email)
 
         user = User.objects.filter(email=email).first()
-        invalid_credentials__exception(user, password)
+        invalid_credentials_exception(user, password)
 
         access_token = create_access_token(user.id)
         refresh_token = create_refresh_token(user.id)
@@ -114,7 +114,7 @@ class LogoutView(APIView):
     def post(self, request):
 
         refesh_token = request.COOKIES.get("refresh_token", False)
-        not_logged_in__exception(refesh_token)
+        not_logged_in_exception(refesh_token)
 
         UserToken.objects.filter(token=refesh_token).delete()
         response = Response()
@@ -130,10 +130,10 @@ class ForgotView(APIView):
     def post(self, request):
 
         email = request.data["email"]
-        validate_email__exception(email)
+        validate_email_exception(email)
 
         user = User.objects.filter(email=email).first()
-        invalid_email__exception(user)
+        user_not_found_exception(user)
 
         token = PasswordResetTokenGenerator().make_token(user)
         UserForgot.objects.create(email=email, token=token)
@@ -157,8 +157,8 @@ class ResetView(APIView):
         user_reset = UserForgot.objects.filter(token=token).first()
         user = User.objects.filter(email=user_reset.email).first()
 
-        invalid_token__exception(user, token)
-        invalid_email__exception(user)
+        invalid_token_exception(user, token)
+        user_not_found_exception(user)
 
         user.set_password(password)
         user.save()
