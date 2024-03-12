@@ -23,11 +23,14 @@ from core.serializers import UserSerializer
 # Third Part Imports
 # from core.tasks import send_mail_task
 
+from django.core.validators import validate_email
+
 from rest_framework.exceptions import (
     AuthenticationFailed,
     NotFound,
     PermissionDenied,
     NotAuthenticated,
+    ValidationError,
 )
 
 
@@ -60,6 +63,12 @@ class LoginView(APIView):
         if not user:
             raise NotFound("User not found.")
 
+        # Check if the email is valid
+        try:
+            validate_email(email)
+        except Exception:
+            raise ValidationError("Invalid email.")
+
         # Check if the user is an admin
         if user.role == "admin":
             raise PermissionDenied("Not allowed.")
@@ -84,13 +93,12 @@ class LoginView(APIView):
 
 
 class UserView(APIView):
-    """
-    Get the user's information
-    """
-
     authentication_classes = [JWTAuthentication]
 
     def get(self, request):
+        """
+        Get the user's information
+        """
         return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 
@@ -160,7 +168,9 @@ class ForgotView(APIView):
         # send_mail_task.delay(email=email, message=message)
 
         return Response(
-            {"message": f"Check your email: {email} to reset your password"},
+            {
+                "message": f"Check your email: {email} to reset your password. Token: {token}"
+            },
             status=status.HTTP_200_OK,
         )
 
