@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -9,8 +9,10 @@ import { DoctorService } from '../services/doctor/doctor.service';
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css']
 })
-export class DoctorComponent {
+export class DoctorComponent implements OnInit {
   form!: FormGroup;
+
+  
 
   SPECIALIZATION_CHOICES: [string, string][] = [
     ['cardiologist', 'Cardiologist'],
@@ -55,9 +57,19 @@ export class DoctorComponent {
 
   availableDays: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-  constructor(private formBuilder: FormBuilder,private doctorService:DoctorService) {}
+  message='';
+
+  constructor(private formBuilder: FormBuilder,private doctorService:DoctorService,private authService:AuthService) {}
+  
+  authenticated=false;
   
   ngOnInit(): void {
+
+
+    AuthService.authEmitter.subscribe(authenticated=>{
+      this.authenticated=authenticated;
+    })
+    
   
   this.form = this.formBuilder.group( {
   
@@ -79,9 +91,6 @@ export class DoctorComponent {
 
   wait_time:'',
 
-  
-
-  profile_photo_url:''
   
   
   });
