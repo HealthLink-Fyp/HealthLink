@@ -1,30 +1,24 @@
 from core.models import DoctorProfile
-from core.serializers import DoctorProfileSerializer
+from core.serializers import DoctorSearchBarSerializer
 from rest_framework.response import Response
 
 from rest_framework import filters
 from rest_framework import generics
 
 
-class SearchDoctorView(generics.ListAPIView):
+class AutoCompleteDoctorView(generics.ListAPIView):
     queryset = DoctorProfile.objects.all()
-    serializer_class = DoctorProfileSerializer
+    serializer_class = DoctorSearchBarSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ("^city", "^specialization")
+    search_fields = ("^city", "^specialization", "^name")
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+    def get_queryset(self):
+        specialization = self.request.query_params.get("specialization", None)
 
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(
-            {
-                "results": serializer.data,
-                "status": 200,
-                "Data Length: ": len(serializer.data),
-            }
+        queryset = DoctorProfile.objects.only(
+            "user", "specialization", "city", "profile_photo_url"
         )
+
+        if specialization:
+            queryset = queryset.filter(specialization__icontains=specialization)
+        return queryset

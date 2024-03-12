@@ -36,7 +36,27 @@ class UserSerializer(ModelSerializer):
 class DoctorProfileSerializer(ModelSerializer):
     class Meta:
         model = DoctorProfile
-        fields = ["specialization", "qualification", "experience_years", "city", "available_timings", "available_days", "consultation_fees", "summary", "wait_time", "recommendation_percent", "patients_count", "reviews_count", "profile_photo_url"]
+        fields = [
+            "specialization",
+            "qualification",
+            "experience_years",
+            "city",
+            "available_timings",
+            "available_days",
+            "consultation_fees",
+            "summary",
+            "wait_time",
+            "recommendation_percent",
+            "patients_count",
+            "reviews_count",
+            "profile_photo_url",
+        ]
+
+
+class DoctorSearchBarSerializer(ModelSerializer):
+    class Meta:
+        model = DoctorProfile
+        fields = ["user", "specialization", "city", "profile_photo_url"]
 
 
 class PatientProfileSerializer(ModelSerializer):
