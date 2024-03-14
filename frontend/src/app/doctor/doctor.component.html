@@ -1,59 +1,58 @@
 <form [formGroup]="form" (submit)="submit()">
+  <h1>doctor form :</h1>
 
-   <h1>doctor form : </h1>
-
-   <div>
+  <div>
     <label>Please select your specialization</label>
     <select formControlName="specialization">
-        <option *ngFor="let choice of SPECIALIZATION_CHOICES" [value]="choice[0]">{{choice[1]}}</option>
+      <option *ngFor="let choice of SPECIALIZATION_CHOICES" [value]="choice[0]">
+        {{ choice[1] }}
+      </option>
     </select>
-    </div>
+  </div>
 
-    <div>
-        <label>Please select your qualification</label>
-        <select formControlName="qualification">
-            <option *ngFor="let choice of QUALIFICATION_CHOICES" [value]="choice[0]">{{choice[1]}}</option>
-        </select>
-        </div>
+  <div>
+    <label>Please select your qualification</label>
+    <select formControlName="qualification">
+      <option *ngFor="let choice of QUALIFICATION_CHOICES" [value]="choice[0]">
+        {{ choice[1] }}
+      </option>
+    </select>
+  </div>
 
-    <div>
-            <label>Please tell your experience years : </label>
-            <input type="text" formControlName="experience_years">
-    </div>
+  <div>
+    <label>Please tell your experience years : </label>
+    <input type="text" formControlName="experience_years" />
+  </div>
 
-    <div>
-        <label>Please tell your city : </label>
-        <input type="text" formControlName="city">
-    </div>
+  <div>
+    <label>Please tell your city : </label>
+    <input type="text" formControlName="city" />
+  </div>
 
-    <div>
-        <label>Please tell your available timings : </label>
-        <input type="time" formControlName="available_timings">
-    </div>
+  <div>
+    <label>Please tell your available timings : </label>
+    <input type="time" formControlName="available_timings" />
+  </div>
 
-    <div *ngFor="let day of availableDays">
-         
-        <input type="radio"  [value]="day" formControlName="available_days">
-        <label>{{day}}</label>
-    </div>
+  <div *ngFor="let day of availableDays">
+    <input type="radio" [value]="day" formControlName="available_days" />
+    <label>{{ day }}</label>
+  </div>
 
-    <div>
-        <label>Please tell us you consulation fees : </label>
-        <input type="number" formControlName="consultation_fees">
-    </div>
+  <div>
+    <label>Please tell us you consulation fees : </label>
+    <input type="number" formControlName="consultation_fees" />
+  </div>
 
-    <div>
-        <label>Please tell us you little about yourself : </label>
-        <input type="text" formControlName="summary">
-    </div>
+  <div>
+    <label>Please tell us you little about yourself : </label>
+    <input type="text" formControlName="summary" />
+  </div>
 
-    <div>
-        <label>Please set ur wait time : </label>
-        <input type="number"  formControlName="wait_time">
-    </div>
-        
-    <button type="submit">Submit</button>
+  <div>
+    <label>Please set ur wait time : </label>
+    <input type="number" formControlName="wait_time" />
+  </div>
 
-
-
+  <button type="submit">Submit</button>
 </form>

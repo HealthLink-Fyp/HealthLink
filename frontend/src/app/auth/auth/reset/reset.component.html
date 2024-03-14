@@ -1,24 +1,19 @@
 <form [formGroup]="form" (submit)="submit()">
+  <h1>Please reset your password</h1>
 
-    <h1 >Please reset your password</h1>
- 
-    
-    <div>
-    
-        <label>Password</label>
-    <input formControlName="password" type="password"  placeholder="Password"> 
-    
-    </div>
-    
-    <div>
-    
-        <label>Password</label>
-    <input formControlName="password_confirm" type="password"  placeholder="Password Confirm"> 
-    
-    </div>
-    
-    
-    
-    <button  type="submit">Submit</button> 
-    
-    </form>
+  <div>
+    <label>Password</label>
+    <input formControlName="password" type="password" placeholder="Password" />
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input
+      formControlName="password_confirm"
+      type="password"
+      placeholder="Password Confirm"
+    />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>

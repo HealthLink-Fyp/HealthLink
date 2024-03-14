@@ -1,21 +1,18 @@
 <form [formGroup]="form" (submit)="submit()">
+  <h1>Please insert your password</h1>
 
-    <h1 >Please insert your password</h1>
-    
   <div *ngIf="cls">
-    {{message}}
-
+    {{ message }}
   </div>
-    
-    <div>
-    
-        <label>Email address</label>
-    <input formControlName="email" type="email"  placeholder="name@example.com"> 
-    
-    </div>
-    
-   
-    
-    <button  type="submit">Submit</button> 
-    
-    </form>
+
+  <div>
+    <label>Email address</label>
+    <input
+      formControlName="email"
+      type="email"
+      placeholder="name@example.com"
+    />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
