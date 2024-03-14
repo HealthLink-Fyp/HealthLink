@@ -5,35 +5,26 @@ import { ForgotService } from 'src/app/services/forgot.service';
 @Component({
   selector: 'app-forgot',
   templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.css']
+  styleUrls: ['./forgot.component.css'],
 })
 export class ForgotComponent implements OnInit {
+  cls = '';
 
-  cls='';
+  message = '';
 
-  message='';
-
-  
   form!: FormGroup;
-  
-  constructor(private formBuilder: FormBuilder, private forgotService:ForgotService) {}
-  
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private forgotService: ForgotService,
+  ) {}
+
   ngOnInit(): void {
-  
-  this.form = this.formBuilder.group( {
-  
- 
-  
-  email: '',
-  
-  
-  
-  });
-  
+    this.form = this.formBuilder.group({
+      email: '',
+    });
   }
-  
-  
-  
+
   submit() {
     this.forgotService.forgot(this.form.getRawValue()).subscribe(
       () => {
@@ -43,12 +34,7 @@ export class ForgotComponent implements OnInit {
       () => {
         this.cls = 'danger';
         this.message = 'Error occurred!';
-      }
+      },
     );
   }
-  
-  
 }
-   
-
-

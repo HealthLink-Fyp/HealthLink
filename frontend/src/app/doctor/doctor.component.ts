@@ -7,12 +7,10 @@ import { DoctorService } from '../services/doctor/doctor.service';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  styleUrls: ['./doctor.component.css'],
 })
 export class DoctorComponent implements OnInit {
   form!: FormGroup;
-
-  
 
   SPECIALIZATION_CHOICES: [string, string][] = [
     ['cardiologist', 'Cardiologist'],
@@ -41,7 +39,7 @@ export class DoctorComponent implements OnInit {
     ['rheumatologist', 'Rheumatologist'],
     ['surgeon', 'Surgeon'],
     ['urologist', 'Urologist'],
-    ['other', 'Other']
+    ['other', 'Other'],
   ];
 
   QUALIFICATION_CHOICES: [string, string][] = [
@@ -52,55 +50,56 @@ export class DoctorComponent implements OnInit {
     ['dm', 'DM'],
     ['mch', 'MCH'],
     ['phd', 'PHD'],
-    ['other', 'Other']
+    ['other', 'Other'],
   ];
 
-  availableDays: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  availableDays: string[] = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+  ];
 
-  message='';
+  message = '';
 
-  constructor(private formBuilder: FormBuilder,private doctorService:DoctorService,private authService:AuthService) {}
-  
-  authenticated=false;
-  
+  constructor(
+    private formBuilder: FormBuilder,
+    private doctorService: DoctorService,
+    private authService: AuthService,
+  ) {}
+
+  authenticated = false;
+
   ngOnInit(): void {
+    AuthService.authEmitter.subscribe((authenticated) => {
+      this.authenticated = authenticated;
+    });
 
+    this.form = this.formBuilder.group({
+      specialization: '',
 
-    AuthService.authEmitter.subscribe(authenticated=>{
-      this.authenticated=authenticated;
-    })
-    
-  
-  this.form = this.formBuilder.group( {
-  
-  specialization: '',
+      qualification: '',
 
-  qualification:'',
+      experience_years: '',
 
-  experience_years:'',
+      city: '',
 
-  city:'',
+      available_timings: '',
 
-  available_timings:'',
-  
-  available_days:'',
+      available_days: '',
 
-  consultation_fees:'',
+      consultation_fees: '',
 
-  summary:'',
+      summary: '',
 
-  wait_time:'',
-
-  
-  
-  });
-  
+      wait_time: '',
+    });
   }
 
   submit() {
-    this.doctorService.register(this.form.getRawValue()).subscribe(
-      (res)=>console.log(res)
-    )
+    this.doctorService
+      .register(this.form.getRawValue())
+      .subscribe((res) => console.log(res));
   }
-  
 }

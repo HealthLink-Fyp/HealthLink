@@ -28,9 +28,6 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# Allowed Hosts
-ALLOWED_HOSTS = ["*"]
-
 # Timezones
 USE_TZ = True
 TIME_ZONE = "UTC"

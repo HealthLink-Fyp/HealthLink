@@ -1,60 +1,67 @@
 <form [formGroup]="form" (submit)="submit()">
+  <h1 style="text-align: center">Patient</h1>
 
-    <h1>patient form : </h1>
- 
-     
-     <div>
-             <label>Please tell us you age : </label>
-             <input type="number" formControlName="age">
-     </div>
- 
-     <div>
-        <label>select your sex</label>
-        <input type="radio" name="sex" value="true" name="selectsex" formControlName="sex"> Male
-        <input type="radio" name="sex" value="false" name="selectsex" formControlName="sex"> Female
+  <div>
+    <label>Please tell us you age : </label>
+    <input type="number" formControlName="age" />
+  </div>
 
-     </div>
- 
-     <div>
-         <label>Please tell your blood group : </label>
-         <input type="text" formControlName="blood_group">
-     </div>
- 
- 
-     <div>
-         <label>Please tell us your weight : </label>
-         <input type="number" formControlName="weight">
-     </div>
- 
-     <div>
-         <label>Please tell us your height : </label>
-         <input type="number" formControlName="height">
-     </div>
- 
-     <div>
-         <label>Please tell us your maximum bmi : </label>
-         <input type="number" formControlName="bmi">
-     </div>
- 
-    
-         
-     <button type="submit">Submit</button>
- 
- 
- 
- </form>
+  <div>
+    <label>select your sex</label>
+    <input type="radio" name="sex" value="true" formControlName="sex" /> Male
+    <input type="radio" name="sex" value="false" formControlName="sex" />
+    Female
+  </div>
 
+  <div>
+    <label>Please tell your blood group : </label>
+    <input type="text" formControlName="blood_group" />
+  </div>
 
-<div *ngIf="formSubmitted">
- <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
+  <div>
+    <label>Please tell us your weight : </label>
+    <input type="number" formControlName="weight" />
+  </div>
 
- <div *ngIf="searchResults.length > 0">
+  <div>
+    <label>Please tell us your height : </label>
+    <input type="number" formControlName="height" />
+  </div>
+
+  <div>
+    <label>Please tell us your maximum bmi : </label>
+    <input type="number" formControlName="bmi" />
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
+
+<div style="margin: 10%">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="searchDoctors()"
+    placeholder="Search Doctors..."
+  />
+
+  <div *ngIf="searchResults.length > 0 && searchQuery">
     <ul>
       <li *ngFor="let result of searchResults">
-        <!-- Display search results as desired -->
-        {{ result.name }} - {{ result.city }} - {{ result.specialization }}
+        <img
+          [src]="getProfilePhotoUrl(result.profile_photo_url)"
+          alt="Profile Photo"
+          width="100"
+          height="100"
+          style="border-radius: 50%"
+        />
+        <p>{{ result.full_name }}</p>
+        <p>{{ result.specialization }}</p>
+        <p>{{ result.city }}</p>
+        <button mat-raised-button color="primary">Book Appointment</button>
       </li>
     </ul>
   </div>
-
+  <div *ngIf="searchResults.length === 0 && searchQuery">
+    <p>No doctors found</p>
+  </div>
 </div>

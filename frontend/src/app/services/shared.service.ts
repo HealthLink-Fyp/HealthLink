@@ -2,14 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
+  constructor(http: HttpClient) {}
 
-  constructor(http:HttpClient) { }
+  amDoctor = false;
 
-    amDoctor=false;
-
-    amPatient=false;
-
+  amPatient = false;
 }

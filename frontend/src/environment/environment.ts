@@ -1,5 +1,4 @@
-export const environment={
- production:false,
- api : 'https://curly-space-spork-7v95g6qq4r6whgj-8000.app.github.dev',
-
+export const environment = {
+  production: false,
+  api: 'https://bug-free-winner-p965vr69qw7h74j4-8000.app.github.dev',
 };

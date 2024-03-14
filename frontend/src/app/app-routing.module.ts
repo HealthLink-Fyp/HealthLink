@@ -9,17 +9,17 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 
 const routes: Routes = [
-  {path:'',component:AuthComponent},
-  {path:'doctor',component:DoctorComponent},
-  {path:'patient',component:PatientComponent},
-  {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
-  {path:'forgot',component:ForgotComponent},
-  {path:'reset/:token',component:ResetComponent}
+  { path: '', component: AuthComponent },
+  { path: 'doctor', component: DoctorComponent },
+  { path: 'patient', component: PatientComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgot', component: ForgotComponent },
+  { path: 'reset/:token', component: ResetComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

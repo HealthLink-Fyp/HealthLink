@@ -1,58 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
-
-
-
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  form!: FormGroup;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      first_name: '',
 
-  
-form!: FormGroup;
+      last_name: '',
 
-constructor(private formBuilder: FormBuilder, private authService:AuthService, private router:Router) {}
+      username: '',
 
-ngOnInit(): void {
+      email: '',
 
-this.form = this.formBuilder.group( {
+      password: '',
 
-first_name: '',
+      phone_number: '',
 
-last_name: '',
+      address: '',
 
-username: '',
+      city: '',
 
-email: '',
+      role: '',
+    });
+  }
 
-password: '',
-
-phone_number:'',
-
-address:'',
-
-city:'',
-
-role:''
-
-});
-
-}
-
-
-
-submit() {
-  this.authService.register(this.form.getRawValue()).subscribe(
-    ()=>this.router.navigate(['/login'])
-  )
-}
-
+  submit() {
+    this.authService
+      .register(this.form.getRawValue())
+      .subscribe(() => this.router.navigate(['/login']));
+  }
 }

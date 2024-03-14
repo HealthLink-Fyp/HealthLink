@@ -3,18 +3,14 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DoctorService {
+  static authEmitter = new EventEmitter<boolean>();
 
-  static authEmitter=new EventEmitter<boolean>();
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  register(body:any)
-  {
-    return this.http.post(`${environment.api}/api/profile/`,body);
+  register(body: any) {
+    return this.http.post(`${environment.api}/api/profile/`, body);
   }
-
- 
 }

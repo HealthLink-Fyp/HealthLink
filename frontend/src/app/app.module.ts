@@ -1,4 +1,4 @@
-import {  NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,7 +9,7 @@ import { NavComponent } from './auth/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from  '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthComponent } from './auth/auth/auth.component';
 import { ResetComponent } from './auth/auth/reset/reset.component';
@@ -29,8 +29,6 @@ import { PatientComponent } from './patient/patient.component';
     ForgotComponent,
     DoctorComponent,
     PatientComponent,
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -39,18 +37,15 @@ import { PatientComponent } from './patient/patient.component';
     RouterOutlet,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
-   
-    
-    
+    MaterialModule,
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
-      multi:true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

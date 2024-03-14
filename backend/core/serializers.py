@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import SerializerMethodField
 
 from .models import User, DoctorProfile, PatientProfile
 
@@ -54,9 +55,20 @@ class DoctorProfileSerializer(ModelSerializer):
 
 
 class DoctorSearchBarSerializer(ModelSerializer):
+    full_name = SerializerMethodField()
+
     class Meta:
         model = DoctorProfile
-        fields = ["user", "specialization", "city", "profile_photo_url"]
+        fields = (
+            "user",
+            "full_name",
+            "specialization",
+            "city",
+            "profile_photo_url",
+        )
+
+    def get_full_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
 
 
 class PatientProfileSerializer(ModelSerializer):

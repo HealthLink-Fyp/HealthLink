@@ -7,6 +7,7 @@ from .choices import SPECIALIZATION_CHOICES, QUALIFICATION_CHOICES, ROLE_CHOICES
 
 ##------------- Base User Manager --------------##
 
+
 class MyUserManager(BaseUserManager):
     def create_user(
         self,
@@ -54,6 +55,7 @@ class MyUserManager(BaseUserManager):
 
 ##------------- User Authentication Model --------------##
 
+
 class User(AbstractBaseUser):
     first_name = models.CharField(max_length=255, null=False, blank=False)
     last_name = models.CharField(max_length=255, null=False, blank=False)
@@ -87,11 +89,13 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+
 class UserToken(models.Model):
     user_id = models.IntegerField()
     token = models.CharField(max_length=255, unique=True, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     expire_at = models.DateTimeField()
+
 
 class UserForgot(models.Model):
     email = models.EmailField(max_length=255, null=False, blank=False)
@@ -99,6 +103,7 @@ class UserForgot(models.Model):
 
 
 ##------------- Doctor Profile Model --------------##
+
 
 class DoctorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -116,7 +121,7 @@ class DoctorProfile(models.Model):
     summary = models.TextField(max_length=255, null=False, blank=False)
     wait_time = models.IntegerField(null=True, blank=True)
     recommendation_percent = models.IntegerField(null=True, blank=True)
-    patients_count = models.IntegerField(null=True, blank=True) 
+    patients_count = models.IntegerField(null=True, blank=True)
     reviews_count = models.IntegerField(null=True, blank=True)
     profile_photo_url = models.ImageField(null=True, blank=True)
 
@@ -127,6 +132,7 @@ class DoctorProfile(models.Model):
 
 
 ##------------- Patient Profile Model --------------##
+
 
 class PatientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

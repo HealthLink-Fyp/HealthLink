@@ -3,20 +3,16 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ForgotService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  forgot(body:any)
-  {
-    return this.http.post(`${environment.api}/auth/forget/`,body);
+  forgot(body: any) {
+    return this.http.post(`${environment.api}/auth/forget/`, body);
   }
 
-  reset(body:any)
-  {
-    return this.http.post(`${environment.api}/auth/reset/`,body);
+  reset(body: any) {
+    return this.http.post(`${environment.api}/auth/reset/`, body);
   }
-
 }

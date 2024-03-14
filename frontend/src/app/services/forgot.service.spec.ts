@@ -4,7 +4,6 @@ import { ForgotService } from './forgot.service';
 
 describe('ForgotService', () => {
   let service: ForgotService;
-  
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

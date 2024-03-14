@@ -3,38 +3,42 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  static authEmitter = new EventEmitter<boolean>();
 
-  static authEmitter=new EventEmitter<boolean>();
+  accessToken = '';
 
-  accessToken='';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  register(body:any)
-  {
-    return this.http.post(`${environment.api}/auth/register/`,body);
+  register(body: any) {
+    return this.http.post(`${environment.api}/auth/register/`, body);
   }
 
-  login(body:any)
-  {
-    return this.http.post(`${environment.api}/auth/login/`,body,{withCredentials:true});
+  login(body: any) {
+    return this.http.post(`${environment.api}/auth/login/`, body, {
+      withCredentials: true,
+    });
   }
 
-  user()
-  {
+  user() {
     return this.http.get(`${environment.api}/auth/user/`);
   }
 
-  refresh()
-  {
-    return this.http.post(`${environment.api}/auth/refresh/`,{},{withCredentials:true});
+  refresh() {
+    return this.http.post(
+      `${environment.api}/auth/refresh/`,
+      {},
+      { withCredentials: true },
+    );
   }
 
-  logout()
-  {
-    return this.http.post(`${environment.api}/auth/logout/`,{},{withCredentials:true});
+  logout() {
+    return this.http.post(
+      `${environment.api}/auth/logout/`,
+      {},
+      { withCredentials: true },
+    );
   }
 }

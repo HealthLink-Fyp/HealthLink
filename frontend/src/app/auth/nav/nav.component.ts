@@ -4,26 +4,23 @@ import { MaterialModule } from 'src/app/material/material/material.module';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
+  authenticated = false;
 
-  authenticated=false;
-
-  constructor(private authService:AuthService){}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    AuthService.authEmitter.subscribe(authenticated=>{
-      this.authenticated=authenticated;
+    AuthService.authEmitter.subscribe((authenticated) => {
+      this.authenticated = authenticated;
     });
   }
 
-  logout()
-  {
-    this.authService.logout().subscribe(()=>{
-      this.authService.accessToken='';
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.authService.accessToken = '';
       AuthService.authEmitter.emit(false);
-    })
+    });
   }
-
 }
