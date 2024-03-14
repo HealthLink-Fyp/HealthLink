@@ -9,33 +9,26 @@ import { PatientService } from '../services/patient/patient.service';
 })
 export class PatientComponent {
   form!: FormGroup;
+  searchTimeout: any = null;
 
   constructor(
     private formBuilder: FormBuilder,
-    private patientService: PatientService,
+    private patientService: PatientService
   ) {}
 
   formSubmitted: boolean = false;
+  searchQuery: string = '';
+  searchResults: any[] = [];
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       age: '',
-
       sex: '',
-
       blood_group: '',
-
       weight: '',
-
       height: '',
-
       bmi: '',
     });
-  }
-
-  getProfilePhotoUrl(url: string): string {
-    const currentHost = window.location.origin.replace('4200', '8000');
-    return url.replace('http://localhost:8000', currentHost);
   }
 
   submit() {
@@ -45,16 +38,23 @@ export class PatientComponent {
     this.formSubmitted = true;
   }
 
-  searchQuery: string = '';
-  searchResults: any[] = [];
+  getProfilePhotoUrl(url: string): string {
+    const currentHost = window.location.origin.replace('4200', '8000');
+    return url.replace('http://localhost:8000', currentHost);
+  }
+
+  onSearchQueryChange() {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.searchDoctors();
+    }, 500);
+  }
 
   searchDoctors() {
-    if (this.searchQuery.length > 1) {
-      this.patientService
-        .searchDoctors(this.searchQuery)
-        .subscribe((response: any) => {
-          this.searchResults = response;
-        });
-    }
+    this.patientService
+      .searchDoctors(this.searchQuery)
+      .subscribe((response: any) => {
+        this.searchResults = response;
+      });
   }
 }

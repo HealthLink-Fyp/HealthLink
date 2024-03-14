@@ -6,19 +6,22 @@ from rest_framework import generics
 
 
 class AutoCompleteDoctorView(generics.ListAPIView):
-    queryset = DoctorProfile.objects.all()
+    """
+    View to return suggestions for doctor's city and specialization
+    """
+
     serializer_class = DoctorSearchBarSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ("^city", "^specialization")
 
     def get_queryset(self):
-        specialization = self.request.query_params.get("specialization", None)
+        queryset = DoctorProfile.objects.only(
+            "user", "city", "specialization", "profile_photo_url"
+        )
         city = self.request.query_params.get("city", None)
-
-        queryset = DoctorProfile.objects.all()
+        specialization = self.request.query_params.get("specialization", None)
+        if city:
+            queryset = queryset.filter(specialization__icontains=city)
         if specialization:
             queryset = queryset.filter(specialization__icontains=specialization)
-
-        if city:
-            queryset = queryset.filter(city__icontains=city)
         return queryset

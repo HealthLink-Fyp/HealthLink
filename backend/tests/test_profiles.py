@@ -27,7 +27,10 @@ class ProfileTests(AuthenticatedApiTest):
         self.user.role = "doctor"
         self.user.save()
         url = reverse("profile")
+        user_id = self.user.id
+        print("\n\n\n", user_id, "\n\n\n")
         data = {
+            "user_id": user_id,
             "specialization": "cardiologist",
             "qualification": "mbbs",
             "experience_years": 5,
@@ -50,7 +53,6 @@ class ProfileTests(AuthenticatedApiTest):
         url = reverse("profile")
         response = self.client.post(url, data={}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
 
     def test_admin_profile(self):
         self.user.role = "admin"

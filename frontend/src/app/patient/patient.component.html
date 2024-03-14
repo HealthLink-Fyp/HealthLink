@@ -40,28 +40,21 @@
   <input
     type="text"
     [(ngModel)]="searchQuery"
-    (input)="searchDoctors()"
+    (input)="onSearchQueryChange()"
     placeholder="Search Doctors..."
   />
 
-  <div *ngIf="searchResults.length > 0 && searchQuery">
+  <div *ngIf="searchResults.length > 0">
     <ul>
       <li *ngFor="let result of searchResults">
         <img
           [src]="getProfilePhotoUrl(result.profile_photo_url)"
-          alt="Profile Photo"
-          width="100"
-          height="100"
-          style="border-radius: 50%"
+          style="width: 10%"
         />
-        <p>{{ result.full_name }}</p>
+        <a [routerLink]="['/doctor', result.user]">{{ result.full_name }}</a>
         <p>{{ result.specialization }}</p>
         <p>{{ result.city }}</p>
-        <button mat-raised-button color="primary">Book Appointment</button>
       </li>
     </ul>
-  </div>
-  <div *ngIf="searchResults.length === 0 && searchQuery">
-    <p>No doctors found</p>
   </div>
 </div>
