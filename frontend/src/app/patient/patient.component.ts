@@ -11,6 +11,8 @@ export class PatientComponent {
   form!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private patientService:PatientService) {}
+
+  formSubmitted:boolean=false;
   
   ngOnInit(): void {
   
@@ -32,9 +34,25 @@ export class PatientComponent {
   });
   
   }
+
+
   submit() {
     this.patientService.register(this.form.getRawValue()).subscribe(
       (res)=>console.log(res)
     )
+    this.formSubmitted=true;
   }
+
+  searchQuery:string='';
+  searchResults:any[]=[];
+
+  searchDoctors()
+  {
+    this.patientService.searchDoctors(this.searchQuery).subscribe(
+      (response:any)=>{
+          this.searchResults=response.results
+      }
+    )
+    }
 }
+

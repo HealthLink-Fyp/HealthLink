@@ -16,4 +16,8 @@ export class PatientService {
     return this.http.post(`${environment.api}/api/profile/`,body);
   }
 
+  searchDoctors(query: string) {
+    return this.http.get(`${environment.api}/api/autocomplete/?search=${query}`);
+  }
+
 }
