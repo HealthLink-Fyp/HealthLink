@@ -1,6 +1,128 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    
+  "name": "Django & Angular Dev Container",
+
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+
+  "forwardPorts": [8000, 4200],
+
+  "workspaceFolder": "/workspaces/HealthLink/",
+
+  "customizations": {
+
+
+    "extensions": [
+      "ms-python.python",
+      "charliermarsh.ruff",
+      "EliverLara.andromeda",
+      "GitHub.copilot",
+      "GitHub.copilot-chat",
+      "vscode-icons-team.vscode-icons",
+      "esbenp.prettier-vscode"
+
+    ],
+    "vscode": {
+
+      "settings": {
+        // Python settings
+        "terminal.integrated.shell.osx": "/bin/zsh",
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "python.poetryPath": "/usr/local/bin/poetry",
+        "python.venvPath": "~/.cache/pypoetry/virtualenvs",
+        "python.venvFolders": [
+          "~/.cache/pypoetry/virtualenvs"
+        ],
+
+        // Git settings
+        "git.enableSmartCommit": true,
+        "git.confirmSync": false,
+        "git.defaultCloneDirectory": "~/workspaces",
+        "git.autofetch": true,
+        "git.autofetchPeriod": 180,
+        "git.autorefresh": true,
+        "git.autorefreshPeriod": 180,
+        "git.enableCommitSigning": true,
+        "git.enableCommitSigningAutomatic": true,
+
+        // Remote - Containers settings
+        "remote.autoForwardPorts": true,
+        "remote.forwardOnOpen": true,
+        "remote.otherPortsAttributes": {
+          "onAutoForward": "notify"
+
+        },
+        "remote.portsAttributes": {
+          "8000": {
+            "label": "Django",
+            "onAutoForward": "openPreview",
+            "visibility": "public"
+          },
+          "4200": {
+            "label": "Angular",
+            "onAutoForward": "openPreview",
+            "visibility": "public"
+          }
+        },
+
+        // Workspace settings
+        "workbench.colorTheme": "Andromeda",
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.editor.showIcons": true,
+
+        // Terminal settings
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.fontFamily": "Fira Code",
+        "terminal.integrated.fontSize": 14,
+        "terminal.integrated.cursorStyle": "line",
+        "terminal.integrated.rightClickBehavior": "copyPaste",
+        "terminal.integrated.copyOnSelection": true,
+        "terminal.integrated.sendKeybindingsToShell": true,
+
+        // File settings
+        "files.autoSave": "onWindowChange",
+        "files.autoSaveDelay": 1000,
+        "files.autoSaveTimeout": 1000,
+        "files.autoSaveWhenNoErrors": true,
+        "files.defaultLanguage": "python",
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+
+        // Search settings
+        "search.collapseResults": "alwaysCollapse",
+        "search.sortOrder": "modified",
+
+        // Prettier settings
+        "prettier.singleQuote": true,
+        "prettier.trailingComma": "all",
+        "prettier.arrowParens": "always",
+
+        // Editor settings
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+
+        // Ruff settings
+        "ruff.lint.run": "onSave",
+        "ruff.lint.autoFix": true
+
+
+
+      }
   }
+
+
+},
+
+"postCreateCommand": [
+  "pip install --upgrade pip",
+  "conda install -c conda-forge just",
+  "pip install poetry",
+  "npm install -g @angular/cli",
+  "cd /workspaces/HealthLink/backend",
+  "poetry install",
+  "cd /workspaces/HealthLink/frontend",
+  "npm install",
+  "ng build",
+  "cd /workspaces/HealthLink/"
+]
+
 }
