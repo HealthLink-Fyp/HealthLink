@@ -38,6 +38,7 @@ class DoctorProfileSerializer(ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = [
+            "user",
             "specialization",
             "qualification",
             "experience_years",
