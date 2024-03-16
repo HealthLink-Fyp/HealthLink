@@ -1,0 +1,25 @@
+<div>
+    <h1>User ID: {{ patientData.user }}</h1>
+    <p>Age: {{ patientData.age }}</p>
+    <p>Sex: {{ patientData.sex }}</p>
+  
+    <!-- Display other properties -->
+</div>
+
+
+
+
+
+<div>
+    <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
+    
+    <div *ngIf="searchResults.length > 0">
+      <ul>
+        <li *ngFor="let result of searchResults">
+          <!-- Display search results as desired -->
+          {{ result.name }} - {{ result.city }} - {{ result.specialization }}
+        </li>
+      </ul>
+    </div>
+    
+    </div>

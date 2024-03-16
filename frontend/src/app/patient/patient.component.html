@@ -40,21 +40,7 @@
        
    <button type="submit">Submit</button>
 
-
-
+   <button onsubmit="Done()">Already filled</button>
 </form>
 
 
-<div *ngIf="formSubmitted">
-<input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
-
-<div *ngIf="searchResults.length > 0">
-  <ul>
-    <li *ngFor="let result of searchResults">
-      <!-- Display search results as desired -->
-      {{ result.name }} - {{ result.city }} - {{ result.specialization }}
-    </li>
-  </ul>
-</div>
-
-</div>

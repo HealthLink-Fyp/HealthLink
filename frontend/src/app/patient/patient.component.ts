@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PatientService } from '../services/patient/patient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -10,9 +11,9 @@ import { PatientService } from '../services/patient/patient.service';
 export class PatientComponent {
   form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private patientService:PatientService) {}
+  constructor(private formBuilder: FormBuilder,private patientService:PatientService,private router:Router) {}
 
-  formSubmitted:boolean=false;
+  
   
   ngOnInit(): void {
   
@@ -40,18 +41,16 @@ export class PatientComponent {
     this.patientService.register(this.form.getRawValue()).subscribe(
       (res)=>console.log(res)
     )
-    this.formSubmitted=true;
+    this.router.navigate(['/pboard']);
   }
 
-  searchQuery:string='';
-  searchResults:any[]=[];
 
-  searchDoctors()
+  // if the form is already filled don't need to fill it again
+
+  Done()
   {
-    this.patientService.searchDoctors(this.searchQuery).subscribe(
-      (response:any)=>{
-          this.searchResults=response.results
-      }
-    )
-    }
+    this.router.navigate(['/dboard']);
+  }
+
+  
 }
