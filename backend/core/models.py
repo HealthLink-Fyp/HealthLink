@@ -122,8 +122,8 @@ class DoctorProfile(models.Model):
     profile_photo_url = models.ImageField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
-    full_name = models.CharField(max_length=255, null=False, blank=False)
-    city = models.CharField(max_length=255, null=False, blank=False)
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.full_name = f"{self.user.first_name} {self.user.last_name}"
