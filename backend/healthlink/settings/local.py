@@ -20,3 +20,11 @@ CORS_ALLOW_CREDENTIALS = True
 
 # Quick and dirty way to enable all hosts for development
 ALLOWED_HOSTS = ["*"]
+
+# Rest Framework settings
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": {
+        "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.CursorPagination",
+        "PAGE_SIZE": 10,
+    },
+}

@@ -18,7 +18,6 @@ class MyUserManager(BaseUserManager):
         password,
         role,
         phone_number=None,
-        address=None,
         city=None,
     ):
         if not email:
@@ -31,7 +30,6 @@ class MyUserManager(BaseUserManager):
             username=username,
             role=role,
             phone_number=phone_number,
-            address=address,
             city=city,
         )
 
@@ -63,7 +61,6 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=255, unique=True, null=False, blank=False)
     password = models.CharField(max_length=255, null=False, blank=False)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
-    address = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     role = models.CharField(
         max_length=255, choices=ROLE_CHOICES, null=False, blank=False
@@ -114,7 +111,6 @@ class DoctorProfile(models.Model):
         max_length=255, choices=QUALIFICATION_CHOICES, null=False, blank=False
     )
     experience_years = models.IntegerField()
-    city = models.CharField(max_length=255)
     available_timings = models.TimeField(null=False, blank=False)
     available_days = models.JSONField(null=True, blank=True)
     consultation_fees = models.IntegerField(null=False, blank=False)
@@ -125,10 +121,13 @@ class DoctorProfile(models.Model):
     reviews_count = models.IntegerField(null=True, blank=True)
     profile_photo_url = models.ImageField(null=True, blank=True)
 
-    def __str__(self):
-        return (
-            self.user.first_name + " " + self.user.last_name + " - " + self.user.email
-        )
+    @property
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
+    @property
+    def city(self):
+        return self.user.city
 
 
 ##------------- Patient Profile Model --------------##
@@ -149,7 +148,10 @@ class PatientProfile(models.Model):
             self.bmi = self.weight / (self.height / 100) ** 2
         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return (
-            self.user.first_name + " " + self.user.last_name + " - " + self.user.email
-        )
+    @property
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
+    @property
+    def city(self):
+        return self.user.city
