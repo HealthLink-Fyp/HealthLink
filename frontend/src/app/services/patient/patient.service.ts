@@ -14,6 +14,11 @@ export class PatientService {
     return this.http.post(`${environment.api}/auth/api/profile/`, body);
   }
 
+  getPatient() {
+    return this.http.get(`${environment.api}/api/profile/`);
+  }
+
+
   searchDoctors(query: string) {
     return this.http.get(
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,

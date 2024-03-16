@@ -17,6 +17,7 @@ import { ForgotComponent } from './auth/auth/forgot/forgot.component';
 import { MaterialModule } from './material/material/material.module';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
+import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PatientComponent } from './patient/patient.component';
     ForgotComponent,
     DoctorComponent,
     PatientComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

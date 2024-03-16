@@ -67,6 +67,7 @@ export class DoctorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     private authService: AuthService,
+    private router:Router
   ) {}
 
   authenticated = false;
@@ -101,5 +102,6 @@ export class DoctorComponent implements OnInit {
     this.doctorService
       .register(this.form.getRawValue())
       .subscribe((res) => console.log(res));
+      this.router.navigate(['/dboard']);
   }
 }
