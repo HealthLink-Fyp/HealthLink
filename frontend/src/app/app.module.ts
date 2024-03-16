@@ -18,6 +18,12 @@ import { MaterialModule } from './material/material/material.module';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.component';
+import { AddressformComponent } from './addressform/addressform.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.comp
     DoctorComponent,
     PatientComponent,
     DashboardComponent,
+    AddressformComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +47,11 @@ import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.comp
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
   ],
   providers: [
     {
