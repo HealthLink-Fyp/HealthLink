@@ -4,6 +4,12 @@ from .base import *  # noqa
 
 DEBUG = True
 
+# Codespace Settings
+CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa
+CODESPACE_PORT_DOMAIN = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "")  # noqa
+BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_PORT_DOMAIN}"
+FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_PORT_DOMAIN}"
+
 # Only show emails in console don't send it to smtp
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -15,11 +21,12 @@ CACHES = {
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
+# CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # Quick and dirty way to enable all hosts for development
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [BACKEND_URL, FRONTEND_URL]
 
 # Rest Framework settings
 REST_FRAMEWORK = {
