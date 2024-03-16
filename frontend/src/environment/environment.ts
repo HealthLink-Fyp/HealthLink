@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  api: 'https://bug-free-winner-p965vr69qw7h74j4-8000.app.github.dev/api/v1',
+  api: 'https://literate-barnacle-xpj4g4g64vq3vxqg-8000.app.github.dev/api/v1',
 };
