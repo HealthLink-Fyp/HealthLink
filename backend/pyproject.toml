@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "healthlink"
+name = "env"
 version = "0.1.0"
 description = "HealthLink, A telemedicine plateform."
 authors = ["Faisal Fida <69955157+faisal-fida@users.noreply.github.com>"]
@@ -19,7 +19,6 @@ celery = "^5.3.6"
 redis = "^5.0.1"
 pillow = "^10.2.0"
 ruff = "^0.3.1"
-django-filter = "^24.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.1"
