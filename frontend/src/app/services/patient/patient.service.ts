@@ -11,12 +11,12 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   register(body: any) {
-    return this.http.post(`${environment.api}/api/profile/`, body);
+    return this.http.post(`${environment.api}/auth/api/profile/`, body);
   }
 
   searchDoctors(query: string) {
     return this.http.get(
-      `${environment.api}/api/autocomplete/?search=${query}`,
+      `${environment.api}/search/doctors/autocomplete/?search=${query}`,
     );
   }
 }
