@@ -30,6 +30,7 @@ class SearchDoctorView(generics.ListAPIView):
     serializer_class = DoctorSearchSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ("^city", "^specialization")
+    # pagination_class = None
 
     def get_queryset(self):
         city = self.request.query_params.get("city", None)

@@ -105,12 +105,12 @@ class UserForgot(models.Model):
 class DoctorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     specialization = models.CharField(
-        max_length=255, choices=SPECIALIZATION_CHOICES, null=False, blank=False
+        max_length=255, choices=SPECIALIZATION_CHOICES, null=False, blank=False, db_index=True
     )
     qualification = models.CharField(
-        max_length=255, choices=QUALIFICATION_CHOICES, null=False, blank=False
+        max_length=255, choices=QUALIFICATION_CHOICES, null=False, blank=False, db_index=True
     )
-    experience_years = models.IntegerField()
+    experience_years = models.IntegerField(db_index=True)
     available_timings = models.TimeField(null=False, blank=False)
     available_days = models.JSONField(null=True, blank=True)
     consultation_fees = models.IntegerField(null=False, blank=False)
@@ -120,14 +120,15 @@ class DoctorProfile(models.Model):
     patients_count = models.IntegerField(null=True, blank=True)
     reviews_count = models.IntegerField(null=True, blank=True)
     profile_photo_url = models.ImageField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
 
-    @property
-    def full_name(self):
-        return self.user.first_name + " " + self.user.last_name
+    full_name = models.CharField(max_length=255, null=False, blank=False)
+    city = models.CharField(max_length=255, null=False, blank=False)
 
-    @property
-    def city(self):
-        return self.user.city
+    def save(self, *args, **kwargs):
+        self.full_name = f"{self.user.first_name} {self.user.last_name}"
+        self.city = self.user.city
+        super().save(*args, **kwargs)
 
 
 ##------------- Patient Profile Model --------------##
