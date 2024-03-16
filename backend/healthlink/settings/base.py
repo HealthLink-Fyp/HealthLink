@@ -19,9 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Secret Key
 SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
-# Frontend URL
-FRONTEND_URL = os.environ.get("FRONTEND_URL", default="https://localhost:4200/reset/")
-
 # Email Settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -49,7 +46,6 @@ INSTALLED_APPS = [
     # Third-Party apps
     "corsheaders",
     "rest_framework",
-    "django_filters",
 ]
 
 MIDDLEWARE = [

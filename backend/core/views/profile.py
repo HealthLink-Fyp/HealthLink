@@ -1,13 +1,14 @@
-from core.models import DoctorProfile, PatientProfile
+# Rest Framework Imports
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
-
-from core.authentication import JWTAuthentication
-
 from rest_framework.exceptions import PermissionDenied, NotFound
+
+# Local Imports
+from core.models import DoctorProfile, PatientProfile
+from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
+from core.authentication import JWTAuthentication
 
 
 class ProfileView(APIView):
@@ -26,7 +27,7 @@ class ProfileView(APIView):
             raise NotFound("User not found.")
 
         if user.role == "doctor":
-            # Check if the user has a doctor profile
+            # Check if the user has a doctor profile otherwise raise a 404
             if not DoctorProfile.objects.filter(user=user).exists():
                 raise NotFound("Profile not found.")
 
@@ -34,7 +35,7 @@ class ProfileView(APIView):
             serializer = DoctorProfileSerializer(profile)
 
         elif user.role == "patient":
-            # Check if the user has a patient profile
+            # Check if the user has a patient profile otherwise raise a 404
             if not PatientProfile.objects.filter(user=user).exists():
                 raise NotFound("Profile not found.")
 
@@ -42,7 +43,7 @@ class ProfileView(APIView):
             serializer = PatientProfileSerializer(profile)
 
         else:
-            # Check if the user is an admin
+            # Check if the user is an admin otherwise raise a 403
             raise PermissionDenied("Not allowed.")
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -60,7 +61,7 @@ class ProfileView(APIView):
         elif user.role == "patient":
             serializer = PatientProfileSerializer(data=payload)
         else:
-            # Check if the user is an admin
+            # Check if the user is an admin otherwise raise a 403
             raise PermissionDenied("Not allowed.")
 
         serializer.is_valid(raise_exception=True)
