@@ -11,6 +11,6 @@ export class DoctorService {
   constructor(private http: HttpClient) {}
 
   register(body: any) {
-    return this.http.post(`${environment.api}/api/profile/`, body);
+    return this.http.post(`${environment.api}/auth/api/profile/`, body);
   }
 }
