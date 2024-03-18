@@ -15,7 +15,7 @@ export class PatientService {
   }
 
   getPatient() {
-    return this.http.get(`${environment.api}/api/profile/`);
+    return this.http.get(`${environment.api}/auth/profile/`);
   }
 
 
@@ -24,4 +24,12 @@ export class PatientService {
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,
     );
   }
+
+  afterDoctorsSearched(query: string, city: string) {
+    const params = { search: query, city: city };
+    return this.http.get(`${environment.api}/search/doctors/`, { params: params });
+  }
+  
+
+  
 }

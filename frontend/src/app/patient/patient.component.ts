@@ -49,7 +49,7 @@ export class PatientComponent {
 
   Done()
   {
-    this.router.navigate(['/dboard']);
+    this.router.navigate(['/pboard']);
   }
 
   

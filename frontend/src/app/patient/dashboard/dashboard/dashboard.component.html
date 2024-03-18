@@ -1,25 +1,35 @@
-<div>
-    <h1>User ID: {{ patientData.user }}</h1>
-    <p>Age: {{ patientData.age }}</p>
-    <p>Sex: {{ patientData.sex }}</p>
-  
-    <!-- Display other properties -->
-</div>
-
-
-
+<select [(ngModel)]="selectedCity">
+  <option>Select city</option>
+  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+</select>
 
 
 <div>
     <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
-    
-    <div *ngIf="searchResults.length > 0">
+    <button (click)="doctorsSearched()">Search</button>
+    <div *ngIf="searchResults && searchResults.length > 0">
       <ul>
         <li *ngFor="let result of searchResults">
           <!-- Display search results as desired -->
-          {{ result.name }} - {{ result.city }} - {{ result.specialization }}
+          {{ result.full_name }} - {{ result.city }} - {{ result.specialization }}
         </li>
       </ul>
     </div>
     
     </div>
+
+    <div>
+      <h1>User ID: {{ patientData.user }}</h1>
+      <p>Age: {{ patientData.age }}</p>
+      <p>Sex: {{ patientData.sex }}</p>
+    
+      <!-- Display other properties -->
+  </div>
+
+<div *ngIf="afterSearchData && afterSearchData.length > 0">
+  <div *ngFor="let data of afterSearchData  ">
+    <p>data coming from complete search</p>
+    <p>{{data.full_name}}</p>
+
+  </div>
+</div>
