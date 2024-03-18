@@ -6,8 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("auth/", include("core.urls.authentication")),
-    path("api/", include("core.urls.profile")),
-    path("api/", include("patient.urls.search")),
+    path("api/v1/", include("core.urls")),
+    path("api/v1/", include("patient.urls")),
     # Add media photos path
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

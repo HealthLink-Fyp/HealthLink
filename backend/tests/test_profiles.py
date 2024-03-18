@@ -27,22 +27,18 @@ class ProfileTests(AuthenticatedApiTest):
         self.user.role = "doctor"
         self.user.save()
         url = reverse("profile")
-        user_id = self.user.id
-        print("\n\n\n", user_id, "\n\n\n")
         data = {
-            "user_id": user_id,
-            "specialization": "cardiologist",
+            "specialization": "general_practice",
             "qualification": "mbbs",
             "experience_years": 5,
-            "city": "delhi",
-            "available_timings": "10:00:00",
-            "available_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "available_timings": "10:00",
+            "available_days": ["Monday"],
             "consultation_fees": 500,
-            "summary": "Dr. John Doe is a Cardiologist in Delhi with 5 years of experience.",
-            "wait_time": 15,
-            "recommendation_percent": 90,
-            "patients_count": 100,
-            "reviews_count": 50,
+            "summary": "Good",
+            "wait_time": 30,
+            "recommendation_percent": 50,
+            "patients_count": 10,
+            "reviews_count": 5,
         }
         response = self.client.post(url, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

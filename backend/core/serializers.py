@@ -1,6 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import SerializerMethodField
-
 from .models import User, DoctorProfile, PatientProfile
 
 
@@ -15,7 +13,6 @@ class UserSerializer(ModelSerializer):
             "username",
             "role",
             "phone_number",
-            "address",
             "city",
             "password",
         )
@@ -34,11 +31,19 @@ class UserSerializer(ModelSerializer):
         return instance
 
 
+class PatientProfileSerializer(ModelSerializer):
+    class Meta:
+        model = PatientProfile
+        fields = "__all__"
+
+
 class DoctorProfileSerializer(ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = [
             "user",
+            "full_name",
+            "city",
             "specialization",
             "qualification",
             "experience_years",
@@ -55,24 +60,32 @@ class DoctorProfileSerializer(ModelSerializer):
         ]
 
 
-class DoctorSearchBarSerializer(ModelSerializer):
-    full_name = SerializerMethodField()
-
+class DoctorAutoCompleteSerializer(ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = (
             "user",
             "full_name",
-            "specialization",
             "city",
+            "specialization",
             "profile_photo_url",
         )
 
-    def get_full_name(self, obj):
-        return f"{obj.user.first_name} {obj.user.last_name}"
 
-
-class PatientProfileSerializer(ModelSerializer):
+class DoctorSearchSerializer(ModelSerializer):
     class Meta:
-        model = PatientProfile
-        fields = "__all__"
+        model = DoctorProfile
+        fields = (
+            "user",
+            "full_name",
+            "city",
+            "specialization",
+            "profile_photo_url",
+            "patients_count",
+            "reviews_count",
+            "recommendation_percent",
+            "consultation_fees",
+            "wait_time",
+            "experience_years",
+            "available_days",
+        )
