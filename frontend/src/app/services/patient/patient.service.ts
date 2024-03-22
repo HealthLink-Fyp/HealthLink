@@ -24,4 +24,6 @@ export class PatientService {
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,
     );
   }
+
+ 
 }
