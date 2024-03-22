@@ -6,7 +6,7 @@ from patient.views.search import (
     DoctorDetailView,
 )
 
-urlpatterns = [
+urlpatterns = [ 
     path("search/doctors/", SearchDoctorView.as_view(), name="search"),
     path("doctors/<int:pk>/", DoctorDetailView.as_view(), name="doctor-detail"),
     path(

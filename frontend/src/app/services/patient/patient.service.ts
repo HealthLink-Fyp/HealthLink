@@ -11,11 +11,11 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   register(body: any) {
-    return this.http.post(`${environment.api}/auth/api/profile/`, body);
+    return this.http.post(`${environment.api}/auth/profile/`, body);
   }
 
   getPatient() {
-    return this.http.get(`${environment.api}/api/profile/`);
+    return this.http.get(`${environment.api}/auth/profile/`);
   }
 
 
