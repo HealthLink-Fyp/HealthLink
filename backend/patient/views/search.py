@@ -1,5 +1,9 @@
 from core.models import DoctorProfile
-from core.serializers import DoctorAutoCompleteSerializer, DoctorSearchSerializer
+from core.serializers import (
+    DoctorAutoCompleteSerializer,
+    DoctorSearchSerializer,
+    DoctorProfileSerializer,
+)
 
 from rest_framework import filters
 from rest_framework import generics
@@ -70,3 +74,13 @@ class SearchDoctorView(generics.ListAPIView):
         return queryset
 
 
+class DoctorDetailView(generics.RetrieveAPIView):
+    """
+    Get doctor profile by id.
+    """
+    
+    serializer_class = DoctorProfileSerializer
+
+    def get_queryset(self):
+        queryset = DoctorProfile.objects.filter(user=self.kwargs["pk"])
+        return queryset
