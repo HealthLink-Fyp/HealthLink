@@ -30,6 +30,9 @@ export class PatientService {
     return this.http.get(`${environment.api}/search/doctors/`, { params: params });
   }
   
+  viewDoctor() {
+    return this.http.get(`${environment.api}/auth/profile/`);
+  }
 
   
 }
