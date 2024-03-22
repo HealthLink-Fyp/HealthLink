@@ -1,6 +1,7 @@
 from .base import AuthenticatedApiTest
 from django.urls import reverse
 from rest_framework import status
+from .variables import doctor_profile_data, patient_profile_data
 
 
 class ProfileTests(AuthenticatedApiTest):
@@ -14,7 +15,7 @@ class ProfileTests(AuthenticatedApiTest):
 
     def test_patient_profile(self):
         url = reverse("profile")
-        data = {"age": 20, "sex": 0, "blood_group": "A+", "weight": 60, "height": 170}
+        data = patient_profile_data
         response = self.client.post(url, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -27,19 +28,7 @@ class ProfileTests(AuthenticatedApiTest):
         self.user.role = "doctor"
         self.user.save()
         url = reverse("profile")
-        data = {
-            "specialization": "general_practice",
-            "qualification": "mbbs",
-            "experience_years": 5,
-            "available_timings": "10:00",
-            "available_days": ["Monday"],
-            "consultation_fees": 500,
-            "summary": "Good",
-            "wait_time": 30,
-            "recommendation_percent": 50,
-            "patients_count": 10,
-            "reviews_count": 5,
-        }
+        data = doctor_profile_data
         response = self.client.post(url, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
