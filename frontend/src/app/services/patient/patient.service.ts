@@ -24,4 +24,19 @@ export class PatientService {
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,
     );
   }
+
+<<<<<<< HEAD
+  afterDoctorsSearched(query: string, city: string) {
+    const params = { search: query, city: city };
+    return this.http.get(`${environment.api}/search/doctors/`, { params: params });
+  }
+  
+  viewDoctor() {
+    return this.http.get(`${environment.api}/auth/profile/`);
+  }
+
+  
+=======
+ 
+>>>>>>> 74ddf9625d2cf254c74358c421cad21405450e0f
 }
