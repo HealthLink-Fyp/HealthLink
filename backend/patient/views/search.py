@@ -1,5 +1,9 @@
 from core.models import DoctorProfile
-from core.serializers import DoctorAutoCompleteSerializer, DoctorSearchSerializer
+from core.serializers import (
+    DoctorAutoCompleteSerializer,
+    DoctorSearchSerializer,
+    DoctorProfileSerializer,
+)
 
 from rest_framework import filters
 from rest_framework import generics
@@ -7,7 +11,7 @@ from rest_framework import generics
 
 class AutoCompleteDoctorView(generics.ListAPIView):
     """
-    View to return suggestions for doctor's city and specialization
+    API view to provide autocomplete functionality for DoctorProfile model.
     """
 
     serializer_class = DoctorAutoCompleteSerializer
@@ -16,6 +20,13 @@ class AutoCompleteDoctorView(generics.ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
+        """
+        Get the queryset for the view.
+
+        Returns:
+            QuerySet: The queryset containing the DoctorProfile objects.
+        """
+
         queryset = DoctorProfile.objects.only(
             "user", "full_name", "city", "specialization", "profile_photo_url"
         )
@@ -24,7 +35,7 @@ class AutoCompleteDoctorView(generics.ListAPIView):
 
 class SearchDoctorView(generics.ListAPIView):
     """
-    View to search doctor
+    API view to provide search functionality for DoctorProfile model.
     """
 
     serializer_class = DoctorSearchSerializer
@@ -33,6 +44,13 @@ class SearchDoctorView(generics.ListAPIView):
     # pagination_class = None
 
     def get_queryset(self):
+        """
+        Get the queryset for the view.
+
+        Returns:
+            QuerySet: The queryset containing the DoctorProfile objects.
+        """
+
         city = self.request.query_params.get("city", None)
 
         queryset = DoctorProfile.objects.only(
@@ -53,4 +71,16 @@ class SearchDoctorView(generics.ListAPIView):
         if city:
             queryset = queryset.filter(city__icontains=city)
 
+        return queryset
+
+
+class DoctorDetailView(generics.RetrieveAPIView):
+    """
+    Get doctor profile by id.
+    """
+    
+    serializer_class = DoctorProfileSerializer
+
+    def get_queryset(self):
+        queryset = DoctorProfile.objects.filter(user=self.kwargs["pk"])
         return queryset
