@@ -9,6 +9,8 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
+
+
 const routes: Routes = [
   { path: '', component: AuthComponent },
   { path: 'login', component: LoginComponent },
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'doctor', component: DoctorComponent },
   { path: 'patient', component: PatientComponent },
   {path:'dboard',component:doctorDashBoard},
-  {path:'pboard',component:patientDashBoard}
+  {path:'pboard',component:patientDashBoard},
+
+  {path:'dboard/:userId',component:doctorDashBoard},
 ];
 
 @NgModule({

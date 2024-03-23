@@ -14,10 +14,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthComponent } from './auth/auth/auth.component';
 import { ResetComponent } from './auth/auth/reset/reset.component';
 import { ForgotComponent } from './auth/auth/forgot/forgot.component';
-import { MaterialModule } from './material/material/material.module';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
-import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.component';
+import { DashboardComponent as patientDashboard } from './patient/dashboard/dashboard/dashboard.component';
+import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.comp
     ForgotComponent,
     DoctorComponent,
     PatientComponent,
-    DashboardComponent,
+    patientDashboard,
+    doctorDashboard
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,7 @@ import { DashboardComponent } from './patient/dashboard/dashboard/dashboard.comp
     RouterOutlet,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule,
+
   ],
   providers: [
     {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
@@ -12,6 +13,7 @@ export class DashboardComponent implements OnInit {
   patientData: any = {};
 
 
+
 ngOnInit(): void {
   this.patientService.getPatient().subscribe((res:any)=>{
     this.patientData=res;
@@ -21,7 +23,7 @@ ngOnInit(): void {
   )
 }
 
-  constructor(private patientService:PatientService){}
+  constructor(private patientService:PatientService, private router:Router){}
 
   searchQuery:string='';
   searchResults:any[]=[];
@@ -59,6 +61,12 @@ ngOnInit(): void {
            this.afterSearchData=response.results;
            console.log('data came after search is : ',this.afterSearchData);
       })
+    }
+
+    viewDoctor(userId:any)
+    {
+      this.router.navigate(['/dboard',userId]);
+        
     }
 
    

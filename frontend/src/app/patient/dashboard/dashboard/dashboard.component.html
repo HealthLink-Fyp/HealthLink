@@ -30,6 +30,6 @@
   <div *ngFor="let data of afterSearchData  ">
     <p>data coming from complete search</p>
     <p>{{data.full_name}}</p>
-       
+      <button (click)="viewDoctor(data.user)">view Profile</button>
   </div>
 </div>

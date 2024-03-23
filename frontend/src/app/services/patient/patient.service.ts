@@ -30,6 +30,8 @@ export class PatientService {
     return this.http.get(`${environment.api}/search/doctors/`, { params: params });
   }
   
-
+  getDoctorProfile(userId:number) {
+    return this.http.get(`${environment.api}/doctors/${userId}/`);
+  }
   
 }
