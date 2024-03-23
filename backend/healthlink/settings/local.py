@@ -10,6 +10,12 @@ DEBUG = True
 # BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_PORT_DOMAIN}"
 # FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_PORT_DOMAIN}"
 
+# Variables
+JWT_REFRESH_SECRET = "secret"
+JWT_ACCESS_SECRET = "secret"
+JWT_ACCESS_EXPIRE = 60 * 60 * 24 * 7  # 1 week
+JWT_REFRESH_EXPIRE = 60 * 60 * 24 * 14  # 2 weeks
+
 # Only show emails in console don't send it to smtp
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
