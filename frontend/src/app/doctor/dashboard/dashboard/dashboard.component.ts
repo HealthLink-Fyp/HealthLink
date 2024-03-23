@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit{
 
   doctorData:any={};
 
-  doctorProfileData:any=null;
+  doctorProfileData:any={};
 
   ngOnInit(): void {
 

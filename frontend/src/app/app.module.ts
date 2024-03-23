@@ -8,7 +8,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NavComponent } from './auth/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthComponent } from './auth/auth/auth.component';
@@ -40,6 +40,7 @@ import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashbo
     RouterOutlet,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
 
   ],
   providers: [
