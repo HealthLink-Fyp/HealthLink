@@ -1,17 +1,14 @@
 from django.urls import path
 
-from patient.views.search import (
-    SearchDoctorView,
-    AutoCompleteDoctorView,
-    DoctorDetailView,
-)
+from patient.views import search, appointment
 
-urlpatterns = [ 
-    path("search/doctors/", SearchDoctorView.as_view(), name="search"),
-    path("doctors/<int:pk>/", DoctorDetailView.as_view(), name="doctor-detail"),
+urlpatterns = [
+    path("appointment/", appointment.AppointmentView.as_view(), name="appointment"),
+    path("search/doctors/", search.SearchDoctorView.as_view(), name="search"),
+    path("doctors/<int:pk>/", search.DoctorDetailView.as_view(), name="doctor-detail"),
     path(
         "search/doctors/autocomplete/",
-        AutoCompleteDoctorView.as_view(),
+        search.AutoCompleteDoctorView.as_view(),
         name="autocomplete",
     ),
 ]

@@ -36,3 +36,23 @@ QUALIFICATION_CHOICES = [
     ("bds", "BDS"),
     ("md", "MD"),
 ]
+
+
+STATUS_CHOICES = [
+    ("pending", "Pending"),
+    ("confirmed", "Confirmed"),
+    ("scheduled", "Scheduled"),
+    ("canceled", "Canceled"),
+    ("completed", "Completed"),
+]
+
+
+DAY_CHOICES = [
+    ("monday", "Monday"),
+    ("tuesday", "Tuesday"),
+    ("wednesday", "Wednesday"),
+    ("thursday", "Thursday"),
+    ("friday", "Friday"),
+    ("saturday", "Saturday"),
+    ("sunday", "Sunday"),
+]

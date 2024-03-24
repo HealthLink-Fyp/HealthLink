@@ -57,17 +57,18 @@ class LoginView(APIView):
         """
         email = request.data.get("email", "").strip().lower()
         password = request.data.get("password", "")
-        user = User.objects.filter(email=email).first()
-
-        # Check if the user exists
-        if not user:
-            raise NotFound("User not found.")
 
         # Check if the email is valid
         try:
             validate_email(email)
         except Exception:
             raise ValidationError("Invalid email.")
+
+        user = User.objects.filter(email=email).first()
+
+        # Check if the user exists
+        if not user:
+            raise NotFound("User not found.")
 
         # Check if the user is an admin
         if user.role == "admin":
@@ -77,10 +78,10 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed("Invalid credentials.")
 
-        access_token = create_access_token(user.id)
-        refresh_token = create_refresh_token(user.id)
+        access_token = create_access_token(user=user)
+        refresh_token = create_refresh_token(user=user)
         UserToken.objects.create(
-            user_id=user.id,
+            user=user,
             token=refresh_token,
             expire_at=timezone.now() + timezone.timedelta(days=7),
         )
@@ -107,23 +108,35 @@ class RefreshView(APIView):
         """
         Refresh the access token
         """
+
         refresh_token = request.COOKIES.get("refresh_token", False)
-        id = decode_refresh_token(token=refresh_token)
+
+        # Check if the refresh token is valid
+        if not refresh_token:
+            raise NotAuthenticated("Not authenticated.")
+
+        user_id = decode_refresh_token(token=refresh_token)
+        user = User.objects.filter(id=user_id).first()
+
+        # Check if the user exists
+        if not user:
+            raise NotFound("User not found.")
+
         filter_params = {
-            "user_id": id,
+            "user": user,
             "token": refresh_token,
             "expire_at__gt": timezone.now(),
         }
 
         # Check if the user is logged in
-        if not refresh_token or not id:
+        if not refresh_token or not user_id or not user:
             raise NotAuthenticated("Not authenticated.")
 
         # Check if the refresh token is valid
         if not UserToken.objects.filter(**filter_params).exists():
             raise AuthenticationFailed("Invalid refresh token.")
 
-        access_token = create_access_token(id=id)
+        access_token = create_access_token(user=user)
         return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
 
@@ -132,13 +145,13 @@ class LogoutView(APIView):
         """
         Logout the user
         """
-        refesh_token = request.COOKIES.get("refresh_token", False)
+        refresh_token = request.COOKIES.get("refresh_token", False)
 
         # Check if the user is logged in
-        if not refesh_token:
+        if not refresh_token:
             raise NotAuthenticated("Not authenticated.")
 
-        UserToken.objects.filter(token=refesh_token).delete()
+        UserToken.objects.filter(token=refresh_token).delete()
 
         response = Response()
         response.delete_cookie(key="refresh_token")
@@ -161,7 +174,7 @@ class ForgotView(APIView):
             raise NotFound("User not found.")
 
         token = PasswordResetTokenGenerator().make_token(user)
-        UserForgot.objects.create(email=email, token=token)
+        UserForgot.objects.create(user=user, email=email, token=token)
 
         # forgot_url = settings.FRONTEND_URL + "/" + token
         # message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
@@ -182,6 +195,10 @@ class ResetView(APIView):
         """
         token = request.data.get("token")
         password = request.data.get("password")
+
+        # Check for password strength
+        if len(password) < 8:
+            raise ValidationError("Password must be at least 8 characters long.")
 
         user_reset = UserForgot.objects.filter(token=token).first()
 

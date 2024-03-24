@@ -53,13 +53,13 @@ class ProfileView(APIView):
         Create the user profile
         """
         user = request.user
-        payload = request.data
-        payload["user"] = user.id
+        data = request.data.copy()
+        data["user"] = user.id
 
         if user.role == "doctor":
-            serializer = DoctorProfileSerializer(data=payload)
+            serializer = DoctorProfileSerializer(data=data)
         elif user.role == "patient":
-            serializer = PatientProfileSerializer(data=payload)
+            serializer = PatientProfileSerializer(data=data)
         else:
             # Check if the user is an admin otherwise raise a 403
             raise PermissionDenied("Not allowed.")

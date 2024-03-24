@@ -1,8 +1,5 @@
-.env
 .venv/
 .vscode/*
-*/Justfile
-*/poetry.lock
 __pycache__/
 *.pyc
 .ruff_cache/
