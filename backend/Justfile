@@ -1,0 +1,53 @@
+set dotenv-load
+set positional-arguments
+
+# Django commands
+
+serve:
+  python manage.py runserver_plus
+
+testall:
+  python manage.py test
+
+@test file:
+  python manage.py test tests.test_$1
+
+migration:
+  python manage.py makemigrations
+
+migrate:
+  python manage.py migrate --run-syncdb
+
+admin:
+  python manage.py createsuperuser
+
+shell:
+  python manage.py shell --no-startup
+
+# django-extensions commands
+
+erd:
+  python manage.py graph_models -a -g -I User,DoctorProfile,Availability,PatientProfile,Appointment -o erd.png
+
+reset:
+  python manage.py reset_db --noinput patient 
+
+# Backend setup
+
+bsetup:
+  pip install poetry && cd backend && poetry install && poetry shell && cd ..
+
+# Frontend setup
+
+fsetup:
+  cd frontend && nvm use 18 && npm install -g @angular/cli@12.2.0 && npm install && ng serve
+
+# Aggregate commands
+
+run: migrate testall serve
+
+db: migration migrate
+
+rdb: reset db
+
+all: bsetup fsetup run
