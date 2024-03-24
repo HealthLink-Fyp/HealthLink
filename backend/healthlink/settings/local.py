@@ -32,3 +32,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.CursorPagination",
     "PAGE_SIZE": 100,
 }
+
+
+# Timezone for pakistan
+TIME_ZONE = "Asia/Karachi"

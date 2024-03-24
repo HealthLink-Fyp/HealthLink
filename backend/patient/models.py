@@ -14,7 +14,7 @@ class Appointment(models.Model):
     patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     start = models.DateTimeField()
-    end = models.DateTimeField()
+    end = models.DateTimeField(null=True, blank=True, default=None)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
