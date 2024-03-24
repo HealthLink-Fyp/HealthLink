@@ -40,7 +40,7 @@ QUALIFICATION_CHOICES = [
 
 STATUS_CHOICES = [
     ("pending", "Pending"),
-    ("booked", "Booked"),
+    ("confirmed", "Confirmed"),
     ("scheduled", "Scheduled"),
     ("canceled", "Canceled"),
     ("completed", "Completed"),

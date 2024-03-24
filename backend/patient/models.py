@@ -16,3 +16,7 @@ class Appointment(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    def __str__(self):
+        return f"{self.patient.full_name} - {self.doctor.full_name}"

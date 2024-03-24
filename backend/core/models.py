@@ -29,6 +29,29 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault("role", "admin")
+
+        user = self.create_user(email, password, **extra_fields)
+
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.is_active = True
+
+        user.save(using=self._db)
+        return user
+
+    def create_doctor(self, email, password=None, **extra_fields):
+        extra_fields.setdefault("role", "doctor")
+        user = self.create_user(email, password, **extra_fields)
+        return user
+
+    def create_patient(self, email, password=None, **extra_fields):
+        extra_fields.setdefault("role", "patient")
+        user = self.create_user(email, password, **extra_fields)
+        return user
+
 
 ##------------- User Authentication Model --------------##
 
@@ -43,14 +66,26 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     role = models.CharField(max_length=255, choices=ROLE_CHOICES, default="patient")
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = ["role"]
     USERNAME_FIELD = "email"
 
     objects = MyUserManager()
 
+    def is_admin(self):
+        return self.role == "admin"
+
+    def is_doctor(self):
+        return self.role == "doctor"
+
+    def is_patient(self):
+        return self.role == "patient"
+
     def __str__(self):
-        return self.email
+        return f"{self.email} - {self.role}"
 
 
 class UserToken(models.Model):
@@ -82,7 +117,9 @@ class DoctorProfile(models.Model):
     Model to store the doctor profile details.
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, related_name="doctor"
+    )
     full_name = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     specialization = models.CharField(
@@ -109,7 +146,7 @@ class DoctorProfile(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.full_name
+        return f"{self.full_name} - {self.city}"
 
 
 ##------------- Availability Model --------------##
@@ -120,10 +157,24 @@ class Availability(models.Model):
     Model to store the availability of a doctor.
     """
 
-    doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(
+        DoctorProfile, on_delete=models.CASCADE, related_name="availability_set"
+    )
     day = models.CharField(max_length=10, choices=DAY_CHOICES)
     start_time = models.TimeField()
     end_time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.doctor.full_name} - {self.day} - {self.start_time} to {self.end_time}"
+
+    class Meta:
+        unique_together = ["doctor", "day"]
+        verbose_name_plural = "Availabilities"
+
+    def save(self, *args, **kwargs):
+        if self.start_time >= self.end_time:
+            raise ValueError("End time must be greater than start time")
+        super().save(*args, **kwargs)
 
 
 ##------------- Patient Profile Model --------------##
@@ -134,7 +185,9 @@ class PatientProfile(models.Model):
     Model to store the patient profile details.
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, related_name="patient"
+    )
     full_name = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     age = models.IntegerField()
@@ -143,6 +196,7 @@ class PatientProfile(models.Model):
     weight = models.IntegerField(default=1)
     height = models.IntegerField(default=1)
     bmi = models.FloatField(null=True, blank=True, default=0)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def save(self, *args, **kwargs):
         # Caluclate and store BMI it in the database
@@ -154,4 +208,4 @@ class PatientProfile(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.full_name
+        return f"{self.full_name} - {self.city}"
