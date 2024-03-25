@@ -1,21 +1,20 @@
 # Local Imports
 from patient.models import Appointment
 from patient.serializers import AppointmentSerializer
-
-from core.models import DoctorProfile, Availability
+from core.models import DoctorProfile
 from core.authentication import JWTAuthentication
-# from core.serializers import DoctorProfileSerializer, AvailabilitySerializer
 
+# Rest Framework Imports
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import ParseError
 from rest_framework.response import Response
 
-
+# Django Imports
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.utils import timezone
 
+# Python Imports
 import datetime
 
 
@@ -28,6 +27,10 @@ class AppointmentView(generics.ListCreateAPIView):
     pagination_class = None
 
     def get_queryset(self):
+        """
+        Return the appointments of the user based on their role.
+        """
+
         user = self.request.user
 
         if user.role == "patient":
@@ -40,6 +43,9 @@ class AppointmentView(generics.ListCreateAPIView):
         return queryset
 
     def perform_create(self, serializer):
+        """
+        Create an appointment for the patient.
+        """
         patient = self.request.user.patient
         doctor = get_object_or_404(DoctorProfile, user=self.request.data.get("doctor"))
 
