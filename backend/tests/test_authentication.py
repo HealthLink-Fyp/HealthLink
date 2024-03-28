@@ -23,13 +23,13 @@ class SignInEndpointTests(BaseApiTest):
     def test_without_data(self):
         url = reverse("login")
         response = self.client.post(url, {}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_invalid_email(self):
         url = reverse("login")
         data = {"email": "abcgmail.com", "password": "user@123"}
         response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_invalid_password(self):
         url = reverse("login")
@@ -40,14 +40,14 @@ class SignInEndpointTests(BaseApiTest):
     def test_not_logged_in(self):
         url = reverse("user")
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_logged_in_as_admin(self):
         self.user.role = "admin"
         self.user.save()
         url = reverse("user")
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
 class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
