@@ -1,157 +1,130 @@
-API Endpoints
-============
+# HealthLink Authentication API Documentation
 
-### Register
+This documentation outlines the usage of the Django API provided for user authentication and management.
 
-* **Method**: POST
-* **Endpoint**: `/api/v1/register/`
-* **Description**: Creates a new user account
-* **Request Body**:
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
+## Endpoints
 
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "Account created successfully"
-}
-```
+### 1. Register User
 
-### Login
+- **URL:** `/api/v1/auth/register/`
+- **Method:** `POST`
+- **Description:** Register a new user.
 
-* **Method**: POST
-* **Endpoint**: `/api/v1/login/`
-* **Description**: Logs in an existing user
-* **Request Body**:
+- **Request Body:**
+    
+    `email` (string, required): Email of the user.
 
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
+    `password` (string, required): Password of the user.
 
-* **Response**:
+    `role` (string, optional): Role of the user (Note: Only non-admin roles are allowed.)
 
-```json
-{
-  "success": true,
-  "message": "Logged in successfully",
-  "access_token": "eyJrZXkiOiAidmFsdWUiOlt7IlJlc29sdmFsImlzcyI6Imh0dHA6Ly9zdGF0aWMuY29tL3F1ZXN0aW9ucyIsInVzZXJfaWQiOiAifQ=="
-}
-```
+- **Responses:**
 
-### Get User
+    `200 OK`: User registered successfully.
 
-* **Method**: GET
-* **Endpoint**: `/api/v1/users/me/`
-* **Description**: Retrieves the current user's information
-* **Auth**: Bearer Token
-* **Response**:
+    `400 Bad Request`: Invalid request parameters.
 
-```json
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "email": "user@example.com",
-    "username": "johndoe",
-    "created_at": "2023-03-15T14:30:00.000000Z"
-  }
-}
-```
-### Update User
+    `403 Forbidden`: Not allowed (for admin role).
 
-* **Method**: PATCH
-* **Endpoint**: `/api/v1/users/me/`
-* **Description**: Updates the current user's information
-* **Auth**: Bearer Token
-* **Request Body**:
-```json
-{
-  "email": "new-email@example.com",
-  "username": "new-username"
-}
-```
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "User updated successfully"
-}
-```
-### Delete User
+### 2. User Login
 
-* **Method**: DELETE
-* **Endpoint**: `/api/v1/users/me/`
-* **Description**: Deletes the current user's account
-* **Auth**: Bearer Token
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "User deleted successfully"
-}
-```
-### Forgot Password
+- **URL:** `/api/v1/auth/login/`
+- **Method:** `POST`
+- **Description:** Log in an existing user.
+- **Request Body:**
 
-* **Method**: POST
-* **Endpoint**: `/api/v1/forgot/`
-* **Description**: Sends a password reset link to the user's email
-* **Request Body**:
-```json
-{
-  "email": "user@example.com"
-}
-```
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "Password reset link sent successfully"
-}
-```
-### Reset Password
+    `email` (string, required): Email of the user.
 
-* **Method**: POST
-* **Endpoint**: `/api/v1/reset/`
-* **Description**: Resets the user's password
-* **Request Body**:
-```json
-{
-  "token": "reset-token",
-  "password": "new-password"
-}
-```
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "Password reset successfully"
-}
-```
-### Change Password
+    `password` (string, required): Password of the user.
 
-* **Method**: PATCH
-* **Endpoint**: `/api/v1/users/me/password/`
-* **Description**: Changes the current user's password
-* **Auth**: Bearer Token
-* **Request Body**:
-```json
-{
-  "old_password": "old-password",
-  "new_password": "new-password"
-}
-```
-* **Response**:
-```json
-{
-  "success": true,
-  "message": "Password changed successfully"
-}
-```
+- **Responses:**
+
+    `200 OK`: User logged in successfully.
+
+    `400 Bad Request`: Invalid request parameters.
+
+    `401 Unauthorized`: Invalid credentials or authentication failed.
+
+    `404 Not Found`: User not found.
+
+    `403 Forbidden`: Not allowed (for admin role).
+
+### 3. User Information
+
+- **URL:** `/api/v1/auth/user/`
+- **Method:** `GET`
+- **Description:** Retrieve information about the logged-in user.
+- **Authentication:** JWT token required.
+- **Responses:**
+
+    `200 OK`: User information retrieved successfully.
+
+    `401 Unauthorized`: Not authenticated.
+
+### 4. Refresh Access Token
+
+- **URL:** `/api/v1/auth/refresh/`
+- **Method:** `POST`
+- **Description:** Refresh the access token using the refresh token.
+- **Request Header:**
+
+    `Cookie`: `refresh_token` (string, required): Refresh token.
+
+- **Responses:**
+
+    `200 OK`: Access token refreshed successfully.
+
+    `400 Bad Request`: Invalid refresh token.
+
+    `401 Unauthorized`: Not authenticated.
+
+    `404 Not Found`: User not found.
+
+### 5. User Logout
+
+- **URL:** `/api/v1/auth/logout/`
+- **Method:** `POST`
+- **Description:** Log out the user by deleting the refresh token.
+- **Request Header:**
+
+    `Cookie`: `refresh_token` (string, required): Refresh token.
+
+- **Responses:**
+
+    `200 OK`: User logged out successfully.
+
+    `401 Unauthorized`: Not authenticated.
+
+### 6. Forgot Password
+
+- **URL:** `/api/v1/auth/forgot/`
+- **Method:** `POST`
+- **Description:** Send an email to the user to reset their password.
+- **Request Body:**
+
+    `email` (string, required): Email of the user.
+
+- **Responses:**
+
+    `200 OK`: Email sent successfully with reset instructions.
+
+    `404 Not Found`: User not found.
+
+### 7. Reset Password
+
+- **URL:** `/api/v1/auth/reset/`
+- **Method:** `POST`
+- **Description:** Reset the user's password using the reset token.
+- **Request Body:**
+
+    `token` (string, required): Reset token received via email.
+
+    `password` (string, required): New password for the user.
+
+- **Responses:**
+
+    `200 OK`: Password reset successfully.
+
+    `400 Bad Request`: Invalid request parameters.
+    
+    `404 Not Found`: Invalid token or user not found.
