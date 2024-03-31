@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor/doctor.service';
@@ -20,7 +19,6 @@ export class DoctorComponent implements OnInit {
   QUALIFICATION_CHOICES=QUALIFICATION_CHOICES;
   availableDays=availableDays;
   
-  message = '';
 
   constructor(
     private formBuilder: FormBuilder,
