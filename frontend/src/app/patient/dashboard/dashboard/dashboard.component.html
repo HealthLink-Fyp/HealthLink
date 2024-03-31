@@ -31,5 +31,21 @@
     <p>data coming from complete search</p>
     <p>{{data.full_name}}</p>
       <button (click)="viewDoctor(data.user)">view Profile</button>
+      <button (click)="onAppointment()">Book Appointment</button>
   </div>
+</div>
+
+<label>For appointment booking : </label><br>
+<div>
+  <label for="start">Start:</label>
+  <input type="datetime-local"  [(ngModel)]="appointmentData.start">
+</div>
+
+<div>
+  <label for="end">End:</label>
+  <input type="datetime-local"  [(ngModel)]="appointmentData.end">
+</div>
+
+<div>
+
 </div>

@@ -34,9 +34,22 @@
     <input type="time" formControlName="available_timings" />
   </div>
 
-  <div *ngFor="let day of availableDays">
-    <input type="radio" [value]="day" formControlName="available_days" />
-    <label>{{ day }}</label>
+  <div formGroupName="availability_data">
+    <div *ngFor="let day of availableDays">
+      <input type="checkbox" [value]="day"  (change)="onChange($event)">
+      <label>{{ day }}</label>
+    </div> 
+    <div>
+      {{form.get('availability_data.days')?.value}}
+    </div>
+    <div>
+      <label>Available Start Time:</label>
+      <input type="time" formControlName="start" />
+    </div>
+    <div>
+      <label>Available End Time:</label>
+      <input type="time" formControlName="end" />
+    </div>
   </div>
 
   <div>

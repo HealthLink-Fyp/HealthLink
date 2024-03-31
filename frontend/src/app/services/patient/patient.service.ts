@@ -34,4 +34,8 @@ export class PatientService {
     return this.http.get(`${environment.api}/doctors/${userId}/`);
   }
   
+  makeAppointment(body:any)
+  {
+    return this.http.post(`${environment.api}/appointment`,body);
+  }
 }

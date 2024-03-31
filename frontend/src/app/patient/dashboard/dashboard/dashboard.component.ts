@@ -29,6 +29,13 @@ ngOnInit(): void {
   searchResults:any[]=[];
   selectedCity:string='';
 
+  appointmentData: any = {
+    start:'',
+    end:''
+  };
+
+
+
    cities:string[]=[
    'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Quetta', 'Peshawar', 'Gujranwala', 'Sialkot', 'Abbottabad', 'Bahawalpur', 'Sargodha', 'Sukkur', 'Larkana', 'Nawabshah', 'Mirpur Khas', 'Rahim Yar Khan', 'Sahiwal', 'Okara', 'Wah Cantonment', 'Dera Ghazi Khan', 'Mingora', 'Kamoke', 'Shekhupura', 'Mardan', 'Kasur', 'Gujrat', 'Chiniot', 'Jhang', 'Sadiqabad', 'Sheikhupura', 'Attock', 'Jhelum', 'Jacobabad', 'Khanewal', 'Muzaffargarh', 'Khanpur'
    ]
@@ -70,6 +77,10 @@ ngOnInit(): void {
     }
 
    
+    onAppointment()
+    {
+        
+    }
 
     
 
