@@ -13,7 +13,6 @@ doctor_profile_data = {
     "qualification": "mbbs",
     "experience_years": 5,
     "available_timings": "10:00:00",
-    "available_days": ["Monday"],
     "consultation_fees": 500,
     "summary": "Good",
     "wait_time": 30,

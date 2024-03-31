@@ -65,7 +65,7 @@ class SearchDoctorView(generics.ListAPIView):
             "consultation_fees",
             "wait_time",
             "experience_years",
-            "available_days",
+            "availability_data"
         )
 
         if city:
