@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor/doctor.service';
@@ -12,6 +13,8 @@ import {SPECIALIZATION_CHOICES,QUALIFICATION_CHOICES,availableDays} from './doct
 })
 export class DoctorComponent implements OnInit {
   form!: FormGroup;
+  message = '';
+  authenticated = false;
 
   SPECIALIZATION_CHOICES=SPECIALIZATION_CHOICES;
   QUALIFICATION_CHOICES=QUALIFICATION_CHOICES;
@@ -23,10 +26,8 @@ export class DoctorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     private authService: AuthService,
-    private router:Router
+    private router: Router
   ) {}
-
-  authenticated = false;
 
   ngOnInit(): void {
     AuthService.authEmitter.subscribe((authenticated) => {
@@ -35,11 +36,8 @@ export class DoctorComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       specialization: '',
-
       qualification: '',
-
       experience_years: '',
-
       city: '',
 
       available_timings: '',
@@ -53,7 +51,6 @@ export class DoctorComponent implements OnInit {
       }),
 
       summary: '',
-
       wait_time: '',
     });
   }
@@ -84,14 +81,37 @@ export class DoctorComponent implements OnInit {
   }
 
   submit() {
+    let doctor_data = this.prepareDoctorData();
     this.doctorService
-      .register(this.form.getRawValue())
+      .register(doctor_data)
       .subscribe((res) => console.log(res));
-      this.router.navigate(['/dboard']);
+    this.router.navigate(['/dboard']);
   }
 
-  Done()
-  {
+  prepareDoctorData() {
+    let formValue = this.form.getRawValue();
+
+    let availability_data = {
+      days: formValue.available_days,
+      start: formValue.start_time,
+      end: formValue.end_time,
+    };
+
+    let doctor_data = {
+      specialization: formValue.specialization,
+      qualification: formValue.qualification,
+      experience_years: formValue.experience_years,
+      city: formValue.city,
+      consultation_fees: formValue.consultation_fees,
+      summary: formValue.summary,
+      wait_time: formValue.wait_time,
+      availability_data: availability_data,
+    };
+
+    return doctor_data;
+  }
+
+  Done() {
     this.router.navigate(['/dboard']);
   }
 }

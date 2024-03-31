@@ -78,7 +78,7 @@ class DoctorDetailView(generics.RetrieveAPIView):
     """
     Get doctor profile by id.
     """
-    
+
     serializer_class = DoctorProfileSerializer
 
     def get_queryset(self):

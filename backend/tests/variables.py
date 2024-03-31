@@ -14,11 +14,16 @@ doctor_profile_data = {
     "experience_years": 5,
     "available_timings": "10:00:00",
     "consultation_fees": 500,
-    "summary": "Good",
-    "wait_time": 30,
-    "recommendation_percent": 50,
-    "patients_count": 10,
-    "reviews_count": 5,
+    "summary": "Dr. John Doe is a Cardiologist in Delhi with 5 years of experience.",
+    "wait_time": 15,
+    "recommendation_percent": 90,
+    "patients_count": 100,
+    "reviews_count": 50,
+    "availability_data": {
+        "days": ["monday", "tuesday"],
+        "start": "09:00",
+        "end": "17:00",
+    },
 }
 
 patient_profile_data = {
