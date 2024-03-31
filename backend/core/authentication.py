@@ -41,8 +41,6 @@ class JWTAuthentication(BaseAuthentication):
             user = User.objects.get(pk=decode_access_token(access_token))
         except User.DoesNotExist:
             raise AuthenticationFailed("User not found")
-
-        print(f"\n\n User: {user} \n\n")
         return (user, auth_data)
 
 

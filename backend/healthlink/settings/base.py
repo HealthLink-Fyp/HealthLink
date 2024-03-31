@@ -94,7 +94,6 @@ WSGI_APPLICATION = "healthlink.wsgi.application"
 
 # Database
 if bool(os.environ.get("DATABASE_URL")):
-    print(os.environ.get("DATABASE_URL"))
     DATABASES = {
         "default": dj_database_url.config(),
     }

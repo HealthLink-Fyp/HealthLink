@@ -29,7 +29,6 @@ from django.core.validators import validate_email
 from rest_framework.exceptions import (
     AuthenticationFailed,
     NotFound,
-    PermissionDenied,
     NotAuthenticated,
     ValidationError,
 )

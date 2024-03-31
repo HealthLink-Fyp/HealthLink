@@ -22,7 +22,7 @@ urlpatterns = [
     path("auth/forgot/", ForgotView.as_view(), name="forgot"),
     path("auth/reset/", ResetView.as_view(), name="reset"),
     # views/profile
-    path("profile/", ProfileView.as_view(), name="profile"),
+    path("auth/profile/", ProfileView.as_view(), name="profile"),
     # views/choice
     path("choices/", choice.ProfileChoiceView.as_view(), name="choice"),
 ]

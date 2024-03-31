@@ -92,6 +92,14 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         except KeyError:
             raise serializers.ValidationError("days, start, and end are required")
 
+        import datetime
+
+        start_time = datetime.datetime.strptime(start_time, "%H:%M")
+        end_time = datetime.datetime.strptime(end_time, "%H:%M")
+
+        if start_time >= end_time:
+            raise serializers.ValidationError("start time must be less than end time")
+
         if not isinstance(days, list) or len(days) == 0:
             raise serializers.ValidationError(
                 "days, start, and end are required in availability_data"
