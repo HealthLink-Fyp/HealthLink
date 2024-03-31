@@ -79,34 +79,10 @@ export class DoctorComponent implements OnInit {
   }
 
   submit() {
-    let doctor_data = this.prepareDoctorData();
     this.doctorService
-      .register(doctor_data)
+      .register(this.form.getRawValue())
       .subscribe((res) => console.log(res));
     this.router.navigate(['/dboard']);
-  }
-
-  prepareDoctorData() {
-    let formValue = this.form.getRawValue();
-
-    let availability_data = {
-      days: formValue.available_days,
-      start: formValue.start_time,
-      end: formValue.end_time,
-    };
-
-    let doctor_data = {
-      specialization: formValue.specialization,
-      qualification: formValue.qualification,
-      experience_years: formValue.experience_years,
-      city: formValue.city,
-      consultation_fees: formValue.consultation_fees,
-      summary: formValue.summary,
-      wait_time: formValue.wait_time,
-      availability_data: availability_data,
-    };
-
-    return doctor_data;
   }
 
   Done() {
