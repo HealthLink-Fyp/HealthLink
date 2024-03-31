@@ -12,7 +12,6 @@ doctor_profile_data = {
     "specialization": "general_practice",
     "qualification": "mbbs",
     "experience_years": 5,
-    "available_timings": "10:00:00",
     "consultation_fees": 500,
     "summary": "Dr. John Doe is a Cardiologist in Delhi with 5 years of experience.",
     "wait_time": 15,
