@@ -21,9 +21,16 @@ class AuthenticatedApiTest(BaseApiTest):
 class DoctorApiTest(AuthenticatedApiTest):
     def setUp(self):
         super().setUp(role="doctor")
-        self.doctor = DoctorProfile.objects.create(
-            user=self.user, **doctor_profile_data
-        )
+        self.doctor_profile_data = doctor_profile_data.copy()
+        self.doctor_profile_data["user"] = self.user
+
+    def create_doctor(self):
+        return DoctorProfile.objects.create(**self.doctor_profile_data)
+
+    def create_doctor_with_availabilities(self):
+        doctor = self.create_doctor()
+        doctor.availability_set.create(**self.doctor_profile_data["availability_data"])
+        return doctor
 
 
 class PatientApiTest(AuthenticatedApiTest):

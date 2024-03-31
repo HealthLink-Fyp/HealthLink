@@ -63,43 +63,37 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         availability = obj.availability_set.all()
 
         # check if availability exists
-        if not availability.exists():
-            return None
+        if len(availability) > 0:
+            data["days"] = [day.day for day in availability if day]
+            data["start"] = availability[0].start_time
+            data["end"] = availability[0].end_time
 
-        data["days"] = [day.day for day in availability if day]
-        data["start"] = availability[0].start_time if len(availability) > 0 else None
-        data["end"] = availability[0].end_time if len(availability) > 0 else None
+        return data if data else None
 
-        return data
-
-    @transaction.atomic
-    def create(self, validated_data):
-        availability_data = self.initial_data.get("availability_data")
-
-        # check if availability_data is provided
-        if availability_data is None:
-            raise serializers.ValidationError("availability_data is required")
-
-        # check if availability_data is a dictionary
+    def validate_availability_data(self, availability_data):
         if not isinstance(availability_data, dict):
-            raise serializers.ValidationError("availability_data must be a dictionary")
+            raise serializers.ValidationError(
+                "availability_data as a dictionary is required"
+            )
 
-        days = availability_data.get("days")
-        start_time = availability_data.get("start")
-        end_time = availability_data.get("end")
+        try:
+            days = availability_data["days"]
+            start_time = availability_data["start"]
+            end_time = availability_data["end"]
+        except KeyError:
+            raise serializers.ValidationError("days are required in availability_data")
 
-        # check if days, start, and end are provided
-        if (
-            not days
-            or not isinstance(days, list)
-            or len(days) == 0
-            or not start_time
-            or not end_time
-        ):
+        if not isinstance(days, list) or len(days) == 0:
             raise serializers.ValidationError(
                 "days, start, and end are required in availability_data"
             )
 
+        return days, start_time, end_time
+
+    @transaction.atomic
+    def create(self, validated_data):
+        availability_data = self.initial_data.get("availability_data")
+        days, start_time, end_time = self.validate_availability_data(availability_data)
         doctor = DoctorProfile.objects.create(**validated_data)
 
         serializer_data = [
@@ -109,7 +103,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
                 "start_time": availability_data.get("start"),
                 "end_time": availability_data.get("end"),
             }
-            for day in availability_data["days"]
+            for day in days
         ]
 
         serializer = AvailabilitySerializer(data=serializer_data, many=True)
@@ -145,7 +139,6 @@ class DoctorSearchSerializer(serializers.ModelSerializer):
             "consultation_fees",
             "wait_time",
             "experience_years",
-            "available_days",
         )
 
 

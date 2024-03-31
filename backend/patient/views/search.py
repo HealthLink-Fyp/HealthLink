@@ -65,7 +65,6 @@ class SearchDoctorView(generics.ListAPIView):
             "consultation_fees",
             "wait_time",
             "experience_years",
-            "available_days",
         )
 
         if city:
@@ -78,7 +77,7 @@ class DoctorDetailView(generics.RetrieveAPIView):
     """
     Get doctor profile by id.
     """
-    
+
     serializer_class = DoctorProfileSerializer
 
     def get_queryset(self):
