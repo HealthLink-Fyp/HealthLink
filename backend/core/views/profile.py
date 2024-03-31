@@ -10,6 +10,9 @@ from core.models import DoctorProfile, PatientProfile
 from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
 from core.authentication import JWTAuthentication
 
+# Django Imports
+from django.shortcuts import get_object_or_404
+
 
 class ProfileView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -67,3 +70,44 @@ class ProfileView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def put(self, request):
+        """
+        Update the user profile
+        """
+        user = request.user
+
+        if user.role == "doctor":
+            profile = get_object_or_404(DoctorProfile, user=user)
+            serializer = DoctorProfileSerializer(
+                profile, data=request.data, partial=True
+            )
+        elif user.role == "patient":
+            profile = get_object_or_404(PatientProfile, user=user)
+            serializer = PatientProfileSerializer(
+                profile, data=request.data, partial=True
+            )
+        else:
+            # Check if the user is an admin otherwise raise a 403
+            raise PermissionDenied("Not allowed.")
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        """
+        Delete the user profile
+        """
+        user = request.user
+
+        if user.role == "doctor":
+            profile = DoctorProfile.objects.get(user=user)
+        elif user.role == "patient":
+            profile = PatientProfile.objects.get(user=user)
+        else:
+            # Check if the user is an admin otherwise raise a 403
+            raise PermissionDenied("Not allowed.")
+
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

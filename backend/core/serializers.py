@@ -38,7 +38,23 @@ class PatientProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class DoctorProfileSerializer(serializers.ModelSerializer):
+class AvailabilityDataMixin:
+    availability_data = serializers.SerializerMethodField()
+
+    def get_availability_data(self, obj):
+        data = {}
+        availability = obj.availability_set.all()
+
+        # check if availability exists
+        if len(availability) > 0:
+            data["days"] = [day.day for day in availability if day]
+            data["start"] = availability[0].start_time
+            data["end"] = availability[0].end_time
+
+        return data if data else None
+
+
+class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = (
@@ -58,17 +74,10 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
             "created",
         )
 
-    def get_availability_data(self, obj):
-        data = {}
-        availability = obj.availability_set.all()
-
-        # check if availability exists
-        if len(availability) > 0:
-            data["days"] = [day.day for day in availability if day]
-            data["start"] = availability[0].start_time
-            data["end"] = availability[0].end_time
-
-        return data if data else None
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["availability_data"] = self.get_availability_data(instance)
+        return data
 
     def validate_availability_data(self, availability_data):
         if not isinstance(availability_data, dict):
@@ -124,7 +133,7 @@ class DoctorAutoCompleteSerializer(serializers.ModelSerializer):
         )
 
 
-class DoctorSearchSerializer(serializers.ModelSerializer):
+class DoctorSearchSerializer(AvailabilityDataMixin, serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = (
@@ -139,8 +148,12 @@ class DoctorSearchSerializer(serializers.ModelSerializer):
             "consultation_fees",
             "wait_time",
             "experience_years",
-            "availability_data"
         )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["availability_data"] = self.get_availability_data(instance)
+        return data
 
 
 class AvailabilitySerializer(serializers.ModelSerializer):

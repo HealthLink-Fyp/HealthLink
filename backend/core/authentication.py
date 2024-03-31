@@ -42,6 +42,7 @@ class JWTAuthentication(BaseAuthentication):
         except User.DoesNotExist:
             raise AuthenticationFailed("User not found")
 
+        print(f"\n\n User: {user} \n\n")
         return (user, auth_data)
 
 
