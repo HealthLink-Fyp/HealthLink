@@ -81,7 +81,7 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
             start_time = availability_data["start"]
             end_time = availability_data["end"]
         except KeyError:
-            raise serializers.ValidationError("days are required in availability_data")
+            raise serializers.ValidationError("days, start, and end are required")
 
         if not isinstance(days, list) or len(days) == 0:
             raise serializers.ValidationError(

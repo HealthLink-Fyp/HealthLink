@@ -29,13 +29,32 @@
     <input type="text" formControlName="city" />
   </div>
 
-  <div>
+  <!-- <div>
     <label>Please tell your available timings : </label>
     <input type="time" formControlName="available_timings" />
+  </div> -->
+
+  <div>
+    <label>Please tell your start time : </label>
+    <input type="time" formControlName="start_time" />
   </div>
 
-  <div *ngFor="let day of availableDays">
+  <div>
+    <label>Please tell your end time : </label>
+    <input type="time" formControlName="end_time" />
+  </div>
+
+  <!-- <div *ngFor="let day of availableDays">
     <input type="radio" [value]="day" formControlName="available_days" />
+    <label>{{ day }}</label>
+  </div> -->
+
+  <div *ngFor="let day of availableDays; let i = index">
+    <input
+      type="checkbox"
+      [value]="day"
+      (change)="onCheckboxChange(i, $event)"
+    />
     <label>{{ day }}</label>
   </div>
 
@@ -56,5 +75,5 @@
 
   <button type="submit">Submit</button>
 
-  <button onsubmit="Done()">Already filled</button>
+  <button onclick="Done()">Already filled</button>
 </form>
