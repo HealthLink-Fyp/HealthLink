@@ -32,6 +32,11 @@ erd:
 reset:
   python manage.py reset_db --noinput patient 
 
+# MKDocs commands
+
+docs:
+  mkdocs serve
+
 # Backend setup
 
 bsetup:

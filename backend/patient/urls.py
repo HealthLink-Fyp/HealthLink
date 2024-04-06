@@ -1,19 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 
-from patient.views import search, appointment
+from patient.views.url_patterns import (
+    appointment_patterns,
+    doctor_patterns,
+    search_patterns,
+)
 
 urlpatterns = [
-    path("appointment/", appointment.AppointmentView.as_view(), name="appointment"),
-    path(
-        "appointment/<int:pk>",
-        appointment.AppointmentView.as_view(),
-        name="appointment-detail",
-    ),
-    path("search/doctors/", search.SearchDoctorView.as_view(), name="search"),
-    path("doctors/<int:pk>/", search.DoctorDetailView.as_view(), name="doctor-detail"),
-    path(
-        "search/doctors/autocomplete/",
-        search.AutoCompleteDoctorView.as_view(),
-        name="autocomplete",
-    ),
+    path("appointment/", include(appointment_patterns)),
+    path("doctors/", include(doctor_patterns)),
+    path("search/", include(search_patterns)),
 ]

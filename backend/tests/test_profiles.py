@@ -30,7 +30,6 @@ class ProfileTests(AuthenticatedApiTest):
         url = reverse("profile")
         data = doctor_profile_data
         response = self.client.post(url, data=data, format="json")
-        # print("sasdasadas", response.data, response)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_doctor_profile_invalid_data(self):

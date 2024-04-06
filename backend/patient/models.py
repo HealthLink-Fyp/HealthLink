@@ -11,7 +11,10 @@ class Appointment(models.Model):
     Model to store the appointment details.
     """
 
-    patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
+    appointment_id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(
+        PatientProfile, on_delete=models.CASCADE, null=True, blank=True
+    )
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     start = models.DateTimeField()
     end = models.DateTimeField(null=True, blank=True, default=None)

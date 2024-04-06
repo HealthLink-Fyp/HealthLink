@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 from core.authentication import (
     JWTAuthentication,
     create_access_token,
@@ -28,7 +29,6 @@ from django.core.validators import validate_email
 from rest_framework.exceptions import (
     AuthenticationFailed,
     NotFound,
-    PermissionDenied,
     NotAuthenticated,
     ValidationError,
 )
@@ -39,10 +39,6 @@ class RegisterView(APIView):
         """
         Register the user
         """
-        # Check if the user is an admin
-        if request.data.get("role") == "admin":
-            raise PermissionDenied("Not allowed.")
-
         serializer = UserSerializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)
@@ -69,10 +65,6 @@ class LoginView(APIView):
         # Check if the user exists
         if not user:
             raise NotFound("User not found.")
-
-        # Check if the user is an admin
-        if user.role == "admin":
-            raise PermissionDenied("Not allowed.")
 
         # Check if the password is correct
         if not user.check_password(password):
@@ -101,6 +93,30 @@ class UserView(APIView):
         Get the user's information
         """
         return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
+
+    def put(self, request):
+        """
+        Update the user's information
+        """
+        user = request.user
+        data = request.data.copy()
+        data.pop("email", None)
+        data.pop("password", None)
+        data.pop("role", None)
+
+        serializer = UserSerializer(user, data=data, partial=True)
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        """
+        Delete the user
+        """
+        user = request.user
+        user.delete()
+        return Response({"message": "Success"}, status=status.HTTP_200_OK)
 
 
 class RefreshView(APIView):

@@ -38,7 +38,23 @@ class PatientProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class DoctorProfileSerializer(serializers.ModelSerializer):
+class AvailabilityDataMixin:
+    availability_data = serializers.SerializerMethodField()
+
+    def get_availability_data(self, obj):
+        data = {}
+        availability = obj.availability_set.all()
+
+        # check if availability exists
+        if len(availability) > 0:
+            data["days"] = [day.day for day in availability if day]
+            data["start"] = availability[0].start_time
+            data["end"] = availability[0].end_time
+
+        return data if data else None
+
+
+class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = (
@@ -58,17 +74,10 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
             "created",
         )
 
-    def get_availability_data(self, obj):
-        data = {}
-        availability = obj.availability_set.all()
-
-        # check if availability exists
-        if len(availability) > 0:
-            data["days"] = [day.day for day in availability if day]
-            data["start"] = availability[0].start_time
-            data["end"] = availability[0].end_time
-
-        return data if data else None
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["availability_data"] = self.get_availability_data(instance)
+        return data
 
     def validate_availability_data(self, availability_data):
         if not isinstance(availability_data, dict):
@@ -82,6 +91,14 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
             end_time = availability_data["end"]
         except KeyError:
             raise serializers.ValidationError("days, start, and end are required")
+
+        import datetime
+
+        start_time = datetime.datetime.strptime(start_time, "%H:%M")
+        end_time = datetime.datetime.strptime(end_time, "%H:%M")
+
+        if start_time >= end_time:
+            raise serializers.ValidationError("start time must be less than end time")
 
         if not isinstance(days, list) or len(days) == 0:
             raise serializers.ValidationError(
@@ -124,7 +141,7 @@ class DoctorAutoCompleteSerializer(serializers.ModelSerializer):
         )
 
 
-class DoctorSearchSerializer(serializers.ModelSerializer):
+class DoctorSearchSerializer(AvailabilityDataMixin, serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
         fields = (
@@ -139,8 +156,12 @@ class DoctorSearchSerializer(serializers.ModelSerializer):
             "consultation_fees",
             "wait_time",
             "experience_years",
-           
         )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["availability_data"] = self.get_availability_data(instance)
+        return data
 
 
 class AvailabilitySerializer(serializers.ModelSerializer):
