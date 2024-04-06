@@ -154,11 +154,11 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
             + datetime.timedelta(days=1),  #! TODO: Remove timedelta after resetdb
         )
 
-        def error_response(self, message):
-            return Response(
-                {"error": message},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+    def error_response(self, message):
+         return Response(
+            {"error": message},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     def perform_destroy(self, instance):
         """

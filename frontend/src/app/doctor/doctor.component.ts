@@ -45,7 +45,7 @@ export class DoctorComponent implements OnInit {
       availability_data:this.formBuilder.group({
         days: this.formBuilder.array([]),// Initialize as an empty array
         start:'',
-        end:''
+
       }),
 
       summary: '',

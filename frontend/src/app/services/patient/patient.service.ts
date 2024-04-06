@@ -36,6 +36,6 @@ export class PatientService {
   
   makeAppointment(body:any)
   {
-    return this.http.post(`${environment.api}/appointment`,body);
+    return this.http.post(`${environment.api}/appointment/`,body);
   }
 }

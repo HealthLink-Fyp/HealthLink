@@ -139,7 +139,7 @@ class DoctorSearchSerializer(serializers.ModelSerializer):
             "consultation_fees",
             "wait_time",
             "experience_years",
-            "availability_data"
+           
         )
 
 

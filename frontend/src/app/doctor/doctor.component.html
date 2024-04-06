@@ -39,17 +39,12 @@
       <input type="checkbox" [value]="day"  (change)="onChange($event)">
       <label>{{ day }}</label>
     </div> 
-    <div>
-      {{form.get('availability_data.days')?.value}}
-    </div>
+ 
     <div>
       <label>Available Start Time:</label>
       <input type="time" formControlName="start" />
     </div>
-    <div>
-      <label>Available End Time:</label>
-      <input type="time" formControlName="end" />
-    </div>
+   
   </div>
 
   <div>
