@@ -1,3 +1,5 @@
+import { FormGroup, FormArray, FormControl } from "@angular/forms";
+
 export const SPECIALIZATION_CHOICES: [string, string][] = [
     
     ["general_practice", "General Practice"],
@@ -38,3 +40,27 @@ export const availableDays: string[] = [
   'thursday',
   'friday',
 ];
+
+
+
+
+// function to store avaiaiableb weekends of doctor 
+
+
+export function onChange(e: any, form: FormGroup) {
+  const checkedvalue = e.target.value;
+  const checkedflag = e.target.checked;
+
+  const checkedArray = form.get('availability_data.days') as FormArray;
+  if (checkedflag) {
+    checkedArray.push(new FormControl(checkedvalue))
+  } else {
+    let i: number = 0;
+    checkedArray.controls.forEach((item) => {
+      if (item.value == checkedflag) {
+        checkedArray.removeAt(i);
+      }
+      i++;
+    })
+  }
+}

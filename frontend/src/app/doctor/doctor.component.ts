@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor/doctor.service';
 import {SPECIALIZATION_CHOICES,QUALIFICATION_CHOICES,availableDays} from './doctorExtras'
+import { onChange } from './doctorExtras';
 
 @Component({
   selector: 'app-doctor',
@@ -45,7 +46,7 @@ export class DoctorComponent implements OnInit {
       availability_data:this.formBuilder.group({
         days: this.formBuilder.array([]),// Initialize as an empty array
         start:'',
-
+        end:''
       }),
 
       summary: '',
@@ -55,28 +56,9 @@ export class DoctorComponent implements OnInit {
 
   onChange(e:any)
   {
-    const checkedvalue=e.target.value;
-    const checkedflag=e.target.checked;
-
-    const checkedArray=this.form.get('availability_data.days') as FormArray;
-    if(checkedflag)
-    {
-      checkedArray.push(new FormControl(checkedvalue))
-    }
-    else
-    {
-      let i:number=0;
-      checkedArray.controls.forEach((item)=>{
-        if(item.value==checkedflag)
-        {
-          checkedArray.removeAt(i);
-        }
-        i++;
-      })
-    }
-
-   
+    onChange(e,this.form);
   }
+
 
   submit() {
     this.doctorService
