@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
 @Component({
@@ -23,7 +24,7 @@ ngOnInit(): void {
   )
 }
 
-  constructor(private patientService:PatientService, private router:Router){}
+  constructor(private patientService:PatientService, private router:Router,private authService:AuthService){}
 
   searchQuery:string='';
   searchResults:any[]=[];
@@ -31,7 +32,8 @@ ngOnInit(): void {
 
   appointmentData: any = {
     start:'',
-    end:''
+    doctor:'',
+    patient:''
   };
 
 
@@ -77,9 +79,20 @@ ngOnInit(): void {
     }
 
    
-    onAppointment()
+    onAppointment(docId:any)
     {
-        
+      this.authService.user().subscribe((res:any)=>{
+        this.appointmentData.patient=res.id;
+        console.log("the patient id is : ",res.id)
+  
+      
+      
+      this.appointmentData.doctor=docId;
+
+      this.patientService.makeAppointment(this.appointmentData).subscribe((response:any)=>{
+        console.log(response);
+      })
+    });
     }
 
     
