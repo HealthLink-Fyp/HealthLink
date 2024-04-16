@@ -2,6 +2,7 @@ from django.urls import path
 
 from .search import SearchDoctorView, AutoCompleteDoctorView, DoctorDetailView
 from .appointment import AppointmentView
+from .records import MedicalRecordView
 
 appointment_patterns = [
     path("", AppointmentView.as_view(), name="appointment"),
@@ -19,4 +20,9 @@ search_patterns = [
         AutoCompleteDoctorView.as_view(),
         name="autocomplete-doctors",
     ),
+]
+
+record_patterns = [
+    path("", MedicalRecordView.as_view(), name="medical-record"),
+    path("<int:pk>/", MedicalRecordView.as_view(), name="medical-record-detail"),
 ]

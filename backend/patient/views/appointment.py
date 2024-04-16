@@ -13,9 +13,9 @@ from .exceptions import DoctorNotAvailable
 # Local Imports
 from core.models import DoctorProfile
 from patient.models import Appointment
-from core.authentication import JWTAuthentication
 from patient.serializers import AppointmentSerializer
 from healthlink.utils.response_handler import send_response
+from core.authentication import JWTAuthentication
 
 
 class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):

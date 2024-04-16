@@ -8,7 +8,7 @@ from core.choices import (
     ROLE_CHOICES as RC,
     QUALIFICATION_CHOICES as QC,
     SPECIALIZATION_CHOICES as SPC,
-    STATUS_CHOICES as SC,
+    APPOINTMENT_STATUS_CHOICES as SC,
     DAY_CHOICES as DC,
 )
 
