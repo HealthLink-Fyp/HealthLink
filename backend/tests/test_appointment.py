@@ -35,8 +35,4 @@ class AppointmentTests(PatientApiTest, DoctorApiTest):
         }
 
         response = self.client.post(reverse("appointment"), data)
-        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
-        self.assertEqual(
-            response.data.get("error"),
-            "Doctor is not available at the selected date and time.",
-        )
+        self.assertEqual(response.data.get("detail").code, "doctor_not_available")

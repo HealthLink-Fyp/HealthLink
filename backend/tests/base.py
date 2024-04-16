@@ -5,6 +5,12 @@ from core.models import DoctorProfile, PatientProfile
 
 from .variables import user_profile_data, doctor_profile_data, patient_profile_data
 
+import logging
+
+logger = logging.getLogger()
+
+logger.setLevel(logging.CRITICAL)
+
 
 class BaseApiTest(APITestCase):
     def setUp(self):

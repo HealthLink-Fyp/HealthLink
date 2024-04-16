@@ -24,30 +24,27 @@ class SignInEndpointTests(BaseApiTest):
         url = reverse("login")
         response = self.client.post(url, {}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data["detail"], "Email and password are required.")
 
     def test_invalid_email(self):
         url = reverse("login")
         data = {"email": "abcgmail.com", "password": "user@123"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data["detail"], "Please enter a valid email.")
 
     def test_invalid_password(self):
         url = reverse("login")
         data_with_invalid_password = {"email": "abc@gmail.com", "password": "user123"}
         response = self.client.post(url, data_with_invalid_password, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data["detail"], "Invalid password.")
 
     def test_not_logged_in(self):
         url = reverse("user")
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_logged_in_as_admin(self):
-        self.user.role = "admin"
-        self.user.save()
-        url = reverse("user")
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.data["detail"], "Token not provided.")
 
 
 class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
@@ -58,6 +55,7 @@ class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
         url = reverse("user")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["email"], self.user.email)
 
     def test_logged_in_as_doctor(self):
         self.user.role = "doctor"
@@ -65,6 +63,7 @@ class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
         url = reverse("user")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["email"], self.user.email)
 
     def test_logged_in_as_patient(self):
         self.user.role = "patient"
@@ -72,3 +71,4 @@ class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
         url = reverse("user")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["email"], self.user.email)

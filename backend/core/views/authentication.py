@@ -20,30 +20,39 @@ from core.authentication import (
 # Local Imports
 from core.models import User, UserForgot, UserToken
 from core.serializers import UserSerializer
+from healthlink.utils.response_handler import send_response
 
 # Third Part Imports
 # from core.tasks import send_mail_task
 
+
 from django.core.validators import validate_email
 
-from rest_framework.exceptions import (
-    AuthenticationFailed,
-    NotFound,
-    NotAuthenticated,
-    ValidationError,
-)
+from rest_framework.exceptions import ValidationError
 
 
 class RegisterView(APIView):
     def post(self, request):
-        """
-        Register the user
-        """
-        serializer = UserSerializer(data=request.data)
+        email = request.data.get("email", False)
+        password = request.data.get("password", False)
 
-        serializer.is_valid(raise_exception=True)
+        if not email or not password:
+            return send_response("Email and password are required.", 400)
+
+        email = email.strip().lower()
+
+        try:
+            validate_email(email)
+        except Exception:
+            return send_response("Please enter a valid email.", 400)
+
+        if User.objects.filter(email=email).exists():
+            return send_response("Email already exists.", 400)
+
+        serializer = UserSerializer(data=request.data)
+        serializer.is_valid()
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return send_response("User created successfully.", 201)
 
 
 class LoginView(APIView):
@@ -54,21 +63,25 @@ class LoginView(APIView):
         email = request.data.get("email", "").strip().lower()
         password = request.data.get("password", "")
 
+        # Check if the email and password are provided
+        if not email or not password:
+            return send_response("Email and password are required.", 400)
+
         # Check if the email is valid
         try:
             validate_email(email)
         except Exception:
-            raise ValidationError("Invalid email.")
+            return send_response("Please enter a valid email.", 400)
 
         user = User.objects.filter(email=email).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            return send_response("User not found.", 404)
 
         # Check if the password is correct
         if not user.check_password(password):
-            raise AuthenticationFailed("Invalid credentials.")
+            return send_response("Invalid password.", 400)
 
         access_token = create_access_token(user=user)
         refresh_token = create_refresh_token(user=user)
@@ -92,7 +105,9 @@ class UserView(APIView):
         """
         Get the user's information
         """
-        return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request):
         """
@@ -116,7 +131,7 @@ class UserView(APIView):
         """
         user = request.user
         user.delete()
-        return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return send_response("User deleted successfully.", 200)
 
 
 class RefreshView(APIView):
@@ -129,14 +144,14 @@ class RefreshView(APIView):
 
         # Check if the refresh token is valid
         if not refresh_token:
-            raise NotAuthenticated("Not authenticated.")
+            return send_response("Not authenticated.", 401)
 
         user_id = decode_refresh_token(token=refresh_token)
         user = User.objects.filter(id=user_id).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            return send_response("User not found.", 404)
 
         filter_params = {
             "user": user,
@@ -146,11 +161,11 @@ class RefreshView(APIView):
 
         # Check if the user is logged in
         if not refresh_token or not user_id or not user:
-            raise NotAuthenticated("Not authenticated.")
+            return send_response("Not authenticated.", 401)
 
         # Check if the refresh token is valid
         if not UserToken.objects.filter(**filter_params).exists():
-            raise AuthenticationFailed("Invalid refresh token.")
+            return send_response("Invalid refresh token.", 401)
 
         access_token = create_access_token(user=user)
         return Response({"access_token": access_token}, status=status.HTTP_200_OK)
@@ -165,7 +180,7 @@ class LogoutView(APIView):
 
         # Check if the user is logged in
         if not refresh_token:
-            raise NotAuthenticated("Not authenticated.")
+            return send_response("Not authenticated.", 401)
 
         UserToken.objects.filter(token=refresh_token).delete()
 
@@ -187,7 +202,7 @@ class ForgotView(APIView):
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            return send_response("User not found.", 404)
 
         token = PasswordResetTokenGenerator().make_token(user)
         UserForgot.objects.create(user=user, email=email, token=token)
@@ -196,12 +211,7 @@ class ForgotView(APIView):
         # message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
         # send_mail_task.delay(email=email, message=message)
 
-        return Response(
-            {
-                "message": f"Check your email: {email} to reset your password. Token: {token}"
-            },
-            status=status.HTTP_200_OK,
-        )
+        return send_response("Email sent successfully.", 200)
 
 
 class ResetView(APIView):
@@ -214,21 +224,21 @@ class ResetView(APIView):
 
         # Check for password strength
         if len(password) < 8:
-            raise ValidationError("Password must be at least 8 characters long.")
+            return send_response("Password must be at least 8 characters long.", 400)
 
         user_reset = UserForgot.objects.filter(token=token).first()
 
         # Check if the token is valid
         if not user_reset:
-            raise NotFound("Invalid token.")
+            return send_response("Invalid token.", 400)
 
         user = User.objects.filter(email=user_reset.email).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            return send_response("User not found.", 404)
 
         user.set_password(password)
         user.save()
 
-        return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return send_response("Password reset successfully.", 200)

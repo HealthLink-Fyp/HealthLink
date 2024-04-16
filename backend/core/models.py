@@ -3,8 +3,6 @@ from django.db import models
 import uuid
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth import get_user_model
-
 
 # Local Imports
 from .choices import (
@@ -24,9 +22,6 @@ class MyUserManager(BaseUserManager):
     """
 
     def create_user(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError("Users must have an email address")
-
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -187,11 +182,6 @@ class Availability(models.Model):
     class Meta:
         unique_together = ["doctor", "day"]
         verbose_name_plural = "Availabilities"
-
-    def save(self, *args, **kwargs):
-        if self.start_time >= self.end_time:
-            raise ValueError("End time must be greater than start time")
-        super().save(*args, **kwargs)
 
 
 ##------------- Patient Profile Model --------------##

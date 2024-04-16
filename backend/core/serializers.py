@@ -2,6 +2,8 @@ from django.db import transaction
 from rest_framework import serializers
 from .models import User, DoctorProfile, PatientProfile, Availability
 
+from healthlink.utils.response_handler import send_response
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -81,16 +83,16 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
 
     def validate_availability_data(self, availability_data):
         if not isinstance(availability_data, dict):
-            raise serializers.ValidationError(
-                "availability_data as a dictionary is required"
-            )
+            return send_response("availability_data must be a dictionary", 400)
 
         try:
             days = availability_data["days"]
             start_time = availability_data["start"]
             end_time = availability_data["end"]
         except KeyError:
-            raise serializers.ValidationError("days, start, and end are required")
+            return send_response(
+                "days, start, and end are required in availability_data", 400
+            )
 
         import datetime
 
@@ -98,12 +100,10 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         end_time = datetime.datetime.strptime(end_time, "%H:%M")
 
         if start_time >= end_time:
-            raise serializers.ValidationError("start time must be less than end time")
+            return send_response("start time must be before end time", 400)
 
         if not isinstance(days, list) or len(days) == 0:
-            raise serializers.ValidationError(
-                "days, start, and end are required in availability_data"
-            )
+            return send_response("days must be a list of days", 400)
 
         return days, start_time, end_time
 

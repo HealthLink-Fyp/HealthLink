@@ -1,39 +1,33 @@
-# Django Imports
-from django.core.cache import cache
-
 # Rest Framework Imports
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 # Local Imports
-from core.choices import QUALIFICATION_CHOICES, SPECIALIZATION_CHOICES
+from core.choices import (
+    ROLE_CHOICES as RC,
+    QUALIFICATION_CHOICES as QC,
+    SPECIALIZATION_CHOICES as SPC,
+    STATUS_CHOICES as SC,
+    DAY_CHOICES as DC,
+)
 
 
 class ProfileChoiceView(APIView):
-    def post(self, request):
+    def get(self, request):
         """
         Get the user profile choice
         """
 
-        choices = cache.get("profile_choices")
-        get_cache = request.data.get("get_cache", False)
+        def get_choices(choices):
+            return [{"value": choice[0], "label": choice[1]} for choice in choices]
 
-        if not choices or get_cache:
-            qualification_choices = [
-                {"value": choice[0], "label": choice[1]}
-                for choice in QUALIFICATION_CHOICES
-            ]
-            specialization_choices = [
-                {"value": choice[0], "label": choice[1]}
-                for choice in SPECIALIZATION_CHOICES
-            ]
-
-            choices = {
-                "qualification": qualification_choices,
-                "specialization": specialization_choices,
-            }
-
-            cache.set("profile_choices", choices, timeout=60 * 60 * 24 * 7)
+        choices = {
+            "qualification": get_choices(QC),
+            "specialization": get_choices(SPC),
+            "status": get_choices(SC),
+            "day": get_choices(DC),
+            "role": get_choices(RC),
+        }
 
         return Response(choices, status=status.HTTP_200_OK)

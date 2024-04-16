@@ -6,15 +6,16 @@ from django.db.models import Q
 from django.utils import timezone
 
 # Rest Framework Imports
-from rest_framework.exceptions import APIException
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from .exceptions import DoctorNotAvailable
 
 # Local Imports
 from core.models import DoctorProfile
 from patient.models import Appointment
 from core.authentication import JWTAuthentication
 from patient.serializers import AppointmentSerializer
+from healthlink.utils.response_handler import send_response
 
 
 class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
@@ -48,7 +49,7 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
             queryset = Appointment.objects.filter(doctor=user.doctor, appointment_id=pk)
 
         if not queryset:
-            self.error_response("Appointment not found.")
+            return send_response("Appointment not found.", 404)
 
         return queryset.first()
 
@@ -109,7 +110,7 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         error_message = self.is_appointment_active(instance)
 
         if error_message:
-            self.error_response(error_message)
+            return send_response(error_message, 400)
         else:
             instance.delete()
 
@@ -123,12 +124,6 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
             return "Cannot delete an appointment that has already started."
         return None
 
-    def error_response(self, message):
-        """
-        Raise an error response.
-        """
-        raise APIException({"error": message})
-
     def validate_appointment(self, serializer):
         """
         Validate appointment time.
@@ -139,29 +134,27 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         doctor = DoctorProfile.objects.get(user=self.request.data.get("doctor"))
 
         if not appointment_start:
-            self.error_response("Appointment date and time is required.")
+            return send_response("Appointment date and time is required.", 400)
 
         try:
             appointment_datetime = timezone.make_aware(
                 datetime.datetime.fromisoformat(appointment_start)
             )
         except Exception:
-            self.error_response("Invalid date and time format.")
+            return send_response("Invalid appointment date and time.", 400)
 
         if appointment_datetime < timezone.now():
-            self.error_response("Appointment date and time cannot be in the past.")
+            return send_response("Appointments cannot be in the past.", 400)
 
         day = appointment_datetime.strftime("%A").lower()
         time = appointment_datetime.strftime("%H:%M:%S")
 
         if not doctor.availability_set.exists():
-            self.error_response("Doctor has not set their availability.")
+            return send_response("Doctor has not set their availability.", 400)
 
         query = Q(day=day) & Q(start_time__lte=time) & Q(end_time__gte=time)
 
         if not doctor.availability_set.filter(query).exists():
-            self.error_response(
-                "Doctor is not available at the selected date and time."
-            )
+            raise DoctorNotAvailable()
 
         return appointment_datetime, doctor
