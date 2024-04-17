@@ -1,0 +1,6 @@
+.venv/
+.vscode/*
+__pycache__/
+*.pyc
+.ruff_cache/
+*.sqlite3

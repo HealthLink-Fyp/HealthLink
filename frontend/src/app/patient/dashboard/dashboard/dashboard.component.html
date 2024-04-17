@@ -1,0 +1,48 @@
+<select [(ngModel)]="selectedCity">
+  <option>Select city</option>
+  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+</select>
+
+
+<div>
+    <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
+    <button (click)="doctorsSearched()">Search</button>
+    <div *ngIf="searchResults && searchResults.length > 0">
+      <ul>
+        <li *ngFor="let result of searchResults">
+          <!-- Display search results as desired -->
+          {{ result.full_name }} - {{ result.city }} - {{ result.specialization }}
+        </li>
+      </ul>
+    </div>
+    
+    </div>
+
+    <div>
+      <h1>User ID: {{ patientData.user }}</h1>
+      <p>Age: {{ patientData.age }}</p>
+      <p>Sex: {{ patientData.sex }}</p>
+    
+      <!-- Display other properties -->
+  </div>
+
+<div *ngIf="afterSearchData && afterSearchData.length > 0">
+  <div *ngFor="let data of afterSearchData  ">
+    <p>data coming from complete search</p>
+    <p>{{data.full_name}}</p>
+      <button (click)="viewDoctor(data.user)">view Profile</button>
+      <button (click)="onAppointment(data.user)">Book Appointment</button>
+  </div>
+</div>
+
+<label>For appointment booking : </label><br>
+<div>
+  <label for="start">Start:</label>
+  <input type="datetime-local"  [(ngModel)]="appointmentData.start">
+</div>
+
+
+
+<div>
+
+</div>

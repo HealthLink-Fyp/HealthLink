@@ -1,0 +1,10 @@
+<div *ngIf="authenticated">
+  <button mat-button routerLink="/login" (click)="logout()">Logout</button>
+</div>
+
+<div color="primary" *ngIf="!authenticated">
+  <span>Logo</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/login">Login</button>
+  <button mat-button routerLink="/register">Register</button>
+</div>
