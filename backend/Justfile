@@ -15,6 +15,9 @@ testall:
 migration:
   python manage.py makemigrations
 
+@migrations app:
+  python manage.py makemigrations $1
+
 migrate:
   python manage.py migrate --run-syncdb
 
@@ -27,7 +30,7 @@ shell:
 # django-extensions commands
 
 erd:
-  python manage.py graph_models -a -g -I User,DoctorProfile,Availability,PatientProfile,Appointment -o erd.png
+  python manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop -o erd.png
 
 reset:
   python manage.py reset_db --noinput patient 

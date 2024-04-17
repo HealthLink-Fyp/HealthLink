@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Appointment, MedicalRecord
+from .models import Appointment, MedicalRecord, MedicineShop
 
 import secrets
 
@@ -42,3 +42,9 @@ class MedicalRecordSerializer(ModelSerializer):
         )
 
         return super().create(validated_data)
+
+
+class MedicineShopSerializer(ModelSerializer):
+    class Meta:
+        model = MedicineShop
+        fields = "__all__"

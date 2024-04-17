@@ -1,8 +1,7 @@
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 from django.db import models
 import uuid
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 # Local Imports
 from .choices import (
@@ -85,19 +84,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.email} - {self.role}"
-
-
-@receiver(post_save, sender=User)
-def update_profile_city(sender, instance, **kwargs):
-    """
-    Update the city in the profile when the user is updated.
-    """
-    if instance.is_patient and hasattr(instance, "patient"):
-        instance.patient.city = instance.city
-        instance.patient.save()
-    elif instance.is_doctor and hasattr(instance, "doctor"):
-        instance.doctor.city = instance.city
-        instance.doctor.save()
 
 
 class UserToken(models.Model):
