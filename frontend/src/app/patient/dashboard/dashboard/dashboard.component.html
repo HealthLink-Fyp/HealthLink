@@ -49,9 +49,31 @@
          <p>{{bookedAppoint.start}}</p>
          <p>{{bookedAppoint.end}}</p>
          <p>{{bookedAppoint.status}}</p>
+         <p>
+          <button (click)="onUpdateAppointment(bookedAppoint.appointment_id)">update appointment</button>
+         </p>
+        
+        <p>
+          <button (click)="onDeleteAppointment(bookedAppoint.appointment_id)">delete appointment</button>
+        </p>
      </div>
+
 </div>
 
-<div  >
-      <button (click)="onupdatePatient()"></button>
+
+<div>
+  <button (click)="updatePatientProfile()">Update patient personal info</button>
 </div>
+
+<div>
+  <button (click)="updatePatientForm()">Update patient form</button>
+</div>
+
+<div>
+  <button (click)="onDeletePatient()">delete patient</button>
+</div>
+
+<div>
+  <button (click)="onDeletePatientForm()">delete patient form</button>
+</div>
+

@@ -19,6 +19,34 @@ export class PatientService {
   }
 
 
+  updatePatientProfile(body:any)
+  {
+    return this.http.put(`${environment.api}/auth/profile/`,body);
+  }
+
+  
+  deletePatient()
+  {
+    return this.http.delete(`${environment.api}/auth/user/`);
+  }
+
+  delPatForm()
+  {
+    return this.http.delete(`${environment.api}/auth/profile/`);
+  }
+
+  updateAppointment(body:any)
+  {
+    return this.http.delete(`${environment.api}/auth/profile/`,body);
+  }
+
+  delAppointment()
+  {
+    return this.http.delete(`${environment.api}/auth/profile/`);
+  }
+
+
+
   searchDoctors(query: string) {
     return this.http.get(
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,

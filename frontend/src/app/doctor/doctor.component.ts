@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor/doctor.service';
 import {SPECIALIZATION_CHOICES,QUALIFICATION_CHOICES,availableDays} from './doctorExtras'
@@ -14,7 +14,8 @@ import { onChange } from './doctorExtras';
 export class DoctorComponent implements OnInit {
   form!: FormGroup;
   message = '';
-  authenticated = false;
+
+  isUpdateMode=false;
 
   SPECIALIZATION_CHOICES=SPECIALIZATION_CHOICES;
   QUALIFICATION_CHOICES=QUALIFICATION_CHOICES;
@@ -25,14 +26,25 @@ export class DoctorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route:ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    AuthService.authEmitter.subscribe((authenticated) => {
-      this.authenticated = authenticated;
-    });
+   
 
+    this.route.queryParams.subscribe(params=>{
+      this.isUpdateMode=params['updateMode'] ||false;        //catch the boolean value from dashboard compoent
+      this.createForm();                                     //create the entire form fields
+      if (this.isUpdateMode) {                               //if update is true
+        this.getDoctorDataFields();                         // fill out the form fields with patient data
+      }
+    })
+    
+  }
+
+  createForm()
+  {
     this.form = this.formBuilder.group({
       specialization: '',
       qualification: '',
@@ -54,15 +66,17 @@ export class DoctorComponent implements OnInit {
     });
   }
 
-  onChange(e:any)
+
+
+  onChange(e:any)      //function which saves the weekend data to the form in array
   {
     onChange(e,this.form);
   }
 
 
   submit() {
-    this.doctorService
-      .register(this.form.getRawValue())
+    const method = this.isUpdateMode ? 'updateDoctorProfile' : 'register';   
+    this.doctorService[method](this.form.getRawValue())
       .subscribe((res) => console.log(res));
     this.router.navigate(['/dboard']);
   }
@@ -70,4 +84,16 @@ export class DoctorComponent implements OnInit {
   Done() {
     this.router.navigate(['/dboard']);
   }
+
+  getDoctorDataFields() {
+    this.doctorService.getDoctor().subscribe(data => this.form.patchValue(data));   //re-write the patient data on the form fields
+  }
+
+  toggleUpdateMode() {                               //used for cancel button which empties out the form fields and does not update the form
+    this.isUpdateMode = !this.isUpdateMode;
+    
+  }
+
+  
+
 }

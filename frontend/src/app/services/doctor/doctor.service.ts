@@ -18,5 +18,20 @@ export class DoctorService {
     return this.http.get(`${environment.api}/auth/profile/`);
   }
 
+  updateDoctorProfile(body:any)
+  {
+    return this.http.put(`${environment.api}/auth/profile/`,body);
+  }
+
+  deleteDoctor()
+  {
+    return this.http.delete(`${environment.api}/auth/user/`);
+  }
+
+  delDocForm()
+  {
+    return this.http.delete(`${environment.api}/auth/profile/`);
+  }
+
   
 }

@@ -122,9 +122,47 @@ ngOnInit(): void {
        )
     }
 
-    onupdatePatient(id:any)
+    updatePatientForm()
     {
-       
+      this.router.navigate(['/patient'],{queryParams:{updateMode:true}});
     }
 
+    updatePatientProfile()
+    {
+      this.router.navigate(['/register'],{queryParams:{updateMode:true}});
+    }
+
+
+    onDeletePatient()
+    {
+      this.patientService.deletePatient().subscribe(
+        (reponse:any)=>{
+          console.log("patient deleted successfully",reponse)
+        }
+      )
+    }
+  
+    onDeletePatientForm()
+    {
+      this.patientService.delPatForm().subscribe(
+        (response:any)=>{
+          console.log("paitent form deleted successfully",response);
+        }
+      )
+    }
+
+    onUpdateAppointment(appointId:any)
+    {
+      this.patientService.updateAppointment(appointId).subscribe(
+        (response:any)=>{
+          console.log("updated appointment succcessfully",response);
+        }
+      )
+    }
+
+    onDeleteAppointment(appointId:any)
+    {
+
+    }
+  
 }
