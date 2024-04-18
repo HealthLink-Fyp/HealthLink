@@ -40,6 +40,7 @@ CACHES = {
 
 # Rest Framework settings
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "healthlink.utils.exceptions.custom_exception_handler",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }

@@ -28,8 +28,6 @@ from healthlink.utils.response_handler import send_response
 
 from django.core.validators import validate_email
 
-from rest_framework.exceptions import ValidationError
-
 
 class RegisterView(APIView):
     def post(self, request):

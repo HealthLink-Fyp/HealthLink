@@ -7,6 +7,12 @@ from rest_framework.permissions import IsAuthenticated
 from core.authentication import JWTAuthentication
 from core.permissions import IsHealthcareProvider
 
+from healthlink.utils.exceptions import (
+    UserNotFound,
+    ProfileNotFound,
+    DoctorNotAllowed,
+)
+
 
 class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
     """
@@ -24,32 +30,43 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         Get the queryset based on the user role.
         """
 
-        if self.request.user.role == "patient":
-            return MedicalRecord.objects.filter(patient=self.request.user.patient)
-        elif self.request.user.role == "doctor":
-            return MedicalRecord.objects.filter(doctor=self.request.user.doctor)
-        elif self.request.user.role == "admin":
-            return MedicalRecord.objects.all()
-        return MedicalRecord.objects.none()
+        user = self.request.user
+
+        self.validate_user(user, method="get")
+
+        roles = {
+            "patient": lambda user: MedicalRecord.objects.filter(patient=user.patient),
+            "doctor": lambda user: MedicalRecord.objects.filter(doctor=user.doctor),
+        }
+
+        return roles.get(user.role, lambda user: MedicalRecord.objects.none())(user)
 
     def perform_create(self, serializer):
         """
         Create a MedicalRecord object.
         """
 
-        serializer.save(patient=self.request.user.patient)
+        user = self.request.user
+        self.validate_user(user)
+
+        serializer.save(patient=user.patient)
 
     def perform_update(self, serializer):
         """
         Update a MedicalRecord object.
         """
 
-        serializer.save(patient=self.request.user.patient)
+        user = self.request.user
+        self.validate_user(user)
+
+        serializer.save(patient=user.patient)
 
     def perform_destroy(self, instance):
         """
         Delete a MedicalRecord object.
         """
+
+        self.validate_user(self.request.user)
 
         instance.delete()
 
@@ -63,3 +80,22 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
             return self.retrieve(request, *args, **kwargs)
         else:
             return super().get(request, *args, **kwargs)
+
+    def validate_user(self, user, method=None):
+        """
+        Validate the user based on the user role.
+        """
+
+        # Check if the user exists
+        if not user:
+            raise UserNotFound()
+
+        # Check if the user has a profile
+        if user.role == "patient" and hasattr(user, "patient"):
+            return
+        elif user.role == "doctor" and hasattr(user, "doctor"):
+            if method == "get":
+                return
+            raise DoctorNotAllowed()
+        else:
+            raise ProfileNotFound()

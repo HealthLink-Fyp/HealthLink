@@ -35,4 +35,4 @@ class AppointmentTests(PatientApiTest, DoctorApiTest):
         }
 
         response = self.client.post(reverse("appointment"), data)
-        self.assertEqual(response.data.get("detail").code, "doctor_not_available")
+        self.assertEqual(response.data.get("code"), "doctor_not_available")

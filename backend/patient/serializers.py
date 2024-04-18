@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from healthlink.utils.exceptions import NotFound
 from .models import Appointment, MedicalRecord, MedicineShop
 
 import secrets

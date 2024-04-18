@@ -13,6 +13,7 @@ import jwt
 # Local Imports
 from .models import User
 from healthlink.utils.response_handler import send_response
+from healthlink.utils.exceptions import InvalidToken, TokenExpired
 
 # JWT Secret Keys
 jwt_refresh_secret = settings.JWT_REFRESH_SECRET
@@ -63,9 +64,9 @@ def decode_access_token(token):
         payload = jwt.decode(token, key=jwt_access_secret, algorithms=["HS256"])
         return payload["user_id"]
     except jwt.ExpiredSignatureError:
-        return send_response("Token has expired.", 401)
+        raise TokenExpired()
     except (jwt.InvalidTokenError, jwt.DecodeError):
-        return send_response("Invalid token.", 401)
+        raise InvalidToken()
 
 
 def create_refresh_token(user):
@@ -86,6 +87,6 @@ def decode_refresh_token(token):
         payload = jwt.decode(token, key=jwt_refresh_secret, algorithms=["HS256"])
         return payload["user_id"]
     except jwt.ExpiredSignatureError:
-        return send_response("Token has expired.", 401)
+        raise TokenExpired()
     except (jwt.InvalidTokenError, jwt.DecodeError):
-        return send_response("Invalid token.", 401)
+        raise InvalidToken()

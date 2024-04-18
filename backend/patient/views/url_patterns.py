@@ -6,7 +6,7 @@ from .records import MedicalRecordView
 from .medicine import MedicineListView
 
 appointment_patterns = [
-    path("", AppointmentView.as_view(), name="appointment"),
+    path("", AppointmentView.as_view(), name="appointment-list"),
     path("<int:appointment_id>/", AppointmentView.as_view(), name="appointment-detail"),
 ]
 

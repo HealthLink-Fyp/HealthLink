@@ -128,6 +128,24 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         serializer.save()
         return doctor
 
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        availability_data = self.initial_data.get("availability_data")
+        days, start_time, end_time = self.validate_availability_data(availability_data)
+
+        for day in days:
+            availability = instance.availability_set.filter(day=day).first()
+            if availability:
+                availability.start_time = start_time
+                availability.end_time = end_time
+                availability.save()
+            else:
+                Availability.objects.create(
+                    doctor=instance, day=day, start_time=start_time, end_time=end_time
+                )
+
+        return super().update(instance, validated_data)
+
 
 class DoctorAutoCompleteSerializer(serializers.ModelSerializer):
     class Meta:
