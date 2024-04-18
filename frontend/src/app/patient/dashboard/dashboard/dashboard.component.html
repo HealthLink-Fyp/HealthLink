@@ -35,8 +35,8 @@
   </div>
 </div>
 
+<div *ngIf="onbookAppointment">
 <label>For appointment booking : </label><br>
-<div>
   <label for="start">Start:</label>
   <input type="datetime-local"  [(ngModel)]="appointmentData.start">
 </div>
@@ -44,5 +44,14 @@
 
 
 <div>
+     <h1>Your booked apointment is </h1>
+     <div *ngFor="let bookedAppoint of bookedAppointments">
+         <p>{{bookedAppoint.start}}</p>
+         <p>{{bookedAppoint.end}}</p>
+         <p>{{bookedAppoint.status}}</p>
+     </div>
+</div>
 
+<div  >
+      <button (click)="onupdatePatient()"></button>
 </div>

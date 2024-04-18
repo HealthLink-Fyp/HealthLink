@@ -17,4 +17,6 @@ export class DoctorService {
   getDoctor() {
     return this.http.get(`${environment.api}/auth/profile/`);
   }
+
+  
 }

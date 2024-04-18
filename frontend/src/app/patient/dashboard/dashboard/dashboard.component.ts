@@ -12,7 +12,7 @@ import { PatientService } from 'src/app/services/patient/patient.service';
 export class DashboardComponent implements OnInit {
 
   patientData: any = {};
-
+  onbookAppointment:boolean=false;
 
 
 ngOnInit(): void {
@@ -20,16 +20,20 @@ ngOnInit(): void {
     this.patientData=res;
     console.log("coming from dashboard",this.patientData);
   }
-    
   )
+
+  this.onbookedAppointments();
 }
 
   constructor(private patientService:PatientService, private router:Router,private authService:AuthService){}
 
-  searchQuery:string='';
-  searchResults:any[]=[];
-  selectedCity:string='';
+   searchQuery:string='';          // stores the words  that user types in search
+  searchResults:any[]=[];          //stores the automcomplete searchResults of doctors
+  selectedCity:string='';          //stores that city in which user wants to search doctor
+  bookedAppointments:any[] = []; 
 
+
+  // function to store book appointment data and to be sent to backend
   appointmentData: any = {
     start:'',
     doctor:'',
@@ -42,13 +46,15 @@ ngOnInit(): void {
    'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Quetta', 'Peshawar', 'Gujranwala', 'Sialkot', 'Abbottabad', 'Bahawalpur', 'Sargodha', 'Sukkur', 'Larkana', 'Nawabshah', 'Mirpur Khas', 'Rahim Yar Khan', 'Sahiwal', 'Okara', 'Wah Cantonment', 'Dera Ghazi Khan', 'Mingora', 'Kamoke', 'Shekhupura', 'Mardan', 'Kasur', 'Gujrat', 'Chiniot', 'Jhang', 'Sadiqabad', 'Sheikhupura', 'Attock', 'Jhelum', 'Jacobabad', 'Khanewal', 'Muzaffargarh', 'Khanpur'
    ]
 
+   //array that stores all results of doctor after clicking on search button
+
    afterSearchData:any[]=[];
 
   searchDoctors()
-  {
+  {                                          //if userpresses backspace and clear the search bar then remove the search results showing on the screen
     if(this.searchQuery===''){
       this.clearSearchResults();
-      return
+      return                                // after that don't go further and don't make any more calls
     }
 
    this.patientService.searchDoctors(this.searchQuery).subscribe(
@@ -59,10 +65,14 @@ ngOnInit(): void {
     )
     }
 
+    // for clearing auto complete search reuslts
+
     clearSearchResults()
     {
       this.searchResults=[];
     }
+
+    // function that shows the searched results of doctors after clicking on search button
 
     doctorsSearched()
     {
@@ -72,6 +82,8 @@ ngOnInit(): void {
       })
     }
 
+    // function that passes primary key of a specified doctor to doctor dshaboard and view that doctor
+
     viewDoctor(userId:any)
     {
       this.router.navigate(['/dboard',userId]);
@@ -79,8 +91,13 @@ ngOnInit(): void {
     }
 
    
+    // function for booking appointment
+
     onAppointment(docId:any)
     {
+
+      this.onbookAppointment=true;
+      
       this.authService.user().subscribe((res:any)=>{
         this.appointmentData.patient=res.id;
         console.log("the patient id is : ",res.id)
@@ -96,5 +113,18 @@ ngOnInit(): void {
     }
 
     
+    onbookedAppointments()
+    {
+       this.patientService.getbookedAppointments().subscribe(
+        (response:any)=>{
+          this.bookedAppointments=response;
+        }
+       )
+    }
+
+    onupdatePatient(id:any)
+    {
+       
+    }
 
 }

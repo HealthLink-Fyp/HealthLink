@@ -38,4 +38,9 @@ export class PatientService {
   {
     return this.http.post(`${environment.api}/appointment/`,body);
   }
+
+  getbookedAppointments()
+  {
+    return this.http.get(`${environment.api}/appointment/`)
+  }
 }
