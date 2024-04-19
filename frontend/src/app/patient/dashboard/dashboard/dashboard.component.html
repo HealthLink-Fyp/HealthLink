@@ -35,11 +35,24 @@
   </div>
 </div>
 
+
 <div *ngIf="onbookAppointment">
 <label>For appointment booking : </label><br>
   <label for="start">Start:</label>
   <input type="datetime-local"  [(ngModel)]="appointmentData.start">
 </div>
+
+<div *ngIf="onupdateAppointment">
+  <h1>Update appointment:</h1>
+  <div>
+    <label for="start">Start:</label>
+    <input type="datetime-local" [(ngModel)]="appointmentData.start">
+  </div>
+  <!-- Add other fields as needed -->
+  <button (click)="onSubmitUpdatedAppointment()">Update</button>
+</div>
+
+
 
 
 
@@ -50,7 +63,7 @@
          <p>{{bookedAppoint.end}}</p>
          <p>{{bookedAppoint.status}}</p>
          <p>
-          <button (click)="onUpdateAppointment(bookedAppoint.appointment_id)">update appointment</button>
+          <button (click)="onUpdateAppointment(bookedAppoint.appointment_id,bookedAppoint.doctor)">update appointment</button>
          </p>
         
         <p>

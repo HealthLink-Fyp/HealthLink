@@ -35,14 +35,14 @@ export class PatientService {
     return this.http.delete(`${environment.api}/auth/profile/`);
   }
 
-  updateAppointment(body:any)
+  updateAppointment(body:any,pkAppointment: any)
   {
-    return this.http.delete(`${environment.api}/auth/profile/`,body);
+    return this.http.put(`${environment.api}/appointment/${pkAppointment}/`,body);
   }
 
-  delAppointment()
+  delAppointment(pkAppointment: any)
   {
-    return this.http.delete(`${environment.api}/auth/profile/`);
+    return this.http.delete(`${environment.api}/appointment/${pkAppointment}/`);
   }
 
 
@@ -70,5 +70,10 @@ export class PatientService {
   getbookedAppointments()
   {
     return this.http.get(`${environment.api}/appointment/`)
+  }
+
+  getbookedAppointment(body:any)
+  {
+    return this.http.get(`${environment.api}/appointment/`,body);
   }
 }

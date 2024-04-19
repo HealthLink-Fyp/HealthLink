@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,8 +14,10 @@ export class DashboardComponent implements OnInit {
 
   patientData: any = {};
   onbookAppointment:boolean=false;
+ 
 
-
+  constructor(private patientService:PatientService, private router:Router,private authService:AuthService) {}
+  
 ngOnInit(): void {
   this.patientService.getPatient().subscribe((res:any)=>{
     this.patientData=res;
@@ -22,10 +25,11 @@ ngOnInit(): void {
   }
   )
 
+
   this.onbookedAppointments();
 }
 
-  constructor(private patientService:PatientService, private router:Router,private authService:AuthService){}
+  
 
    searchQuery:string='';          // stores the words  that user types in search
   searchResults:any[]=[];          //stores the automcomplete searchResults of doctors
@@ -37,7 +41,8 @@ ngOnInit(): void {
   appointmentData: any = {
     start:'',
     doctor:'',
-    patient:''
+    patient:'',
+    pkAppointment:''
   };
 
 
@@ -151,18 +156,32 @@ ngOnInit(): void {
       )
     }
 
-    onUpdateAppointment(appointId:any)
-    {
-      this.patientService.updateAppointment(appointId).subscribe(
-        (response:any)=>{
-          console.log("updated appointment succcessfully",response);
-        }
-      )
+    onupdateAppointment:boolean=false;
+
+    pkAppointment:any='';
+    
+    onUpdateAppointment(appointId:any,docId:any) {
+
+      this.onupdateAppointment=true;
+      this.appointmentData.doctor=docId;
+      this.appointmentData.pkAppointment=appointId;
+     
     }
+
+    onSubmitUpdatedAppointment() {
+      this.patientService.updateAppointment(this.appointmentData,this.appointmentData.pkAppointment).subscribe((response:any)=>{
+        console.log(response);
+      })
+    }
+    
 
     onDeleteAppointment(appointId:any)
     {
-
+      this.patientService.delAppointment(appointId).subscribe(
+        (response:any)=>{
+          console.log("appointment deleted succesfully",response)
+        }
+      )
     }
   
 }
