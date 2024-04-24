@@ -1,6 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from healthlink.utils.exceptions import NotFound
-from .models import Appointment, MedicalRecord, MedicineShop
+from .models import Appointment, MedicalRecord, MedicineShop, MedicalTest
 
 import secrets
 
@@ -48,4 +47,10 @@ class MedicalRecordSerializer(ModelSerializer):
 class MedicineShopSerializer(ModelSerializer):
     class Meta:
         model = MedicineShop
+        fields = "__all__"
+
+
+class MedicalTestSerializer(ModelSerializer):
+    class Meta:
+        model = MedicalTest
         fields = "__all__"

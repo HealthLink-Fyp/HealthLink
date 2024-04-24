@@ -21,7 +21,6 @@ from healthlink.utils.exceptions import (
 from core.models import DoctorProfile
 from patient.models import Appointment
 from patient.serializers import AppointmentSerializer
-from healthlink.utils.response_handler import send_response
 from core.authentication import JWTAuthentication
 
 
@@ -102,8 +101,6 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
             raise UnableToDestroyPastAppointment()
         else:
             instance.delete()
-
-        return send_response("Appointment deleted successfully.", 200)
 
     def validate_appointment(self, serializer):
         """

@@ -8,7 +8,7 @@ from core.authentication import JWTAuthentication
 from core.permissions import IsHealthcareProvider
 
 from healthlink.utils.exceptions import (
-    UserNotFound,
+    NotFound,
     ProfileNotFound,
     DoctorNotAllowed,
 )
@@ -59,7 +59,9 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         user = self.request.user
         self.validate_user(user)
 
-        serializer.save(patient=user.patient)
+        partial = self.request.method == "PATCH"
+
+        serializer.save(patient=user.patient, partial=partial)
 
     def perform_destroy(self, instance):
         """
@@ -88,7 +90,7 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
 
         # Check if the user exists
         if not user:
-            raise UserNotFound()
+            raise NotFound("User")
 
         # Check if the user has a profile
         if user.role == "patient" and hasattr(user, "patient"):

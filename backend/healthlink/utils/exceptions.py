@@ -3,11 +3,6 @@ from rest_framework.views import exception_handler
 from rest_framework.exceptions import APIException
 from rest_framework import status
 
-# Python Imports
-import logging
-
-logger = logging.getLogger(__name__)
-
 
 def custom_exception_handler(exc, context):
     """
@@ -26,33 +21,46 @@ def custom_exception_handler(exc, context):
     return response
 
 
-##------------- Common Exceptions --------------##
+##------------- Custom Exceptions --------------##
 
 
-class NotFound(APIException):
-    default_detail = "Not found."
-    code = "not_found"
-    status_code = status.HTTP_404_NOT_FOUND
-
-    def __init__(self, detail=None, code=None):
-        if detail is not None and code is not None:
-            self.detail = detail + self.default_detail
-            self.code = code
-
-        super().__init__(self.detail, self.code)
-
-
-class URLKwargNotFound(APIException):
-    default_detail = " keyword arguments not found in the URL."
-    code = "url_kwarg_not_found"
+class CustomCommonException(APIException):
+    default_detail = "Something went wrong."
+    code = "custom_common_exception"
     status_code = status.HTTP_400_BAD_REQUEST
 
     def __init__(self, detail=None, code=None):
-        if detail is not None and code is not None:
-            self.detail = detail + self.default_detail
-            self.code = code
+        self.detail = self.default_detail if detail is None else detail + self.detail
+        self.code = self.code if code is None else code
 
         super().__init__(self.detail, self.code)
+
+
+##------------- Common Exceptions --------------##
+
+
+class NotFound(CustomCommonException):
+    detail = " not found."
+    code = "not_found"
+    status_code = status.HTTP_404_NOT_FOUND
+
+
+class URLKwargNotFound(CustomCommonException):
+    detail = " keyword arguments not found in the URL."
+    code = "url_kwarg_not_found"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class AlreadyExists(CustomCommonException):
+    detail = " already exists."
+    code = "already_exists"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class InvalidData(CustomCommonException):
+    detail = " invalid, make sure it's valid."
+    code = "invalid_data"
+    status_code = status.HTTP_400_BAD_REQUEST
 
 
 ##------------- User Authentication Exceptions --------------##
@@ -70,19 +78,13 @@ class TokenExpired(APIException):
     status_code = status.HTTP_401_UNAUTHORIZED
 
 
-class UserNotFound(APIException):
-    default_detail = "User not found."
-    code = "user_not_found"
-    status_code = status.HTTP_404_NOT_FOUND
+class NoTokenProvided(APIException):
+    default_detail = "No token provided."
+    code = "no_token_provided"
+    status_code = status.HTTP_401_UNAUTHORIZED
 
 
 ##------------- Profile Exceptions --------------##
-
-
-class ProfileAlreadyExists(APIException):
-    default_detail = "Doctor or Patient profile already exists."
-    code = "profile_already_exists"
-    status_code = status.HTTP_403_FORBIDDEN
 
 
 class ProfileNotFound(APIException):
@@ -100,6 +102,12 @@ class AdminNotAllowed(APIException):
 class DoctorNotAllowed(APIException):
     default_detail = "Doctors are not allowed to access this feature."
     code = "doctor_not_allowed"
+    status_code = status.HTTP_403_FORBIDDEN
+
+
+class NotHealthcareProvider(APIException):
+    default_detail = "You are not a healthcare provider."
+    code = "not_healthcare_provider"
     status_code = status.HTTP_403_FORBIDDEN
 
 
@@ -133,4 +141,27 @@ class DoctorAvailabilityNotFound(APIException):
 class UnableToDestroyPastAppointment(APIException):
     default_detail = "You cannot delete a past appointment."
     code = "unable_to_destroy_past_appointment"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+##------------- Availability Exceptions --------------##
+
+
+class InvalidAvailabilityData(APIException):
+    default_detail = "Invalid availability data, make sure it is a valid dictionary."
+    code = "invalid_availability_data"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class InvalidAvailabilityTime(APIException):
+    default_detail = (
+        "Invalid availability time, make sure start time is before end time."
+    )
+    code = "invalid_availability_time"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class InvalidAvailabilityDay(APIException):
+    default_detail = "Invalid availability day, make sure it is a valid list of days."
+    code = "invalid_availability_day"
     status_code = status.HTTP_400_BAD_REQUEST

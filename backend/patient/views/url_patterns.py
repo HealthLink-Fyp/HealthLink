@@ -4,9 +4,10 @@ from .search import SearchDoctorView, AutoCompleteDoctorView, DoctorDetailView
 from .appointment import AppointmentView
 from .records import MedicalRecordView
 from .medicine import MedicineListView
+from .medical_test import MedicalTestListView
 
 appointment_patterns = [
-    path("", AppointmentView.as_view(), name="appointment-list"),
+    path("", AppointmentView.as_view(), name="appointment"),
     path("<int:appointment_id>/", AppointmentView.as_view(), name="appointment-detail"),
 ]
 
@@ -32,4 +33,9 @@ record_patterns = [
 medicine_patterns = [
     path("", MedicineListView.as_view(), name="medicine-shop"),
     path("<int:pk>/", MedicineListView.as_view(), name="medicine-shop-detail"),
+]
+
+medical_test_patterns = [
+    path("", MedicineListView.as_view(), name="medical-test"),
+    path("<int:pk>/", MedicineListView.as_view(), name="medical-test-detail"),
 ]

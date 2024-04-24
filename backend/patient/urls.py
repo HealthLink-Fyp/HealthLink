@@ -6,6 +6,7 @@ from patient.views.url_patterns import (
     search_patterns,
     record_patterns,
     medicine_patterns,
+    medical_test_patterns,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("search/", include(search_patterns)),
     path("records/", include(record_patterns)),
     path("medicines/", include(medicine_patterns)),
+    path("tests/", include(medical_test_patterns)),
 ]

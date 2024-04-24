@@ -8,11 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from core.models import DoctorProfile, PatientProfile
 from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
 from core.authentication import JWTAuthentication
-from healthlink.utils.response_handler import send_response
 from healthlink.utils.exceptions import (
     ProfileNotFound,
-    UserNotFound,
-    ProfileAlreadyExists,
+    NotFound,
+    AlreadyExists,
     AdminNotAllowed,
 )
 
@@ -32,7 +31,7 @@ class ProfileView(APIView):
 
         # Check if user exists
         if not user:
-            raise UserNotFound()
+            raise NotFound("User")
 
         # Check if user has a profile
         if user.role == "doctor" and hasattr(user, "doctor"):
@@ -55,7 +54,7 @@ class ProfileView(APIView):
 
         # Check if user exists
         if not user:
-            raise UserNotFound()
+            raise NotFound("User")
 
         data = request.data.copy()
         data["user"] = user.id
@@ -63,11 +62,11 @@ class ProfileView(APIView):
         # Check if user already has a profile
         if user.role == "doctor":
             if DoctorProfile.objects.filter(user=user).exists():
-                raise ProfileAlreadyExists()
+                raise AlreadyExists("Doctor profile")
             serializer = DoctorProfileSerializer(data=data)
         elif user.role == "patient":
             if PatientProfile.objects.filter(user=user).exists():
-                raise ProfileAlreadyExists()
+                raise AlreadyExists("Patient profile")
             serializer = PatientProfileSerializer(data=data)
         else:
             raise AdminNotAllowed()
@@ -114,4 +113,4 @@ class ProfileView(APIView):
 
         profile.delete()
 
-        return send_response("Profile deleted successfully.", 200)
+        return Response(status=status.HTTP_204_NO_CONTENT)

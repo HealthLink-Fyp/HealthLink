@@ -1,7 +1,6 @@
 user_profile_data = {
     "first_name": "demo_name",
     "last_name": "demo_name",
-    "email": "abc@gmail.com",
     "password": "user@123",
     "username": "demo",
     "city": "Demo City",
@@ -25,6 +24,13 @@ doctor_profile_data = {
     },
 }
 
+
+doctor_availability_data = {
+    "day": doctor_profile_data["availability_data"]["days"][0],
+    "start_time": doctor_profile_data["availability_data"]["start"],
+    "end_time": doctor_profile_data["availability_data"]["end"],
+}
+
 patient_profile_data = {
     "age": 20,
     "sex": 0,
@@ -32,3 +38,22 @@ patient_profile_data = {
     "weight": 60,
     "height": 170,
 }
+
+
+def get_record_data():
+    from django.core.files.uploadedfile import SimpleUploadedFile
+
+    with open("tests/test_files/prescription.png", "rb") as prescription:
+        prescription_file = SimpleUploadedFile(
+            prescription.name, prescription.read(), content_type="image/png"
+        )
+
+    with open("tests/test_files/test.png", "rb") as test:
+        test_file = SimpleUploadedFile(test.name, test.read(), content_type="image/png")
+
+    return {
+        "doctor_note": "Test doctor note",
+        "llm_note": "Test llm note",
+        "prescription": prescription_file,
+        "test_result": test_file,
+    }

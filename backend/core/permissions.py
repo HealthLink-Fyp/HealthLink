@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from rest_framework import exceptions
+from healthlink.utils.exceptions import NotHealthcareProvider
 
 
 class IsHealthcareProvider(BasePermission):
@@ -14,7 +14,7 @@ class IsHealthcareProvider(BasePermission):
 
         if request.user.role == "doctor" or request.user.role == "patient":
             return True
-        raise exceptions.PermissionDenied("You are not a healthcare provider.")
+        raise NotHealthcareProvider()
 
     def has_object_permission(self, request, view, obj):
         """
@@ -23,4 +23,4 @@ class IsHealthcareProvider(BasePermission):
 
         if request.user.role == "doctor" or request.user.role == "patient":
             return True
-        raise exceptions.PermissionDenied("You are not a healthcare provider.")
+        raise NotHealthcareProvider()
