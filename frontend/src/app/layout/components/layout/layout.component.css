@@ -1,0 +1,39 @@
+.parent {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Make sure the parent container takes up the full height of the viewport */
+    background-color: black;
+  }
+  
+  .child {
+    flex-grow: 1; /* Each child will grow to fit content */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .header {
+    background-color: aqua;
+    order: -1; /* Push the header to the top */
+  }
+  
+  .body {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1; /* Body takes up remaining space */
+  }
+  
+  .child2 {
+    background-color: yellow;
+    flex-grow: 1; /* Expand to fill available space */
+  }
+  
+  .child3 {
+    background: blue;
+    flex-grow: 1; /* Expand to fill available space */
+  }
+  
+  .footer {
+    background-color: blueviolet;
+  }
+  

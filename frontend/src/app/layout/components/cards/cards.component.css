@@ -1,0 +1,26 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:  center; /* Center align the cards */
+  
+  }
+  
+  .card {
+    flex: 1 1 auto; /* Let the card grow and shrink to fit available space */
+    margin: 10px; /* Add some space between cards */
+    max-width: 300px; /* sets a maximum width for the cards to prevent them from expanding too much on 
+                          larger screens. */
+  }
+  
+  
+  /* The item is allowed to grow (flex-grow: 1) and shrink (flex-shrink: 1) equally relative
+   to other items.
+   Its initial size is determined by its content (flex-basis: auto), 
+   meaning the browser will calculate its size based on the content it contains. */
+
+
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  

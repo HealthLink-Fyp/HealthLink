@@ -1,0 +1,49 @@
+.container {
+    display: flex;                /* will make it flex and diplay the things in row */
+    flex-direction: column;       /* will make things appear in vertical way */
+    align-items: center;          /* will algin all the things in container to the center */
+  } 
+
+ .logo-image
+  {
+    max-width: 100px; /* Set maximum width of the project logo */
+    max-height: 100px; /* Set maximum height of the project logo */
+    margin-bottom: 10px;
+  }
+  
+  .social-icons {
+    margin-bottom: 10px;
+  }
+  
+  .social-icons button {
+    margin-right: 10px;
+  }
+
+  .footer-links .heading {
+    font-weight: bold;
+    font-size:large;
+    margin-bottom: 10px;           /* generate space downwards */
+  }
+  
+  .footer-links {
+    display: flex;
+  }
+   
+  .footer-links ul {
+    list-style-type: none;
+    padding-left: 0;         /* telling the browser to start the list items right from the left edge of their container, removing any
+                                 extra space or indentation that might have been there before */
+    margin:50px;
+    font-size:15px;
+  }
+
+  footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;       
+    padding: 20px;
+    font-size: 16px; /* Adjust font size */
+  }
+
+  
+  

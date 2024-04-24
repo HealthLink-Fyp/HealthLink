@@ -1,0 +1,16 @@
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;   
+  }
+  
+  .toolbar h1 {
+    margin-right: 20px;
+  }
+  
+  .toolbar h1:nth-last-child(2) {
+    margin-left: auto;
+  }                     /* targets the last h1 element inside an element with the class .
+                           toolbar and pushes it to the far right side by applying margin-left: auto; */
+                        
+

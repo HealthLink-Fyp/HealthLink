@@ -24,6 +24,30 @@ const routes: Routes = [
   {path:'pboard',component:patientDashBoard},
 
   {path:'dboard/:userId',component:doctorDashBoard},
+
+
+
+
+
+  //materialui
+
+  
+  { path: 'bodychart', loadChildren: () => import('./layout/components/bodychart/bodychart.module').then(m => m.BodychartModule) },
+  { path: 'cards', loadChildren: () => import('./layout/components/cards/cards.module').then(m => m.CardsModule) },
+  { path: 'charts', loadChildren: () => import('./layout/components/charts/charts.module').then(m => m.ChartsModule) },
+  { path: 'dark', loadChildren: () => import('./layout/components/dark/dark.module').then(m => m.DarkModule) },
+  { path: 'footer', loadChildren: () => import('./layout/components/footer/footer.module').then(m => m.FooterModule) },
+  { path: 'topnav', loadChildren: () => import('./layout/components/topnav/landing.module').then(m => m.LandingModule) },
+  { path: 'layout', loadChildren: () => import('./layout/components/layout/layout.module').then(m => m.LayoutModule) },
+  { path: 'list', loadChildren: () => import('./layout/components/list/list.module').then(m => m.ListModule) },
+  { path: 'loaders', loadChildren: () => import('./layout/components/loaders/loaders.module').then(m => m.LoadersModule) },
+  { path: 'notification', loadChildren: () => import('./layout/components/notification/notification.module').then(m => m.NotificationModule) },
+  { path: 'search-suggest', loadChildren: () => import('./layout/components/search-suggest/search-suggest.module').then(m => m.SearchSuggestModule) },
+  { path: 'searchbar', loadChildren: () => import('./layout/components/searchbar/searchbar.module').then(m => m.SearchbarModule) },
+  { path: 'sidenav', loadChildren: () => import('./layout/components/sidenav/sidenav.module').then(m => m.SidenavModule) },
+  { path: 'sign-in-up', loadChildren: () => import('./layout/components/sign-in-up/sign-in-up.module').then(m => m.SignInUpModule) },
+  { path: 'stepper', loadChildren: () => import('./layout/components/stepper/stepper.module').then(m => m.StepperModule) },
+  { path: 'swipe', loadChildren: () => import('./layout/components/swipe/swipe.module').then(m => m.SwipeModule) },
 ];
 
 @NgModule({

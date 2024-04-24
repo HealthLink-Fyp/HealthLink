@@ -1,0 +1,51 @@
+
+.avatar
+{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.listo
+{
+  align-items: center;
+  background-color: #F9F9F9;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  list-style-type: none;
+  margin: 0px 0px 10px;
+  padding: 10px;
+  place-items: center normal;
+  vertical-align: middle;
+max-width:651.3px;
+min-height:70px;
+}
+
+.dr
+{
+  box-sizing: border-box;
+  color: #555555;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+  list-style-type: none;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.spec
+{
+  box-sizing: border-box;
+  color: #96A2B4;
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+  list-style-type: none;
+  text-align: left;
+  word-wrap: break-word;
+}

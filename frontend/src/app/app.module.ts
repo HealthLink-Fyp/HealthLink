@@ -18,6 +18,9 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent as patientDashboard } from './patient/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,15 +38,21 @@ import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashbo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     RouterOutlet,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    FlexLayoutModule,
+    AppRoutingModule
 
   ],
   providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {displayDefaultIndicatorType: false},
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
