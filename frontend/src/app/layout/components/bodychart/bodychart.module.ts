@@ -12,6 +12,7 @@ import { BodychartComponent } from './bodychart.component';
   imports: [
     CommonModule,
     BodychartRoutingModule
-  ]
+  ],
+  exports:[BodychartComponent]
 })
 export class BodychartModule { }

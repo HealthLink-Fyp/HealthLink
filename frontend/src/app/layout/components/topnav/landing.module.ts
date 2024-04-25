@@ -6,6 +6,7 @@ import { LandingComponent } from './landing.component';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   imports: [
     CommonModule,
     LandingRoutingModule,
-    MatIconModule,
-    MatToolbarModule
+    MaterialModule
 
-  ]
+  ],
+  exports:[LandingComponent]
 })
 export class LandingModule { }

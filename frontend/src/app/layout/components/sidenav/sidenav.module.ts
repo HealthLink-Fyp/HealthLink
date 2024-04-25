@@ -7,6 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 
 @NgModule({
@@ -16,10 +17,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   imports: [
     CommonModule,
     SidenavRoutingModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
+    MaterialModule
   
     
   ]

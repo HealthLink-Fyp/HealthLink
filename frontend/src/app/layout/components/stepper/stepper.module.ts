@@ -7,6 +7,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,8 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     StepperRoutingModule,
-    MatStepperModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MaterialModule
    
   ]
 })

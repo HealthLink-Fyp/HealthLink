@@ -4,20 +4,20 @@ import { CommonModule } from '@angular/common';
 import { SignInUpRoutingModule } from './sign-in-up-routing.module';
 import { SignInUpComponent } from './sign-in-up.component';
 
-import { MatRadioModule } from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-import { MatCardModule } from '@angular/material/card';
+import { MaterialModule } from 'src/app/material/material/material.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    SignInUpComponent
+    SignInUpComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     SignInUpRoutingModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatCardModule
-  ]
+    MaterialModule
+  ],
+  exports:[SignInUpComponent,LoginComponent]
 })
+
 export class SignInUpModule { }

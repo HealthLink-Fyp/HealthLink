@@ -1,27 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import {
-  FormControl,
-  Validators,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-const materialcomponents = [
-  MatToolbarModule,
-  MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule,
-  FormsModule,
-  ReactiveFormsModule,
-];
+
+
+
+
+const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,
+                          MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
+                        MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
+                      MatSnackBarModule,MatSlideToggleModule
+                      ];
 
 @NgModule({
-  imports: [materialcomponents],
-  exports: [materialcomponents],
+  imports: [AllMaterialModules],
+  exports: [AllMaterialModules],
 })
 export class MaterialModule {}

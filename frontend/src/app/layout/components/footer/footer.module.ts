@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
     CommonModule,
     FooterRoutingModule,
     MatIconModule
-  ]
+  ],
+  exports:[FooterComponent]
 })
 export class FooterModule { }

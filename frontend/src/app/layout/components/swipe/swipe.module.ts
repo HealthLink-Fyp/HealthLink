@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SwipeRoutingModule } from './swipe-routing.module';
 import { SwipeComponent } from './swipe.component';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SwipeComponent } from './swipe.component';
   ],
   imports: [
     CommonModule,
-    SwipeRoutingModule
-  ]
+    SwipeRoutingModule,
+  ],
+  exports:[SwipeComponent]
 })
 export class SwipeModule { }

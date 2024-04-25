@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
   imports: [
     CommonModule,
     SearchbarRoutingModule,
-    MatIconModule,
-    MatSelectModule,
-    FormsModule
-  ]
+    MaterialModule
+  ],
+  exports:[SearchbarComponent]
 })
 export class SearchbarModule { }

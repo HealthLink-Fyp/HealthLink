@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/material/material/material.module';
 
 
 @NgModule({
@@ -18,10 +19,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SearchSuggestRoutingModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    FormsModule
+   
+    MaterialModule
   ]
 })
 export class SearchSuggestModule { }

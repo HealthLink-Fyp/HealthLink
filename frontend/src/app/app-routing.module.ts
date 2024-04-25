@@ -48,6 +48,8 @@ const routes: Routes = [
   { path: 'sign-in-up', loadChildren: () => import('./layout/components/sign-in-up/sign-in-up.module').then(m => m.SignInUpModule) },
   { path: 'stepper', loadChildren: () => import('./layout/components/stepper/stepper.module').then(m => m.StepperModule) },
   { path: 'swipe', loadChildren: () => import('./layout/components/swipe/swipe.module').then(m => m.SwipeModule) },
+  { path: 'dashboards', loadChildren: () => import('./layout/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'tabs', loadChildren: () => import('./layout/components/tabs/tabs/tabs.module').then(m => m.TabsModule) },
 ];
 
 @NgModule({

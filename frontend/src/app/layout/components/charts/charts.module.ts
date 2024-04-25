@@ -15,7 +15,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [
     CommonModule,
     ChartsRoutingModule,
-
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.
@@ -24,6 +23,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
-  ]
+  ],
+exports:[BarchartComponent]
 })
 export class ChartsModule { }

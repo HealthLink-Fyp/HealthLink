@@ -1,0 +1,47 @@
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .toolbar h1 {
+    margin-right: 20px;
+  }
+  
+  .toolbar h1:nth-last-child(1) {
+    margin-left: auto;
+  }
+  
+  /* targets the last h1 element inside an element with the class .
+                             toolbar and pushes it to the far right side by applying margin-left: auto; */
+  
+  .bodie {
+    background-color: #F0F3FB;
+  }
+  
+  .avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    left: 11px;
+    top: -3px;
+  }
+  
+  .whole {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .profile {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .pname {
+    position: relative;
+    left: 0px;
+    top: 12px;
+  }
+  
+  
