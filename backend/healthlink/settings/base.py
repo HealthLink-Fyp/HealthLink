@@ -23,6 +23,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
 # Application definition
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     # In-house apps
     "patient",
     "core",
+    "chat",
     # Third-Party apps
     "corsheaders",
     "rest_framework",
@@ -76,6 +78,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "healthlink.wsgi.application"
 
+ASGI_APPLICATION = "healthlink.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

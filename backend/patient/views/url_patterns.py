@@ -5,6 +5,7 @@ from .appointment import AppointmentView
 from .records import MedicalRecordView
 from .medicine import MedicineListView
 from .medical_test import MedicalTestListView
+from .emotion import EmotionView
 
 appointment_patterns = [
     path("", AppointmentView.as_view(), name="appointment"),
@@ -36,6 +37,11 @@ medicine_patterns = [
 ]
 
 medical_test_patterns = [
-    path("", MedicineListView.as_view(), name="medical-test"),
-    path("<int:pk>/", MedicineListView.as_view(), name="medical-test-detail"),
+    path("", MedicalTestListView.as_view(), name="medical-test"),
+    path("<int:pk>/", MedicalTestListView.as_view(), name="medical-test-detail"),
+]
+
+
+emotion_patterns = [
+    path("predict/", EmotionView.as_view(), name="emotion"),
 ]
