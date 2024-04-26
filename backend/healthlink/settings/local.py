@@ -4,11 +4,22 @@ from .base import *  # noqa
 
 DEBUG = True
 
-# Codespace Settings
-# CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa
-# CODESPACE_PORT_DOMAIN = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "")  # noqa
-# BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_PORT_DOMAIN}"
-# FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_PORT_DOMAIN}"
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+# Quick and dirty way to enable all hosts for development
+ALLOWED_HOSTS = ["*"]
+
+# URLs for frontend and backend
+if os.environ.get("CODESPACES") == "true":  # noqa
+    CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa
+    CODESPACE_DOMAIN = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "")  # noqa
+    BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_DOMAIN}"
+    FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_DOMAIN}"
+else:
+    BACKEND_URL = "http://localhost:8000"
+    FRONTEND_URL = "http://localhost:4200"
 
 # Variables
 JWT_REFRESH_SECRET = "secret"
@@ -29,6 +40,7 @@ CACHES = {
 
 # Rest Framework settings
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "healthlink.utils.exceptions.custom_exception_handler",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }
@@ -36,3 +48,12 @@ REST_FRAMEWORK = {
 
 # Timezone for pakistan
 TIME_ZONE = "Asia/Karachi"
+
+
+# Database
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",  # noqa
+    }
+}

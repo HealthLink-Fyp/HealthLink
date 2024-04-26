@@ -14,7 +14,7 @@ def populate_medicines():
     """
     import json
 
-    with open("scripts/data/medicines.json") as file:
+    with open("healthlink/scripts/data/medicines.json") as file:
         medicines = json.load(file)
 
     for medicine in medicines:

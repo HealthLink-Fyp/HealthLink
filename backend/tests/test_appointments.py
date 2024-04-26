@@ -7,12 +7,13 @@ from core.serializers import DoctorProfileSerializer
 class AppointmentTests(PatientApiTest, DoctorApiTest):
     def setUp(self):
         super().setUp()
-
-        self.doctor = self.create_doctor_with_availabilities()
+        self.create_patient()
+        self.create_doctor_with_availabilities()
 
     def test_create_appointment(self):
         data = {
             "doctor": DoctorProfileSerializer(self.doctor).data.get("user"),
+            "patient": self.patient.user.id,
             "start": "2025-01-06T12:00:00",
         }
 
@@ -35,4 +36,4 @@ class AppointmentTests(PatientApiTest, DoctorApiTest):
         }
 
         response = self.client.post(reverse("appointment"), data)
-        self.assertEqual(response.data.get("detail").code, "doctor_not_available")
+        self.assertEqual(response.data.get("code"), "doctor_not_available")

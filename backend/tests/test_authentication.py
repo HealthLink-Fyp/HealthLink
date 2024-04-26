@@ -24,32 +24,33 @@ class SignInEndpointTests(BaseApiTest):
         url = reverse("login")
         response = self.client.post(url, {}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["detail"], "Email and password are required.")
+        self.assertEqual(response.data.get("code"), "invalid_data")
 
     def test_invalid_email(self):
         url = reverse("login")
         data = {"email": "abcgmail.com", "password": "user@123"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["detail"], "Please enter a valid email.")
+        self.assertEqual(response.data.get("code"), "invalid_data")
 
     def test_invalid_password(self):
         url = reverse("login")
         data_with_invalid_password = {"email": "abc@gmail.com", "password": "user123"}
         response = self.client.post(url, data_with_invalid_password, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["detail"], "Invalid password.")
+        self.assertEqual(response.data.get("code"), "invalid_data")
 
     def test_not_logged_in(self):
         url = reverse("user")
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data["detail"], "Token not provided.")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.data.get("code"), "no_token_provided")
 
 
 class SignInEndpointAuthenticatedTests(AuthenticatedApiTest):
     def setUp(self):
-        super().setUp("patient")
+        self.role = "patient"
+        super().setUp()
 
     def test_logged_in(self):
         url = reverse("user")

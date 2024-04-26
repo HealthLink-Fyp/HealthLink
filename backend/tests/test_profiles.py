@@ -6,7 +6,8 @@ from .variables import doctor_profile_data, patient_profile_data
 
 class ProfileTests(AuthenticatedApiTest):
     def setUp(self):
-        super().setUp("patient")
+        self.role = "patient"
+        super().setUp()
 
     def test_no_profile(self):
         url = reverse("profile")

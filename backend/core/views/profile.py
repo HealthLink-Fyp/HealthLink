@@ -8,7 +8,12 @@ from rest_framework.permissions import IsAuthenticated
 from core.models import DoctorProfile, PatientProfile
 from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
 from core.authentication import JWTAuthentication
-from healthlink.utils.response_handler import send_response
+from healthlink.utils.exceptions import (
+    ProfileNotFound,
+    NotFound,
+    AlreadyExists,
+    AdminNotAllowed,
+)
 
 # Django Imports
 from django.shortcuts import get_object_or_404
@@ -24,18 +29,20 @@ class ProfileView(APIView):
         """
         user = request.user
 
+        # Check if user exists
         if not user:
-            return send_response("User not found.", 404)
+            raise NotFound("User")
 
-        if user.role == "doctor":
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
             profile = get_object_or_404(DoctorProfile, user=user)
             serializer = DoctorProfileSerializer(profile)
 
-        elif user.role == "patient":
+        elif user.role == "patient" and hasattr(user, "patient"):
             profile = get_object_or_404(PatientProfile, user=user)
             serializer = PatientProfileSerializer(profile)
         else:
-            return send_response("Not allowed.", 403)
+            raise ProfileNotFound()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -44,23 +51,25 @@ class ProfileView(APIView):
         Create the user profile
         """
         user = request.user
+
+        # Check if user exists
+        if not user:
+            raise NotFound("User")
+
         data = request.data.copy()
         data["user"] = user.id
 
+        # Check if user already has a profile
         if user.role == "doctor":
             if DoctorProfile.objects.filter(user=user).exists():
-                return send_response("Doctor profile already exists.", 403)
-
+                raise AlreadyExists("Doctor profile")
             serializer = DoctorProfileSerializer(data=data)
-
         elif user.role == "patient":
             if PatientProfile.objects.filter(user=user).exists():
-                return send_response("Patient profile already exists.", 403)
-
+                raise AlreadyExists("Patient profile")
             serializer = PatientProfileSerializer(data=data)
-
         else:
-            return send_response("Not allowed.", 403)
+            raise AdminNotAllowed()
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -73,14 +82,15 @@ class ProfileView(APIView):
         """
         user = request.user
 
-        if user.role == "doctor":
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
             profile = get_object_or_404(DoctorProfile, user=user)
             serializer = DoctorProfileSerializer(profile, request.data, partial=True)
-        elif user.role == "patient":
+        elif user.role == "patient" and hasattr(user, "patient"):
             profile = get_object_or_404(PatientProfile, user=user)
             serializer = PatientProfileSerializer(profile, request.data, partial=True)
         else:
-            return send_response("Not allowed.", 403)
+            raise ProfileNotFound()
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -93,13 +103,14 @@ class ProfileView(APIView):
         """
         user = request.user
 
-        if user.role == "doctor":
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
             profile = DoctorProfile.objects.get(user=user)
-        elif user.role == "patient":
+        elif user.role == "patient" and hasattr(user, "patient"):
             profile = PatientProfile.objects.get(user=user)
         else:
-            return send_response("Not allowed.", 403)
+            raise ProfileNotFound()
 
         profile.delete()
 
-        return send_response("Profile deleted successfully.", 200)
+        return Response(status=status.HTTP_204_NO_CONTENT)
