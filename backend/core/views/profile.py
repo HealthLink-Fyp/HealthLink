@@ -3,12 +3,17 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied, NotFound
 
 # Local Imports
 from core.models import DoctorProfile, PatientProfile
 from core.serializers import DoctorProfileSerializer, PatientProfileSerializer
 from core.authentication import JWTAuthentication
+from healthlink.utils.exceptions import (
+    ProfileNotFound,
+    NotFound,
+    AlreadyExists,
+    AdminNotAllowed,
+)
 
 # Django Imports
 from django.shortcuts import get_object_or_404
@@ -24,30 +29,20 @@ class ProfileView(APIView):
         """
         user = request.user
 
-        DoctorProfile.objects.filter(user=user).exists()
-
+        # Check if user exists
         if not user:
-            raise NotFound("User not found.")
+            raise NotFound("User")
 
-        if user.role == "doctor":
-            # Check if the user has a doctor profile otherwise raise a 404
-            if not DoctorProfile.objects.filter(user=user).exists():
-                raise NotFound("Profile not found.")
-
-            profile = DoctorProfile.objects.get(user=user)
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
+            profile = get_object_or_404(DoctorProfile, user=user)
             serializer = DoctorProfileSerializer(profile)
 
-        elif user.role == "patient":
-            # Check if the user has a patient profile otherwise raise a 404
-            if not PatientProfile.objects.filter(user=user).exists():
-                raise NotFound("Profile not found.")
-
-            profile = PatientProfile.objects.get(user=user)
+        elif user.role == "patient" and hasattr(user, "patient"):
+            profile = get_object_or_404(PatientProfile, user=user)
             serializer = PatientProfileSerializer(profile)
-
         else:
-            # Check if the user is an admin otherwise raise a 403
-            raise PermissionDenied("Not allowed.")
+            raise ProfileNotFound()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -56,19 +51,29 @@ class ProfileView(APIView):
         Create the user profile
         """
         user = request.user
+
+        # Check if user exists
+        if not user:
+            raise NotFound("User")
+
         data = request.data.copy()
         data["user"] = user.id
 
+        # Check if user already has a profile
         if user.role == "doctor":
+            if DoctorProfile.objects.filter(user=user).exists():
+                raise AlreadyExists("Doctor profile")
             serializer = DoctorProfileSerializer(data=data)
         elif user.role == "patient":
+            if PatientProfile.objects.filter(user=user).exists():
+                raise AlreadyExists("Patient profile")
             serializer = PatientProfileSerializer(data=data)
         else:
-            # Check if the user is an admin otherwise raise a 403
-            raise PermissionDenied("Not allowed.")
+            raise AdminNotAllowed()
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def put(self, request):
@@ -77,22 +82,19 @@ class ProfileView(APIView):
         """
         user = request.user
 
-        if user.role == "doctor":
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
             profile = get_object_or_404(DoctorProfile, user=user)
-            serializer = DoctorProfileSerializer(
-                profile, data=request.data, partial=True
-            )
-        elif user.role == "patient":
+            serializer = DoctorProfileSerializer(profile, request.data, partial=True)
+        elif user.role == "patient" and hasattr(user, "patient"):
             profile = get_object_or_404(PatientProfile, user=user)
-            serializer = PatientProfileSerializer(
-                profile, data=request.data, partial=True
-            )
+            serializer = PatientProfileSerializer(profile, request.data, partial=True)
         else:
-            # Check if the user is an admin otherwise raise a 403
-            raise PermissionDenied("Not allowed.")
+            raise ProfileNotFound()
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request):
@@ -101,13 +103,14 @@ class ProfileView(APIView):
         """
         user = request.user
 
-        if user.role == "doctor":
+        # Check if user has a profile
+        if user.role == "doctor" and hasattr(user, "doctor"):
             profile = DoctorProfile.objects.get(user=user)
-        elif user.role == "patient":
+        elif user.role == "patient" and hasattr(user, "patient"):
             profile = PatientProfile.objects.get(user=user)
         else:
-            # Check if the user is an admin otherwise raise a 403
-            raise PermissionDenied("Not allowed.")
+            raise ProfileNotFound()
 
         profile.delete()
+
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -1,9 +1,6 @@
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 from django.db import models
 import uuid
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.contrib.auth import get_user_model
 
 
 # Local Imports
@@ -24,9 +21,6 @@ class MyUserManager(BaseUserManager):
     """
 
     def create_user(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError("Users must have an email address")
-
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -90,19 +84,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.email} - {self.role}"
-
-
-@receiver(post_save, sender=User)
-def update_profile_city(sender, instance, **kwargs):
-    """
-    Update the city in the profile when the user is updated.
-    """
-    if instance.is_patient and hasattr(instance, "patient"):
-        instance.patient.city = instance.city
-        instance.patient.save()
-    elif instance.is_doctor and hasattr(instance, "doctor"):
-        instance.doctor.city = instance.city
-        instance.doctor.save()
 
 
 class UserToken(models.Model):
@@ -187,11 +168,6 @@ class Availability(models.Model):
     class Meta:
         unique_together = ["doctor", "day"]
         verbose_name_plural = "Availabilities"
-
-    def save(self, *args, **kwargs):
-        if self.start_time >= self.end_time:
-            raise ValueError("End time must be greater than start time")
-        super().save(*args, **kwargs)
 
 
 ##------------- Patient Profile Model --------------##
