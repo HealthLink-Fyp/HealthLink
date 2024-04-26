@@ -25,7 +25,7 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 
     # Check for response presence and status code
     if response is None:
-        return {"error": "Langchain response is None"}
+        return {"error": "OpenAi response is None"}
 
     response_json = validate_response(str(response.content))
     return response_json
@@ -43,8 +43,8 @@ def validate_response(response: str) -> dict:
 
     # Check for missing or extra keys
     if missing_keys:
-        return {"error": f"Invalid response from chain, missing keys {missing_keys}"}
+        return {"error": f"Invalid response from OpenAi, missing keys {missing_keys}"}
     elif extra_keys:
-        return {"error": f"Invalid response from chain, extra keys {extra_keys}"}
+        return {"error": f"Invalid response from OpenAi, extra keys {extra_keys}"}
 
     return response_json

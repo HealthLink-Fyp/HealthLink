@@ -1,0 +1,1394 @@
+openapi: 3.0.3
+info:
+  title: HealthLink API
+  version: 1.0.0
+  description: API for HealthLink
+paths:
+  /api/v1/appointment/:
+    get:
+      operationId: appointment_list
+      tags:
+      - appointment
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+          description: ''
+    post:
+      operationId: appointment_create
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    put:
+      operationId: appointment_update
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    patch:
+      operationId: appointment_partial_update
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    delete:
+      operationId: appointment_destroy
+      tags:
+      - appointment
+      responses:
+        '204':
+          description: No response body
+  /api/v1/appointment/{appointment_id}/:
+    get:
+      operationId: appointment_list_2
+      parameters:
+      - in: path
+        name: appointment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - appointment
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+          description: ''
+    post:
+      operationId: appointment_create_2
+      parameters:
+      - in: path
+        name: appointment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    put:
+      operationId: appointment_update_2
+      parameters:
+      - in: path
+        name: appointment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    patch:
+      operationId: appointment_partial_update_2
+      parameters:
+      - in: path
+        name: appointment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    delete:
+      operationId: appointment_destroy_2
+      parameters:
+      - in: path
+        name: appointment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - appointment
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/forgot/:
+    post:
+      operationId: auth_forgot_create
+      description: Send an email to the user to reset their password
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: Login the user
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/logout/:
+    post:
+      operationId: auth_logout_create
+      description: Logout the user
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/profile/:
+    get:
+      operationId: auth_profile_retrieve
+      description: Get the user profile
+      tags:
+      - auth
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: auth_profile_create
+      description: Create the user profile
+      tags:
+      - auth
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: auth_profile_update
+      description: Update the user profile
+      tags:
+      - auth
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: auth_profile_destroy
+      description: Delete the user profile
+      tags:
+      - auth
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: Refresh the access token
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/reset/:
+    post:
+      operationId: auth_reset_create
+      description: Reset the user's password
+      tags:
+      - auth
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/user/:
+    get:
+      operationId: auth_user_retrieve
+      description: Get the user's information
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: auth_user_update
+      description: Update the user's information
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: auth_user_destroy
+      description: Delete the user
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/calls/:
+    get:
+      operationId: calls_retrieve
+      description: Get the call details based on the user role.
+      tags:
+      - calls
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: calls_create
+      description: Create a call based on the user role.
+      tags:
+      - calls
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/calls/transcript/:
+    post:
+      operationId: calls_transcript_create
+      description: Send the transcription to the chatbot.
+      tags:
+      - calls
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/choices/:
+    get:
+      operationId: choices_retrieve
+      description: Get the user profile choice
+      tags:
+      - choices
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/doctors/{id}/:
+    get:
+      operationId: doctors_retrieve
+      description: Get doctor profile by id.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - doctors
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorProfile'
+          description: ''
+  /api/v1/emotion/predict/:
+    post:
+      operationId: emotion_predict_create
+      tags:
+      - emotion
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/medicines/:
+    get:
+      operationId: medicines_list
+      description: View to list all the medicines.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - medicines
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicineShopList'
+          description: ''
+  /api/v1/medicines/{medicine_id}/:
+    get:
+      operationId: medicines_list_2
+      description: View to list all the medicines.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: medicine_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medicine shop.
+        required: true
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - medicines
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicineShopList'
+          description: ''
+  /api/v1/records/:
+    get:
+      operationId: records_list
+      description: Get the MedicalRecord object based on the user role.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - records
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicalRecordList'
+          description: ''
+    post:
+      operationId: records_create
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    put:
+      operationId: records_update
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    patch:
+      operationId: records_partial_update
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    delete:
+      operationId: records_destroy
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      tags:
+      - records
+      responses:
+        '204':
+          description: No response body
+  /api/v1/records/{record_id}/:
+    get:
+      operationId: records_list_2
+      description: Get the MedicalRecord object based on the user role.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: path
+        name: record_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical record.
+        required: true
+      tags:
+      - records
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicalRecordList'
+          description: ''
+    post:
+      operationId: records_create_2
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      parameters:
+      - in: path
+        name: record_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical record.
+        required: true
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    put:
+      operationId: records_update_2
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      parameters:
+      - in: path
+        name: record_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical record.
+        required: true
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    patch:
+      operationId: records_partial_update_2
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      parameters:
+      - in: path
+        name: record_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical record.
+        required: true
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicalRecord'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+          description: ''
+    delete:
+      operationId: records_destroy_2
+      description: API view to retrieve, update or delete a MedicalRecord object.
+      parameters:
+      - in: path
+        name: record_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical record.
+        required: true
+      tags:
+      - records
+      responses:
+        '204':
+          description: No response body
+  /api/v1/search/doctors/:
+    get:
+      operationId: search_doctors_list
+      description: API view to search for doctors based on city and specialization.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - search
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDoctorSearchList'
+          description: ''
+  /api/v1/search/doctors/autocomplete/:
+    get:
+      operationId: search_doctors_autocomplete_list
+      description: API view to provide autocomplete functionality for DoctorProfile
+        model.
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - search
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorAutoComplete'
+          description: ''
+  /api/v1/tests/:
+    get:
+      operationId: tests_list
+      description: View to list all the medical tests.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - tests
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicalTestList'
+          description: ''
+  /api/v1/tests/{test_id}/:
+    get:
+      operationId: tests_list_2
+      description: View to list all the medical tests.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: path
+        name: test_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medical test.
+        required: true
+      tags:
+      - tests
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicalTestList'
+          description: ''
+components:
+  schemas:
+    Appointment:
+      type: object
+      properties:
+        appointment_id:
+          type: integer
+          readOnly: true
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+          nullable: true
+        appointment_status:
+          $ref: '#/components/schemas/AppointmentStatusEnum'
+        payment_status:
+          $ref: '#/components/schemas/PaymentStatusEnum'
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        patient:
+          type: integer
+          nullable: true
+        doctor:
+          type: integer
+      required:
+      - appointment_id
+      - created
+      - doctor
+      - start
+    AppointmentStatusEnum:
+      enum:
+      - pending
+      - confirmed
+      - scheduled
+      - canceled
+      - completed
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `confirmed` - Confirmed
+        * `scheduled` - Scheduled
+        * `canceled` - Canceled
+        * `completed` - Completed
+    DoctorAutoComplete:
+      type: object
+      properties:
+        user:
+          type: integer
+        full_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        city:
+          type: string
+          nullable: true
+          maxLength: 255
+        specialization:
+          $ref: '#/components/schemas/SpecializationEnum'
+        profile_photo_url:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - specialization
+      - user
+    DoctorProfile:
+      type: object
+      properties:
+        user:
+          type: integer
+        full_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        city:
+          type: string
+          nullable: true
+          maxLength: 255
+        specialization:
+          $ref: '#/components/schemas/SpecializationEnum'
+        qualification:
+          $ref: '#/components/schemas/QualificationEnum'
+        experience_years:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        consultation_fees:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        summary:
+          type: string
+          maxLength: 255
+        wait_time:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        recommendation_percent:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        patients_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        reviews_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        profile_photo_url:
+          type: string
+          format: uri
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - consultation_fees
+      - created
+      - experience_years
+      - qualification
+      - specialization
+      - summary
+      - user
+    DoctorSearch:
+      type: object
+      properties:
+        user:
+          type: integer
+        full_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        city:
+          type: string
+          nullable: true
+          maxLength: 255
+        specialization:
+          $ref: '#/components/schemas/SpecializationEnum'
+        profile_photo_url:
+          type: string
+          format: uri
+          nullable: true
+        patients_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        reviews_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        recommendation_percent:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        consultation_fees:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        wait_time:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        experience_years:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+      required:
+      - consultation_fees
+      - experience_years
+      - specialization
+      - user
+    MedicalRecord:
+      type: object
+      properties:
+        record_id:
+          type: integer
+          readOnly: true
+        doctor_note:
+          type: string
+        llm_note:
+          type: string
+        prescription:
+          type: string
+          format: uri
+          nullable: true
+        test_result:
+          type: string
+          format: uri
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        patient:
+          type: integer
+        doctor:
+          type: integer
+      required:
+      - created
+      - doctor
+      - doctor_note
+      - llm_note
+      - patient
+      - record_id
+    MedicalTest:
+      type: object
+      properties:
+        test_id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+        lab_name:
+          type: string
+          maxLength: 100
+        image:
+          type: string
+          format: uri
+          maxLength: 200
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created
+      - image
+      - lab_name
+      - link
+      - name
+      - price
+      - test_id
+    MedicineShop:
+      type: object
+      properties:
+        medicine_id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+        manufacturer:
+          type: string
+          maxLength: 100
+        pack_details:
+          type: string
+          maxLength: 100
+        image:
+          type: string
+          format: uri
+          maxLength: 200
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created
+      - image
+      - link
+      - manufacturer
+      - medicine_id
+      - name
+      - pack_details
+      - price
+    PaginatedDoctorSearchList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DoctorSearch'
+    PaginatedMedicalRecordList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MedicalRecord'
+    PaginatedMedicalTestList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MedicalTest'
+    PaginatedMedicineShopList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MedicineShop'
+    PatchedAppointment:
+      type: object
+      properties:
+        appointment_id:
+          type: integer
+          readOnly: true
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+          nullable: true
+        appointment_status:
+          $ref: '#/components/schemas/AppointmentStatusEnum'
+        payment_status:
+          $ref: '#/components/schemas/PaymentStatusEnum'
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        patient:
+          type: integer
+          nullable: true
+        doctor:
+          type: integer
+    PatchedMedicalRecord:
+      type: object
+      properties:
+        record_id:
+          type: integer
+          readOnly: true
+        doctor_note:
+          type: string
+        llm_note:
+          type: string
+        prescription:
+          type: string
+          format: uri
+          nullable: true
+        test_result:
+          type: string
+          format: uri
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        patient:
+          type: integer
+        doctor:
+          type: integer
+    PaymentStatusEnum:
+      enum:
+      - pending
+      - paid
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `paid` - Paid
+    QualificationEnum:
+      enum:
+      - mbbs
+      - bds
+      - md
+      type: string
+      description: |-
+        * `mbbs` - MBBS
+        * `bds` - BDS
+        * `md` - MD
+    SpecializationEnum:
+      enum:
+      - general_practice
+      - child_care
+      - women_health
+      - bone_joint_care
+      - heart_care
+      - skin_care
+      - eye_care
+      - dental_care
+      - mental_health
+      - brain_nervous_system_care
+      - digestive_health
+      - urinary_tract_health
+      - cancer_care
+      - ear_nose_throat_care
+      - hormone_health
+      - joint_health
+      - allergy_immune_system_care
+      - lung_respiratory_health
+      - kidney_health
+      - physical_therapy
+      type: string
+      description: |-
+        * `general_practice` - General Practice
+        * `child_care` - Child Care
+        * `women_health` - Women Health
+        * `bone_joint_care` - Bone & Joint Care
+        * `heart_care` - Heart Care
+        * `skin_care` - Skin Care
+        * `eye_care` - Eye Care
+        * `dental_care` - Dental Care
+        * `mental_health` - Mental Health
+        * `brain_nervous_system_care` - Brain & Nervous System Care
+        * `digestive_health` - Digestive Health
+        * `urinary_tract_health` - Urinary Tract Health
+        * `cancer_care` - Cancer Care
+        * `ear_nose_throat_care` - Ear, Nose & Throat Care
+        * `hormone_health` - Hormone Health
+        * `joint_health` - Joint Health
+        * `allergy_immune_system_care` - Allergy & Immune System Care
+        * `lung_respiratory_health` - Lung & Respiratory Health
+        * `kidney_health` - Kidney Health
+        * `physical_therapy` - Physical Therapy
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

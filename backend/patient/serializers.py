@@ -56,16 +56,6 @@ class MedicalTestSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# const file = event.target.files[0];
-# const reader = new FileReader();
-# reader.onload = (event) => {
-#   const arrayBuffer = event.target.result;
-#   const uint8Array = new Uint8Array(arrayBuffer);
-#   // Send the uint8Array to Django
-# };
-# reader.readAsArrayBuffer(file);
-
-
 class EmotionSerializer(serializers.ModelSerializer):
     image = serializers.ImageField()
 
