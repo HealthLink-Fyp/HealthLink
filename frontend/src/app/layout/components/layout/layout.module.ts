@@ -6,33 +6,35 @@ import { LayoutComponent } from './layout.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { MaterialModule } from 'src/app/material/material/material.module';
-import { Lay1Component } from './lay1/lay1.component';
-import { FooterComponent } from '../footer/footer.component';
-import { FooterModule } from '../footer/footer.module';
+import { Lay1Component } from './landing/lay1.component';
+import { FooterComponent } from './footer/footer.component';
+
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from '../topnav/landing.component';
 import { LandingModule } from '../topnav/landing.module';
 import { SearchbarModule } from '../searchbar/searchbar.module';
-import { Card1Component } from '../cards/card1/card1.component';
-import { CardsModule } from '../cards/cards.module';
-import { SwipeModule } from '../swipe/swipe.module';
+
+import { CardsComponent } from './cards/cards.component';
+import { Card1Component } from './cards/card1/card1.component';
+import { SwipeComponent } from './swipe/swipe.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     Lay1Component,
-    
+    CardsComponent,
+    Card1Component,
+    FooterComponent,
+    SwipeComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     LayoutRoutingModule,
     MaterialModule,
-    FooterModule,
     LandingModule,
     SearchbarModule,
-    CardsModule,
-    SwipeModule
+    
   ]
 })
 export class LayoutModule { }

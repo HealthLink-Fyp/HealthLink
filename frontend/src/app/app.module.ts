@@ -45,9 +45,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     CommonModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+
 
   ],
+
+  
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
