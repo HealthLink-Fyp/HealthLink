@@ -21,6 +21,7 @@ import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashbo
 import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DoctorComponent,
     PatientComponent,
     patientDashboard,
-    doctorDashboard
+    doctorDashboard,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

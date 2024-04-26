@@ -9,6 +9,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
   {path:'pboard',component:patientDashBoard},
 
   {path:'dboard/:userId',component:doctorDashBoard},
+
+  {path:'chat',component:ChatComponent},
 
 
 
