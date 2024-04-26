@@ -39,6 +39,12 @@ class CustomCommonException(APIException):
 ##------------- Common Exceptions --------------##
 
 
+class BadRequest(CustomCommonException):
+    detail = "."
+    code = "bad_request"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
 class NotFound(CustomCommonException):
     detail = " not found."
     code = "not_found"
@@ -102,6 +108,12 @@ class AdminNotAllowed(APIException):
 class DoctorNotAllowed(APIException):
     default_detail = "Doctors are not allowed to access this feature."
     code = "doctor_not_allowed"
+    status_code = status.HTTP_403_FORBIDDEN
+
+
+class PatientNotAllowed(APIException):
+    default_detail = "Patients are not allowed to access this feature."
+    code = "patient_not_allowed"
     status_code = status.HTTP_403_FORBIDDEN
 
 
