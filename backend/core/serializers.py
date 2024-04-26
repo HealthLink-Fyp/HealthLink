@@ -2,6 +2,12 @@ from django.db import transaction
 from rest_framework import serializers
 from .models import User, DoctorProfile, PatientProfile, Availability
 
+from healthlink.utils.exceptions import (
+    InvalidAvailabilityData,
+    InvalidAvailabilityTime,
+    InvalidAvailabilityDay,
+)
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -80,30 +86,28 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         return data
 
     def validate_availability_data(self, availability_data):
+        # Check if availability data is a dictionary
         if not isinstance(availability_data, dict):
-            raise serializers.ValidationError(
-                "availability_data as a dictionary is required"
-            )
+            raise InvalidAvailabilityData()
 
-        try:
-            days = availability_data["days"]
-            start_time = availability_data["start"]
-            end_time = availability_data["end"]
-        except KeyError:
-            raise serializers.ValidationError("days, start, and end are required")
+        days = availability_data.get("days", None)
+        start_time = availability_data.get("start", None)
+        end_time = availability_data.get("end", None)
 
-        import datetime
+        # Check if days, start_time and end_time are provided
+        if not days or not start_time or not end_time:
+            raise InvalidAvailabilityData()
 
-        start_time = datetime.datetime.strptime(start_time, "%H:%M")
-        end_time = datetime.datetime.strptime(end_time, "%H:%M")
+        from datetime import datetime
+
+        start_time = datetime.strptime(start_time, "%H:%M").time()
+        end_time = datetime.strptime(end_time, "%H:%M").time()
 
         if start_time >= end_time:
-            raise serializers.ValidationError("start time must be less than end time")
+            raise InvalidAvailabilityTime()
 
         if not isinstance(days, list) or len(days) == 0:
-            raise serializers.ValidationError(
-                "days, start, and end are required in availability_data"
-            )
+            raise InvalidAvailabilityDay()
 
         return days, start_time, end_time
 
@@ -127,6 +131,24 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return doctor
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        availability_data = self.initial_data.get("availability_data")
+        days, start_time, end_time = self.validate_availability_data(availability_data)
+
+        for day in days:
+            availability = instance.availability_set.filter(day=day).first()
+            if availability:
+                availability.start_time = start_time
+                availability.end_time = end_time
+                availability.save()
+            else:
+                Availability.objects.create(
+                    doctor=instance, day=day, start_time=start_time, end_time=end_time
+                )
+
+        return super().update(instance, validated_data)
 
 
 class DoctorAutoCompleteSerializer(serializers.ModelSerializer):

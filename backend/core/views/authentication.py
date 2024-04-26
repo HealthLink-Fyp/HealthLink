@@ -20,30 +20,43 @@ from core.authentication import (
 # Local Imports
 from core.models import User, UserForgot, UserToken
 from core.serializers import UserSerializer
+from healthlink.utils.exceptions import (
+    AlreadyExists,
+    NotFound,
+    InvalidData,
+    InvalidToken,
+)
 
 # Third Part Imports
 # from core.tasks import send_mail_task
 
-from django.core.validators import validate_email
 
-from rest_framework.exceptions import (
-    AuthenticationFailed,
-    NotFound,
-    NotAuthenticated,
-    ValidationError,
-)
+from django.core.validators import validate_email
 
 
 class RegisterView(APIView):
     def post(self, request):
-        """
-        Register the user
-        """
-        serializer = UserSerializer(data=request.data)
+        email = request.data.get("email", False)
+        password = request.data.get("password", False)
 
+        if not email or not password:
+            raise NotFound("Email and password")
+
+        email = email.strip().lower()
+
+        # Check if the email is valid
+        try:
+            validate_email(email)
+        except Exception:
+            raise InvalidData("Email")
+
+        if User.objects.filter(email=email).exists():
+            raise AlreadyExists("User (email)")
+
+        serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class LoginView(APIView):
@@ -54,21 +67,25 @@ class LoginView(APIView):
         email = request.data.get("email", "").strip().lower()
         password = request.data.get("password", "")
 
+        # Check if the email and password are provided
+        if not email or not password:
+            raise InvalidData("Email and password")
+
         # Check if the email is valid
         try:
             validate_email(email)
         except Exception:
-            raise ValidationError("Invalid email.")
+            raise InvalidData("Email")
 
         user = User.objects.filter(email=email).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            raise NotFound("User")
 
         # Check if the password is correct
         if not user.check_password(password):
-            raise AuthenticationFailed("Invalid credentials.")
+            raise InvalidData("Password")
 
         access_token = create_access_token(user=user)
         refresh_token = create_refresh_token(user=user)
@@ -92,7 +109,9 @@ class UserView(APIView):
         """
         Get the user's information
         """
-        return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request):
         """
@@ -116,7 +135,7 @@ class UserView(APIView):
         """
         user = request.user
         user.delete()
-        return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class RefreshView(APIView):
@@ -129,14 +148,14 @@ class RefreshView(APIView):
 
         # Check if the refresh token is valid
         if not refresh_token:
-            raise NotAuthenticated("Not authenticated.")
+            raise InvalidToken()
 
         user_id = decode_refresh_token(token=refresh_token)
         user = User.objects.filter(id=user_id).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            raise NotFound("User")
 
         filter_params = {
             "user": user,
@@ -144,13 +163,9 @@ class RefreshView(APIView):
             "expire_at__gt": timezone.now(),
         }
 
-        # Check if the user is logged in
-        if not refresh_token or not user_id or not user:
-            raise NotAuthenticated("Not authenticated.")
-
         # Check if the refresh token is valid
         if not UserToken.objects.filter(**filter_params).exists():
-            raise AuthenticationFailed("Invalid refresh token.")
+            raise InvalidToken()
 
         access_token = create_access_token(user=user)
         return Response({"access_token": access_token}, status=status.HTTP_200_OK)
@@ -165,7 +180,7 @@ class LogoutView(APIView):
 
         # Check if the user is logged in
         if not refresh_token:
-            raise NotAuthenticated("Not authenticated.")
+            raise InvalidToken()
 
         UserToken.objects.filter(token=refresh_token).delete()
 
@@ -187,7 +202,7 @@ class ForgotView(APIView):
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            raise NotFound("User")
 
         token = PasswordResetTokenGenerator().make_token(user)
         UserForgot.objects.create(user=user, email=email, token=token)
@@ -196,12 +211,10 @@ class ForgotView(APIView):
         # message = f"Dear {user.first_name},\n\nTo select a new password, click on the below link:\n\n\n\n{forgot_url}"
         # send_mail_task.delay(email=email, message=message)
 
-        return Response(
-            {
-                "message": f"Check your email: {email} to reset your password. Token: {token}"
-            },
-            status=status.HTTP_200_OK,
-        )
+        response = Response()
+        response.data = {"message": "Email sent successfully."}
+        response.status_code = status.HTTP_200_OK
+        return response
 
 
 class ResetView(APIView):
@@ -214,21 +227,24 @@ class ResetView(APIView):
 
         # Check for password strength
         if len(password) < 8:
-            raise ValidationError("Password must be at least 8 characters long.")
+            raise InvalidData("Password")
 
         user_reset = UserForgot.objects.filter(token=token).first()
 
         # Check if the token is valid
         if not user_reset:
-            raise NotFound("Invalid token.")
+            raise InvalidToken()
 
         user = User.objects.filter(email=user_reset.email).first()
 
         # Check if the user exists
         if not user:
-            raise NotFound("User not found.")
+            raise NotFound("User")
 
         user.set_password(password)
         user.save()
 
-        return Response({"message": "Success"}, status=status.HTTP_200_OK)
+        response = Response()
+        response.data = {"message": "Password reset successfully."}
+        response.status_code = status.HTTP_200_OK
+        return response
