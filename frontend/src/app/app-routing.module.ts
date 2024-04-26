@@ -9,6 +9,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
+import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
 
   {path:'dboard/:userId',component:doctorDashBoard},
 
-
+  {path:'dsearch',component:DocsearchComponent},
 
 
 
@@ -50,6 +51,10 @@ const routes: Routes = [
   { path: 'swipe', loadChildren: () => import('./layout/components/swipe/swipe.module').then(m => m.SwipeModule) },
   { path: 'dashboards', loadChildren: () => import('./layout/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'tabs', loadChildren: () => import('./layout/components/tabs/tabs/tabs.module').then(m => m.TabsModule) },
+  { path: 'appointments', loadChildren: () => import('./layout/components/dashboards/pat/appointments/appointments.module').then(m => m.AppointmentsModule) },
+  { path: 'appointments', loadChildren: () => import('./layout/components/dashboards/pat/prescriptions/prescriptions.module').then(m => m.PrescriptionsModule) },
+  { path: 'appointments', loadChildren: () => import('./layout/components/dashboards/pat/medrecord/medrecord.module').then(m => m.MedrecordModule) },
+  { path: 'appointments', loadChildren: () => import('./layout/components/dashboards/pat/docsearch/docsearch.module').then(m => m.DocsearchModule) },
 ];
 
 @NgModule({
