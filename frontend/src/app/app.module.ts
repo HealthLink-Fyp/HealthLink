@@ -24,8 +24,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChatComponent } from './chat/chat.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
-import { DialogComponent } from './videocall/dialog/dialog.component';
 import { MaterialModule } from './material/material/material.module';
+import { DialogComponent } from './videocall/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { MaterialModule } from './material/material/material.module';
     ChatComponent,
     VideocallComponent,
     TranscriptionComponent,
-    DialogComponent
+    DialogComponent,
+
   ],
   imports: [
     BrowserModule,

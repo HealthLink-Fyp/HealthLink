@@ -5,6 +5,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { MediaConnection } from 'peerjs';
 import { PeerJSOption } from 'peerjs';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class CallService {
   private isCallStartedBs = new Subject<boolean>();
   public isCallStarted$ = this.isCallStartedBs.asObservable();
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private http:HttpClient) { }
 
   public initPeer(): string {
     if (!this.peer || this.peer.disconnected) {
@@ -134,4 +136,15 @@ export class CallService {
     this.peer?.disconnect();
     this.peer?.destroy();
   }
+
+  peerIdSend(peerId:any)
+  {
+    return this.http.post("www.xxx.com",peerId);
+  }
+
+  peerIdGet()
+  {
+    return this.http.get("www.xxx.com");
+  }
+
 }

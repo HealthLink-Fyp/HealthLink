@@ -12,7 +12,8 @@ import { DialogComponent,DialogData } from './dialog/dialog.component';
 })
 export class VideocallComponent implements OnInit, OnDestroy {
   public isCallStarted$: Observable<boolean>;
-  private peerId: string;
+  public peerId: string;
+  
 
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
@@ -20,6 +21,12 @@ export class VideocallComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, private callService: CallService) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
+    
+    console.log("real peer id is ",this.peerId)
+    //peeridsending to django backend for storage
+    this.callService.peerIdSend(this.peerId).subscribe((response:any)=>{
+         console.log("the peer id have been sent.",response)
+    })
   }
   
   ngOnInit(): void {

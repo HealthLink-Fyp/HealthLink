@@ -1,3 +1,4 @@
+
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,6 +9,7 @@ import { TranscribeService } from 'src/app/services/call/transcribe.service';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
+
 export class DialogComponent {
   text: string | undefined;
 
@@ -21,7 +23,10 @@ export class DialogComponent {
   this.service.init()
    }
 
+   peerFromBack:string='spider123';
+
    ngOnInit(): void {
+    this.data.peerId = this.peerFromBack; // Set the initial value of the input field to the peerId value
   }
 
   
@@ -31,7 +36,9 @@ public startService(){
 }
 
 
-  public showCopiedSnackBar() {        
+  public showCopiedSnackBar() {   
+  
+       
       this._snackBar.open('Peer ID Copied!', 'Hurrah', {
       duration: 1000,
       horizontalPosition: 'center',
@@ -45,4 +52,6 @@ export interface DialogData {
   peerId?: string;
   joinCall: boolean
 }
+
+
 
