@@ -22,9 +22,6 @@ class AutoCompleteDoctorView(generics.ListAPIView):
     def get_queryset(self):
         """
         Get the queryset for the view.
-
-        Returns:
-            QuerySet: The queryset containing the DoctorProfile objects.
         """
 
         queryset = DoctorProfile.objects.only(
@@ -35,7 +32,7 @@ class AutoCompleteDoctorView(generics.ListAPIView):
 
 class SearchDoctorView(generics.ListAPIView):
     """
-    API view to provide search functionality for DoctorProfile model.
+    API view to search for doctors based on city and specialization.
     """
 
     serializer_class = DoctorSearchSerializer
@@ -45,10 +42,7 @@ class SearchDoctorView(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Get the queryset for the view.
-
-        Returns:
-            QuerySet: The queryset containing the DoctorProfile objects.
+        Filter the Doctors based on city.
         """
 
         city = self.request.query_params.get("city", None)
@@ -81,5 +75,8 @@ class DoctorDetailView(generics.RetrieveAPIView):
     serializer_class = DoctorProfileSerializer
 
     def get_queryset(self):
+        """
+        Get the Doctor profile based on the user id in the URL.
+        """
         queryset = DoctorProfile.objects.filter(user=self.kwargs["pk"])
         return queryset

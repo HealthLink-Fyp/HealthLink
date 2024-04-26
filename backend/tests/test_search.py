@@ -7,7 +7,7 @@ from core.serializers import DoctorProfileSerializer, DoctorAutoCompleteSerializ
 class SearchTests(DoctorApiTest):
     def setUp(self):
         super().setUp()
-        self.doctor = super().create_doctor()
+        super().create_doctor()
 
     def test_autocomplete_doctor(self):
         self.url = reverse("autocomplete-doctors") + "?city=Demo"

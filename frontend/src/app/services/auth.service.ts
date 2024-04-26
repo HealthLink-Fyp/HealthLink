@@ -26,6 +26,11 @@ export class AuthService {
     return this.http.get(`${environment.api}/auth/user/`);
   }
 
+  updateUser(body:any)
+  {
+    return this.http.put(`${environment.api}/auth/user/`,body);
+  }
+
   refresh() {
     return this.http.post(
       `${environment.api}/auth/refresh/`,

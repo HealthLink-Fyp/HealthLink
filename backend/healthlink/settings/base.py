@@ -4,8 +4,6 @@
 import os
 from pathlib import Path
 
-import dj_database_url
-
 # Third party imports
 import dotenv
 
@@ -16,25 +14,12 @@ dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Secret Key
-SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
-
-# Email Settings
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# SECURITY WARNING: don't run with debug turned on in production!
+# Debug: For showing errors and debugging
 DEBUG = False
 
-# Timezones
-USE_TZ = True
-TIME_ZONE = "UTC"
+# Secret Key: For cryptographic signing or hashing
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
-# CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-
-# Quick and dirty way to enable all hosts for development
-ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -92,20 +77,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "healthlink.wsgi.application"
 
 
-# Database
-if bool(os.environ.get("DATABASE_URL")):
-    DATABASES = {
-        "default": dj_database_url.config(),
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -120,6 +91,9 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LANGUAGE_CODE = "en-us"
 

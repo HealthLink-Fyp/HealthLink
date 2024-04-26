@@ -38,12 +38,17 @@ QUALIFICATION_CHOICES = [
 ]
 
 
-STATUS_CHOICES = [
+APPOINTMENT_STATUS_CHOICES = [
     ("pending", "Pending"),
     ("confirmed", "Confirmed"),
     ("scheduled", "Scheduled"),
     ("canceled", "Canceled"),
     ("completed", "Completed"),
+]
+
+PAYMENT_CHOICES = [
+    ("pending", "Pending"),
+    ("paid", "Paid"),
 ]
 
 
