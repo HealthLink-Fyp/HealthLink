@@ -90,22 +90,3 @@ class MedicalTest(models.Model):
 
     def __str__(self):
         return self.name
-
-
-##------------- Medical Test Model --------------##
-
-
-class MedicalTest(models.Model):
-    """
-    Model to store the medical test details.
-    """
-
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    link = models.URLField()
-    lab_name = models.CharField(max_length=100)
-    image = models.URLField()
-    created = models.DateTimeField(auto_now_add=True, db_index=True)
-
-    def __str__(self):
-        return self.name
