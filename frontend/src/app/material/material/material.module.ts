@@ -18,6 +18,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -25,7 +28,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
-                      MatSnackBarModule,MatSlideToggleModule
+                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule
                       ];
 
 @NgModule({

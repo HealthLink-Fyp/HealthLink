@@ -22,6 +22,10 @@ import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChatComponent } from './chat/chat.component';
+import { VideocallComponent } from './videocall/videocall.component';
+import { TranscriptionComponent } from './videocall/transcription/transcription.component';
+import { DialogComponent } from './videocall/dialog/dialog.component';
+import { MaterialModule } from './material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { ChatComponent } from './chat/chat.component';
     PatientComponent,
     patientDashboard,
     doctorDashboard,
-    ChatComponent
+    ChatComponent,
+    VideocallComponent,
+    TranscriptionComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import { ChatComponent } from './chat/chat.component';
     CommonModule,
     FlexLayoutModule,
     AppRoutingModule,
+    MaterialModule
 
 
   ],

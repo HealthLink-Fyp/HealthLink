@@ -10,6 +10,7 @@ import { PatientComponent } from './patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
 import { ChatComponent } from './chat/chat.component';
+import { VideocallComponent } from './videocall/videocall.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path:'dboard/:userId',component:doctorDashBoard},
 
   {path:'chat',component:ChatComponent},
+
+  {path:'call',component:VideocallComponent},
 
 
 
@@ -53,6 +56,7 @@ const routes: Routes = [
   // { path: 'swipe', loadChildren: () => import('./layout/components/layout/swipe/swipe.module').then(m => m.SwipeModule) },
   { path: 'dashboard', loadChildren: () => import('./layout/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'account', loadChildren: () => import('./layout/components/tabs/tabs/tabs.module').then(m => m.TabsModule) },
+  // { path: 'appointments', loadChildren: () => import('./videocall/videocall.module').then(m => m.VideocallModule) },
 ];
 
 @NgModule({

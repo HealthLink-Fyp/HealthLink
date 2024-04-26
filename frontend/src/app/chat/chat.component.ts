@@ -12,7 +12,9 @@ export class ChatComponent {
   chatSocket: WebSocket;
 
   constructor() {
-    this.chatSocket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/public_room/`);
+    this.chatSocket = new WebSocket(`wss://organic-doodle-7v95g6qq45vwhr5wx-8000.app.github.dev/ws/chat/public_room/`);
+
+    
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
