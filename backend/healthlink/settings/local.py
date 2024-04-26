@@ -40,11 +40,21 @@ CACHES = {
 
 # Rest Framework settings
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "EXCEPTION_HANDLER": "healthlink.utils.exceptions.custom_exception_handler",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }
 
+# Spectacular settings
+SPECTACULAR_SETTINGS = {
+    "TITLE": "HealthLink API",
+    "DESCRIPTION": "API for HealthLink",
+    "VERSION": "1.0.0",
+    "SCHEMA_PATH_PREFIX": "/api/v1",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_URLCONF": "healthlink.urls",
+}
 
 # Timezone for pakistan
 TIME_ZONE = "Asia/Karachi"
