@@ -38,9 +38,11 @@
 
   
        
-   <button type="submit">Submit</button>
+   <button type="submit">{{isUpdateMode ? 'Update' : 'Submit'}}</button>
 
 
 </form>
+<button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>
+
 <button (click)="Done()">Already filled</button>
 

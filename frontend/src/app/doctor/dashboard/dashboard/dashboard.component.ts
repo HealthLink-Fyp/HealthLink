@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorService } from 'src/app/services/doctor/doctor.service';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
@@ -10,7 +10,7 @@ import { PatientService } from 'src/app/services/patient/patient.service';
 })
 export class DashboardComponent implements OnInit{
 
-  constructor(private doctorService:DoctorService,private patientService:PatientService, private route:ActivatedRoute){}
+  constructor(private doctorService:DoctorService,private patientService:PatientService, private route:ActivatedRoute,private router:Router){}
 
   doctorData:any={};
 
@@ -38,6 +38,32 @@ export class DashboardComponent implements OnInit{
     )
   }
 
- 
+  updateDoctorForm()
+  {
+    this.router.navigate(['/doctor'],{queryParams:{updateMode:true}});
+  }
+
+  updateDoctorProfile()
+  {
+    this.router.navigate(['/register'],{queryParams:{updateMode:true}});
+  }
+
+  onDeleteDoctor()
+  {
+    this.doctorService.deleteDoctor().subscribe(
+      (reponse:any)=>{
+        console.log("doctor deleted successfully",reponse)
+      }
+    )
+  }
+
+  onDeleteDoctorForm()
+  {
+    this.doctorService.delDocForm().subscribe(
+      (response:any)=>{
+        console.log("doctor form deleted successfully",response);
+      }
+    )
+  }
 
 }

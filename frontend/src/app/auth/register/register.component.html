@@ -70,5 +70,6 @@
     <label>I am A Patient</label>
   </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit">{{isUpdateMode ? 'Update' : 'Submit'}}</button>
 </form>
+<button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>

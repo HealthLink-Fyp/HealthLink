@@ -19,6 +19,34 @@ export class PatientService {
   }
 
 
+  updatePatientProfile(body:any)
+  {
+    return this.http.put(`${environment.api}/auth/profile/`,body);
+  }
+
+  
+  deletePatient()
+  {
+    return this.http.delete(`${environment.api}/auth/user/`);
+  }
+
+  delPatForm()
+  {
+    return this.http.delete(`${environment.api}/auth/profile/`);
+  }
+
+  updateAppointment(body:any,pkAppointment: any)
+  {
+    return this.http.put(`${environment.api}/appointment/${pkAppointment}/`,body);
+  }
+
+  delAppointment(pkAppointment: any)
+  {
+    return this.http.delete(`${environment.api}/appointment/${pkAppointment}/`);
+  }
+
+
+
   searchDoctors(query: string) {
     return this.http.get(
       `${environment.api}/search/doctors/autocomplete/?search=${query}`,
@@ -37,5 +65,15 @@ export class PatientService {
   makeAppointment(body:any)
   {
     return this.http.post(`${environment.api}/appointment/`,body);
+  }
+
+  getbookedAppointments()
+  {
+    return this.http.get(`${environment.api}/appointment/`)
+  }
+
+  getbookedAppointment(body:any)
+  {
+    return this.http.get(`${environment.api}/appointment/`,body);
   }
 }

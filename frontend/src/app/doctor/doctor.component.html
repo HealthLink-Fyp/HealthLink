@@ -67,7 +67,10 @@
     <input type="number" formControlName="wait_time" />
   </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit">{{isUpdateMode ? 'Update' : 'Submit'}}</button>
 
-  <button onclick="Done()">Already filled</button>
+  
 </form>
+<button (click)="Done()">Already filled</button>
+
+<button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>
