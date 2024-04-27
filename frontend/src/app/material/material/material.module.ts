@@ -22,13 +22,15 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
 const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
-                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule
+                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule
                       ];
 
 @NgModule({

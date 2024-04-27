@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@ngneat/cashew": "^4.1.0",
     "ngx-echarts": "^16.2.0",
     "ngx-skeleton-loader": "^7.0.0",
     "node-sass": "^9.0.0",

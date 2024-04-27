@@ -24,9 +24,9 @@ export class AuthComponent implements OnInit {
 
         this.amWho = res.role;
         if (this.amWho == 'doctor') {
-          this.router.navigate(['/doctor']);
+          this.router.navigate(['/dform']);
         } else {
-          this.router.navigate(['/patient']);
+          this.router.navigate(['/pform']);
         }
         AuthService.authEmitter.emit(true);
       },

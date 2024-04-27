@@ -11,6 +11,8 @@ import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashbo
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
 import { ChatComponent } from './chat/chat.component';
 import { VideocallComponent } from './videocall/videocall.component';
+import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
+
 
 
 const routes: Routes = [
@@ -32,7 +34,7 @@ const routes: Routes = [
   {path:'call',component:VideocallComponent},
 
 
-
+    {path:'pform',component:PformComponent},
 
 
   //materialui

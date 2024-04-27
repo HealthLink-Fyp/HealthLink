@@ -15,6 +15,8 @@ import { BodychartComponent } from './charts/bodychart/bodychart.component';
 import { MaterialModule } from 'src/app/material/material/material.module';
 
 import { NgxEchartsModule } from 'ngx-echarts';
+import { PformComponent } from './pat/pform/pform.component';
+
 
 
 @NgModule({
@@ -26,7 +28,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     PtabsComponent,
     DsidenavComponent,
     BodychartComponent,
-    BarchartComponent
+    BarchartComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
-  ]
+  ],
+  
 })
 export class DashboardsModule { }

@@ -9,7 +9,7 @@ import { NavComponent } from './auth/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthComponent } from './auth/auth/auth.component';
 import { ResetComponent } from './auth/auth/reset/reset.component';
@@ -26,6 +26,9 @@ import { VideocallComponent } from './videocall/videocall.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
 import { MaterialModule } from './material/material/material.module';
 import { DialogComponent } from './videocall/dialog/dialog.component';
+import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
+
+import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { DialogComponent } from './videocall/dialog/dialog.component';
     VideocallComponent,
     TranscriptionComponent,
     DialogComponent,
+    PformComponent
 
   ],
   imports: [
@@ -72,6 +76,7 @@ import { DialogComponent } from './videocall/dialog/dialog.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+ 
   ],
   bootstrap: [AppComponent],
 })

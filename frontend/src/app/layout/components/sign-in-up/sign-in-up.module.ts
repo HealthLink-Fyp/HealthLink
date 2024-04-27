@@ -6,7 +6,8 @@ import { SignInUpComponent } from './sign-in-up.component';
 
 import { MaterialModule } from 'src/app/material/material/material.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignInUpRoutingModule,
     MaterialModule,
     ReactiveFormsModule
+
   ],
   exports:[SignInUpComponent,LoginComponent]
 })

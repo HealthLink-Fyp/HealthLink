@@ -15,7 +15,10 @@ export class PatientService {
   }
 
   getPatient() {
-    return this.http.get(`${environment.api}/auth/profile/`);
+    console.log("hi i am geeting patient for u (service)");
+    return this.http.get(`${environment.api}/auth/profile/, {
+      context: withCache()
+    });`);
   }
 
 
