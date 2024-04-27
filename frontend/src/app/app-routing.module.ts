@@ -12,6 +12,9 @@ import { DashboardComponent as patientDashBoard } from './patient/dashboard/dash
 import { ChatComponent } from './chat/chat.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
+import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
+import { DformComponent } from './layout/components/dashboards/doc/dform/dform.component';
+import { TranscriptionComponent } from './videocall/transcription/transcription.component';
 
 
 
@@ -36,6 +39,11 @@ const routes: Routes = [
 
     {path:'pform',component:PformComponent},
 
+    {path:'dform',component:DformComponent},
+
+    {path:'docsearch',component:DocsearchComponent},
+
+    {path:'voice',component:TranscriptionComponent},
 
   //materialui
 

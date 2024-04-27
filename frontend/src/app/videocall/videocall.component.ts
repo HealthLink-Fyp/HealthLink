@@ -13,6 +13,10 @@ import { DialogComponent,DialogData } from './dialog/dialog.component';
 export class VideocallComponent implements OnInit, OnDestroy {
   public isCallStarted$: Observable<boolean>;
   public peerId: string;
+
+   patient=2;
+  doctor=1;
+  peer_id:string=""
   
 
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
@@ -24,9 +28,12 @@ export class VideocallComponent implements OnInit, OnDestroy {
     
     console.log("real peer id is ",this.peerId)
     //peeridsending to django backend for storage
-    this.callService.peerIdSend(this.peerId).subscribe((response:any)=>{
+    this.peer_id=this.peerId;
+
+    this.callService.peerIdSend(this.peer_id,this.patient,this.doctor).subscribe((response:any)=>{
          console.log("the peer id have been sent.",response)
     })
+    
   }
   
   ngOnInit(): void {

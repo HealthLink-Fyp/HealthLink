@@ -15,7 +15,11 @@ import { BodychartComponent } from './charts/bodychart/bodychart.component';
 import { MaterialModule } from 'src/app/material/material/material.module';
 
 import { NgxEchartsModule } from 'ngx-echarts';
-import { PformComponent } from './pat/pform/pform.component';
+
+
+import { PformComponent} from './pat/pform/pform.component';
+import { DocsearchComponent } from './pat/docsearch/docsearch.component';
+import { DformComponent } from './doc/dform/dform.component';
 
 
 
@@ -29,6 +33,8 @@ import { PformComponent } from './pat/pform/pform.component';
     DsidenavComponent,
     BodychartComponent,
     BarchartComponent,
+
+    
   ],
   imports: [
     CommonModule,
@@ -45,6 +51,6 @@ import { PformComponent } from './pat/pform/pform.component';
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
   ],
-  
+  exports:[PsidenavComponent]
 })
 export class DashboardsModule { }

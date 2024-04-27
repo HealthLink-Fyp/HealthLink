@@ -29,6 +29,10 @@ import { DialogComponent } from './videocall/dialog/dialog.component';
 import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
+import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
+import { DformComponent } from './layout/components/dashboards/doc/dform/dform.component';
+
+
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     VideocallComponent,
     TranscriptionComponent,
     DialogComponent,
-    PformComponent
+    PformComponent,
+    DocsearchComponent,
+    DformComponent
 
   ],
   imports: [
@@ -60,9 +66,9 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     CommonModule,
     FlexLayoutModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
 
-
+   
   ],
 
   
@@ -76,6 +82,8 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideHttpClient(withInterceptors([withHttpCacheInterceptor()])),
+    provideHttpCache(),
  
   ],
   bootstrap: [AppComponent],

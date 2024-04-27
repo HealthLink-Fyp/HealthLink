@@ -10,6 +10,14 @@
   .toolbar h1:nth-last-child(1) {
     margin-left: auto;
   }
+
+  .nav-link{
+    color: inherit; /* Inherit the color from its parent element */
+   text-decoration: none; /* Remove underline */
+
+  
+}
+
   
   /* targets the last h1 element inside an element with the class .
                              toolbar and pushes it to the far right side by applying margin-left: auto; */

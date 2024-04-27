@@ -51,7 +51,8 @@ export class TranscribeService {
       } else {
         this.wordConcat()
       }
-    });
+    }
+  );
   }
   stop() {
     if (this.text.split(' ').length >= 10) {

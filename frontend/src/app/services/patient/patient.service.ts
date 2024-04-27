@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
@@ -15,10 +16,10 @@ export class PatientService {
   }
 
   getPatient() {
-    console.log("hi i am geeting patient for u (service)");
-    return this.http.get(`${environment.api}/auth/profile/, {
+    console.log("hi i am getting patient for u (service)");
+    return this.http.get(`${environment.api}/auth/profile/`, {
       context: withCache()
-    });`);
+    });
   }
 
 

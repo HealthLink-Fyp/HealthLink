@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { MediaConnection } from 'peerjs';
 import { PeerJSOption } from 'peerjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environment/environment';
 
 
 @Injectable({
@@ -137,14 +138,14 @@ export class CallService {
     this.peer?.destroy();
   }
 
-  peerIdSend(peerId:any)
-  {
-    return this.http.post("www.xxx.com",peerId);
+  peerIdSend(peer_id: any, patient: any, doctor: any) {
+    const data = { peer_id, patient, doctor };
+    return this.http.post(`${environment.api}/calls/`, data);
   }
 
   peerIdGet()
   {
-    return this.http.get("www.xxx.com");
+    return this.http.get(`${environment.api}/calls/`);
   }
 
 }

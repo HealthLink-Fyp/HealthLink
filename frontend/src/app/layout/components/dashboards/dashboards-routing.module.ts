@@ -5,10 +5,12 @@ import { DashboardsComponent } from './dashboards.component';
 import { PsidenavComponent } from './pat/psidenav/psidenav.component';
 import { BodychartComponent } from './charts/bodychart/bodychart.component';
 import { BarchartComponent } from './charts/barchart/barchart.component';
+import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
 
 const routes: Routes = [
   { path: '', component: DashboardsComponent },
   {path:'patient',component:PsidenavComponent},
+  {path:'doctor',component:DsidenavComponent},
   {path:'',component:BodychartComponent},
   {path:'',component:BarchartComponent}
 ];

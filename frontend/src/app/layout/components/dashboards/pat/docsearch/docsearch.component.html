@@ -1,0 +1,60 @@
+<!-- topbar code -->
+
+<div>
+    <mat-toolbar class="toolbar" color="primary">
+      <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+      <h1 class="jello-vertical">HealthLink 360</h1>
+     
+      <h1><a class="nav-link"   routerLink="/find-doctors">Find Doctors</a></h1>
+      <h1><a class="nav-link"  routerLink="/find-doctors">Video Consult</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+    
+      
+    </mat-toolbar>
+
+  </div>   
+
+<br>
+<br>
+<br>
+
+  
+
+
+
+<!-- search.component.html -->
+
+<div class="container">
+    <!-- Left side - City selection -->
+    <div class="city">
+      <mat-form-field>
+        <mat-label><mat-icon>location_on</mat-icon>Select City</mat-label>
+        <mat-select [(ngModel)]="selectedCity">
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <!-- Right side - Search input -->
+    <div>
+      <mat-form-field class="searchBar" appearance="fill">
+        <input matInput type="text" placeholder="Search for doctors..." [(ngModel)]="searchQuery" (input)="searchDoctors()" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of searchSuggestions" [value]="suggestion">
+            {{suggestion}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  
+    <!-- Search button -->
+    <div class="searchButton">
+      <button mat-flat-button color="accent" class="larger-button" (click)="doctorsSearched()">
+        <mat-icon>search</mat-icon> Search
+      </button>
+    </div>
+  </div>
+  

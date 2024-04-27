@@ -1,3 +1,4 @@
+import { CallService } from './../../services/call/call.service';
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -17,16 +18,20 @@ export class DialogComponent {
       public dialogRef: MatDialogRef<DialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
       private _snackBar: MatSnackBar, 
-      public service : TranscribeService
+      public service : TranscribeService,
+      private CallService:CallService
   ) {
       
   this.service.init()
    }
 
-   peerFromBack:string='spider123';
+   
 
    ngOnInit(): void {
-    this.data.peerId = this.peerFromBack; // Set the initial value of the input field to the peerId value
+    this.CallService.peerIdGet().subscribe((response:any)=>{
+      this.data.peerId = response.peer_id; // Set the initial value of the input field to the peerId value
+    })
+   
   }
 
   

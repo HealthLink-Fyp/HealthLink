@@ -74,7 +74,7 @@ export class PformComponent {
 
   Done()
   {
-    this.router.navigate(['/pboard']);
+    this.router.navigate(['/dashboard/patient']);
   }
 
 }

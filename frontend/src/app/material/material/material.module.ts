@@ -24,13 +24,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
 const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
-                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule
+                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule,MatCheckboxModule
                       ];
 
 @NgModule({
