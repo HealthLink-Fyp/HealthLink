@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +13,7 @@ export class ChatComponent {
   chatSocket: WebSocket;
 
   constructor() {
-    this.chatSocket = new WebSocket(`wss://organic-doodle-7v95g6qq45vwhr5wx-8000.app.github.dev/ws/chat/public_room/`);
+    this.chatSocket = new WebSocket(`${environment.testApi}`);
 
     
 

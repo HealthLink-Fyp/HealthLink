@@ -23,7 +23,7 @@ export class TranscriptionComponent {
   }
 
   stopService(){
-    this.service.stop()
+    // this.service.stop()
   }
 
 }

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environment/environment';
 
 declare var webkitSpeechRecognition: any;
 
@@ -8,20 +10,19 @@ declare var webkitSpeechRecognition: any;
 export class TranscribeService {
 
   recognition =  new webkitSpeechRecognition();
-  isStoppedSpeechRecog = false;
   public text = '';
-  tempWords: string | undefined; // Added type annotation
+  tempWords: string | undefined;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   init() {
 
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
-    this.recognition.addEventListener('result', (e: any) => { // Added type annotation
+    this.recognition.addEventListener('result', (e: any) => {
       const transcript = Array.from(e.results)
-        .map((result: any) => result[0].transcript) // Added type annotation and fixed property access
+        .map((result: any) => result[0].transcript)
         .join('');
       this.tempWords = transcript;
       // console.log(transcript);
@@ -29,52 +30,40 @@ export class TranscribeService {
   }
 
   start() {
-    this.isStoppedSpeechRecog = false;
     this.recognition.start();
-    console.log("Speech recognition started")
+    console.log("Speech recognition started");
 
-    let silenceTimer: any; // Added type annotation
-    this.recognition.addEventListener('soundend', () => {
-      clearTimeout(silenceTimer);
-      silenceTimer = setTimeout(() => {
-        this.stop();
-      }, 5000);
-    });
-
-    this.recognition.addEventListener('end', (condition: any) => { // Added type annotation
-      if (this.isStoppedSpeechRecog) {
-        if (this.text.split(' ').length >= 10) {
-          this.sendTextToBackend();
-          this.recognition.stop();
-          console.log("1. End speech recognition.");
-        };
-      } else {
-        this.wordConcat()
-      }
+    this.recognition.addEventListener('end', (condition: any) => {
+      this.wordConcat()
+      
+      this.recognition.start(); // Restart the recognition
     }
-  );
-  }
-  stop() {
-    if (this.text.split(' ').length >= 10) {
-    this.isStoppedSpeechRecog = true;
-    this.wordConcat()
-    this.recognition.stop();
-    console.log("2. End speech recognition.")
-      this.sendTextToBackend();
-    }
+    );
   }
 
   wordConcat() {
-    this.text = this.text + ' ' + this.tempWords + '.';
-    console.log(this.tempWords);
-    this.tempWords = '';
+    if (this.tempWords) {
+      this.text = this.text + ' ' + this.tempWords + '.';
+      console.log(this.tempWords);
+      this.tempWords = '';
+      this.sendTextToBackend();
+    }
+
   }
 
   sendTextToBackend() {
-    // Implement your logic to send the 'text' variable to the backend API here
-    console.log("Sending text to backend API:", this.text);
-    this.text = ''; // Reset the 'text' variable after sending to the API
-    this.start();
-
+    if (this.text.split(' ').length >= 150) {
+      const data = {
+        transcription: this.text,
+        patient_id: 2,
+        call_id: 6
+      };
+      this.http.post(`${environment.api}/calls/transcript/`, data).subscribe((res: any) => {
+        console.log("The text is successfully sent to backend", res)
+      })
+      console.log("Sending text to backend API:", this.text);
+      this.text = ''; // Reset the 'text' variable after sending to the API
+    }
   }
-}
+  }
+   
