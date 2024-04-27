@@ -122,27 +122,27 @@ class CallTranscriptView(APIView):
         transcription = request.data.get("transcription")
 
         # Validate the data
-        self.validate_data(call_id, str, "Call ID")
-        self.validate_data(patient_id, str, "Patient ID")
+        self.validate_data(call_id, int, "Call ID")
+        self.validate_data(patient_id, int, "Patient ID")
         self.validate_data(transcription, str, "Transcription")
 
         # Patient cannot send transcription
-        if request.user.role == "patient" and hasattr(request.user, "patient"):
-            raise PatientNotAllowed("Send transcription")
+        # if request.user.role == "patient" and hasattr(request.user, "patient"):
+        #     raise PatientNotAllowed("Send transcription")
 
         # Check if the call exists
-        try:
-            call = Call.objects.get(call_id=call_id)
-        except Call.DoesNotExist:
-            raise NotFound("Call")
+        # try:
+        #     call = Call.objects.get(call_id=call_id)
+        # except Call.DoesNotExist:
+        #     raise NotFound("Call")
 
         # Check if the call ID and patient ID match
-        if not call or call.patient_id != patient_id:
-            raise InvalidData("Call ID or Patient ID")
+        # if not call or call.patient_id != patient_id:
+        #     raise InvalidData("Call ID or Patient ID")
 
         # Check if the transcription is empty
-        if call.patient_id != patient_id:
-            raise InvalidData("Provided Patient ID does not match or")
+        # if call.patient_id != patient_id:
+        #     raise InvalidData("Provided Patient ID does not match or")
 
         response = send_transcription_to_chatbot(transcription)
 
