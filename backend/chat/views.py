@@ -26,14 +26,15 @@ from rest_framework.parsers import MultiPartParser
 
 
 class CallView(APIView):
-    authentication_classes = [JWTAuthentication]
+    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         """
         Get the call details based on the user role.
         """
-        user = request.user
-        call = self.validate_and_get_call(user)
+        # user = request.user
+        # call = self.validate_and_get_call(user)
+        call = Call.objects.last()
         serializer = CallSerializer(call)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -41,18 +42,18 @@ class CallView(APIView):
         """
         Create a call based on the user role.
         """
-        user = request.user
-        peer_id = request.data.get("peer_id")
+        # user = request.user
+        # peer_id = request.data.get("peer_id")
 
-        # Validate the peer ID
-        if not peer_id or not isinstance(peer_id, str):
-            raise NotFound("Peer ID")
+        # # Validate the peer ID
+        # if not peer_id or not isinstance(peer_id, str):
+        #     raise NotFound("Peer ID")
 
-        # Patient cannot create a call
-        if user.role == "patient" and hasattr(user, "patient"):
-            raise PatientNotAllowed("Create call")
+        # # Patient cannot create a call
+        # if user.role == "patient" and hasattr(user, "patient"):
+        #     raise PatientNotAllowed("Create call")
 
-        _ = self.validate_and_get_call(user)
+        # _ = self.validate_and_get_call(user)
 
         serializer = CallSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
