@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
 
         this.amWho = res.role;
         if (this.amWho == 'doctor') {
-          this.router.navigate(['/dform']);
+          this.router.navigate(['/dashboard/dform']);
         } else {
           this.router.navigate(['/pform']);
         }

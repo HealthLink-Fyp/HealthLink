@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { withCache } from '@ngneat/cashew';
 import { environment } from 'src/environment/environment';
 
 @Injectable({

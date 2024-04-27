@@ -38,23 +38,73 @@
       </mat-form-field>
     </div>
   
-    <!-- Right side - Search input -->
-    <div>
-      <mat-form-field class="searchBar" appearance="fill">
-        <input matInput type="text" placeholder="Search for doctors..." [(ngModel)]="searchQuery" (input)="searchDoctors()" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let suggestion of searchSuggestions" [value]="suggestion">
-            {{suggestion}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-  
-    <!-- Search button -->
-    <div class="searchButton">
-      <button mat-flat-button color="accent" class="larger-button" (click)="doctorsSearched()">
-        <mat-icon>search</mat-icon> Search
-      </button>
-    </div>
-  </div>
-  
+   <!-- Right side - Search input -->
+<div>
+  <mat-form-field class="searchBar" appearance="fill">
+    <input matInput type="text" placeholder="Search for doctors..." [(ngModel)]="searchQuery" (input)="searchDoctors()" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let suggestion of searchSuggestions" [value]="suggestion">
+        {{ suggestion }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<br>
+<br>
+<br>
+
+
+
+
+
+<br>
+<br>
+<!-- Search button -->
+<div class="searchButton">
+  <button mat-flat-button color="accent" class="larger-button" (click)="doctorsSearched()">
+    <mat-icon>search</mat-icon> Search
+  </button>
+</div>
+
+
+
+
+  <div *ngIf="onClickSearchBtnBool">
+<!-- Display auto search results as cards -->
+<div *ngIf="searchResults && searchResults.length > 0" >
+  <br><br>
+  <mat-card  class="cardsearch" *ngFor="let result of searchResults">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar"></div>
+      <mat-card-title>{{ result.full_name }}</mat-card-title>
+      <mat-card-subtitle>{{ result.specialization }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>City: {{ result.city }}</p>
+      <!-- Add more details here as desired -->
+
+    
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+
+
+
+<!-- Display  after clicking on search results using Material cards -->
+<div *ngIf="afterSearchData && afterSearchData.length > 0" class="searchResultsContainer">
+  <mat-card *ngFor="let data of afterSearchData" class="searchResultCard">
+    <mat-card-content>
+      <p>Data coming from autocomplete search:</p>
+      <p>{{ data.full_name }}</p>
+      <!-- View Profile and Book Appointment buttons -->
+      <div class="button-container">
+        <button mat-button color="primary"  (click)="viewDoctor(data.user)">View Profile</button>
+        <button mat-button color="accent" (click)="onBookAppointment(data.user)">Book Appointment</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

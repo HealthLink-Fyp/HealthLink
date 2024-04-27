@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -15,6 +15,7 @@ import { PformComponent } from './layout/components/dashboards/pat/pform/pform.c
 import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
 import { DformComponent } from './layout/components/dashboards/doc/dform/dform.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
+import { AboutComponent } from './layout/components/dashboards/doc/about/about.component';
 
 
 
@@ -39,7 +40,7 @@ const routes: Routes = [
 
     {path:'pform',component:PformComponent},
 
-    {path:'dform',component:DformComponent},
+    {path:'dashboard/doctor/about/:userId',component:AboutComponent},
 
     {path:'docsearch',component:DocsearchComponent},
 

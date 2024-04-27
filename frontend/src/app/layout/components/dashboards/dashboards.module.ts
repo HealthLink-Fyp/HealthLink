@@ -20,6 +20,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { PformComponent} from './pat/pform/pform.component';
 import { DocsearchComponent } from './pat/docsearch/docsearch.component';
 import { DformComponent } from './doc/dform/dform.component';
+import { AboutComponent } from './doc/about/about.component';
+import { PappointmentComponent } from './pat/pappointment/pappointment.component';
 
 
 
@@ -33,6 +35,8 @@ import { DformComponent } from './doc/dform/dform.component';
     DsidenavComponent,
     BodychartComponent,
     BarchartComponent,
+    DformComponent,
+    PappointmentComponent,
 
     
   ],
