@@ -54,23 +54,3 @@ class MedicalTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalTest
         fields = "__all__"
-
-
-class EmotionSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField()
-
-    class Meta:
-        fields = ("image",)
-        model = None
-
-    def validate_image(self, value):
-        return value
-
-    def create(self, validated_data):
-        return validated_data
-
-    def update(self, instance, validated_data):
-        return validated_data
-
-    def save(self, **kwargs):
-        return self.validated_data

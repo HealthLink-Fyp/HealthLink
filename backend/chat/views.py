@@ -7,7 +7,8 @@ import datetime
 from chat.models import Call
 from chat.serializers import CallSerializer
 
-from llm.chat_openai import send_transcription_to_chatbot
+from ml.openai.chat import send_transcription_to_chatbot
+from ml.emotion.predictions import EmotionPredictor
 from patient.models import Appointment
 
 from healthlink.utils.exceptions import (
@@ -20,6 +21,8 @@ from healthlink.utils.exceptions import (
     FutureAppointment,
     MissedAppointment,
 )
+
+from rest_framework.parsers import MultiPartParser
 
 
 class CallView(APIView):
@@ -147,3 +150,27 @@ class CallTranscriptView(APIView):
             raise BadRequest(response["error"])
 
         return Response(response, status=status.HTTP_200_OK)
+
+
+class CallEmotionView(APIView):
+    parser_classes = (MultiPartParser,)
+    parser_classes[0].media_type = "multipart/form-data"
+    predictor = EmotionPredictor()
+
+    def post(self, request, *args, **kwargs):
+        """
+        Receive the image from the client, and send it to the emotion prediction model.
+        """
+        if "file" not in request.data:
+            raise BadRequest("Image file not found in the request")
+
+        image_file = request.data["file"]
+
+        if not image_file:
+            raise InvalidData("Image file is empty")
+
+        try:
+            emotion = self.predictor.predict(image_file.read())
+            return Response({"emotion": emotion}, status=status.HTTP_200_OK)
+        except Exception as e:
+            raise BadRequest(str(e))

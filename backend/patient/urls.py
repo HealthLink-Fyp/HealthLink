@@ -7,7 +7,6 @@ from patient.views.url_patterns import (
     record_patterns,
     medicine_patterns,
     medical_test_patterns,
-    emotion_patterns,
 )
 
 urlpatterns = [
@@ -17,5 +16,4 @@ urlpatterns = [
     path("records/", include(record_patterns)),
     path("medicines/", include(medicine_patterns)),
     path("tests/", include(medical_test_patterns)),
-    path("emotion/", include(emotion_patterns)),
 ]

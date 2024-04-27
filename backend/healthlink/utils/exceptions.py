@@ -64,7 +64,7 @@ class AlreadyExists(CustomCommonException):
 
 
 class InvalidData(CustomCommonException):
-    detail = " invalid, make sure it's valid."
+    detail = " invalid or missing. Please provide valid data."
     code = "invalid_data"
     status_code = status.HTTP_400_BAD_REQUEST
 
