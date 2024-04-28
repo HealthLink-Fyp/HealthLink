@@ -54,33 +54,3 @@ class MedicalTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalTest
         fields = "__all__"
-
-
-# const file = event.target.files[0];
-# const reader = new FileReader();
-# reader.onload = (event) => {
-#   const arrayBuffer = event.target.result;
-#   const uint8Array = new Uint8Array(arrayBuffer);
-#   // Send the uint8Array to Django
-# };
-# reader.readAsArrayBuffer(file);
-
-
-class EmotionSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField()
-
-    class Meta:
-        fields = ("image",)
-        model = None
-
-    def validate_image(self, value):
-        return value
-
-    def create(self, validated_data):
-        return validated_data
-
-    def update(self, instance, validated_data):
-        return validated_data
-
-    def save(self, **kwargs):
-        return self.validated_data

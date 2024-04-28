@@ -39,6 +39,12 @@ class CustomCommonException(APIException):
 ##------------- Common Exceptions --------------##
 
 
+class BadRequest(CustomCommonException):
+    detail = "."
+    code = "bad_request"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
 class NotFound(CustomCommonException):
     detail = " not found."
     code = "not_found"
@@ -58,9 +64,21 @@ class AlreadyExists(CustomCommonException):
 
 
 class InvalidData(CustomCommonException):
-    detail = " invalid, make sure it's valid."
+    detail = " invalid or missing. Please provide valid data."
     code = "invalid_data"
     status_code = status.HTTP_400_BAD_REQUEST
+
+
+class PatientNotAllowed(CustomCommonException):
+    default_detail = " cannot be performed by patients."
+    code = "patient_not_allowed"
+    status_code = status.HTTP_403_FORBIDDEN
+
+
+class DoctorNotAllowed(CustomCommonException):
+    default_detail = " cannot be performed by doctors."
+    code = "doctor_not_allowed"
+    status_code = status.HTTP_403_FORBIDDEN
 
 
 ##------------- User Authentication Exceptions --------------##
@@ -99,12 +117,6 @@ class AdminNotAllowed(APIException):
     status_code = status.HTTP_403_FORBIDDEN
 
 
-class DoctorNotAllowed(APIException):
-    default_detail = "Doctors are not allowed to access this feature."
-    code = "doctor_not_allowed"
-    status_code = status.HTTP_403_FORBIDDEN
-
-
 class NotHealthcareProvider(APIException):
     default_detail = "You are not a healthcare provider."
     code = "not_healthcare_provider"
@@ -127,7 +139,7 @@ class InvalidAppointment(APIException):
 
 
 class PastAppointment(APIException):
-    default_detail = "You cannot book an appointment in the past."
+    default_detail = "Appointment time is in the past."
     code = "past_appointment"
     status_code = status.HTTP_400_BAD_REQUEST
 
@@ -164,4 +176,33 @@ class InvalidAvailabilityTime(APIException):
 class InvalidAvailabilityDay(APIException):
     default_detail = "Invalid availability day, make sure it is a valid list of days."
     code = "invalid_availability_day"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+##------------- Call Exceptions --------------##
+
+
+class AppointmentNotConfirmed(APIException):
+    default_detail = "Appointment is not confirmed."
+    code = "appointment_not_confirmed"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class AppointmentNotPaid(APIException):
+    default_detail = "Appointment is not paid."
+    code = "appointment_not_paid"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class FutureAppointment(APIException):
+    default_detail = (
+        "Appointment not started yet. Please wait for the appointment time."
+    )
+    code = "future_appointment"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
+class MissedAppointment(APIException):
+    default_detail = "You missed the appointment."
+    code = "missed_appointment"
     status_code = status.HTTP_400_BAD_REQUEST
