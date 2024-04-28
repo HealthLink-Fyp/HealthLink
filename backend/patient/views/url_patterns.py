@@ -36,6 +36,6 @@ medicine_patterns = [
 ]
 
 medical_test_patterns = [
-    path("", MedicineListView.as_view(), name="medical-test"),
-    path("<int:pk>/", MedicineListView.as_view(), name="medical-test-detail"),
+    path("", MedicalTestListView.as_view(), name="medical-test"),
+    path("<int:pk>/", MedicalTestListView.as_view(), name="medical-test-detail"),
 ]

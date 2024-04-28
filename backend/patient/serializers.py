@@ -1,16 +1,16 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import Appointment, MedicalRecord, MedicineShop, MedicalTest
 
 import secrets
 
 
-class AppointmentSerializer(ModelSerializer):
+class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = "__all__"
 
 
-class MedicalRecordSerializer(ModelSerializer):
+class MedicalRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalRecord
         fields = "__all__"
@@ -44,13 +44,13 @@ class MedicalRecordSerializer(ModelSerializer):
         return super().create(validated_data)
 
 
-class MedicineShopSerializer(ModelSerializer):
+class MedicineShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicineShop
         fields = "__all__"
 
 
-class MedicalTestSerializer(ModelSerializer):
+class MedicalTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalTest
         fields = "__all__"
