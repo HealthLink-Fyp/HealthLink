@@ -10,8 +10,9 @@ import { PtabsComponent } from './ptabs/ptabs.component';
 import { PatComponent } from './pat.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
 import { MaterialModule } from 'src/app/architecture/material/material/material.module';
-import { SharechartModule } from '../../charts/barchart/sharechart/sharechart.module';
-import { BarchartComponent } from '../../charts/barchart/barchart.component';
+
+import { BarchartComponent } from './barchart/barchart.component';
+
 
 
 @NgModule({
@@ -20,8 +21,8 @@ import { BarchartComponent } from '../../charts/barchart/barchart.component';
     CommonModule,
     PatRoutingModule,
     MaterialModule,
-    SharechartModule,
-    BarchartComponent
+    BarchartComponent,
+
   ]
 })
 export class PatModule { }

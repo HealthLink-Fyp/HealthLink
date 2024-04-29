@@ -25,6 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
@@ -36,7 +37,17 @@ const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbar
                       ];
 
 @NgModule({
-  imports: [AllMaterialModules],
+  imports: [AllMaterialModules,
+
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
+  ],
   exports: [AllMaterialModules],
 })
 export class MaterialModule {}
