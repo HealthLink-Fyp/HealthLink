@@ -59,7 +59,7 @@ export class PformComponent {
   submit() {
     const method = this.isUpdateMode ? 'updatePatientProfile' : 'register';       //if update mode true then execute the 'updatPaitent' function from 'patientService' and vice versa
     this.patientService[method](this.form.getRawValue()).subscribe(
-      () => this.router.navigate(['/dashboard/patient']),
+      () => this.router.navigate(['/patient/dashboard']),
       error => console.error('Error:', error)
     );
   }
@@ -74,7 +74,7 @@ export class PformComponent {
 
   Done()
   {
-    this.router.navigate(['/dashboard2/patient']);
+    this.router.navigate(['/patient/dashboard']);
   }
 
 }

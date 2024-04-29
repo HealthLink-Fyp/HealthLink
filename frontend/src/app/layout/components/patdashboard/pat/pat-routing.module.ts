@@ -13,8 +13,8 @@ const routes: Routes = [
   {path:'',component:BodychartComponent},
   {path:'',component:BarchartComponent},
   {path:'form',component:PformComponent},
-  {path:'',component:DocsearchComponent},
-  {path:'/appointment/booking',component:PappointmentComponent}
+  {path:'docsearch',component:DocsearchComponent},
+  {path:'appointments',component:PappointmentComponent}
 ];
 
 @NgModule({
