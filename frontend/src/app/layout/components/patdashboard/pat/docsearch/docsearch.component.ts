@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { PatientService } from 'src/app/services/patient/patient.service';
+import { AuthService } from 'src/app/architecture/services/auth.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 
 @Component({
   selector: 'app-docsearch',

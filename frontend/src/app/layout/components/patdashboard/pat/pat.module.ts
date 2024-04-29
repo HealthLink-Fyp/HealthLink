@@ -9,7 +9,7 @@ import { PsidenavComponent } from './psidenav/psidenav.component';
 import { PtabsComponent } from './ptabs/ptabs.component';
 import { PatComponent } from './pat.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
-import { MaterialModule } from 'src/app/material/material/material.module';
+import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 import { SharechartModule } from '../../charts/barchart/sharechart/sharechart.module';
 import { BarchartComponent } from '../../charts/barchart/barchart.component';
 

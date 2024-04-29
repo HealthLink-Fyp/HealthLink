@@ -1,20 +1,20 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth/auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ForgotComponent } from './auth/auth/forgot/forgot.component';
-import { ResetComponent } from './auth/auth/reset/reset.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { PatientComponent } from './patient/patient.component';
-import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashboard/dashboard.component';
-import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
-import { ChatComponent } from './chat/chat.component';
-import { VideocallComponent } from './videocall/videocall.component';
+import { AuthComponent } from './architecture/auth/auth/auth.component';
+import { LoginComponent } from './architecture/auth/login/login.component';
+import { RegisterComponent } from './architecture/auth/register/register.component';
+import { ForgotComponent } from './architecture/auth/auth/forgot/forgot.component';
+import { ResetComponent } from './architecture/auth/auth/reset/reset.component';
+import { DoctorComponent } from './architecture/doctor/doctor.component';
+import { PatientComponent } from './architecture/patient/patient.component';
+import { DashboardComponent as doctorDashBoard } from './architecture/doctor/dashboard/dashboard/dashboard.component';
+import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
+import { ChatComponent } from './architecture/chat/chat.component';
+import { VideocallComponent } from './architecture/videocall/videocall.component';
 import { PformComponent } from './layout/components/patdashboard/pat/pform/pform.component';
 import { DocsearchComponent } from './layout/components/patdashboard/pat/docsearch/docsearch.component';
 import { DformComponent } from './layout/components/docdashboard/doc/dform/dform.component';
-import { TranscriptionComponent } from './videocall/transcription/transcription.component';
+import { TranscriptionComponent } from './architecture/videocall/transcription/transcription.component';
 import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
 
 

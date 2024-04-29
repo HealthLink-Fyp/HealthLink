@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranscribeService } from 'src/app/services/call/transcribe.service';
+import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 
 @Component({
   selector: 'app-transcription',

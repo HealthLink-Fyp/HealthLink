@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DoctorService } from 'src/app/services/doctor/doctor.service';
-import { PatientService } from 'src/app/services/patient/patient.service';
+import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-import { MaterialModule } from 'src/app/material/material/material.module';
+import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 
 @NgModule({
   declarations: [

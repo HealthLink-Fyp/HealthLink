@@ -3,7 +3,7 @@ import { CallService } from './../../services/call/call.service';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranscribeService } from 'src/app/services/call/transcribe.service';
+import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 
 @Component({
   selector: 'app-dialog',

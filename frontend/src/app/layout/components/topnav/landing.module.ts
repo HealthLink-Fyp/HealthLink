@@ -6,7 +6,7 @@ import { LandingComponent } from './landing.component';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MaterialModule } from 'src/app/material/material/material.module';
+import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 
 @NgModule({
   declarations: [

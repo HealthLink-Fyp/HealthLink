@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { PatientService } from 'src/app/services/patient/patient.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

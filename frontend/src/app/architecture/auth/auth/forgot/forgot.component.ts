@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ForgotService } from 'src/app/services/forgot.service';
+import { ForgotService } from 'src/app/architecture/services/forgot.service';
 
 @Component({
   selector: 'app-forgot',

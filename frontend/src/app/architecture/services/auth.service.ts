@@ -1,4 +1,4 @@
-import { environment } from './../../environment/environment';
+import { environment } from '../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 

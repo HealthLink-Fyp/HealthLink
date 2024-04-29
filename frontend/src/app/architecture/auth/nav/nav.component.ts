@@ -1,6 +1,6 @@
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/architecture/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { MaterialModule } from 'src/app/material/material/material.module';
+import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',

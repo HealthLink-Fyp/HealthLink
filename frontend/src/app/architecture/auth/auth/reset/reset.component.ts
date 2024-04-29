@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ForgotService } from 'src/app/services/forgot.service';
+import { ForgotService } from 'src/app/architecture/services/forgot.service';
 
 @Component({
   selector: 'app-reset',

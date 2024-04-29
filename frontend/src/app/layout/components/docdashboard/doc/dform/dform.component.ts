@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { DoctorService } from 'src/app/services/doctor/doctor.service';
+import { AuthService } from 'src/app/architecture/services/auth.service';
+import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import {SPECIALIZATION_CHOICES,QUALIFICATION_CHOICES,availableDays} from './doctorExtras'
 import { onChange } from './doctorExtras';
 

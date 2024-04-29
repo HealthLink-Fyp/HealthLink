@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { PatientService } from 'src/app/services/patient/patient.service';
+import { AuthService } from 'src/app/architecture/services/auth.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -5,7 +5,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 
 import {MatCardModule} from '@angular/material/card';
-import { MaterialModule } from 'src/app/material/material/material.module';
+import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 import { Lay1Component } from './landing/lay1.component';
 import { FooterComponent } from './footer/footer.component';
 
