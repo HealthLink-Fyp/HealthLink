@@ -26,12 +26,12 @@ import { VideocallComponent } from './videocall/videocall.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
 import { MaterialModule } from './material/material/material.module';
 import { DialogComponent } from './videocall/dialog/dialog.component';
-import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
+import { PformComponent } from './layout/components/patdashboard/pat/pform/pform.component';
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
-import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
-import { DformComponent } from './layout/components/dashboards/doc/dform/dform.component';
-import { AboutComponent } from './layout/components/dashboards/doc/about/about.component';
+import { DocsearchComponent } from './layout/components/patdashboard/pat/docsearch/docsearch.component';
+import { DformComponent } from './layout/components/docdashboard/doc/dform/dform.component';
+import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
 
 
 

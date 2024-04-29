@@ -11,11 +11,11 @@ import { DashboardComponent as doctorDashBoard } from './doctor/dashboard/dashbo
 import { DashboardComponent as patientDashBoard } from './patient/dashboard/dashboard/dashboard.component';
 import { ChatComponent } from './chat/chat.component';
 import { VideocallComponent } from './videocall/videocall.component';
-import { PformComponent } from './layout/components/dashboards/pat/pform/pform.component';
-import { DocsearchComponent } from './layout/components/dashboards/pat/docsearch/docsearch.component';
-import { DformComponent } from './layout/components/dashboards/doc/dform/dform.component';
+import { PformComponent } from './layout/components/patdashboard/pat/pform/pform.component';
+import { DocsearchComponent } from './layout/components/patdashboard/pat/docsearch/docsearch.component';
+import { DformComponent } from './layout/components/docdashboard/doc/dform/dform.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
-import { AboutComponent } from './layout/components/dashboards/doc/about/about.component';
+import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
 
 
 
@@ -65,7 +65,8 @@ const routes: Routes = [
   // { path: 'sign-in-up', loadChildren: () => import('./layout/components/sign-in-up/sign-in-up.module').then(m => m.SignInUpModule) },
   { path: 'stepper', loadChildren: () => import('./layout/components/stepper/stepper.module').then(m => m.StepperModule) },
   // { path: 'swipe', loadChildren: () => import('./layout/components/layout/swipe/swipe.module').then(m => m.SwipeModule) },
-  { path: 'dashboard', loadChildren: () => import('./layout/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'doctor', loadChildren: () => import('./layout/components/docdashboard/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'patient', loadChildren: () => import('./layout/components/patdashboard/pat/pat.module').then(m => m.PatModule) },
   { path: 'account', loadChildren: () => import('./layout/components/tabs/tabs/tabs.module').then(m => m.TabsModule) },
   // { path: 'appointments', loadChildren: () => import('./videocall/videocall.module').then(m => m.VideocallModule) },
 ];

@@ -4,24 +4,25 @@ import { CommonModule } from '@angular/common';
 import { DashboardsRoutingModule } from './dashboards-routing.module';
 import { DashboardsComponent } from './dashboards.component';
 import { DocComponent } from './doc/doc.component';
-import { PatComponent } from './pat/pat.component';
-import { PsidenavComponent } from './pat/psidenav/psidenav.component';
-import { PtabsComponent } from './pat/ptabs/ptabs.component';
+import { PatComponent } from '../patdashboard/pat/pat.component';
+import { PsidenavComponent } from '../patdashboard/pat/psidenav/psidenav.component';
+import { PtabsComponent } from '../patdashboard/pat/ptabs/ptabs.component';
 import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
-import { BarchartComponent } from './charts/barchart/barchart.component';
+import { BarchartComponent } from '../charts/barchart/barchart.component';
 
-import { BodychartComponent } from './charts/bodychart/bodychart.component';
+import { BodychartComponent } from '../patdashboard/pat/bodychart/bodychart.component';
 
 import { MaterialModule } from 'src/app/material/material/material.module';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
 
-import { PformComponent} from './pat/pform/pform.component';
-import { DocsearchComponent } from './pat/docsearch/docsearch.component';
+import { PformComponent} from '../patdashboard/pat/pform/pform.component';
+import { DocsearchComponent } from '../patdashboard/pat/docsearch/docsearch.component';
 import { DformComponent } from './doc/dform/dform.component';
 import { AboutComponent } from './doc/about/about.component';
-import { PappointmentComponent } from './pat/pappointment/pappointment.component';
+import { PappointmentComponent } from '../patdashboard/pat/pappointment/pappointment.component';
+import { SharechartModule } from '../charts/barchart/sharechart/sharechart.module';
 
 
 
@@ -29,14 +30,11 @@ import { PappointmentComponent } from './pat/pappointment/pappointment.component
   declarations: [
     DashboardsComponent,
     DocComponent,
-    PatComponent,
-    PsidenavComponent,
-    PtabsComponent,
     DsidenavComponent,
     BodychartComponent,
     BarchartComponent,
     DformComponent,
-    PappointmentComponent,
+
 
     
   ],
@@ -44,16 +42,10 @@ import { PappointmentComponent } from './pat/pappointment/pappointment.component
     CommonModule,
     DashboardsRoutingModule,
     MaterialModule,
-
+    SharechartModule,
+    BarchartComponent
     
-    NgxEchartsModule.forRoot({
-      /**
-       * This will import all modules from echarts.
-       * If you only need custom modules,
-       * please refer to [Custom Build] section.
-       */
-      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
-    }),
+   
   ],
   exports:[PsidenavComponent]
 })

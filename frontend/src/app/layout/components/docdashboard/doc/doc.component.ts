@@ -1,4 +1,4 @@
-import { DoctorService } from './../../../../services/doctor/doctor.service';
+import { DoctorService } from '../../../../services/doctor/doctor.service';
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/services/patient/patient.service';
 
