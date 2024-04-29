@@ -29,7 +29,6 @@ import { SharechartModule } from '../charts/barchart/sharechart/sharechart.modul
     DashboardsComponent,
     DocComponent,
     DsidenavComponent,
-    BodychartComponent,
     BarchartComponent,
     DformComponent,
 
@@ -41,7 +40,7 @@ import { SharechartModule } from '../charts/barchart/sharechart/sharechart.modul
     DashboardsRoutingModule,
     MaterialModule,
     SharechartModule,
-    BarchartComponent
+  
     
    
   ],

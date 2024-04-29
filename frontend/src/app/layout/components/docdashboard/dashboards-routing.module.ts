@@ -10,7 +10,6 @@ import { DformComponent } from './doc/dform/dform.component';
 const routes: Routes = [
   { path: '', component: DashboardsComponent },
   {path:'dashboard',component:DsidenavComponent},
-  {path:'',component:BodychartComponent},
   {path:'',component:BarchartComponent},
   {path:'form',component:DformComponent},
  

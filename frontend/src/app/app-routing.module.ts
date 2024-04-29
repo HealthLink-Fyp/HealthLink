@@ -38,11 +38,11 @@ const routes: Routes = [
   {path:'call',component:VideocallComponent},
 
 
-    {path:'pform',component:PformComponent},
+  
 
     {path:'dashboard/doctor/about/:userId',component:AboutComponent},
 
-    {path:'docsearch',component:DocsearchComponent},
+
 
     {path:'voice',component:TranscriptionComponent},
 

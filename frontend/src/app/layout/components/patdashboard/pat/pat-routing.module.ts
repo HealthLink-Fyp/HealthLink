@@ -5,6 +5,7 @@ import { BodychartComponent } from './bodychart/bodychart.component';
 import { PappointmentComponent } from './pappointment/pappointment.component';
 import { PformComponent } from './pform/pform.component';
 import { BarchartComponent } from '../../charts/barchart/barchart.component';
+import { DocsearchComponent } from './docsearch/docsearch.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'',component:BodychartComponent},
   {path:'',component:BarchartComponent},
   {path:'form',component:PformComponent},
+  {path:'',component:DocsearchComponent},
   {path:'/appointment/booking',component:PappointmentComponent}
 ];
 
