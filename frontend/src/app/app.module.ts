@@ -30,7 +30,7 @@ import { DialogComponent } from './architecture/videocall/dialog/dialog.componen
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
-import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
+import { AboutComponent } from './layout/components/3-docdashboard/doc/about/about.component';
 
 
 
