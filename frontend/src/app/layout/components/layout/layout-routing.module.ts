@@ -8,12 +8,12 @@ import { FooterComponent } from './footer/footer.component';
 import { SwipeComponent } from './swipe/swipe.component';
 
 const routes: Routes = [
-  { path: '', component: LayoutComponent },
-  {path:'landingPage',component:Lay1Component},
-  {path:'',component:CardsComponent},
-  {path:'',component:Card1Component},
-  {path:'',component:FooterComponent},
-  {path:'',component:SwipeComponent}
+  { path: 'lay1', component: LayoutComponent },
+  {path:'',component:Lay1Component},
+  {path:'cards',component:CardsComponent},
+  {path:'card1',component:Card1Component},
+  {path:'footer',component:FooterComponent},
+  {path:'swipe',component:SwipeComponent}
 ];
 
 @NgModule({

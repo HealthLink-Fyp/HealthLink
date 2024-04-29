@@ -20,7 +20,7 @@ import { AboutComponent } from './layout/components/dashboards/doc/about/about.c
 
 
 const routes: Routes = [
-  { path: '', component: AuthComponent },
+  { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgotComponent },
@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'dark', loadChildren: () => import('./layout/components/dark/dark.module').then(m => m.DarkModule) },
   // { path: 'footer', loadChildren: () => import('./layout/components/layout/footer/footer.module').then(m => m.FooterModule) },
   { path: 'topnav', loadChildren: () => import('./layout/components/topnav/landing.module').then(m => m.LandingModule) },
-  { path: 'lay', loadChildren: () => import('./layout/components/layout/layout.module').then(m => m.LayoutModule) },
+  { path: '', loadChildren: () => import('./layout/components/layout/layout.module').then(m => m.LayoutModule) },
   { path: 'list', loadChildren: () => import('./layout/components/list/list.module').then(m => m.ListModule) },
   { path: 'loaders', loadChildren: () => import('./layout/components/loaders/loaders.module').then(m => m.LoadersModule) },
   { path: 'notification', loadChildren: () => import('./layout/components/notification/notification.module').then(m => m.NotificationModule) },
