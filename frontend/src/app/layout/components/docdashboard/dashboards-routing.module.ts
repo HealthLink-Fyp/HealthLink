@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardsComponent } from './dashboards.component';
-import { BodychartComponent } from '../patdashboard/pat/bodychart/bodychart.component';
+
 import { BarchartComponent } from '../charts/barchart/barchart.component';
 import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
 import { DformComponent } from './doc/dform/dform.component';

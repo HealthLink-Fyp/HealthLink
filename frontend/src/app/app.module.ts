@@ -32,6 +32,7 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 import { DocsearchComponent } from './layout/components/patdashboard/pat/docsearch/docsearch.component';
 import { DformComponent } from './layout/components/docdashboard/doc/dform/dform.component';
 import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
+import { SharechartModule } from './layout/components/charts/barchart/sharechart/sharechart.module';
 
 
 
@@ -52,8 +53,7 @@ import { AboutComponent } from './layout/components/docdashboard/doc/about/about
     VideocallComponent,
     TranscriptionComponent,
     DialogComponent,
-    PformComponent,
-    DocsearchComponent,
+ 
     AboutComponent
 
   ],
@@ -68,6 +68,7 @@ import { AboutComponent } from './layout/components/docdashboard/doc/about/about
     FlexLayoutModule,
     AppRoutingModule,
     MaterialModule,
+    SharechartModule
 
    
   ],

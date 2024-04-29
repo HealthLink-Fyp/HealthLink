@@ -5,12 +5,10 @@ import { DashboardsRoutingModule } from './dashboards-routing.module';
 import { DashboardsComponent } from './dashboards.component';
 import { DocComponent } from './doc/doc.component';
 
-import { PsidenavComponent } from '../patdashboard/pat/psidenav/psidenav.component';
 
 import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
 import { BarchartComponent } from '../charts/barchart/barchart.component';
 
-import { BodychartComponent } from '../patdashboard/pat/bodychart/bodychart.component';
 
 import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 
@@ -21,6 +19,7 @@ import { MaterialModule } from 'src/app/architecture/material/material/material.
 import { DformComponent } from './doc/dform/dform.component';
 
 import { SharechartModule } from '../charts/barchart/sharechart/sharechart.module';
+import { DtabsComponent } from './doc/dtabs/dtabs.component';
 
 
 
@@ -31,6 +30,7 @@ import { SharechartModule } from '../charts/barchart/sharechart/sharechart.modul
     DsidenavComponent,
     BarchartComponent,
     DformComponent,
+    DtabsComponent,
 
 
     
