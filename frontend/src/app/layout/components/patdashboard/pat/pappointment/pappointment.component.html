@@ -9,10 +9,7 @@
       <div>
         <label for="start">Start:</label>
         <input type="datetime-local" [(ngModel)]="appointmentData.start">
-      </div>
-      <!-- Add other fields as needed -->
-      <button (click)="onSubmitUpdatedAppointment()">Update</button>
-    </div>
+   
     
     
     
@@ -28,9 +25,7 @@
               <button (click)="onUpdateAppointment(bookedAppoint.appointment_id,bookedAppoint.doctor)">update appointment</button>
              </p>
             
-            <p>
-              <button (click)="onDeleteAppointment(bookedAppoint.appointment_id)">delete appointment</button>
-            </p>
+           
          </div>
     
     </div>

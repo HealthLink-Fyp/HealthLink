@@ -12,16 +12,25 @@ import { DocsearchComponent } from './docsearch/docsearch.component';
 import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 
 import { BarchartComponent } from './barchart/barchart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
 @NgModule({
-  declarations: [BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent],
   imports: [
     CommonModule,
     PatRoutingModule,
     MaterialModule,
-    BarchartComponent,
+   
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts') // or import('./path-to-my-custom-echarts')
+    }),
 
   ]
 })
