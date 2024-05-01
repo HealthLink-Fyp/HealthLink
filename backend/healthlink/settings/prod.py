@@ -32,10 +32,10 @@ REST_FRAMEWORK = {
 }
 
 # Celery Configuration
-CELERY_TIMEZONE = TIME_ZONE  # noqa
-CELERY_TASK_SERIALIZER = "json"
-CELERY_ACCEPT_CONTENT = ["application/json"]
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
+# CELERY_TIMEZONE = TIME_ZONE  # noqa
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_ACCEPT_CONTENT = ["application/json"]
+# CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
 # Cache settings
 CACHES = {

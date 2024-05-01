@@ -41,10 +41,9 @@ class MedicalRecord(models.Model):
     record_id = models.AutoField(primary_key=True)
     patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
-    doctor_note = models.TextField()
-    llm_note = models.TextField()
-    prescription = models.FileField(upload_to="prescriptions/", null=True, blank=True)
-    test_result = models.FileField(upload_to="test_results/", null=True, blank=True)
+    doctor_notes = models.TextField()
+    prescription = models.JSONField(null=True, blank=True)
+    past_records = models.FileField(upload_to="past_records/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def __str__(self):
@@ -56,7 +55,7 @@ class MedicalRecord(models.Model):
 
 class MedicineShop(models.Model):
     """
-    Model to store the medicine details.
+    Model to store the medicine details of the shop.
     """
 
     medicine_id = models.AutoField(primary_key=True)
