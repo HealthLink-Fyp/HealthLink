@@ -7,7 +7,10 @@
 
 .toolbar h1 {
     margin-right: 20px;
+    
 }
+
+
 
                     /* targets the last h1 element inside an element with the class .
                            toolbar and pushes it to the far right side by applying margin-left: auto; */
@@ -15,7 +18,7 @@
 .nav-link{
     color: inherit; /* Inherit the color from its parent element */
    text-decoration: none; /* Remove underline */
-
+ 
   
 }
 

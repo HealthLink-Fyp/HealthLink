@@ -1,4 +1,4 @@
-import { CallService } from './../../services/call/call.service';
+import { CallService } from '../../../../../../architecture/services/call/call.service';
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

@@ -79,11 +79,11 @@ export class DformComponent {
     const method = this.isUpdateMode ? 'updateDoctorProfile' : 'register';   
     this.doctorService[method](this.form.getRawValue())
       .subscribe((res) => console.log(res));
-    this.router.navigate(['/dashboard/doctor']);
+    this.router.navigate(['/doctor/dashboard']);
   }
 
   Done() {
-    this.router.navigate(['/dashboard/doctor']);
+    this.router.navigate(['/doctor/dashboard']);
   }
 
   getDoctorDataFields() {

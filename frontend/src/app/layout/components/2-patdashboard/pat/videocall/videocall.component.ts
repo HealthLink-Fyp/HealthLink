@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-import { CallService } from '../services/call/call.service';
+import { CallService } from '../../../../../architecture/services/call/call.service';
 import { DialogComponent,DialogData } from './dialog/dialog.component';
 
 @Component({

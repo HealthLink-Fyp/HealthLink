@@ -10,8 +10,8 @@ import { PatientComponent } from './architecture/patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './architecture/doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
 import { ChatComponent } from './architecture/chat/chat.component';
-import { VideocallComponent } from './architecture/videocall/videocall.component';
-import { TranscriptionComponent } from './architecture/videocall/transcription/transcription.component';
+import { VideocallComponent } from './layout/components/2-patdashboard/pat/videocall/videocall.component';
+import { TranscriptionComponent } from './layout/components/2-patdashboard/pat/videocall/transcription/transcription.component';
 import { AboutComponent } from './layout/components/3-docdashboard/doc/about/about.component';
 
 
