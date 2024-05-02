@@ -95,11 +95,6 @@ export class PappointmentComponent implements OnInit {
     )
   }
 
-  onJoinAppointment()
-  {
-  this.router.navigate(['/patient/videoCall']);
-
-  }
 
   isJoinVisible(start: string, expiresAt: number): boolean {
     const appointmentTime = new Date(start);

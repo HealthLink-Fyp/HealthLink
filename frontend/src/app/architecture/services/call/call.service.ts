@@ -138,9 +138,11 @@ export class CallService {
     this.peer?.destroy();
   }
 
-  peerIdSend(peer_id: any, patient: any, doctor: any) {
-    const data = { peer_id, patient, doctor };
-    return this.http.post(`${environment.api}/calls/`, data);
+  patientId:any='';  //storing patient key due to video call component reintialization
+
+  peerIdSend(videoData:any) {
+   
+    return this.http.post(`${environment.api}/calls/`, videoData);
   }
 
   peerIdGet()

@@ -22,15 +22,11 @@ import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChatComponent } from './architecture/chat/chat.component';
-import { VideocallComponent } from './layout/components/2-patdashboard/pat/videocall/videocall.component';
-import { TranscriptionComponent } from './layout/components/2-patdashboard/pat/videocall/transcription/transcription.component';
-import { MaterialModule } from './architecture/material/material/material.module';
-import { DialogComponent } from './layout/components/2-patdashboard/pat/videocall/dialog/dialog.component';
-
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
 import { AboutComponent } from './layout/components/3-docdashboard/doc/about/about.component';
+import { MaterialModule } from './architecture/material/material/material.module';
 
 
 
@@ -49,10 +45,6 @@ import { AboutComponent } from './layout/components/3-docdashboard/doc/about/abo
     patientDashboard,
     doctorDashboard,
     ChatComponent,
-    VideocallComponent,
-    TranscriptionComponent,
-    DialogComponent,
- 
     AboutComponent
 
   ],

@@ -6,7 +6,7 @@ import { PappointmentComponent } from './pappointment/pappointment.component';
 import { PformComponent } from './pform/pform.component';
 import { BarchartComponent } from './barchart/barchart.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
-import { VideocallComponent } from './videocall/videocall.component';
+
 
 
 const routes: Routes = [
@@ -17,7 +17,6 @@ const routes: Routes = [
   {path:'docsearch',component:DocsearchComponent},
   {path:'appointments',component:PappointmentComponent},
   {path:'appointments/:doctorId',component:PappointmentComponent},
-  {path:'videoCall',component:VideocallComponent}
 ];
 
 @NgModule({

@@ -2,8 +2,9 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-import { CallService } from '../../../../../architecture/services/call/call.service';
+import { CallService } from 'src/app/architecture/services/call/call.service';
 import { DialogComponent,DialogData } from './dialog/dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-videocall',
@@ -22,15 +23,29 @@ export class VideocallComponent implements OnInit, OnDestroy {
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
 
-  constructor(public dialog: MatDialog, private callService: CallService) {
+
+  videoData: any = {
+    peer_id:'',
+    doctor:'',
+    patient:'',
+  };
+
+
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
     
     console.log("real peer id is ",this.peerId)
     //peeridsending to django backend for storage
-    this.peer_id=this.peerId;
+    this.videoData.peer_id=this.peerId;
 
-    this.callService.peerIdSend(this.peer_id,this.patient,this.doctor).subscribe((response:any)=>{
+    this.videoData.patient=this.route.snapshot.paramMap.get('patientId');
+
+    this.videoData.doctor=this.route.snapshot.paramMap.get('doctorId');
+
+    console.log("the videoData contains : ",this.videoData);
+
+    this.callService.peerIdSend(this.videoData).subscribe((response:any)=>{
          console.log("the peer id have been sent.",response)
     })
     

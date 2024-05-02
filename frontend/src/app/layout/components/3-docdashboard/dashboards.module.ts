@@ -19,6 +19,11 @@ import { MaterialModule } from 'src/app/architecture/material/material/material.
 import { DformComponent } from './doc/dform/dform.component';
 
 import { DtabsComponent } from './doc/dtabs/dtabs.component';
+import { VideocallComponent } from './videocall/videocall.component';
+import { TranscriptionComponent } from './videocall/transcription/transcription.component';
+import { DialogComponent } from './videocall/dialog/dialog.component';
+import { AidochelperComponent } from './aidochelper/aidochelper.component';
+import { DappointmentComponent } from './doc/dappointment/dappointment.component';
 
 
 
@@ -29,6 +34,12 @@ import { DtabsComponent } from './doc/dtabs/dtabs.component';
     DsidenavComponent,
     DformComponent,
     DtabsComponent,
+    VideocallComponent,
+    TranscriptionComponent,
+    DialogComponent,
+    AidochelperComponent,
+    DappointmentComponent
+
 
 
     
