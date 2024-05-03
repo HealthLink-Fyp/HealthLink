@@ -7,7 +7,7 @@ import { DocComponent } from './doc/doc.component';
 
 
 import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
-import { BarchartComponent } from '../charts/barchart/barchart.component';
+
 
 
 import { MaterialModule } from 'src/app/architecture/material/material/material.module';
@@ -18,7 +18,6 @@ import { MaterialModule } from 'src/app/architecture/material/material/material.
 
 import { DformComponent } from './doc/dform/dform.component';
 
-import { SharechartModule } from '../charts/barchart/sharechart/sharechart.module';
 import { DtabsComponent } from './doc/dtabs/dtabs.component';
 
 
@@ -28,7 +27,6 @@ import { DtabsComponent } from './doc/dtabs/dtabs.component';
     DashboardsComponent,
     DocComponent,
     DsidenavComponent,
-    BarchartComponent,
     DformComponent,
     DtabsComponent,
 
@@ -39,7 +37,6 @@ import { DtabsComponent } from './doc/dtabs/dtabs.component';
     CommonModule,
     DashboardsRoutingModule,
     MaterialModule,
-    SharechartModule,
   
     
    

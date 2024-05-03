@@ -4,7 +4,7 @@ import { PsidenavComponent } from './psidenav/psidenav.component';
 import { BodychartComponent } from './bodychart/bodychart.component';
 import { PappointmentComponent } from './pappointment/pappointment.component';
 import { PformComponent } from './pform/pform.component';
-import { BarchartComponent } from '../../charts/barchart/barchart.component';
+import { BarchartComponent } from './barchart/barchart.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
 
 

@@ -26,13 +26,12 @@ import { VideocallComponent } from './architecture/videocall/videocall.component
 import { TranscriptionComponent } from './architecture/videocall/transcription/transcription.component';
 import { MaterialModule } from './architecture/material/material/material.module';
 import { DialogComponent } from './architecture/videocall/dialog/dialog.component';
-import { PformComponent } from './layout/components/patdashboard/pat/pform/pform.component';
+
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
-import { DocsearchComponent } from './layout/components/patdashboard/pat/docsearch/docsearch.component';
-import { DformComponent } from './layout/components/docdashboard/doc/dform/dform.component';
+
 import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
-import { SharechartModule } from './layout/components/charts/barchart/sharechart/sharechart.module';
+
 
 
 
@@ -68,7 +67,7 @@ import { SharechartModule } from './layout/components/charts/barchart/sharechart
     FlexLayoutModule,
     AppRoutingModule,
     MaterialModule,
-    SharechartModule
+  
 
    
   ],
