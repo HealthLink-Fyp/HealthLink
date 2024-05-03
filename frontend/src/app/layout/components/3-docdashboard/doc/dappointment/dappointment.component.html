@@ -1,3 +1,32 @@
+<!-- topbar code -->
+
+<div>
+    <mat-toolbar class="toolbar" color="primary">
+      <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+      <h1 class="jello-vertical">HealthLink 360</h1>
+     
+      <h1><a class="nav-link"  (click)="onbookedAppointments() " routerLink="#">Show Appointments</a></h1>
+      <h1><a class="nav-link"  >Video Consult</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+    
+      
+    </mat-toolbar>
+  
+  </div>   
+  
+  <br>
+  <br>
+  <br>
+
+
+
+
+
+
+
+
+
 
 <div>
 <button mat-raised-button color="primary" class="join-button" routerLink="/doctor/videoCall" >Join</button>
@@ -17,7 +46,7 @@
       <p>{{ bookedAppoint.status }}</p>
     </div>
     <div class="actions" class="buttonsAppoint">
-      <button mat-raised-button color="primary" class="action-button" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update </button>
+
       <button mat-raised-button color="warn" class="action-button" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete </button>
       <button mat-raised-button color="primary" class="join-button" [routerLink]="['/doctor/videoCall',bookedAppoint.patient,bookedAppoint.doctor]" *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
     </div>

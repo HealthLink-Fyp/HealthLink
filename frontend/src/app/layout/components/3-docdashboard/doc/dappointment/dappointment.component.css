@@ -1,3 +1,37 @@
+/* top bar css */
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;  
+    height:50px; 
+}
+
+.toolbar h1 {
+    margin-right: 20px;
+}
+
+
+
+                    /* targets the last h1 element inside an element with the class .
+                           toolbar and pushes it to the far right side by applying margin-left: auto; */
+                        
+.nav-link{
+    color: inherit; /* Inherit the color from its parent element */
+   text-decoration: none; /* Remove underline */
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
 .join-button:hover { min-width: 50px; margin-right: 10px; font-size: smaller; -webkit-animation: heartbeat 1.5s ease-in-out infinite both; animation: heartbeat 1.5s ease-in-out infinite both; } @-webkit-keyframes heartbeat { from { -webkit-transform: scale(1); transform: scale(1); -webkit-transform-origin: center center; transform-origin: center center; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 10% { -webkit-transform: scale(.91); transform: scale(.91); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 17% { -webkit-transform: scale(.98); transform: scale(.98); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 33% { -webkit-transform: scale(.87); transform: scale(.87); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 45% { -webkit-transform: scale(1); transform: scale(1); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } } @keyframes heartbeat { from { -webkit-transform: scale(1); transform: scale(1); -webkit-transform-origin: center center; transform-origin: center center; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 10% { -webkit-transform: scale(.91); transform: scale(.91); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 17% { -webkit-transform: scale(.98); transform: scale(.98); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 33% { -webkit-transform: scale(.87); transform: scale(.87); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 45% { -webkit-transform: scale(1); transform: scale(1); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } }
 
   

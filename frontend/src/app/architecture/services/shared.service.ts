@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -7,20 +7,21 @@ import { Observable, of } from 'rxjs';
 })
 export class SharedService {
   
-  constructor( private http: HttpClient) {}
+  private response: any;
+  private responseAvailable = new EventEmitter<any>();
 
-  private keys = {
-    patientId: '',
-    doctorId: ''
-  };
+  constructor() { }
 
-  getKeys(): Observable<any> {
-    return of({ patientId: this.keys.patientId, doctorId: this.keys.doctorId });
+  setResponseData(data: any) {
+    this.response = data;
+    this.responseAvailable.emit(data);
   }
 
-  updateKeys(patientId: string, doctorId: string) {
-    this.keys.patientId = patientId;
-    this.keys.doctorId = doctorId;
+  getResponseData(): any {
+    return this.response;
   }
 
+  onResponseAvailable(): EventEmitter<any> {
+    return this.responseAvailable;
+  }
 }

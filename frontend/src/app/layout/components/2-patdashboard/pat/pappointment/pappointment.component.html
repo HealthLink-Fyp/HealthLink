@@ -66,7 +66,7 @@
     <div class="actions" class="buttonsAppoint">
       <button mat-raised-button color="primary" class="action-button" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update </button>
       <button mat-raised-button color="warn" class="action-button" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete </button>
-      <button mat-raised-button color="primary" class="join-button" [routerLink]="['/doctor/videoCall',bookedAppoint.patient,bookedAppoint.doctor]" *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
+      <button mat-raised-button color="primary" class="join-button" routerLink='/doctor/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
     </div>
   </mat-card>
   

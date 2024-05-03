@@ -34,4 +34,20 @@ export class DappointmentComponent {
       }
     );
   }
+
+  isJoinVisible(start: string, expiresAt: number): boolean {
+    const appointmentTime = new Date(start);
+    const currentTime = new Date();
+    return appointmentTime.getTime() <= currentTime.getTime() && currentTime.getTime() <= expiresAt;
+  }
+
+  
+  onDeleteAppointment(appointId:any)
+  {
+    this.doctorService.delAppointment(appointId).subscribe(
+      (response:any)=>{
+        console.log("appointment deleted succesfully",response)
+      }
+    )
+  }
 }
