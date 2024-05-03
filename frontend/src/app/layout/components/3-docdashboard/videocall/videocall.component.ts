@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 import { CallService } from 'src/app/architecture/services/call/call.service';
 import { DialogComponent,DialogData } from './dialog/dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 import { AuthService } from 'src/app/architecture/services/auth.service';
+import { SharedService } from 'src/app/architecture/services/shared.service';
 
 @Component({
   selector: 'app-videocall',
@@ -36,7 +37,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService) {
 
     this.getCurrentUserRole();
     
@@ -65,8 +66,34 @@ export class VideocallComponent implements OnInit, OnDestroy {
     this.transcribeService.data.patient_id=patientId;
   }
 
+  transResponse: any='';
+
+  fakeData = {
+    "key_points": [
+        "Patient's name: Tripura Amanda Flores",
+        "Patient reluctant to share their name",
+        "Location unknown"
+    ],
+    "likely_diagnoses": [
+      "Alzehemier 50%",
+      "Headache 40%",
+      "Hiv 30%"
+    ],
+    "followup_questions": [
+        "Can you provide your date of birth?",
+        "Are you experiencing any specific symptoms or health concerns?",
+        "Do you have any medical conditions or take any medications regularly?",
+        "Can you describe your current location or any recent travel history?"
+    ]
+  };
   
   ngOnInit(): void {
+
+    this.sharedService.onResponseAvailable().pipe(take(1)).subscribe((data) => {
+      this.transResponse = data;
+      console.log("the ai answer is coming in aidochelp", this.transResponse);
+    });
+
     this.callService.localStream$
       .pipe(filter(res => !!res))
       .subscribe(stream => {

@@ -22,9 +22,9 @@ import { DtabsComponent } from './doc/dtabs/dtabs.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { TranscriptionComponent } from './videocall/transcription/transcription.component';
 import { DialogComponent } from './videocall/dialog/dialog.component';
-import { AidochelperComponent } from './aidochelper/aidochelper.component';
 import { DappointmentComponent } from './doc/dappointment/dappointment.component';
 import { AboutComponent } from './doc/about/about.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -38,9 +38,9 @@ import { AboutComponent } from './doc/about/about.component';
     VideocallComponent,
     TranscriptionComponent,
     DialogComponent,
-    AidochelperComponent,
     DappointmentComponent,
-    AboutComponent
+    AboutComponent,
+    ChatComponent
 
 
 

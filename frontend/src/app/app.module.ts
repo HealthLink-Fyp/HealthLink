@@ -21,7 +21,7 @@ import { DashboardComponent as doctorDashboard } from './architecture/doctor/das
 import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChatComponent } from './architecture/chat/chat.component';
+import { ChatComponent } from './layout/components/3-docdashboard/chat/chat.component';
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
@@ -44,7 +44,7 @@ import { MaterialModule } from './architecture/material/material/material.module
     PatientComponent,
     patientDashboard,
     doctorDashboard,
-    ChatComponent,
+  
     
 
   ],

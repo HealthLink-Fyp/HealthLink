@@ -31,6 +31,11 @@ export class LoginComponent {
       this.authService.accessToken = res.access_token;
       AuthService.authEmitter.emit(true);
       this.router.navigate(['/auth']);
+
+
+      const token = res.access_token;
+      // Store the token in local storage
+    localStorage.setItem('token', token);
     });
   }
 }
