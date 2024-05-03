@@ -6,6 +6,7 @@ import { CallService } from 'src/app/architecture/services/call/call.service';
 import { DialogComponent,DialogData } from './dialog/dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
+import { AuthService } from 'src/app/architecture/services/auth.service';
 
 @Component({
   selector: 'app-videocall',
@@ -19,6 +20,14 @@ export class VideocallComponent implements OnInit, OnDestroy {
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
 
+  currentUserRole: string='';
+
+  getCurrentUserRole() {
+    this.authService.user().subscribe((user: any) => {
+      this.currentUserRole = user.role;
+    });
+  }
+
 
   videoData: any = {
     peer_id:'',
@@ -27,7 +36,10 @@ export class VideocallComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService) {
+
+    this.getCurrentUserRole();
+    
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
     

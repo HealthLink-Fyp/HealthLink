@@ -14,4 +14,9 @@
     </div>
   </div>
 
+<!-- Only show the following content if the user is a doctor -->
+<div *ngIf="currentUserRole === 'doctor'">
+  <!-- Additional content for doctors only -->
   <app-aidochelper></app-aidochelper>
+  <!-- Other content for doctors only -->
+</div>
