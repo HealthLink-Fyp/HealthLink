@@ -83,11 +83,7 @@ searchDoctors()
       })
     }
 
-    viewDoctor(userId:any)
-    {
-      this.router.navigate(['/dashboard/doctor/about',userId]);
-        
-    }
+  
 
    
     onBookAppointment(docId:any)

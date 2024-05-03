@@ -45,7 +45,7 @@ import { MaterialModule } from './architecture/material/material/material.module
     patientDashboard,
     doctorDashboard,
     ChatComponent,
-    AboutComponent
+    
 
   ],
   imports: [

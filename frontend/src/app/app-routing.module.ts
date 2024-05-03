@@ -33,7 +33,7 @@ const routes: Routes = [
 
 
 
-    {path:'dashboard/doctor/about/:userId',component:AboutComponent},
+  
 
 
 

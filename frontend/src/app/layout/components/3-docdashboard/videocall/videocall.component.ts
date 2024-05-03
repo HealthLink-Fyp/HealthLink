@@ -5,6 +5,7 @@ import { filter, switchMap } from 'rxjs/operators';
 import { CallService } from 'src/app/architecture/services/call/call.service';
 import { DialogComponent,DialogData } from './dialog/dialog.component';
 import { ActivatedRoute } from '@angular/router';
+import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 
 @Component({
   selector: 'app-videocall',
@@ -13,12 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VideocallComponent implements OnInit, OnDestroy {
   public isCallStarted$: Observable<boolean>;
-  public peerId: string;
-
-   patient=2;
-  doctor=1;
-  peer_id:string=""
-  
+  public peerId: string; 
 
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
@@ -31,7 +27,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
     
@@ -43,13 +39,20 @@ export class VideocallComponent implements OnInit, OnDestroy {
 
     this.videoData.doctor=this.route.snapshot.paramMap.get('doctorId');
 
-    console.log("the videoData contains : ",this.videoData);
+    console.log("information to unlock sending peer id in vid ts : ",this.videoData);
 
     this.callService.peerIdSend(this.videoData).subscribe((response:any)=>{
-         console.log("the peer id have been sent.",response)
+         console.log("the peer id have been sent vid ts.",response)
+         this.sendCallIdToTranscribeService(response.call_id,response.patient);
     })
     
   }
+
+  sendCallIdToTranscribeService(callId: any,patientId:any) {
+    this.transcribeService.data.call_id = callId;
+    this.transcribeService.data.patient_id=patientId;
+  }
+
   
   ngOnInit(): void {
     this.callService.localStream$

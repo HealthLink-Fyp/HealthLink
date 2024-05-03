@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { SharedService } from 'src/app/architecture/services/shared.service';
 
 @Component({
   selector: 'app-pappointment',
@@ -10,7 +11,7 @@ import { PatientService } from 'src/app/architecture/services/patient/patient.se
 })
 export class PappointmentComponent implements OnInit {
 
-  constructor(private currentPatient:AuthService,private authService:AuthService, private patientService:PatientService, private route:ActivatedRoute, private router:Router){}
+  constructor(private currentPatient:AuthService,private authService:AuthService, private patientService:PatientService, private route:ActivatedRoute, private router:Router, private keyService:SharedService){}
 
   ngOnInit(): void {
 
@@ -57,6 +58,7 @@ export class PappointmentComponent implements OnInit {
     this.patientService.getbookedAppointments().subscribe(
       (response: any) => {
         this.bookedAppointments = response;
+        
         // Add expiresAt property to each appointment
         this.bookedAppointments.forEach((appointment) => {
           appointment.expiresAt = new Date(appointment.start).getTime() + 30 * 60 * 1000; // 30 minutes

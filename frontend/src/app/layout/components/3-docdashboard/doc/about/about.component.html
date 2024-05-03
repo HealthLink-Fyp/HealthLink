@@ -2,30 +2,42 @@
 <div class="container">
     <div class="card">
       <img class="avatar" src="https://img.freepik.com/free-photo/portrait-3d-male-doctor_23-2151107212.jpg" alt="Doctor Avatar">
-      <div class="name">Dr. John Doe</div><br><br>
+      <div class="name">Dr. {{doctorBioData.full_name}}</div><br><br>
       <div class="info">
         <i class="material-icons info-icon">school</i>
-        <p><b>Qualification:</b>  MD, Cardiology - University Name</p>
+        <p><b>Qualification:</b>  MD, {{doctorBioData.specialization}} - {{doctorBioData.qualification}}</p>
       </div>
       <div class="info">
         <i class="material-icons info-icon">work</i>
-        <p><b>Experience:</b> 10+ years</p>
+        <p><b>Experience:</b> {{doctorBioData.experience_years}} years</p>
       </div>
       <div class="info">
         <i class="material-icons info-icon">category</i>
-        <p><b>Specialization:</b> Cardiology</p>
+        <p><b>Specialization:</b> {{doctorBioData.specialization}}</p>
       </div>
       <div class="info">
         <i class="material-icons info-icon">schedule</i>
-        <p><b>Availability:</b> Monday to Friday, 9:00 AM - 5:00 PM</p>
+        <b>Availability:</b>
+        <table class="availability-table">
+          <tbody>
+            <tr *ngFor="let day of doctorBioData.availability_data.days">
+              <td>{{ day }}</td>
+              <td>
+                {{ '2024-05-01T' + doctorBioData.availability_data.start | date: 'HH:mm a' }}
+                - {{ '2024-05-01T' + doctorBioData.availability_data.end | date: 'HH:mm a' }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      
       <div class="info">
         <i class="material-icons info-icon">attach_money</i>
-        <p><b>Consultation Fee:</b> $100 per session</p>
+        <p><b>Consultation Fee:</b> pkr {{doctorBioData.consultation_fees}} per session</p>
       </div>
       <div class="description">
         <b>Description:</b>
-        <p>Dr. John Doe is a highly experienced cardiologist with a passion for providing excellent patient care...</p>
+        <p>{{doctorBioData.summary}}</p>
       </div>
     </div>
   </div>

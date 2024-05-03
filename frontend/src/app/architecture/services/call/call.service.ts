@@ -138,7 +138,7 @@ export class CallService {
     this.peer?.destroy();
   }
 
-  patientId:any='';  //storing patient key due to video call component reintialization
+
 
   peerIdSend(videoData:any) {
    

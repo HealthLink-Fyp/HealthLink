@@ -9,17 +9,29 @@ import { DoctorService } from 'src/app/architecture/services/doctor/doctor.servi
 export class DappointmentComponent {
 
 
-  doctorKey:any='';
+
+
+  bookedAppointments:any[] = []; 
 
   constructor(private doctorService:DoctorService){}
   
   ngOnInit(): void {
-    this.doctorService.getDoctor().subscribe((res: any) => {
-      this.doctorKey = res.user;
-      console.log("coming from appointment doctor", this.doctorKey);
-      console.log("the doctor id captured in appointment is : ", this.doctorKey);
-    });
+ 
    
   }
   
+
+  onbookedAppointments() {
+    this.doctorService.getbookedAppointments().subscribe(
+      (response: any) => {
+        this.bookedAppointments = response;
+        
+        // Add expiresAt property to each appointment
+        this.bookedAppointments.forEach((appointment) => {
+          appointment.expiresAt = new Date(appointment.start).getTime() + 30 * 60 * 1000; // 30 minutes
+          // appointment.expiresAt = new Date(appointment.start).getTime() + 3 * 60 * 1000; // 3 minutes
+        });
+      }
+    );
+  }
 }

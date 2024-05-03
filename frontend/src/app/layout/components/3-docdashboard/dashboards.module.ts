@@ -24,6 +24,7 @@ import { TranscriptionComponent } from './videocall/transcription/transcription.
 import { DialogComponent } from './videocall/dialog/dialog.component';
 import { AidochelperComponent } from './aidochelper/aidochelper.component';
 import { DappointmentComponent } from './doc/dappointment/dappointment.component';
+import { AboutComponent } from './doc/about/about.component';
 
 
 
@@ -38,7 +39,8 @@ import { DappointmentComponent } from './doc/dappointment/dappointment.component
     TranscriptionComponent,
     DialogComponent,
     AidochelperComponent,
-    DappointmentComponent
+    DappointmentComponent,
+    AboutComponent
 
 
 

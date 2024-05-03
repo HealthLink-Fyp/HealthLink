@@ -7,6 +7,7 @@ import { DsidenavComponent } from './doc/dsidenav/dsidenav.component';
 import { DformComponent } from './doc/dform/dform.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { DappointmentComponent } from './doc/dappointment/dappointment.component';
+import { AboutComponent } from './doc/about/about.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'videoCall',component:VideocallComponent},
   {path:'videoCall/:patientId/:doctorId',component:VideocallComponent},
   {path:'appointments',component:DappointmentComponent},
+  {path:'about/:doctorId',component:AboutComponent},
  
 ];
 

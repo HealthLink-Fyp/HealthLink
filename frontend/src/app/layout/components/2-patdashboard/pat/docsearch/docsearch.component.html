@@ -102,7 +102,7 @@
       <p>{{ data.full_name }}</p>
       <!-- View Profile and Book Appointment buttons -->
       <div class="button-container">
-        <button mat-button color="primary"  (click)="viewDoctor(data.user)">View Profile</button>
+        <button mat-button color="primary"  [routerLink]="['/doctor/about',data.user]">View Profile</button>
         <button mat-button color="accent" [routerLink]="['/patient/appointments',data.user]">Book Appointment</button>
       </div>
     </mat-card-content>
