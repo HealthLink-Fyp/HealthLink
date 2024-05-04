@@ -1,0 +1,136 @@
+<div *ngIf="currentUserRole === 'patient'" class="container-fluid">
+    <div class="row p-2">
+      <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(false)">Start Call</button>
+      <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join Call</button>
+      <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)" (click)="endCall()">End Call</button>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <div id="video-wrapper">
+          <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
+          <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Only show the following content if the user is a doctor -->
+<div *ngIf="currentUserRole === 'doctor'">
+  <!-- Additional content for doctors only -->
+  <mat-card class="parent">
+    <mat-card-content class="child">
+  
+      <div class="header">
+
+        <!-- topbar code -->
+
+<div>
+  <mat-toolbar class="toolbar" color="primary">
+    <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+    <h1 class="jello-vertical">HealthLink 360</h1>
+   
+    <h1><a class="nav-link"   routerLink="#">Show Appointments</a></h1>
+    <h1><a class="nav-link"  >Video Consult</a></h1>
+    <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
+    <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+  
+    
+  </mat-toolbar>
+
+</div>   
+
+<br>
+
+
+      </div>
+  
+      <div class="body">
+        <div class="row">
+          <div class="col">
+            <div class="child2">
+              <h1>child2</h1>
+              
+            </div>
+          </div>
+          <div class="col">
+            <div class="middle">
+              <div class="container-fluid">
+                <div class="row p-2">
+                  <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(false)">Start Call</button>
+                  <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join Call</button>
+                  <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)" (click)="endCall()">End Call</button>
+                </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <div id="video-wrapper">
+                      <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline ></video>
+                      <video #localVideo id="local-video" autoplay playsinline [muted]=true ></video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="child2">
+  
+              <div>
+                <h2>Key Points:</h2>
+                <ul>
+                  <li *ngFor="let point of fakeData.key_points">{{ point }}</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h2>Follow-up Questions:</h2>
+                <ul>
+                  <li *ngFor="let question of fakeData.followup_questions">{{ question }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="child3">
+              <h1>child3</h1>
+              <div *ngIf="currentUserRole === 'doctor' || currentUserRole === 'patient'">
+               <app-chat></app-chat>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="child3">
+              <h1>child3</h1>
+              <div>
+                <h2>live possible causes:</h2>
+                <ul>
+                  <li *ngFor="let question of fakeData.likely_diagnoses">{{ question }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="child3">
+              <h1>child3</h1>
+              <mat-card class="custom-note-card">
+                <mat-card-header>
+                  <mat-card-title>Consultation Note</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Note</mat-label>
+                    <textarea matInput placeholder="Type your note here" class="full-width"></textarea>
+                  </mat-form-field>
+                  <button mat-raised-button color="primary">Save</button>
+                </mat-card-content>
+              </mat-card>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!-- Other content for doctors only -->
+</div>

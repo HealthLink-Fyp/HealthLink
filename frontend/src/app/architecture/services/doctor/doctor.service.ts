@@ -19,6 +19,16 @@ export class DoctorService {
     return this.http.get(`${environment.api}/auth/profile/`);
   }
 
+  getbookedAppointments()
+  {
+    return this.http.get(`${environment.api}/appointment/`)
+  }
+
+  delAppointment(pkAppointment: any)
+  {
+    return this.http.delete(`${environment.api}/appointment/${pkAppointment}/`);
+  }
+
   updateDoctorProfile(body:any)
   {
     return this.http.put(`${environment.api}/auth/profile/`,body);

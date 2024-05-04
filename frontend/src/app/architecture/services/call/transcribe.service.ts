@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environment/environment';
+import { SharedService } from '../shared.service';
 
 declare var webkitSpeechRecognition: any;
 
@@ -13,7 +14,9 @@ export class TranscribeService {
   public text = '';
   tempWords: string | undefined;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private sharedService:SharedService) {
+   
+   }
 
   init() {
 
@@ -51,15 +54,20 @@ export class TranscribeService {
 
   }
 
+   data = {
+    transcription: '',
+    patient_id: '',
+    call_id: ''
+  };
+
+
   sendTextToBackend() {
-    if (this.text.split(' ').length >= 150) {
-      const data = {
-        transcription: this.text,
-        patient_id: 2,
-        call_id: 6
-      };
-      this.http.post(`${environment.api}/calls/transcript/`, data).subscribe((res: any) => {
+    if (this.text.split(' ').length >= 20) {
+      this.data.transcription=this.text;
+      this.http.post(`${environment.api}/calls/transcript/`, this.data).subscribe((res: any) => {
+        console.log("The data before sending is here : ",this.data)
         console.log("The text is successfully sent to backend", res)
+        this.sharedService.setResponseData(res);
       })
       console.log("Sending text to backend API:", this.text);
       this.text = ''; // Reset the 'text' variable after sending to the API

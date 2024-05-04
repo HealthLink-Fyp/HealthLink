@@ -1,13 +1,27 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  constructor(http: HttpClient) {}
+  
+  private response: any;
+  private responseAvailable = new EventEmitter<any>();
 
-  amDoctor = false;
+  constructor() { }
 
-  amPatient = false;
+  setResponseData(data: any) {
+    this.response = data;
+    this.responseAvailable.emit(data);
+  }
+
+  getResponseData(): any {
+    return this.response;
+  }
+
+  onResponseAvailable(): EventEmitter<any> {
+    return this.responseAvailable;
+  }
 }

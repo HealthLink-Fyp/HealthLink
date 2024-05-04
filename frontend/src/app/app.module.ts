@@ -48,12 +48,8 @@ import { AboutComponent } from './layout/components/docdashboard/doc/about/about
     PatientComponent,
     patientDashboard,
     doctorDashboard,
-    ChatComponent,
-    VideocallComponent,
-    TranscriptionComponent,
-    DialogComponent,
- 
-    AboutComponent
+  
+    
 
   ],
   imports: [
@@ -67,6 +63,7 @@ import { AboutComponent } from './layout/components/docdashboard/doc/about/about
     FlexLayoutModule,
     AppRoutingModule,
     MaterialModule,
+  
   
 
    
