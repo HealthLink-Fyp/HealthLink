@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/architecture/services/auth.service';
 import { environment } from 'src/environment/environment';
 
 @Component({
@@ -12,7 +13,18 @@ export class ChatComponent {
 
   chatSocket: WebSocket;
 
-  constructor() {
+  currentUserRole: string='';
+
+  getCurrentUserRole() {
+    this.authService.user().subscribe((user: any) => {
+      this.currentUserRole = user.role;
+    });
+  }
+
+  constructor(private authService:AuthService) {
+
+    this.getCurrentUserRole();
+    
     const token = localStorage.getItem('token');
     this.chatSocket = new WebSocket(`${environment.testApi}${token}`);
    

@@ -5,28 +5,47 @@
       <div class="col-lg-4">
         <div class="chat-input">
           <div class="mb-3">
-            <p>first div opened</p>
+            <p>first div</p>
             <label for="textMessage" class="form-label">Enter your message:</label>
             <textarea class="form-control" id="textMessage" [(ngModel)]="newMessage" rows="3"></textarea>
           </div>
-          <p>first div closed</p>
           <button (click)="sendMessage()" class="btn btn-primary rounded-pill">Send</button>
         </div>
       </div>
   
       <!-- Chat Messages Section -->
-      <div class="col-lg-8">
-        <div class="chat-messages mt-4">
-          <div *ngFor="let message of messages" class="chat-message">
-            <p>2nd div opened</p>
-            <div class="alert alert-primary" role="alert">
-              {{ message }}
-              <button type="button" class="btn-close" aria-label="Close" (click)="removeMessage(message)"></button>
+      <div class="left-side">
+        <div>
+            <div *ngIf="currentUserRole === 'doctor'">
+                <div class="chat-messages mt-4">
+                    <div *ngFor="let message of messages" class="chat-message">
+                        <p>1st</p>
+                        <div class="alert alert-primary" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" aria-label="Close" (click)="removeMessage(message)"></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <p>2nd div closed</p>
         </div>
-      </div>
     </div>
+    
+
+    <div class="right-side">
+      <div *ngIf="currentUserRole === 'patient'">
+          <div *ngFor="let message of messages" class="chat-message">
+              <p>2nd</p>
+              <div class="alert alert-primary" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" aria-label="Close" (click)="removeMessage(message)"></button>
+              </div>
+          </div>
+      </div>
   </div>
+  
+    
+    
+  </div>
+</div>
+
   
