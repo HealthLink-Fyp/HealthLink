@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotifyService } from '../../../notification/notify.service';
 
 @Component({
   selector: 'app-pform',
@@ -14,7 +15,7 @@ export class PformComponent {
   isUpdateMode = false;     //when clicked on update button in dashboard component, it recevies
                             // a true boolean value updatemode=true which in turn sets it to true
 
-  constructor(private formBuilder: FormBuilder,private patientService:PatientService,private route:ActivatedRoute,private router:Router) {}
+  constructor(private formBuilder: FormBuilder,private patientService:PatientService,private route:ActivatedRoute,private router:Router, private notifyService:NotifyService) {}
 
   
   
@@ -57,10 +58,21 @@ export class PformComponent {
 
 
   submit() {
-    const method = this.isUpdateMode ? 'updatePatientProfile' : 'register';       //if update mode true then execute the 'updatPaitent' function from 'patientService' and vice versa
+    const method = this.isUpdateMode ? 'updatePatientProfile' : 'register';
     this.patientService[method](this.form.getRawValue()).subscribe(
-      () => this.router.navigate(['/patient/dashboard']),
-      error => console.error('Error:', error)
+      (res: any) => {
+        if(res.user!=null) {
+          this.notifyService.showSuccess('Successfully created patient profile!')
+          this.router.navigate(['/patient/dashboard']);
+        } else {
+          this.notifyService.showError('Fill out the whole Form!')
+        }
+        console.log("response for pform notify service", res);
+      },
+      error => {
+        console.error('Error:', error)
+        this.notifyService.showError(' Error! Please fill out the whole Form')
+      }
     );
   }
 

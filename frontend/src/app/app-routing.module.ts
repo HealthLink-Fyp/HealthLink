@@ -11,6 +11,7 @@ import { DashboardComponent as doctorDashBoard } from './architecture/doctor/das
 import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
 
 
+
 // my name is aitq
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'patient', loadChildren: () => import('./layout/components/2-patdashboard/pat/pat.module').then(m => m.PatModule) },
   { path: 'account', loadChildren: () => import('./layout/components/tabs/tabs/tabs.module').then(m => m.TabsModule) },
  
+ { path: 'notify', loadChildren: () => import('./layout/components/notification/notification.module').then(m => m.NotificationModule) },
 ];
 
 @NgModule({

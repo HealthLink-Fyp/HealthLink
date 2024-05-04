@@ -12,7 +12,9 @@ export class NotifyService {
   {
     this.snackBar.open(message,'close',{
       duration:60000,
-      panelClass:['mdc-snackbar__surface','success']
+      panelClass:['mdc-snackbar__surface','success'],
+      verticalPosition: 'top', // Add this line
+      horizontalPosition: 'end', // Set to 'end' to align right
     })
   }
 
@@ -20,7 +22,9 @@ export class NotifyService {
   {
     this.snackBar.open(message,'close',{
       duration:60000,
-      panelClass:['mdc-snackbar__surface','error']
+      panelClass:['mdc-snackbar__surface','error'],
+      verticalPosition: 'top', // Add this line
+      horizontalPosition: 'end', // Set to 'end' to align right
     })
   }
 
@@ -28,7 +32,9 @@ export class NotifyService {
   {
     this.snackBar.open(message,'close',{
       duration:60000,
-      panelClass:['mdc-snackbar__surface','warning']
+      panelClass:['mdc-snackbar__surface','warning'],
+      verticalPosition: 'top', // Add this line
+      horizontalPosition: 'end', // Set to 'end' to align right
     })
   }
 
@@ -36,7 +42,9 @@ export class NotifyService {
   {
     this.snackBar.open(message,'close',{
       duration:60000,
-      panelClass:['mdc-snackbar__surface','pending']
+      panelClass:['mdc-snackbar__surface','pending'],
+      verticalPosition: 'top', // Add this line
+      horizontalPosition: 'end', // Set to 'end' to align right
     })
   }
 }

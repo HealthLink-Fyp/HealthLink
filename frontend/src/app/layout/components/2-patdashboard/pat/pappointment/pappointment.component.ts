@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
+import { NotifyService } from '../../../notification/notify.service';
 
 @Component({
   selector: 'app-pappointment',
@@ -11,7 +12,7 @@ import { SharedService } from 'src/app/architecture/services/shared.service';
 })
 export class PappointmentComponent implements OnInit {
 
-  constructor(private currentPatient:AuthService,private authService:AuthService, private patientService:PatientService, private route:ActivatedRoute, private router:Router, private keyService:SharedService){}
+  constructor(private currentPatient:AuthService,private authService:AuthService, private patientService:PatientService, private route:ActivatedRoute, private router:Router, private keyService:SharedService, private notifyService:NotifyService){}
 
   ngOnInit(): void {
 
@@ -49,8 +50,13 @@ export class PappointmentComponent implements OnInit {
   {
 
     this.patientService.makeAppointment(this.appointmentData).subscribe((response:any)=>{
-      console.log(response);
-    })
+      console.log("appointment book boi",response);
+      this.notifyService.showSuccess('Appointment Booked Successfully!'); // added showSuccess
+    }, error => {
+      console.error("appointment error boi",error);
+      this.notifyService.showError('Error! Please Fill Out Form.'); // added showError
+    });
+  
  
   }
 

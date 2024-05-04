@@ -7,6 +7,7 @@ import { SignInUpComponent } from './sign-in-up.component';
 import { MaterialModule } from 'src/app/architecture/material/material/material.module';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotificationModule } from '../notification/notification.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SignInUpRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotificationModule
 
   ],
   exports:[SignInUpComponent,LoginComponent]

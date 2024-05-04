@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
+import { NotifyService } from '../notification/notify.service';
 
 @Component({
   selector: 'app-sign-in-up',
@@ -22,7 +23,8 @@ export class SignInUpComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private notifyService:NotifyService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,7 @@ export class SignInUpComponent {
     const method = this.isUpdateMode ? 'updateUser' : 'register';  
     this.authService[method](this.form.getRawValue())
       .subscribe(() => this.router.navigate(['/account/login']));
+      this.notifyService.showSuccess('Well Done, the account has been created !');
   }
 
   getUserDataFields() {

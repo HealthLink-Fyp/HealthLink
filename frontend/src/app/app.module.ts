@@ -27,6 +27,7 @@ import { MaterialModule } from './architecture/material/material/material.module
 
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -46,6 +47,8 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     PatientComponent,
     patientDashboard,
     doctorDashboard,
+
+  
   
     
 
@@ -61,7 +64,7 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     FlexLayoutModule,
     AppRoutingModule,
     MaterialModule,
-  
+   MatSnackBarModule
   
 
    
