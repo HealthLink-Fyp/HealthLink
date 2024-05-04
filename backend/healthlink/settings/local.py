@@ -12,14 +12,14 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = ["*"]
 
 # URLs for frontend and backend
-if os.environ.get("CODESPACES") == "true":  # noqa
-    CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa
-    CODESPACE_DOMAIN = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "")  # noqa
-    BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_DOMAIN}"
-    FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_DOMAIN}"
-else:
-    BACKEND_URL = "http://localhost:8000"
-    FRONTEND_URL = "http://localhost:4200"
+# if os.environ.get("CODESPACES") == "true":  # noqa
+#     CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa
+#     CODESPACE_DOMAIN = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN", "")  # noqa
+#     BACKEND_URL = f"https://{CODESPACE_NAME}-8000.{CODESPACE_DOMAIN}"
+#     FRONTEND_URL = f"https://{CODESPACE_NAME}-4200.{CODESPACE_DOMAIN}"
+# else:
+#     BACKEND_URL = "http://localhost:8000"
+#     FRONTEND_URL = "http://localhost:4200"
 
 # Variables
 JWT_REFRESH_SECRET = "secret"

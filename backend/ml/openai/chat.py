@@ -13,10 +13,14 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
     anonymizer = get_fake_anonymizer()
     prompt = get_prompt()
 
+    model_kwargs = {
+        "response_format": {"type": "json_object"},
+    }
+
     chatopenai = ChatOpenAI(
         temperature=0.5,
-        model="gpt-3.5-turbo-0125",
-        response_format={"type": "json_object"},
+        model_name="gpt-3.5-turbo-0125",
+        model_kwargs=model_kwargs,
     )
 
     chain = {"anonymized_text": anonymizer.anonymize} | prompt | chatopenai
