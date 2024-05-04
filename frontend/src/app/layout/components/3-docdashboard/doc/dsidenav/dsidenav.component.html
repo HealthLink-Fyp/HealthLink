@@ -1,0 +1,64 @@
+<div>
+    <mat-toolbar class="toolbar" color="primary">
+      <h1><button (click)="drawer.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+      <h1 >HealthLink 360</h1>
+     
+      <h1><a class="nav-link"   routerLink="#">Find Doctors</a></h1>
+      <h1><a class="nav-link"  routerLink="/doctor/videoCall">Video Consult</a></h1>
+      <h1><a class="nav-link" routerLink="#">Medicines</a></h1>
+      <h1><a class="nav-link" routerLink="#">Lab Tests</a></h1>
+      
+      <h1><div class="whole">
+        <div class="notifications">
+            <mat-icon style=" position: relative;left: -8px;top: 14px;">notifications_active</mat-icon>
+        </div>
+      <div class="profile">
+        <h2 class="pname">Dr . {{doctorData.full_name}}</h2>
+        <img src="https://cdn.openart.ai/stable_diffusion/554ba8635f8930a93702f1f8ace22de9c8a1dbed_2000x2000.webp" alt="Avatar" class="avatar">
+      </div>
+    </div></h1>
+      
+      
+    </mat-toolbar>
+  
+  </div>
+  
+  
+  
+  
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+        <mat-list-item>
+            <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="/doctor/appointments" mat-button><mat-icon>assignment</mat-icon> Appointments</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="slider" mat-button><mat-icon>receipt</mat-icon> Prescriptions</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="table" mat-button><mat-icon>restore_page</mat-icon> Medical Record</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button><mat-icon> attach_money</mat-icon> Billing</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button><mat-icon> chat</mat-icon> Chat</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button><mat-icon>settings</mat-icon> Settings</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button routerLink="/" (click)="logout()"><mat-icon>power_settings_new</mat-icon> Logout</button>
+        </mat-list-item>
+    </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="bodie">
+             <app-doc></app-doc>
+         
+            </div>
+    </mat-drawer-content>
+  </mat-drawer-container>

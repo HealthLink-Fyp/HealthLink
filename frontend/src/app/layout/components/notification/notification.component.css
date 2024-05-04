@@ -1,0 +1,35 @@
+
+  
+  .success {
+ 
+    .mdc-snackbar__surface {
+      background-color: green !important;
+  }
+  }
+  
+  .error {
+    .mdc-snackbar__surface {
+      background-color:#EF403D !important;
+  }
+}
+
+  .warning
+  {
+    .mdc-snackbar__surface {
+      background-color:#FFD557 !important;
+      
+  }
+  }
+
+  .pending
+  {
+    .mdc-snackbar__surface{
+      background-color: #ACDAE2 !important;
+    }
+  }
+
+  
+  
+ 
+
+  

@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="bounce-in-left">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Patient Form</mat-card-title>
+        <mat-card-subtitle>Fill out patient details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="form" (submit)="submit()">
+          <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput type="number" formControlName="age" placeholder="Please tell us your age">
+          </mat-form-field>
+
+          <mat-radio-group formControlName="sex">
+            <mat-label>Select your sex</mat-label>
+            <mat-radio-button value="true">Male</mat-radio-button>
+            <mat-radio-button value="false">Female</mat-radio-button>
+          </mat-radio-group>
+
+          <mat-form-field>
+            <mat-label>Blood Group</mat-label>
+            <input matInput type="text" formControlName="blood_group" placeholder="Please tell us your blood group">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Weight</mat-label>
+            <input matInput type="number" formControlName="weight" placeholder="Please tell us your weight">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Height</mat-label>
+            <input matInput type="number" formControlName="height" placeholder="Please tell us your height">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Maximum BMI</mat-label>
+            <input matInput type="number" formControlName="bmi" placeholder="Please tell us your maximum BMI">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        </form>
+
+        <button *ngIf="isUpdateMode" mat-button (click)="toggleUpdateMode()">Cancel</button>
+        <button mat-button (click)="Done()">Already filled</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

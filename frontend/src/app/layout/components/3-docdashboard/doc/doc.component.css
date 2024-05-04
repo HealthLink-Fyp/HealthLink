@@ -1,0 +1,153 @@
+.welcomediv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.wcard {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(242, 244, 249);
+    border-radius: 10px;
+    box-shadow: rgba(183, 192, 206, 0.2) 0px 0px 10px 0px;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+    margin: 21px 21px 10px;
+
+}
+
+.wimage {
+    width: 100% !important;
+}
+
+.wname {
+    color: #2196f3;
+    font-size: 25px;
+    font-weight: 500;
+    grid-area: auto;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    padding: 4px 0px 0px;
+}
+
+
+
+
+.bcrumb {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    Color: rgb(68, 68, 68);
+    font-size: 20px;
+    position: relative;
+    left: 6px;
+    top: 6px;
+
+}
+
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 64px;
+    top: 20px;
+
+}
+
+.metricCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    margin:30px;
+
+}
+
+.metric>.mcard {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(242, 244, 249);
+    border-radius: 10px;
+    box-shadow: rgba(183, 192, 206, 0.2) 0px 0px 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  
+    
+
+}
+
+.mname {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: rgb(33, 37, 41);
+    font-size: 16px;
+    line-height: 28px;
+    position: relative;
+    left: 59px;
+    top: 1px;
+}
+
+.mscore {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(76, 175, 80);
+    font-size: 16px;
+    line-height: 28px;
+    position: relative;
+    left: 63px;
+    top: 4px;
+}
+
+.mstat {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(33, 37, 41);
+    font-size: 12px;
+    line-height: 20px;
+    position: relative;
+    left: -34px;
+    top: 11px;
+}
+
+.mimage {
+    max-width: 100%;
+    /* Make the image responsive */
+    height: 80px;
+    /* Maintain aspect ratio */
+    position: relative;
+    left: 12px;
+    top: -16px;
+
+}
+
+/* visual metrices */
+
+.vmetrices
+{
+    display:flex;
+    flex-direction: row;
+    margin-top: 80px;
+    margin-bottom:80px;
+}
+
+.barparent{
+    height: 350px;
+    width: 800px;
+    }
+
+
+.barchart
+{
+   
+        height: 100vh;
+        position: relative;
+        
+}
+

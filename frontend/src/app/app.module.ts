@@ -3,21 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { NavComponent } from './auth/nav/nav.component';
+import { LoginComponent } from './architecture/auth/login/login.component';
+import { RegisterComponent } from './architecture/auth/register/register.component';
+import { NavComponent } from './architecture/auth/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { AuthComponent } from './auth/auth/auth.component';
-import { ResetComponent } from './auth/auth/reset/reset.component';
-import { ForgotComponent } from './auth/auth/forgot/forgot.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { PatientComponent } from './patient/patient.component';
-import { DashboardComponent as patientDashboard } from './patient/dashboard/dashboard/dashboard.component';
-import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashboard/dashboard.component';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { AuthInterceptor } from './architecture/interceptors/auth.interceptor';
+import { AuthComponent } from './architecture/auth/auth/auth.component';
+import { ResetComponent } from './architecture/auth/auth/reset/reset.component';
+import { ForgotComponent } from './architecture/auth/auth/forgot/forgot.component';
+import { DoctorComponent } from './architecture/doctor/doctor.component';
+import { PatientComponent } from './architecture/patient/patient.component';
+import { DashboardComponent as patientDashboard } from './architecture/patient/dashboard/dashboard/dashboard.component';
+import { DashboardComponent as doctorDashboard } from './architecture/doctor/dashboard/dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { MaterialModule } from './architecture/material/material/material.module';
+
+
+
+import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -31,24 +45,42 @@ import { DashboardComponent as doctorDashboard } from './doctor/dashboard/dashbo
     DoctorComponent,
     PatientComponent,
     patientDashboard,
-    doctorDashboard
+    doctorDashboard,
+  
+    
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     RouterOutlet,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    FlexLayoutModule,
+    AppRoutingModule,
+    MaterialModule,
+  
+  
 
+   
   ],
+
+  
   providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {displayDefaultIndicatorType: false},
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideHttpClient(withInterceptors([withHttpCacheInterceptor()])),
+    provideHttpCache(),
+ 
   ],
   bootstrap: [AppComponent],
 })
