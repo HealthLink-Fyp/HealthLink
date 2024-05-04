@@ -44,7 +44,7 @@ make_port_public() {
 
 check_port
 start_server
-make_port_public
+# make_port_public
 
 clear
 
