@@ -1,0 +1,92 @@
+<select [(ngModel)]="selectedCity">
+  <option>Select city</option>
+  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+</select>
+
+
+<div>
+    <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
+    <button (click)="doctorsSearched()">Search</button>
+    <div *ngIf="searchResults && searchResults.length > 0">
+      <ul>
+        <li *ngFor="let result of searchResults">
+          <!-- Display search results as desired -->
+          {{ result.full_name }} - {{ result.city }} - {{ result.specialization }}
+        </li>
+      </ul>
+    </div>
+    
+    </div>
+
+    <div>
+      <h1>User ID: {{ patientData.user }}</h1>
+      <p>Age: {{ patientData.age }}</p>
+      <p>Sex: {{ patientData.sex }}</p>
+    
+      <!-- Display other properties -->
+  </div>
+
+<div *ngIf="afterSearchData && afterSearchData.length > 0">
+  <div *ngFor="let data of afterSearchData  ">
+    <p>data coming from complete search</p>
+    <p>{{data.full_name}}</p>
+      <button (click)="viewDoctor(data.user)">view Profile</button>
+      <button (click)="onAppointment(data.user)">Book Appointment</button>
+  </div>
+</div>
+
+
+<div *ngIf="onbookAppointment">
+<label>For appointment booking : </label><br>
+  <label for="start">Start:</label>
+  <input type="datetime-local"  [(ngModel)]="appointmentData.start">
+</div>
+
+<div *ngIf="onupdateAppointment">
+  <h1>Update appointment:</h1>
+  <div>
+    <label for="start">Start:</label>
+    <input type="datetime-local" [(ngModel)]="appointmentData.start">
+  </div>
+  <!-- Add other fields as needed -->
+  <button (click)="onSubmitUpdatedAppointment()">Update</button>
+</div>
+
+
+
+
+
+<div>
+     <h1>Your booked apointment is </h1>
+     <div *ngFor="let bookedAppoint of bookedAppointments">
+         <p>{{bookedAppoint.start}}</p>
+         <p>{{bookedAppoint.end}}</p>
+         <p>{{bookedAppoint.status}}</p>
+         <p>
+          <button (click)="onUpdateAppointment(bookedAppoint.appointment_id,bookedAppoint.doctor)">update appointment</button>
+         </p>
+        
+        <p>
+          <button (click)="onDeleteAppointment(bookedAppoint.appointment_id)">delete appointment</button>
+        </p>
+     </div>
+
+</div>
+
+
+<div>
+  <button (click)="updatePatientProfile()">Update patient personal info</button>
+</div>
+
+<div>
+  <button (click)="updatePatientForm()">Update patient form</button>
+</div>
+
+<div>
+  <button (click)="onDeletePatient()">delete patient</button>
+</div>
+
+<div>
+  <button (click)="onDeletePatientForm()">delete patient form</button>
+</div>
+

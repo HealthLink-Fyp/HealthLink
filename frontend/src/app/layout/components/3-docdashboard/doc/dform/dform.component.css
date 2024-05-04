@@ -1,0 +1,53 @@
+.container {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+    background-image:url('https://images6.alphacoders.com/379/379570.png');
+    background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
+    background-size: cover; /* Optional: scale the background image to cover the entire element */
+   
+  }
+  
+  .card {
+    width: 400px;
+    margin-top: 20px;
+      margin-bottom: 20px;
+      box-shadow: 
+      1px 20px 4px rgba(0, 0, 0, 0.1),      /* Inner shadow */
+       9px 16px 6px rgba(0, 0, 0, 0.15),     /* Darker shadow with a bit more spread */
+        0px 20px 16px rgba(0, 0, 0, 0.2);     /* Darkest shadow with more spread */
+        transition: transform 0.3s ease; /* Add transition for smooth effect */
+        
+        background-image: url('https://img.freepik.com/free-vector/simple-blue-blank-background-vector-business_53876-169282.jpg');
+        background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
+        background-size: cover; /* Optional: scale the background image to cover the entire element */
+  }
+  
+  mat-form-field {    
+     width:300px;
+     display: flex;
+     margin-left:30px;
+  }
+  
+  
+  
+  button {
+    width: 100%;
+   
+  }
+  
+  .mat-mdc-card-title
+  {
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    
+  }
+  
+  /* animations
+  
+  for sing up card */
+  
+  .bounce-in-left{-webkit-animation:bounce-in-left 1.1s both;animation:bounce-in-left 1.1s both}
+  
+   @-webkit-keyframes bounce-in-left{0%{-webkit-transform:translateX(-600px);transform:translateX(-600px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}38%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}55%{-webkit-transform:translateX(-68px);transform:translateX(-68px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}72%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}81%{-webkit-transform:translateX(-28px);transform:translateX(-28px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}90%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}95%{-webkit-transform:translateX(-8px);transform:translateX(-8px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}100%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}@keyframes bounce-in-left{0%{-webkit-transform:translateX(-600px);transform:translateX(-600px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}38%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}55%{-webkit-transform:translateX(-68px);transform:translateX(-68px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}72%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}81%{-webkit-transform:translateX(-28px);transform:translateX(-28px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}90%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}95%{-webkit-transform:translateX(-8px);transform:translateX(-8px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}100%{-webkit-transform:translateX(0);transform:translateX(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}

@@ -1,0 +1,84 @@
+/* top bar css */
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;  
+    height:50px; 
+}
+
+.toolbar h1 {
+    margin-right: 20px;
+}
+
+
+
+                    /* targets the last h1 element inside an element with the class .
+                           toolbar and pushes it to the far right side by applying margin-left: auto; */
+                        
+.nav-link{
+    color: inherit; /* Inherit the color from its parent element */
+   text-decoration: none; /* Remove underline */
+
+  
+}
+
+
+
+
+/* appointment compommet css */
+
+div.booking.ng-star-inserted {
+	bottom: -40px;
+	display: flex;
+	flex-direction: column;
+	left: -580px;
+	position: relative;
+	right: 523px;
+	top: -48px;
+	transform: matrix(1, 0, 0, 1, 992, 0);
+    height:300px;
+    width:500px;
+}
+
+.appointment-card {
+  
+	background-color: #FFFFFF;
+	border-radius: 4px;
+	bottom: 196px;
+	box-shadow: rgba(0, 0, 0, 0.22) 6px 7px 3px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	left: 406px;
+	margin: 0px 0px 20px;
+	padding: 20px;
+	position: relative;
+	right: -406px;
+	top: -196px;
+	transform: matrix(1, 0, 0, 1, 0, -2.66665);
+    width:400px;
+
+  }
+
+  .buttonsAppoint
+  {
+    display:flex;
+    flex-direction: row;
+  }
+  
+   
+  .action-button {
+    min-width: 100px; /* Increase button size */
+    margin-right: 10px;
+    font-size: smaller;
+  }
+
+  .join-button:hover { min-width: 50px; margin-right: 10px; font-size: smaller; -webkit-animation: heartbeat 1.5s ease-in-out infinite both; animation: heartbeat 1.5s ease-in-out infinite both; } @-webkit-keyframes heartbeat { from { -webkit-transform: scale(1); transform: scale(1); -webkit-transform-origin: center center; transform-origin: center center; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 10% { -webkit-transform: scale(.91); transform: scale(.91); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 17% { -webkit-transform: scale(.98); transform: scale(.98); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 33% { -webkit-transform: scale(.87); transform: scale(.87); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 45% { -webkit-transform: scale(1); transform: scale(1); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } } @keyframes heartbeat { from { -webkit-transform: scale(1); transform: scale(1); -webkit-transform-origin: center center; transform-origin: center center; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 10% { -webkit-transform: scale(.91); transform: scale(.91); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 17% { -webkit-transform: scale(.98); transform: scale(.98); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } 33% { -webkit-transform: scale(.87); transform: scale(.87); -webkit-animation-timing-function: ease-in; animation-timing-function: ease-in; } 45% { -webkit-transform: scale(1); transform: scale(1); -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; } }
+
+  
+  
+
+
+    
+
+

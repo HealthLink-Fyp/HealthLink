@@ -1,0 +1,19 @@
+<div class="slider">
+    <div class="slides" [style.transform]="'translateX(' + slideIndex * -100 + '%)'">
+        <div *ngFor="let image of images" class="slide" >
+            <img [src]="image" alt="Slide">
+        </div>
+    </div>
+</div>
+
+<!-- translateX(): This is part of the CSS transform property. It's used to move an element horizontally 
+    along the X-axis.In this context, it's setting up a horizontal translation for our slider.
+
+slideIndex * -100: The slideIndex keeps track of which slide we're currently viewing. Multiplying it
+by -100 means each slide is moved to the left by 100% of its width. So, if the
+slideIndex is 0, the first slide remains in its original position (0% shifted), but if
+slideIndex is 1, the deck of slides shifts left by 100%, revealing the next slide.
+
+%: This represents a percentage of the container's width. It's like saying, "Shift the slides by a
+certain percentage of the container's width." In our case, it's the width of the slider component where
+the slides are contained. -->

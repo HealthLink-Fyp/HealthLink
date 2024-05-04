@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Call Info</h1>
+<div mat-dialog-content>
+  <mat-form-field >
+    <mat-label>{{ data.joinCall ? 'Meeting started' : 'Patient Notified' }}</mat-label>
+    <input [ngModel]="data.peerId" (ngModelChange)="data.peerId=$event" [disabled]="!data.joinCall" matInput class="hidden-input">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="data.peerId" (click)="startService()">Ok</button>
+</div>

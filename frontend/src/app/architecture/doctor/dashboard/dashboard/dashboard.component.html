@@ -1,0 +1,27 @@
+<div>
+    <h1>Hi ! welcome to the doctor dashboard</h1>
+    <p>Doctor name :{{doctorData.full_name}}</p>
+
+</div>
+
+<div >
+    <p>data for patient : </p>
+    <p>Hi i am doctor : {{doctorProfileData.full_name}}</p>
+
+</div>
+
+<div>
+    <button (click)="updateDoctorProfile()">Update Doctor personal info</button>
+  </div>
+  
+  <div>
+    <button (click)="updateDoctorForm()">Update Doctor form</button>
+  </div>
+
+  <div>
+    <button (click)="onDeleteDoctor()">delete doctor</button>
+  </div>
+
+  <div>
+    <button (click)="onDeleteDoctorForm()">delete doctor form</button>
+  </div>

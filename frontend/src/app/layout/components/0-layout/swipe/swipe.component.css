@@ -1,0 +1,28 @@
+.slider {
+    overflow: hidden;
+    position: relative;
+    left: 30%;
+    width: 40%; /* Adjust width as needed */
+    max-width: 100%; /* Ensure slider doesn't exceed the width of its container */
+    max-height:100%;
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slide {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  
+  .slide img {
+     max-width: 100%; /* Ensure image doesn't exceed the width of its container */
+    max-height: 100%; /* Ensure image doesn't exceed the height of its container */
+    object-fit: contain;
+  }
+  
+  
+  
+  

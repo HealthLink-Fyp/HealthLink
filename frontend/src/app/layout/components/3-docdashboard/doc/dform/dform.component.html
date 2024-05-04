@@ -1,0 +1,162 @@
+<!-- <div class="container">
+  <div class="bounce-in-left">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Doctor Signup</mat-card-title>
+        <mat-card-subtitle>Welcome to HealthLink360</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="form" (submit)="submit()">
+          <mat-form-field>
+            <mat-label>Select your specialization</mat-label>
+            <mat-select formControlName="specialization" placeholder="Please select your specialization">
+              <mat-option *ngFor="let choice of SPECIALIZATION_CHOICES" [value]="choice[0]">
+                {{ choice[1] }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Select your qualification</mat-label>
+            <mat-select formControlName="qualification" placeholder="Please select your qualification">
+              <mat-option *ngFor="let choice of QUALIFICATION_CHOICES" [value]="choice[0]">
+                {{ choice[1] }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Experience years</mat-label>
+            <input matInput type="number" formControlName="experience_years" placeholder="Please tell your experience years">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput type="text" formControlName="city" placeholder="Please tell your city">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Available timings</mat-label>
+            <input matInput type="time" formControlName="available_timings" placeholder="Please tell your available timings">
+          </mat-form-field>
+
+          <div formGroupName="availability_data">
+            <mat-form-field>
+              <mat-label>Available days</mat-label>
+              <div *ngFor="let day of availableDays; let i = index">
+                <mat-checkbox [formControlName]="i" [value]="day" (change)="onChange($event)">{{ day }}</mat-checkbox>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Available Start Time</mat-label>
+              <input matInput type="time" formControlName="start">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Available End Time</mat-label>
+              <input matInput type="time" formControlName="end">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field>
+            <mat-label>Consultation fees</mat-label>
+            <input matInput type="number" formControlName="consultation_fees" placeholder="Please tell us your consultation fees">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>About yourself</mat-label>
+            <textarea matInput formControlName="summary" placeholder="Please tell us a little about yourself"></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Wait time</mat-label>
+            <input matInput type="number" formControlName="wait_time" placeholder="Please set your wait time">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        </form>
+
+        <button *ngIf="isUpdateMode" mat-button (click)="toggleUpdateMode()">Cancel</button>
+        <button mat-button (click)="Done()">Already filled</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> -->
+
+<form [formGroup]="form" (submit)="submit()">
+  <h1>doctor form :</h1>
+
+  <div>
+    <label>Please select your specialization</label>
+    <select formControlName="specialization">
+      <option *ngFor="let choice of SPECIALIZATION_CHOICES" [value]="choice[0]">
+        {{ choice[1] }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Please select your qualification</label>
+    <select formControlName="qualification">
+      <option *ngFor="let choice of QUALIFICATION_CHOICES" [value]="choice[0]">
+        {{ choice[1] }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Please tell your experience years : </label>
+    <input type="text" formControlName="experience_years" />
+  </div>
+
+  <div>
+    <label>Please tell your city : </label>
+    <input type="text" formControlName="city" />
+  </div>
+
+   <div>
+    <label>Please tell your available timings : </label>
+    <input type="time" formControlName="available_timings" />
+  </div>
+
+  <div formGroupName="availability_data">
+    <div *ngFor="let day of availableDays">
+      <input type="checkbox" [value]="day"  (change)="onChange($event)">
+      <label>{{ day }}</label>
+    </div> 
+ 
+    <div>
+      <label>Available Start Time:</label>
+      <input type="time" formControlName="start" />
+    </div>
+
+    <div>
+      <label>Available end Time:</label>
+      <input type="time" formControlName="end" />
+    </div>
+   
+  </div>
+
+  <div>
+    <label>Please tell us you consulation fees : </label>
+    <input type="number" formControlName="consultation_fees" />
+  </div>
+
+  <div>
+    <label>Please tell us you little about yourself : </label>
+    <input type="text" formControlName="summary" />
+  </div>
+
+  <div>
+    <label>Please set ur wait time : </label>
+    <input type="number" formControlName="wait_time" />
+  </div>
+
+  <button type="submit">{{isUpdateMode ? 'Update' : 'Submit'}}</button>
+
+  
+</form>
+<button (click)="Done()">Already filled</button>
+
+<button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>
