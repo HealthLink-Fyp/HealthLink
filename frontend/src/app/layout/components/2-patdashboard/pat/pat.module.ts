@@ -13,11 +13,12 @@ import { MaterialModule } from 'src/app/architecture/material/material/material.
 
 import { BarchartComponent } from './barchart/barchart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { MstoreComponent } from './mstore/mstore.component';
 
 
 
 @NgModule({
-  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent],
   imports: [
     CommonModule,
     PatRoutingModule,

@@ -25,7 +25,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { NgxEchartsModule } from 'ngx-echarts';
+
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -33,7 +34,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
-                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule,MatCheckboxModule
+                      MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule,MatCheckboxModule,
+                      MatPaginatorModule
                       ];
 
 @NgModule({
