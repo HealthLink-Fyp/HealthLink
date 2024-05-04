@@ -11,7 +11,7 @@ import { DashboardComponent as doctorDashBoard } from './architecture/doctor/das
 import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
 
 
-
+// my name is aitq
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
