@@ -80,4 +80,13 @@ export class PatientService {
   {
     return this.http.get(`${environment.api}/appointment/`,body);
   }
+
+  getMedicines(limit: number, offset: number) {
+    return this.http.get(`${environment.api}/medicines/`, {
+      params: {
+        limit,
+        offset
+      }
+    });
+  }
 }
