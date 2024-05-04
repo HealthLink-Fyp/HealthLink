@@ -4,6 +4,7 @@ from channels.db import database_sync_to_async
 from urllib.parse import parse_qs
 from core.authentication import JWTAuthentication
 from django.http import HttpRequest
+from healthlink.utils.exceptions import InvalidToken, TokenExpired
 
 
 class JwtAuthMiddleware(BaseMiddleware):
@@ -14,7 +15,10 @@ class JwtAuthMiddleware(BaseMiddleware):
     def get_user(self, jwt_token):
         request = HttpRequest()
         request.META["HTTP_AUTHORIZATION"] = f"Bearer {jwt_token}"
-        user, auth_data = JWTAuthentication().authenticate(request)
+        try:
+            user, auth_data = JWTAuthentication().authenticate(request)
+        except TokenExpired or InvalidToken:
+            user = None
         return user
 
     async def __call__(self, scope, receive, send):
@@ -22,5 +26,6 @@ class JwtAuthMiddleware(BaseMiddleware):
         jwt_token = query_string.get("token")
         if jwt_token:
             scope["user"] = await self.get_user(jwt_token[0])
-            print("User is authenticated" + str(scope["user"]))
+        else:
+            scope["user"] = None
         return await super().__call__(scope, receive, send)
