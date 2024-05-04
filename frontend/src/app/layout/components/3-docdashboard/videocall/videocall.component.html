@@ -12,6 +12,7 @@
         </div>
       </div>
     </div>
+    <app-chat></app-chat>
   </div>
 
 <!-- Only show the following content if the user is a doctor -->
@@ -94,9 +95,9 @@
           <div class="col">
             <div class="child3">
               <h1>child3</h1>
-              <div *ngIf="currentUserRole === 'doctor' || currentUserRole === 'patient'">
+              <!-- <div *ngIf="currentUserRole === 'doctor' || currentUserRole === 'patient'"> -->
                <app-chat></app-chat>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
           <div class="col">

@@ -14,7 +14,7 @@ export class ChatComponent {
 
   constructor() {
     const token = localStorage.getItem('token');
-    this.chatSocket = new WebSocket(`${environment.testApi}?token=${token}`);
+    this.chatSocket = new WebSocket(`${environment.testApi}${token}`);
 
 
     
