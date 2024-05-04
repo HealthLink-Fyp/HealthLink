@@ -23,9 +23,6 @@ class EmotionPredictor:
         )
         self.model_path = pathlib.Path("ml/emotion/model.h5")
         self.face_path = pathlib.Path("ml/emotion/face.xml")
-        self.model = self.load_model()
-        self.face_cascade = self.load_cascade()
-        print("Emotion predictor initialized")
 
     def load_model(self):
         if not self.model_path.exists():
@@ -38,9 +35,11 @@ class EmotionPredictor:
         return cv2.CascadeClassifier(str(self.face_path))
 
     def detect_single_face(self, image: bytes) -> np.ndarray:
+        face_cascade = self.load_cascade()
+        print("Face cascade loaded")
         image = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        faces = self.face_cascade.detectMultiScale(
+        faces = face_cascade.detectMultiScale(
             image, 1.3, 5, minSize=(self.SIZE, self.SIZE)
         )
         if len(faces) > 0:
@@ -60,9 +59,11 @@ class EmotionPredictor:
         raise ValueError("Invalid image, unable to preprocess")
 
     def predict(self, image: bytes) -> str:
+        model = self.load_model()
+        print("Model loaded")
         face_image = self.detect_single_face(image)
         preprocessed = self.preprocessing(face_image)
-        predictions = self.model.predict(preprocessed)
+        predictions = model.predict(preprocessed)
         if isinstance(predictions, np.ndarray):
             return self.OBJECTS[np.argmax(predictions)]
         raise ValueError("Invalid prediction")

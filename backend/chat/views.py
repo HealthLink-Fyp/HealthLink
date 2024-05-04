@@ -32,8 +32,8 @@ class CallView(APIView):
         """
         Get the call details based on the user role.
         """
-        # user = request.user
-        # call = self.validate_and_get_call(user)
+        user = request.user
+        call = self.validate_and_get_call(user)
         call = Call.objects.last()
         serializer = CallSerializer(call)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -126,21 +126,21 @@ class CallTranscriptView(APIView):
         self.validate_data(patient_id, int, "Patient ID")
         self.validate_data(transcription, str, "Transcription")
 
-        Patient cannot send transcription
+        # Patient cannot send transcription
         if request.user.role == "patient" and hasattr(request.user, "patient"):
             raise PatientNotAllowed("Send transcription")
 
-        Check if the call exists
+        # Check if the call exists
         try:
             call = Call.objects.get(call_id=call_id)
         except Call.DoesNotExist:
             raise NotFound("Call")
 
-        Check if the call ID and patient ID match
+        # Check if the call ID and patient ID match
         if not call or call.patient_id != patient_id:
             raise InvalidData("Call ID or Patient ID")
 
-        Check if the transcription is empty
+        # Check if the transcription is empty
         if call.patient_id != patient_id:
             raise InvalidData("Provided Patient ID does not match or")
 
