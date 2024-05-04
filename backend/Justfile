@@ -4,7 +4,8 @@ set positional-arguments
 # Django commands
 
 serve:
-  sh start.sh
+  python manage.py runserver
+  # sh start.sh
 
 testall:
   python manage.py test
