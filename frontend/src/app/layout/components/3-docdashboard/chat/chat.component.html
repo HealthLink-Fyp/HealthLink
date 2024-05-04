@@ -5,6 +5,7 @@
       <div class="col-lg-4">
         <div class="chat-input">
           <div class="mb-3">
+            <p>first div</p>
             <label for="textMessage" class="form-label">Enter your message:</label>
             <textarea class="form-control" id="textMessage" [(ngModel)]="newMessage" rows="3"></textarea>
           </div>
@@ -16,6 +17,7 @@
       <div class="col-lg-8">
         <div class="chat-messages mt-4">
           <div *ngFor="let message of messages" class="chat-message">
+            <p>2nd div</p>
             <div class="alert alert-primary" role="alert">
               {{ message }}
               <button type="button" class="btn-close" aria-label="Close" (click)="removeMessage(message)"></button>
