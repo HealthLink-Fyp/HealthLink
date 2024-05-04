@@ -21,16 +21,14 @@ import { DashboardComponent as doctorDashboard } from './architecture/doctor/das
 import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChatComponent } from './architecture/chat/chat.component';
-import { VideocallComponent } from './architecture/videocall/videocall.component';
-import { TranscriptionComponent } from './architecture/videocall/transcription/transcription.component';
+
 import { MaterialModule } from './architecture/material/material/material.module';
-import { DialogComponent } from './architecture/videocall/dialog/dialog.component';
+
 
 
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
-import { AboutComponent } from './layout/components/docdashboard/doc/about/about.component';
+
 
 
 

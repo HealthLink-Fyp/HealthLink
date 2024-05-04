@@ -9,9 +9,7 @@ import { DoctorComponent } from './architecture/doctor/doctor.component';
 import { PatientComponent } from './architecture/patient/patient.component';
 import { DashboardComponent as doctorDashBoard } from './architecture/doctor/dashboard/dashboard/dashboard.component';
 import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
-import { ChatComponent } from './layout/components/3-docdashboard/chat/chat.component';
 
-import { AboutComponent } from './layout/components/3-docdashboard/doc/about/about.component';
 
 
 
@@ -21,7 +19,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgotComponent },
   { path: 'reset/:token', component: ResetComponent },
-
   { path: 'doctor', component: DoctorComponent },
   { path: 'patient', component: PatientComponent },
   {path:'dboard',component:doctorDashBoard},
