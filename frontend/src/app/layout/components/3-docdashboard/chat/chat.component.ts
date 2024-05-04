@@ -15,9 +15,7 @@ export class ChatComponent {
   constructor() {
     const token = localStorage.getItem('token');
     this.chatSocket = new WebSocket(`${environment.testApi}${token}`);
-
-
-    
+   
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
@@ -36,7 +34,7 @@ export class ChatComponent {
 
   sendMessage(): void {
     if (this.newMessage.trim()) {
-      this.chatSocket.send(JSON.stringify({ 'message': this.newMessage.trim() }));
+      this.chatSocket.send(this.newMessage);
       this.newMessage = '';
     }
   }

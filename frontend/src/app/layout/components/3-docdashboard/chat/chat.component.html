@@ -5,10 +5,11 @@
       <div class="col-lg-4">
         <div class="chat-input">
           <div class="mb-3">
-            <p>first div</p>
+            <p>first div opened</p>
             <label for="textMessage" class="form-label">Enter your message:</label>
             <textarea class="form-control" id="textMessage" [(ngModel)]="newMessage" rows="3"></textarea>
           </div>
+          <p>first div closed</p>
           <button (click)="sendMessage()" class="btn btn-primary rounded-pill">Send</button>
         </div>
       </div>
@@ -17,12 +18,13 @@
       <div class="col-lg-8">
         <div class="chat-messages mt-4">
           <div *ngFor="let message of messages" class="chat-message">
-            <p>2nd div</p>
+            <p>2nd div opened</p>
             <div class="alert alert-primary" role="alert">
               {{ message }}
               <button type="button" class="btn-close" aria-label="Close" (click)="removeMessage(message)"></button>
             </div>
           </div>
+          <p>2nd div closed</p>
         </div>
       </div>
     </div>
