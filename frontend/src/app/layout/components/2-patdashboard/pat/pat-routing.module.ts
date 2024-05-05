@@ -7,6 +7,7 @@ import { PformComponent } from './pform/pform.component';
 import { BarchartComponent } from './barchart/barchart.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
 import { MstoreComponent } from './mstore/mstore.component';
+import { LabtestsComponent } from './labtests/labtests.component';
 
 
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'docsearch',component:DocsearchComponent},
   {path:'appointments',component:PappointmentComponent},
   {path:'appointments/:doctorId',component:PappointmentComponent},
-  {path:'medicalStore',component:MstoreComponent}
+  {path:'medicalStore',component:MstoreComponent},
+  {path:'labTests',component:LabtestsComponent}
 ];
 
 @NgModule({

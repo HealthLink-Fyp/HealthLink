@@ -1,0 +1,109 @@
+<!-- topbar code -->
+
+<div>
+    <mat-toolbar class="toolbar" color="primary">
+      <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+      <h1 class="jello-vertical">HealthLink 360</h1>
+     
+      <h1><a class="nav-link"   routerLink="#"> Appointments</a></h1>
+      <h1><a class="nav-link"  >Video Consult</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
+      <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+    
+      
+    </mat-toolbar>
+  
+  </div>   
+  
+  <br>
+  <br>
+  <br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- search.component.html -->
+  <div class="container">
+    <!-- Left side - City selection -->
+    <div class="city">
+      <mat-form-field>
+        <mat-label><mat-icon>location_on</mat-icon>Select City</mat-label>
+        <mat-select [(ngModel)]="selectedCity">
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <!-- Right side - Search input -->
+  
+    <div >
+    <mat-form-field class="searchBar" appearance="fill">
+      <input  matInput type="text" placeholder="Search for medicines..." 
+      [matAutocomplete]="auto">
+    
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let suggestion of searchSuggestions" [value]="suggestion">
+          {{suggestion}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    </div>
+  
+  <!-- Search button -->
+  <div class="searchButton">
+   <button mat-flat-button color="accent" class="larger-button" (click)="search()">
+    <mat-icon >search</mat-icon>
+    </button>
+  </div>
+  
+  </div>
+  
+  
+  
+ 
+   <!-- Display the filtered tests -->
+   <ul>
+    <li *ngFor="let test of filteredTests">
+      {{ test.name }} ({{ test.price }})
+    </li>
+  </ul>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="card-container">
+    <mat-card class="card" *ngFor="let test of tests">
+      <div class="card-image-container">
+        <img mat-card-image [src]="test.image" alt="Test Image">
+      </div>
+      <br>
+      <mat-card-header class="card-content">
+        <mat-card-title>{{ test.name }}</mat-card-title>
+        <mat-card-subtitle>{{ test.lab_name }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Price:</strong> {{ test.price }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="primary" [href]="test.link" target="_blank">View Test</a>
+        <a mat-button color="primary" href="https://www.google.com/maps/dir//Chughtai+Lab,+186-B+Minar+Road%D8%8C+near+SAPNA+CLOTH+DEPOT+UNDER+THE+READ+CHILI+BURGER,+Wah+Cantt,+Rawalpindi,+Punjab+46000/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x38dfa6fb8190658d:0xa6776386c19239fb?sa=X&ved=1t:57443&ictx=111" target="_blank">Show map</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+
+
+<mat-paginator [length]="totalRecords" [pageSize]="10" (page)="onPageChange($event)">
+</mat-paginator>

@@ -1,4 +1,7 @@
 import django
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "healthlink.settings.local")
 
 django.setup()
 
