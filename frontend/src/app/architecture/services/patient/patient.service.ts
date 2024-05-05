@@ -89,4 +89,13 @@ export class PatientService {
       }
     });
   }
+
+  getTests(limit: number, offset: number) {
+    return this.http.get(`${environment.api}/tests/`, {
+      params: {
+        limit: limit,
+        offset: offset
+      }
+    });
+  }
 }

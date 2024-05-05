@@ -1,4 +1,24 @@
 <mat-tab-group >
-    <mat-tab  label="Upcoming Appointment"></mat-tab>
- <mat-tab label="Past Appointment"></mat-tab>
+    <mat-tab  label="Upcoming Appointment">
+        <table matSort (matSortChange)="sortData($event)">
+            <tr>
+              <th mat-sort-header="doctor">Doctor</th>
+              <th mat-sort-header="start">Start Time</th>
+              <th mat-sort-header="end">End Time</th>
+              <th mat-sort-header="appointment_status">Status</th>
+            </tr>
+          
+            <tr *ngFor="let appointment of sortedData">
+              <td>{{ appointment.doctor }}</td>
+              <td class="date-column">{{ appointment.start | date:'mediumDate' }}</td>
+              <td class="date-column">{{ appointment.end | date:'mediumDate' }}</td>
+              <td>{{ appointment.appointment_status }}</td>
+            </tr>
+          </table>
+          
+          
+    </mat-tab>
+ <mat-tab label="Past Appointment">
+   
+ </mat-tab>
 </mat-tab-group>

@@ -39,8 +39,16 @@ patient_profile_data = {
     "height": 170,
 }
 
+record_data = {
+    "doctor_notes": "Test doctor note",
+    "prescription": {
+        "medicines": ["Medicine 1", "Medicine 2"],
+        "tests": ["Test 1", "Test 2"],
+    },
+}
 
-def get_record_data():
+
+def get_record_prescription_data():
     from django.core.files.uploadedfile import SimpleUploadedFile
 
     with open("tests/test_files/prescription.png", "rb") as prescription:
@@ -48,12 +56,4 @@ def get_record_data():
             prescription.name, prescription.read(), content_type="image/png"
         )
 
-    with open("tests/test_files/test.png", "rb") as test:
-        test_file = SimpleUploadedFile(test.name, test.read(), content_type="image/png")
-
-    return {
-        "doctor_note": "Test doctor note",
-        "llm_note": "Test llm note",
-        "prescription": prescription_file,
-        "test_result": test_file,
-    }
+    return prescription_file

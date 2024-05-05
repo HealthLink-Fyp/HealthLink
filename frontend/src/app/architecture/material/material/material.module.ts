@@ -28,6 +28,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+import {MatSortModule, Sort} from '@angular/material/sort';
 
 
 
@@ -35,9 +36,7 @@ const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbar
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
                       MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule,MatCheckboxModule,
-                      MatPaginatorModule,
-
-     
+                      MatPaginatorModule,MatSortModule
                       ];
 
 @NgModule({

@@ -14,12 +14,12 @@ import { MaterialModule } from 'src/app/architecture/material/material/material.
 import { BarchartComponent } from './barchart/barchart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MstoreComponent } from './mstore/mstore.component';
-import { SettingsComponent } from './settings/settings.component';
+import { LabtestsComponent } from './labtests/labtests.component';
 
 
 
 @NgModule({
-  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, SettingsComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent],
   imports: [
     CommonModule,
     PatRoutingModule,

@@ -32,10 +32,10 @@ record_patterns = [
 
 medicine_patterns = [
     path("", MedicineListView.as_view(), name="medicine-shop"),
-    path("<int:pk>/", MedicineListView.as_view(), name="medicine-shop-detail"),
+    path("<int:medicine_id>/", MedicineListView.as_view(), name="medicine-shop-detail"),
 ]
 
 medical_test_patterns = [
     path("", MedicalTestListView.as_view(), name="medical-test"),
-    path("<int:pk>/", MedicalTestListView.as_view(), name="medical-test-detail"),
+    path("<int:test_id>/", MedicalTestListView.as_view(), name="medical-test-detail"),
 ]

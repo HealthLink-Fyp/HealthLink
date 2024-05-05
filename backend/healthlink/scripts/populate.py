@@ -1,18 +1,27 @@
-from patient.models import MedicineShop
+from patient.models import MedicineShop, MedicalTest
 
 
-def check_initial_medicines():
+def check_initial_data():
     """
-    Check if the database is empty.
+    Check if the initial data is already present in the database.
     """
-    return MedicineShop.objects.exists()
+    return MedicineShop.objects.exists() and MedicalTest.objects.exists()
 
 
-def populate_medicines():
+def populate_medical_data():
     """
-    Populate the medicines in the database.
+    Populate the medical data in the database.
     """
     import json
+
+    with open("healthlink/scripts/data/medical_tests.json") as file:
+        medical_tests = json.load(file)
+
+    for medical_test in medical_tests:
+        MedicalTest.objects.create(**medical_test)
+
+    if MedicalTest.objects.count() == len(medical_tests):
+        return f"{len(medical_tests)} medical tests added to the database."
 
     with open("healthlink/scripts/data/medicines.json") as file:
         medicines = json.load(file)
@@ -22,4 +31,5 @@ def populate_medicines():
 
     if MedicineShop.objects.count() == len(medicines):
         return f"{len(medicines)} medicines added to the database."
-    return "Failed to add medicines to the database."
+
+    return "Failed to add medical data to the database."
