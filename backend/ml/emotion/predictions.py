@@ -36,7 +36,6 @@ class EmotionPredictor:
 
     def detect_single_face(self, image: bytes) -> np.ndarray:
         face_cascade = self.load_cascade()
-        print("Face cascade loaded")
         image = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(
@@ -60,7 +59,6 @@ class EmotionPredictor:
 
     def predict(self, image: bytes) -> str:
         model = self.load_model()
-        print("Model loaded")
         face_image = self.detect_single_face(image)
         preprocessed = self.preprocessing(face_image)
         predictions = model.predict(preprocessed)

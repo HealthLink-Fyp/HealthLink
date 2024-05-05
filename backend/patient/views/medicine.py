@@ -6,6 +6,9 @@ from patient.serializers import MedicineShopSerializer
 from rest_framework.response import Response
 
 
+from rest_framework.response import Response
+
+
 class MedicineListView(ListAPIView):
     """
     View to list all the manufacturers of the medicines.
@@ -13,6 +16,7 @@ class MedicineListView(ListAPIView):
 
     serializer_class = MedicineShopSerializer
     filter = ("name", "manufacturer")
+    lookup_field = "medicine_id"
 
     def get(self, request, *args, **kwargs):
         manufacturers = request.query_params.get("manufacturers")
@@ -26,7 +30,12 @@ class MedicineListView(ListAPIView):
         return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
+        medicine_id = self.kwargs.get("medicine_id", None)
         queryset = MedicineShop.objects.all()
+
+        if medicine_id:
+            self.pagination_class = None
+            return queryset.filter(medicine_id=medicine_id)
 
         for field in self.filter:
             value = self.request.query_params.get(field)

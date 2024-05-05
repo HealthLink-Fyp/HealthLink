@@ -11,3 +11,20 @@ class MedicalTestListView(ListAPIView):
 
     queryset = MedicalTest.objects.all()
     serializer_class = MedicalTestSerializer
+    filter = ("name", "lab_name")
+
+    def get_queryset(self):
+        test_id = self.kwargs.get("test_id", None)
+        queryset = MedicalTest.objects.all()
+
+        if test_id:
+            self.pagination_class = None
+            return queryset.filter(test_id=test_id)
+
+        for field in self.filter:
+            value = self.request.query_params.get(field)
+
+            if value:
+                queryset = queryset.filter(**{field: value})
+
+        return queryset

@@ -42,15 +42,19 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
 
         # Check if the user's patient or doctor profile exists
         if user.role == "patient" and hasattr(user, "patient"):
+            if appointment_id:
+                queryset = Appointment.objects.filter(
+                    patient=user.patient, id=appointment_id
+                )
             queryset = Appointment.objects.filter(patient=user.patient)
         elif user.role == "doctor" and hasattr(user, "doctor"):
+            if appointment_id:
+                queryset = Appointment.objects.filter(
+                    doctor=user.doctor, id=appointment_id
+                )
             queryset = Appointment.objects.filter(doctor=user.doctor)
         else:
             raise ProfileNotFound()
-
-        # Filter the appointments based on the appointment_id
-        if appointment_id:
-            queryset = queryset.filter(appointment_id=appointment_id)
 
         return queryset
 
