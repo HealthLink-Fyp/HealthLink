@@ -35,7 +35,9 @@ const AllMaterialModules=[MatCardModule,MatIconModule,MatButtonModule,MatToolbar
                           MatDividerModule,MatListModule,MatSidenavModule,MatSelectModule,MatFormFieldModule,FormsModule,MatInputModule,
                         MatAutocompleteModule,MatRadioModule,MatTabsModule,MatStepperModule,
                       MatSnackBarModule,MatSlideToggleModule,ClipboardModule,MatDialogModule,ReactiveFormsModule,MatCheckboxModule,
-                      MatPaginatorModule
+                      MatPaginatorModule,
+
+     
                       ];
 
 @NgModule({
