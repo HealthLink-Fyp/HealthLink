@@ -1,16 +1,17 @@
 from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
-from healthlink.scripts import populate
+from healthlink.scripts.populate import check_initial_data, populate_medical_data
 
 from django.contrib.auth.models import User
 
 
 @receiver(post_migrate)
-def populate_medicines(sender, **kwargs):
+def populate_data(sender, **kwargs):
     """
-    Populate the medicines in the database after migration.
+    Populate the medical data in the database after the migration.
     """
-    populate.populate_medicines() if not populate.check_initial_medicines() else None
+
+    populate_medical_data() if not check_initial_data() else None
 
 
 @receiver(post_save, sender=User)

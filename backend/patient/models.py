@@ -83,8 +83,10 @@ class MedicalTest(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     link = models.URLField()
-    lab_name = models.CharField(max_length=100)
-    image = models.URLField()
+    lab_name = models.CharField(max_length=100, default="Chughtai Lab")
+    image = models.URLField(
+        default="https://pbs.twimg.com/profile_images/1522880282810015745/-Uax8id5_400x400.jpg"
+    )
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def __str__(self):
