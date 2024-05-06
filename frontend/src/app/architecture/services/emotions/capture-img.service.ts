@@ -73,7 +73,7 @@ export class CaptureImgService {
       // Display the image on the screen
       const image = new Image();
       image.src = URL.createObjectURL(imageData);
-      document.body.appendChild(image);
+      // document.body.appendChild(image);
       await this.restartImageCapture();
 
     }
