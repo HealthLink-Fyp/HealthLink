@@ -83,10 +83,10 @@ class CallView(APIView):
         #     raise AppointmentNotConfirmed()
         # if appointment.payment_status != "paid":
         #     raise AppointmentNotPaid()
-        if appointment.start + datetime.timedelta(minutes=5) > datetime.datetime.now():
-            raise MissedAppointment()
-        if appointment.start > datetime.datetime.now():
-            raise FutureAppointment()
+        # if appointment.start + datetime.timedelta(minutes=5) > datetime.datetime.now():
+        #     raise MissedAppointment()
+        # if appointment.start > datetime.datetime.now():
+        #     raise FutureAppointment()
 
     def get_latest_call(self, user):
         if user.role == "patient" and hasattr(user, "patient"):
