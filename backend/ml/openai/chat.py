@@ -42,7 +42,11 @@ def validate_response(response: str) -> dict:
         response = response.replace("```json", "").replace("```", "").strip()
         response_json = json.loads(response)
     except json.JSONDecodeError:
-        return {"error": "Invalid response from OpenAi, could not parse JSON"}
+        return {
+            "key_points": [],
+            "likely_diagnoses": [],
+            "followup_questions": [],
+        }
 
     required_keys = {"key_points", "likely_diagnoses", "followup_questions"}
 
