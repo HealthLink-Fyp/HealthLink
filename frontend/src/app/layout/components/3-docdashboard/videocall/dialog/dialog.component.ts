@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
+import { CaptureImgService } from 'src/app/architecture/services/emotions/capture-img.service';
 
 @Component({
   selector: 'app-dialog',
@@ -21,7 +22,8 @@ export class DialogComponent {
       private _snackBar: MatSnackBar, 
       public service : TranscribeService,
       private CallService:CallService,
-      private keyService:SharedService
+      private keyService:SharedService,
+      private imageCaptureService: CaptureImgService
   ) {
      
   this.service.init()
@@ -33,6 +35,7 @@ export class DialogComponent {
     this.CallService.peerIdGet().subscribe((response:any)=>{
       console.log("i m getting the peer id in dialog component")
       this.data.peerId = response.peer_id; // Set the initial value of the input field to the peerId value
+      this.imageCaptureService.startImageCapture();
     })
    
 

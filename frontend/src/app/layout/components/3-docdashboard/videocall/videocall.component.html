@@ -78,14 +78,14 @@
               <div>
                 <h2>Key Points:</h2>
                 <ul>
-                  <li *ngFor="let point of fakeData.key_points">{{ point }}</li>
+                  <li *ngFor="let point of transResponse.key_points">{{ point }}</li>
                 </ul>
               </div>
               
               <div>
                 <h2>Follow-up Questions:</h2>
                 <ul>
-                  <li *ngFor="let question of fakeData.followup_questions">{{ question }}</li>
+                  <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li>
                 </ul>
               </div>
             </div>
@@ -106,7 +106,7 @@
               <div>
                 <h2>live possible causes:</h2>
                 <ul>
-                  <li *ngFor="let question of fakeData.likely_diagnoses">{{ question }}</li>
+                  <li *ngFor="let question of transResponse.likely_diagnoses">{{ question }}</li>
                 </ul>
               </div>
             </div>

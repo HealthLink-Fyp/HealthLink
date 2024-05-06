@@ -8,6 +8,9 @@ import { DformComponent } from './doc/dform/dform.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { DappointmentComponent } from './doc/dappointment/dappointment.component';
 import { AboutComponent } from './doc/about/about.component';
+import { ChatComponent } from './chat/chat.component';
+import { TodoComponent } from './doc/todo/todo.component';
+
 
 
 const routes: Routes = [
@@ -18,6 +21,9 @@ const routes: Routes = [
   {path:'videoCall/:patientId/:doctorId',component:VideocallComponent},
   {path:'appointments',component:DappointmentComponent},
   {path:'about/:doctorId',component:AboutComponent},
+  {path:'chat',component:ChatComponent},
+  {path:'todo',component:TodoComponent},
+
  
 ];
 

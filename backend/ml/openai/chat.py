@@ -40,6 +40,7 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 def validate_response(response: str) -> dict:
     try:
         response = response.replace("```json", "").replace("```", "").strip()
+        print("reponse form fiasal before", response)
         response_json = json.loads(response)
     except json.JSONDecodeError:
         return {

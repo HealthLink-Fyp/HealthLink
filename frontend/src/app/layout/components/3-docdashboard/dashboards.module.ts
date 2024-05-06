@@ -25,6 +25,8 @@ import { DialogComponent } from './videocall/dialog/dialog.component';
 import { DappointmentComponent } from './doc/dappointment/dappointment.component';
 import { AboutComponent } from './doc/about/about.component';
 import { ChatComponent } from './chat/chat.component';
+import { TodoComponent } from './doc/todo/todo.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
@@ -40,7 +42,9 @@ import { ChatComponent } from './chat/chat.component';
     DialogComponent,
     DappointmentComponent,
     AboutComponent,
-    ChatComponent
+    ChatComponent,
+    TodoComponent,
+
 
 
 
@@ -52,7 +56,15 @@ import { ChatComponent } from './chat/chat.component';
     MaterialModule,
   
     
-   
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts') // or import('./path-to-my-custom-echarts')
+    }),
+
   ],
  
 })

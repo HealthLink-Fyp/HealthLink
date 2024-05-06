@@ -100,39 +100,39 @@
 
 
 video#local-video {
-	border-radius: 15px;
-	bottom: 147px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	left: 16px;
-	max-height: 300px;
-	max-width: 100%;
-	object-fit: contain;
-	overflow: clip;
-	place-content: normal space-between;
-	position: relative;
-	right: -35px;
-	top: -278px;
-	transform: matrix(1, 0, 0, 1, 0, 130.667);
+  border-radius: 15px;
+  bottom: 147px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+/*   left: 16px; */
+  max-height: 100px;
+  max-width: 100%;
+  object-fit: contain;
+  overflow: clip;
+  place-content: normal space-between;
+  position: relative;
+  right: -220px;
+  top: -160px;
+  transform: matrix(1, 0, 0, 1, 0, 130.667);
 }
 
 video#remote-video {
   border-radius: 15px;
-	bottom: 147px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	left: 491px;
-	max-height: 300px;
-	max-width: 100%;
-	object-fit: contain;
-	overflow: clip;
-	place-content: normal space-between;
-	position: relative;
-	right: -35px;
-	top: -376px;
-	transform: matrix(1, 0, 0, 1, 0, 130.667);
+  bottom: 147px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  left: 491px;
+  max-height: 300px;
+  max-width: 100%;
+  object-fit: contain;
+  overflow: clip;
+  place-content: normal space-between;
+  position: relative;
+  left: -35px;
+  top: -50px;
+  transform: matrix(1, 0, 0, 1, 0, 130.667);
 }
 
 

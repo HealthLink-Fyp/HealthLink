@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from core.authentication import JWTAuthentication
 
-import datetime
+# import datetime
 from chat.models import Call
 from chat.serializers import CallSerializer
 
@@ -16,10 +16,10 @@ from healthlink.utils.exceptions import (
     PatientNotAllowed,
     InvalidData,
     BadRequest,
-    AppointmentNotConfirmed,
-    AppointmentNotPaid,
-    FutureAppointment,
-    MissedAppointment,
+    # AppointmentNotConfirmed,
+    # AppointmentNotPaid,
+    # FutureAppointment,
+    # MissedAppointment,
 )
 
 from rest_framework.parsers import MultiPartParser
@@ -33,8 +33,14 @@ class CallView(APIView):
         Get the call details based on the user role.
         """
         user = request.user
-        call = self.validate_and_get_call(user)
-        call = Call.objects.last()
+        # call = self.validate_and_get_call(user)
+
+        appointment = self.get_latest_appointment(user)
+        self.validate_appointment(appointment)
+        call = self.get_latest_call(user)
+        self.validate_call(call, appointment, user)
+
+        # call = Call.objects.last()
         serializer = CallSerializer(call)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -53,22 +59,23 @@ class CallView(APIView):
         if user.role == "patient" and hasattr(user, "patient"):
             raise PatientNotAllowed("Create call")
 
-        _ = self.validate_and_get_call(user)
+        appointment = self.get_latest_appointment(user)
+        self.validate_appointment(appointment)
 
         serializer = CallSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def validate_and_get_call(self, user):
-        """
-        Validate the call based on the user role and appointment.
-        """
-        appointment = self.get_latest_appointment(user)
-        self.validate_appointment(appointment)
-        call = self.get_latest_call(user)
-        self.validate_call(call, appointment, user)
-        return call
+    # def validate_and_get_call(self, user):
+    #     """
+    #     Validate the call based on the user role and appointment.
+    #     """
+    #     appointment = self.get_latest_appointment(user)
+    #     self.validate_appointment(appointment)
+    #     call = self.get_latest_call(user)
+    #     self.validate_call(call, appointment, user)
+    #     return call
 
     def get_latest_appointment(self, user):
         if user.role == "patient" and hasattr(user, "patient"):
@@ -79,14 +86,14 @@ class CallView(APIView):
     def validate_appointment(self, appointment):
         if not appointment:
             raise NotFound("Appointment")
-        if appointment.appointment_status != "confirmed":
-            raise AppointmentNotConfirmed()
-        if appointment.payment_status != "paid":
-            raise AppointmentNotPaid()
-        if appointment.start + datetime.timedelta(minutes=5) > datetime.datetime.now():
-            raise MissedAppointment()
-        if appointment.start > datetime.datetime.now():
-            raise FutureAppointment()
+        # if appointment.appointment_status != "confirmed":
+        #     raise AppointmentNotConfirmed()
+        # if appointment.payment_status != "paid":
+        #     raise AppointmentNotPaid()
+        # if appointment.start + datetime.timedelta(minutes=5) > datetime.datetime.now():
+        #     raise MissedAppointment()
+        # if appointment.start > datetime.datetime.now():
+        #     raise FutureAppointment()
 
     def get_latest_call(self, user):
         if user.role == "patient" and hasattr(user, "patient"):

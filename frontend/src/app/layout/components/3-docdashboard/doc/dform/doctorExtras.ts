@@ -39,6 +39,8 @@ export const availableDays: string[] = [
   'wednesday',
   'thursday',
   'friday',
+  'saturday',
+  'sunday'
 ];
 
 
