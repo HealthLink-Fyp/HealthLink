@@ -8,6 +8,7 @@ import { BarchartComponent } from './barchart/barchart.component';
 import { DocsearchComponent } from './docsearch/docsearch.component';
 import { MstoreComponent } from './mstore/mstore.component';
 import { LabtestsComponent } from './labtests/labtests.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'appointments',component:PappointmentComponent},
   {path:'appointments/:doctorId',component:PappointmentComponent},
   {path:'medicalStore',component:MstoreComponent},
-  {path:'labTests',component:LabtestsComponent}
+  {path:'labTests',component:LabtestsComponent},
+  {path:'settings',component:SettingsComponent}
 ];
 
 @NgModule({
