@@ -26,7 +26,7 @@ from rest_framework.parsers import MultiPartParser
 
 
 class CallView(APIView):
-    # authentication_classes = [JWTAuthentication]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         """
