@@ -29,6 +29,6 @@ Example:
 
 
 
-Transcript:
+Here is the Transcript of conversation, just give me output in JSON format, nothing else:
 {anonymized_text}
 """

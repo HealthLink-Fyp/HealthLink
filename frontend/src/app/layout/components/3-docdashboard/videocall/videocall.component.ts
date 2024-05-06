@@ -89,7 +89,8 @@ export class VideocallComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
 
-    this.sharedService.onResponseAvailable().pipe(take(1)).subscribe((data) => {
+    this.sharedService.onResponseAvailable().subscribe((data) => {
+      this.transResponse='';
       this.transResponse = data;
       console.log("the ai answer is coming in aidochelp", this.transResponse);
     });

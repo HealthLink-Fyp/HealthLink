@@ -47,7 +47,7 @@ export class CaptureImgService {
     }
 
     // Pause for 5 seconds before restarting capture
-    await new Promise(resolve => setTimeout(resolve, 10000)); 
+    await new Promise(resolve => setTimeout(resolve, 60000)); 
 
     // Restart image capture
     if (!this.stream) {
