@@ -79,10 +79,10 @@ class CallView(APIView):
     def validate_appointment(self, appointment):
         if not appointment:
             raise NotFound("Appointment")
-        if appointment.appointment_status != "confirmed":
-            raise AppointmentNotConfirmed()
-        if appointment.payment_status != "paid":
-            raise AppointmentNotPaid()
+        # if appointment.appointment_status != "confirmed":
+        #     raise AppointmentNotConfirmed()
+        # if appointment.payment_status != "paid":
+        #     raise AppointmentNotPaid()
         if appointment.start + datetime.timedelta(minutes=5) > datetime.datetime.now():
             raise MissedAppointment()
         if appointment.start > datetime.datetime.now():
