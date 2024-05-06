@@ -19,8 +19,10 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 
     chatopenai = ChatOpenAI(
         temperature=0.5,
-        model_name="gpt-3.5-turbo-0125",
+        base_url="https://api.deepseek.com/v1",
+        model_name="deepseek-chat",
         model_kwargs=model_kwargs,
+        api_key="sk-ce808733b8474062ba622b73f3b634cb",
     )
 
     chain = {"anonymized_text": anonymizer.anonymize} | prompt | chatopenai
@@ -31,12 +33,16 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
     if response is None:
         return {"error": "OpenAi response is None"}
 
-    response_json = validate_response(str(response.content))
+    response_json = validate_response(response.content)
     return response_json
 
 
 def validate_response(response: str) -> dict:
-    response_json = json.loads(response, strict=False)
+    try:
+        response = response.replace("```json", "").replace("```", "").strip()
+        response_json = json.loads(response)
+    except json.JSONDecodeError:
+        return {"error": "Invalid response from OpenAi, could not parse JSON"}
 
     required_keys = {"key_points", "likely_diagnoses", "followup_questions"}
 
