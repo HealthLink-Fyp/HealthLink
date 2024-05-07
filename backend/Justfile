@@ -5,7 +5,6 @@ set positional-arguments
 
 serve:
   python manage.py runserver
-  # sh start.sh
 
 testall:
   python manage.py test

@@ -96,8 +96,9 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         if user.role == "patient" and hasattr(user, "patient"):
             return
         elif user.role == "doctor" and hasattr(user, "doctor"):
-            if method == "get":
-                return
-            raise DoctorNotAllowed("This Medical Record operation")
+            return
+            # if method == "get":
+            #     return
+            # raise DoctorNotAllowed("This Medical Record operation")
         else:
             raise ProfileNotFound()

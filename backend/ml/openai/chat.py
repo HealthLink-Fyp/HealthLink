@@ -40,10 +40,13 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 def validate_response(response: str) -> dict:
     try:
         response = response.replace("```json", "").replace("```", "").strip()
-        print("reponse form fiasal before", response)
         response_json = json.loads(response)
     except json.JSONDecodeError:
-        return {"error": f"Invalid response from OpenAi, could not parse JSON {response}"}
+        return {
+            "key_points": [],
+            "likely_diagnoses": [],
+            "followup_questions": [],
+        }
 
     required_keys = {"key_points", "likely_diagnoses", "followup_questions"}
 
@@ -57,5 +60,9 @@ def validate_response(response: str) -> dict:
         return {"error": f"Invalid response from OpenAi, missing keys {missing_keys}"}
     elif extra_keys:
         return {"error": f"Invalid response from OpenAi, extra keys {extra_keys}"}
+
+    # response_json["likely_diagnoses"] = [
+    #     diagnosis for diagnosis in response_json["likely_diagnoses"]
+    # ]
 
     return response_json
