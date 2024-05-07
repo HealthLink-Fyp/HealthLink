@@ -22,6 +22,9 @@ export class PatientService {
     });
   }
 
+  uploadFile(formData: FormData) {
+    return this.http.post(`${environment.api}/records/`, formData);
+  }
 
   updatePatientProfile(body:any)
   {

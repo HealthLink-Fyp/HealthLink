@@ -145,3 +145,32 @@ div.row.p-2 {
 	right: -100px;
 	top: -5px;
 }
+
+
+/* Style for the streaming list items */
+.stream-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.stream-list li {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: stream 5s linear;
+}
+
+/* Animation to create the streaming effect */
+@keyframes stream {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+.item
+{
+  width:200px;
+}

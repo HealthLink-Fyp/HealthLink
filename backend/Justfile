@@ -4,7 +4,7 @@ set positional-arguments
 # Django commands
 
 serve:
-  python -m uvicorn healthlink.asgi:application --reload
+  python manage.py runserver
   # sh start.sh
 
 testall:

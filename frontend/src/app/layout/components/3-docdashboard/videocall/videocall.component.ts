@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranscribeService } from 'src/app/architecture/services/call/transcribe.service';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
+import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 
 @Component({
   selector: 'app-videocall',
@@ -36,8 +38,23 @@ export class VideocallComponent implements OnInit, OnDestroy {
     patient:'',
   };
 
+  selectedFile!: File;
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService) {
+  uploadFile(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  sendFileToBackend() {
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.uploadService.uploadFile(formData).subscribe((res: any) => {
+      console.log('File sent to backend:', res);
+    });
+  }
+
+
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService, private uploadService: PatientService) {
 
     this.getCurrentUserRole();
     
@@ -67,6 +84,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
   }
 
   transResponse: any='';
+  loading: boolean = false;
 
   fakeData = {
     "key_points": [
@@ -90,9 +108,11 @@ export class VideocallComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.sharedService.onResponseAvailable().subscribe((data) => {
-      this.transResponse='';
-      this.transResponse = data;
-      console.log("the ai answer is coming in aidochelp", this.transResponse);
+      this.loading = true; // Set loading to true when a new response is received
+      setTimeout(() => {
+        this.transResponse = data;
+        this.loading = false; // Set loading to false after 5 seconds
+      }, 5000);
     });
 
     this.callService.localStream$
@@ -111,6 +131,21 @@ export class VideocallComponent implements OnInit, OnDestroy {
       })
   }
   
+  notesSave:any='';
+
+  onSendDocNotes()
+  {
+    const notesData = {
+      doctor_notes: this.notesSave,
+      patient: this.videoData.patient,
+      doctor: this.videoData.doctor
+    };
+    
+    this.doctorService.sendNotes(notesData).subscribe((res:any)=>{
+      console.log("notes sent to backend",this.notesSave);
+    })
+  }
+
   ngOnDestroy(): void {
     this.callService.destroyPeer();
   }

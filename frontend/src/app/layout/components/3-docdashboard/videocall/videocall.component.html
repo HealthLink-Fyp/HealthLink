@@ -45,12 +45,15 @@
 
       </div>
   
+      
       <div class="body">
         <div class="row">
           <div class="col">
             <div class="child2">
               <h1>child2</h1>
-              
+              <!-- file-upload.component.html -->
+<input type="file" (change)="uploadFile($event)">
+<button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
             </div>
           </div>
           <div class="col">
@@ -77,15 +80,37 @@
   
               <div>
                 <h2>Key Points:</h2>
-                <ul>
+                <ul class="stream-list">
                   <li *ngFor="let point of transResponse.key_points">{{ point }}</li>
+                </ul>
+                <ul *ngIf="loading">
+                  <li>
+                    <div class="loading">
+                      <div class="item">
+                        <ngx-skeleton-loader count="5" appearance="line" ></ngx-skeleton-loader>
+                        <!-- above line will produce the rendering of 5 circles with the pulse animation and the aria-valuetext attribute set with "This item is actually loading..." -->
+                      </div>
+                      </div>
+
+                  </li>
                 </ul>
               </div>
               
               <div>
                 <h2>Follow-up Questions:</h2>
-                <ul>
+                <ul class="stream-list">
                   <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li>
+                </ul>
+                <ul *ngIf="loading">
+                  <li>
+                    <div class="loading">
+                      <div class="item">
+                        <ngx-skeleton-loader count="5" appearance="line" ></ngx-skeleton-loader>
+                        <!-- above line will produce the rendering of 5 circles with the pulse animation and the aria-valuetext attribute set with "This item is actually loading..." -->
+                      </div>
+                      </div>
+
+                  </li>
                 </ul>
               </div>
             </div>
@@ -95,9 +120,9 @@
           <div class="col">
             <div class="child3">
               <h1>child3</h1>
-              <!-- <div *ngIf="currentUserRole === 'doctor' || currentUserRole === 'patient'"> -->
+          
                <app-chat></app-chat>
-              <!-- </div> -->
+  
             </div>
           </div>
           <div class="col">
@@ -105,8 +130,19 @@
               <h1>child3</h1>
               <div>
                 <h2>live possible causes:</h2>
-                <ul>
+                <ul class="stream-list">
                   <li *ngFor="let question of transResponse.likely_diagnoses">{{ question }}</li>
+                </ul>
+                <ul *ngIf="loading">
+                  <li>
+                    <div class="loading">
+                      <div class="item">
+                        <ngx-skeleton-loader count="5" appearance="line" ></ngx-skeleton-loader>
+                        <!-- above line will produce the rendering of 5 circles with the pulse animation and the aria-valuetext attribute set with "This item is actually loading..." -->
+                      </div>
+                      </div>
+
+                  </li>
                 </ul>
               </div>
             </div>
@@ -121,9 +157,9 @@
                 <mat-card-content>
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Note</mat-label>
-                    <textarea matInput placeholder="Type your note here" class="full-width"></textarea>
+                    <textarea matInput placeholder="Type your note here" class="full-width" [(ngModel)]="notesSave"></textarea>
                   </mat-form-field>
-                  <button mat-raised-button color="primary">Save</button>
+                  <button mat-raised-button color="primary" (click)="onSendDocNotes()">Save</button>
                 </mat-card-content>
               </mat-card>
               

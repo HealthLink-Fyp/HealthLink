@@ -16,11 +16,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { MstoreComponent } from './mstore/mstore.component';
 import { LabtestsComponent } from './labtests/labtests.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MedrecordComponent } from './medrecord/medrecord.component';
 
 
 
 @NgModule({
-  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent, MedrecordComponent],
   imports: [
     CommonModule,
     PatRoutingModule,

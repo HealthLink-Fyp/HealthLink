@@ -27,6 +27,7 @@ import { AboutComponent } from './doc/about/about.component';
 import { ChatComponent } from './chat/chat.component';
 import { TodoComponent } from './doc/todo/todo.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 
@@ -54,6 +55,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     CommonModule,
     DashboardsRoutingModule,
     MaterialModule,
+    NgxSkeletonLoaderModule,
   
     
     NgxEchartsModule.forRoot({
