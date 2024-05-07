@@ -16,13 +16,13 @@ Processed foods (High intake),
 Smoking (1 pack/day for 20 years)]
 
 
-2. likely_diagnoses (List of diagnosis and probability): Probabilistic assessments of potential diagnoses based on the context provided in the transcript, assigning likelihoods to each possible condition.
+2. likely_diagnoses (List of diagnosis and %probability): Probabilistic assessments of potential diagnoses based on the context provided in the transcript, assigning likelihoods to each possible condition.
 
 Example:
-[["Pneumonia", 60],
-["Hypertensive crisis", 30],
-["Migraine with aura", 10],
-["Occipital neuralgia", 5]]
+[["Pneumonia", "60%"],
+["Hypertensive crisis", "30%"],
+["Migraine with aura", "10%"],
+["Occipital neuralgia", "5%"]]
 
 
 3. followup_questions (list of questions): Structured inquiries used by healthcare providers to gather specific details and pertinent information from patients during consultations, aimed at understanding their medical history, symptoms, and potential risk factors. These questions should be tailored to the context of the transcript not generic.
