@@ -1,8 +1,10 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-psidenav',
@@ -12,7 +14,10 @@ import { PatientService } from 'src/app/architecture/services/patient/patient.se
 export class PsidenavComponent implements OnInit {
  
 
-  constructor(private patientser:PatientService,private authService:AuthService){}
+  
+  
+
+  constructor(private patientser:PatientService,private authService:AuthService, private router:Router,private route:ActivatedRoute){}
 
   patientData:any={};
 

@@ -9,14 +9,14 @@ import { DoctorService } from 'src/app/architecture/services/doctor/doctor.servi
 export class DappointmentComponent {
 
 
-
+  displayedColumns: string[] = ['scheduledTime', 'endingTime', 'status', 'actions'];
 
   bookedAppointments:any[] = []; 
 
   constructor(private doctorService:DoctorService){}
   
   ngOnInit(): void {
- 
+    this.onbookedAppointments();
    
   }
   
@@ -30,6 +30,11 @@ export class DappointmentComponent {
         this.bookedAppointments.forEach((appointment) => {
           appointment.expiresAt = new Date(appointment.start).getTime() + 30 * 60 * 1000; // 30 minutes
           // appointment.expiresAt = new Date(appointment.start).getTime() + 3 * 60 * 1000; // 3 minutes
+        });
+
+        // Sort the appointments by the latest scheduled time
+        this.bookedAppointments.sort((a, b) => {
+          return new Date(b.start).getTime() - new Date(a.start).getTime();
         });
       }
     );

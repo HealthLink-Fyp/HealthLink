@@ -38,23 +38,10 @@ export class VideocallComponent implements OnInit, OnDestroy {
     patient:'',
   };
 
-  selectedFile!: File;
-
-  uploadFile(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  sendFileToBackend() {
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-
-    this.uploadService.uploadFile(formData).subscribe((res: any) => {
-      console.log('File sent to backend:', res);
-    });
-  }
+ 
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService, private uploadService: PatientService) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService) {
 
     this.getCurrentUserRole();
     
@@ -76,6 +63,33 @@ export class VideocallComponent implements OnInit, OnDestroy {
          this.sendCallIdToTranscribeService(response.call_id,response.patient);
     })
     
+  }
+
+  selectedFile!:File;
+
+
+  
+
+  uploadFile(event: any) {
+    this.selectedFile = event.target.files[0];
+    }
+
+  sendFileToBackend() {
+    const fileData = {
+      past_records: this.selectedFile,
+      patient: this.videoData.patient,
+      doctor: this.videoData.doctor
+    };
+  
+    const formData = new FormData();
+    formData.append('past_records', this.selectedFile);
+    formData.append('patient', this.videoData.patient);
+    formData.append('doctor', this.videoData.doctor);
+  
+  
+    this.uploadService.uploadFile(formData).subscribe((res: any) => {
+      console.log('File sent to backend:', res);
+    });
   }
 
   sendCallIdToTranscribeService(callId: any,patientId:any) {

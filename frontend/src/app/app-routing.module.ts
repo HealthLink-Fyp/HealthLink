@@ -16,16 +16,16 @@ import { DashboardComponent as patientDashBoard } from './architecture/patient/d
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot', component: ForgotComponent },
-  { path: 'reset/:token', component: ResetComponent },
-  { path: 'doctor', component: DoctorComponent },
-  { path: 'patient', component: PatientComponent },
-  {path:'dboard',component:doctorDashBoard},
-  {path:'pboard',component:patientDashBoard},
+  // { path: 'login', component: LoginComponent },
+  // { path: 'register', component: RegisterComponent },
+  // { path: 'forgot', component: ForgotComponent },
+  // { path: 'reset/:token', component: ResetComponent },
+  // { path: 'doctor', component: DoctorComponent },
+  // { path: 'patient', component: PatientComponent },
+  // {path:'dboard',component:doctorDashBoard},
+  // {path:'pboard',component:patientDashBoard},
 
-  {path:'dboard/:userId',component:doctorDashBoard},
+  // {path:'dboard/:userId',component:doctorDashBoard},
 
 
 

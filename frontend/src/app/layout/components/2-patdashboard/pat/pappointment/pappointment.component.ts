@@ -12,6 +12,10 @@ import { NotifyService } from '../../../notification/notify.service';
 })
 export class PappointmentComponent implements OnInit {
 
+  goBack() {
+    this.router.navigate(['/patient/dashboard'])
+  }
+
   constructor(private currentPatient:AuthService,private authService:AuthService, private patientService:PatientService, private route:ActivatedRoute, private router:Router, private keyService:SharedService, private notifyService:NotifyService){}
 
   ngOnInit(): void {
@@ -101,6 +105,7 @@ export class PappointmentComponent implements OnInit {
         console.log("appointment deleted succesfully",response)
       }
     )
+    this.notifyService.showWarning("Appointment deleted Succcessfully")
   }
 
 

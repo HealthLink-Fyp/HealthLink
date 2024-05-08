@@ -11,7 +11,7 @@ export class NotifyService {
   showSuccess(message:string)
   {
     this.snackBar.open(message,'close',{
-      duration:60000,
+      duration:5000,
       panelClass:['mdc-snackbar__surface','success'],
       verticalPosition: 'top', // Add this line
       horizontalPosition: 'end', // Set to 'end' to align right
@@ -21,7 +21,7 @@ export class NotifyService {
   showError(message:string)
   {
     this.snackBar.open(message,'close',{
-      duration:60000,
+      duration:5000,
       panelClass:['mdc-snackbar__surface','error'],
       verticalPosition: 'top', // Add this line
       horizontalPosition: 'end', // Set to 'end' to align right
@@ -31,7 +31,7 @@ export class NotifyService {
   showWarning(message:string)
   {
     this.snackBar.open(message,'close',{
-      duration:60000,
+      duration:5000,
       panelClass:['mdc-snackbar__surface','warning'],
       verticalPosition: 'top', // Add this line
       horizontalPosition: 'end', // Set to 'end' to align right
@@ -41,7 +41,7 @@ export class NotifyService {
   showPending(message:string)
   {
     this.snackBar.open(message,'close',{
-      duration:60000,
+      duration:5000,
       panelClass:['mdc-snackbar__surface','pending'],
       verticalPosition: 'top', // Add this line
       horizontalPosition: 'end', // Set to 'end' to align right
