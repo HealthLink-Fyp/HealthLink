@@ -11,6 +11,8 @@
           <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
         </div>
       </div>
+      <input type="file" (change)="uploadFile($event)">
+<button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
     </div>
     <app-chat></app-chat>
   </div>
@@ -52,8 +54,7 @@
             <div class="child2">
               <h1>child2</h1>
               <!-- file-upload.component.html -->
-<input type="file" (change)="uploadFile($event)">
-<button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
+
             </div>
           </div>
           <div class="col">
