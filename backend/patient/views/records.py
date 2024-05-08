@@ -50,8 +50,6 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         elif user.role == "doctor":
             serializer.save(doctor=user.doctor)
 
-        
-
     def perform_update(self, serializer):
         """
         Update a MedicalRecord object.
