@@ -20,10 +20,15 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
         Create a MedicalRecord object.
         """
 
+        print(validated_data)
         prescription = validated_data.get("prescription")
 
         if not isinstance(prescription, dict):
-            raise ValueError("Prescription should be a dictionary.")
+            import json
+            try:
+                prescription = json.loads(prescription)
+            except json.JSONDecodeError:
+                raise ValueError("Prescription should be a valid JSON.")
 
         if not prescription.get("medicines") or not prescription.get("tests"):
             raise ValueError("Prescription should have medicines and tests")
