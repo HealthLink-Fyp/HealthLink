@@ -8,25 +8,17 @@ import { PatientService } from 'src/app/architecture/services/patient/patient.se
   styleUrls: ['./medrecord.component.css']
 })
 export class MedrecordComponent {
+  doctorNotes:any='';
+  pastRecords:any='' ;
+  viewRecords:boolean=false;
 
-  selectedFile!: File;
-
-  constructor(private uploadService: PatientService) { }
+  constructor(private recordsService: PatientService) { }
 
   ngOnInit(): void {
-  }
-
-  uploadFile(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  sendFileToBackend() {
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-
-    this.uploadService.uploadFile(formData).subscribe((res: any) => {
-      console.log('File sent to backend:', res);
-    });
+    this.recordsService.getRecords().subscribe((res:any)=>{
+      this.doctorNotes = res.results[3].doctor_notes;
+      this.pastRecords = res.results[3].past_records;
+    })
   }
 
 }

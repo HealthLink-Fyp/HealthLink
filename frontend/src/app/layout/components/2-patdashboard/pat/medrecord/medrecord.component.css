@@ -1,0 +1,6 @@
+.image-size {
+    max-width: 100%; /* or a specific width, e.g. 300px */
+    max-height: 100%; /* or a specific height, e.g. 200px */
+    object-fit: cover; /* or contain, depending on your needs */
+    width:500px;
+  }

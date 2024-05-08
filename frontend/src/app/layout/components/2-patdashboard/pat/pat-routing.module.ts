@@ -9,6 +9,7 @@ import { DocsearchComponent } from './docsearch/docsearch.component';
 import { MstoreComponent } from './mstore/mstore.component';
 import { LabtestsComponent } from './labtests/labtests.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MedrecordComponent } from './medrecord/medrecord.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'appointments/:doctorId',component:PappointmentComponent},
   {path:'medicalStore',component:MstoreComponent},
   {path:'labTests',component:LabtestsComponent},
-  {path:'settings',component:SettingsComponent}
+  {path:'settings',component:SettingsComponent},
+  {path:'medRecords',component:MedrecordComponent}
 ];
 
 @NgModule({

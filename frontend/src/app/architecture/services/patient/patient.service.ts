@@ -26,6 +26,10 @@ export class PatientService {
     return this.http.post(`${environment.api}/records/`, formData);
   }
 
+  getRecords() {
+    return this.http.get(`${environment.api}/records/`);
+  }
+
   updatePatientProfile(body:any)
   {
     return this.http.put(`${environment.api}/auth/profile/`,body);

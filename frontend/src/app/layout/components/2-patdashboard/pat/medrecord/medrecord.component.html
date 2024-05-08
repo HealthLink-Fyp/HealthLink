@@ -1,3 +1,11 @@
-<!-- file-upload.component.html -->
-<input type="file" (change)="uploadFile($event)">
-<button mat-raised-button color="primary" (click)="sendFileToBackend()">Send File</button>
+<div>
+    <div *ngIf="doctorNotes ?? ''">
+    <h2>Doctor Notes: {{ doctorNotes }}</h2>
+    </div>
+
+    <button (click)="viewRecords=true">view records</button>
+    <button (click)="viewRecords=false">close</button>
+    <div *ngIf="viewRecords">
+    <img src="{{ pastRecords }}" alt="Past Records" class="image-size">
+    </div>
+  </div>
