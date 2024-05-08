@@ -7,11 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.authentication import JWTAuthentication
 from core.permissions import IsHealthcareProvider
 
-from healthlink.utils.exceptions import (
-    NotFound,
-    ProfileNotFound,
-    DoctorNotAllowed,
-)
+from healthlink.utils.exceptions import NotFound, ProfileNotFound
 
 
 class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
@@ -47,9 +43,14 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         """
 
         user = self.request.user
-        self.validate_user(user)
+        user = self.validate_user(user)
 
-        serializer.save(patient=user.patient)
+        if user.role == "patient":
+            serializer.save(patient=user.patient)
+        elif user.role == "doctor":
+            serializer.save(doctor=user.doctor)
+
+        
 
     def perform_update(self, serializer):
         """
@@ -94,11 +95,8 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
 
         # Check if the user has a profile
         if user.role == "patient" and hasattr(user, "patient"):
-            return
+            return user
         elif user.role == "doctor" and hasattr(user, "doctor"):
-            return
-            # if method == "get":
-            #     return
-            # raise DoctorNotAllowed("This Medical Record operation")
+            return user
         else:
             raise ProfileNotFound()
