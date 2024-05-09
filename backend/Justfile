@@ -30,7 +30,7 @@ shell:
 # django-extensions commands
 
 erd:
-  python manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop -o erd.png
+  python manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o erd.png
 
 reset:
   python manage.py reset_db --noinput patient 

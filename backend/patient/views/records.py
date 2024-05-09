@@ -1,4 +1,5 @@
 from patient.models import MedicalRecord
+from chat.models import Call
 from patient.serializers import MedicalRecordSerializer
 
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
@@ -46,11 +47,13 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         user = self.validate_user(user)
 
         if user.role == "patient":
-            serializer.save(patient=user.patient)
+            call = Call.objects.filter(patient=user.patient).last()
+            if call:
+                serializer.save(patient=user.patient, doctor=call.doctor)
         elif user.role == "doctor":
-            serializer.save(doctor=user.doctor)
-
-        
+            call = Call.objects.filter(doctor=user.doctor).last()
+            if call:
+                serializer.save(doctor=user.doctor)
 
     def perform_update(self, serializer):
         """

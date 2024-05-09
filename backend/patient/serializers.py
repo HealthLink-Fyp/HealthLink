@@ -11,9 +11,19 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
 
 class MedicalRecordSerializer(serializers.ModelSerializer):
+    doctor_name = serializers.CharField(source="doctor.full_name", read_only=True)
+
     class Meta:
         model = MedicalRecord
-        fields = "__all__"
+        fields = [
+            "record_id",
+            "doctor_name",
+            "doctor_notes",
+            "prescription",
+            "past_records",
+            "created",
+        ]
+        read_only_fields = ["patient", "doctor"]
 
     def create(self, validated_data):
         """
@@ -27,6 +37,7 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
         else:
             if not isinstance(prescription, dict):
                 import json
+
                 try:
                     prescription = json.loads(prescription)
                 except json.JSONDecodeError:

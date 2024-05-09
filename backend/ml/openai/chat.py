@@ -9,10 +9,7 @@ def get_prompt() -> PromptTemplate:
     return PromptTemplate.from_template(prompt_template)
 
 
-def send_transcription_to_chatbot(transcription: str) -> dict:
-    anonymizer = get_fake_anonymizer()
-    prompt = get_prompt()
-
+def prompt_template(anonymizer, prompt):
     model_kwargs = {
         "response_format": {"type": "json_object"},
     }
@@ -27,7 +24,15 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 
     chain = {"anonymized_text": anonymizer.anonymize} | prompt | chatopenai
 
-    response = chain.invoke(transcription)
+    return chain
+
+
+def send_transcription_to_chatbot(transcription: str) -> dict:
+    anonymizer = get_fake_anonymizer()
+    prompt = get_prompt()
+    chain = prompt_template(anonymizer=anonymizer, prompt=prompt)
+
+    response = chain.invoke({"transcription": transcription})
 
     # Check for response presence and status code
     if response is None:
