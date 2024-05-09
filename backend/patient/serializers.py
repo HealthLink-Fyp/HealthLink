@@ -19,7 +19,6 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
             "record_id",
             "doctor_name",
             "doctor_notes",
-            "prescription",
             "past_records",
             "created",
         ]

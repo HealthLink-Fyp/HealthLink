@@ -4,10 +4,13 @@ from rest_framework import status
 from core.authentication import JWTAuthentication
 
 # import datetime
-from chat.models import Call
+from chat.models import Call, LLMResponse
 from chat.serializers import CallSerializer
 
-from ml.openai.chat import send_transcription_to_chatbot
+from ml.openai.chat import (
+    send_transcription_to_chatbot,
+    send_transcription_to_chatbot_v2,
+)
 from ml.emotion.predictions import EmotionPredictor
 from patient.models import Appointment
 
@@ -157,6 +160,36 @@ class CallTranscriptView(APIView):
         if "error" in response:
             raise BadRequest(response["error"])
 
+        LLMResponse.objects.create(
+            call=call, transcription=transcription, response=response
+        )
+
+        return Response(response, status=status.HTTP_200_OK)
+
+
+class DashboardReportView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        """
+        Send the medical report to the chatbot.
+        """
+
+        patient = request.user.patient
+
+        llm_responses = LLMResponse.objects.filter(call__patient=patient)
+
+        if not llm_responses:
+            raise NotFound("LLM Responses")
+
+        llm_data = ""
+
+        for llm_response in llm_responses:
+            if isinstance(llm_response.response, dict):
+                llm_data += json_to_paragraph(llm_response.response)
+
+        response = send_transcription_to_chatbot_v2(llm_data)
+
         return Response(response, status=status.HTTP_200_OK)
 
 
@@ -182,3 +215,26 @@ class CallEmotionView(APIView):
             return Response({"emotion": emotion}, status=status.HTTP_200_OK)
         except Exception as e:
             raise BadRequest(str(e))
+
+
+def json_to_paragraph(data):
+    key_points = data.get("key_points", [])
+    likely_diagnoses = data.get("likely_diagnoses", [])
+    followup_questions = data.get("followup_questions", [])
+
+    paragraph = "Common symptoms include "
+    if key_points:
+        paragraph += ", ".join(key_points)
+
+    if likely_diagnoses:
+        paragraph += ". Based on your symptoms, you may have "
+        diagnoses_text = []
+        for diagnosis, chance in likely_diagnoses:
+            diagnoses_text.append(f"{diagnosis} ({chance} chance)")
+        paragraph += ", ".join(diagnoses_text)
+
+    if followup_questions:
+        paragraph += ". To further assess your condition, I would like to ask you some follow-up questions: "
+        paragraph += " ".join(followup_questions)
+
+    return paragraph
