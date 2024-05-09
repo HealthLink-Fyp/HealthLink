@@ -17,14 +17,13 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
         model = MedicalRecord
         fields = [
             "record_id",
-            "patient",
-            "doctor",
             "doctor_name",
             "doctor_notes",
             "prescription",
             "past_records",
             "created",
         ]
+        read_only_fields = ["patient", "doctor"]
 
     def create(self, validated_data):
         """
