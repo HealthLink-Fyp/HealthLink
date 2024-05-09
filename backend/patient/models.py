@@ -42,7 +42,6 @@ class MedicalRecord(models.Model):
     patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     doctor_notes = models.TextField(null=True, blank=True)
-    prescription = models.JSONField(null=True, blank=True)
     past_records = models.FileField(upload_to="past_records/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
