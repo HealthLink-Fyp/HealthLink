@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
 import { NotifyService } from '../../../notification/notify.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-pappointment',
@@ -37,7 +38,7 @@ export class PappointmentComponent implements OnInit {
 
   pkAppointment:any='';
   
-  bookedAppointments:any[] = []; 
+ 
 
   appointmentData: any = {
     start:'',
@@ -64,16 +65,21 @@ export class PappointmentComponent implements OnInit {
  
   }
 
+  bookedAppointments = new MatTableDataSource<any>();
+
   onbookedAppointments() {
     this.patientService.getbookedAppointments().subscribe(
       (response: any) => {
-        this.bookedAppointments = response;
+        this.bookedAppointments.data = response;
         
         // Add expiresAt property to each appointment
-        this.bookedAppointments.forEach((appointment) => {
+        this.bookedAppointments.data.forEach((appointment) => {
           appointment.expiresAt = new Date(appointment.start).getTime() + 30 * 60 * 1000; // 30 minutes
           // appointment.expiresAt = new Date(appointment.start).getTime() + 3 * 60 * 1000; // 3 minutes
         });
+        
+        // Sort appointments by latest appointment
+        this.bookedAppointments.data.sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
       }
     );
   }

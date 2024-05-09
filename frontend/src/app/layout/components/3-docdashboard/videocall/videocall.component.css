@@ -174,3 +174,18 @@ div.row.p-2 {
 {
   width:200px;
 }
+
+
+.fileUpload
+{
+  width:200px;
+  display:flex;
+  flex-direction: column;
+}
+
+.image-size {
+  max-width: 100%; /* or a specific width, e.g. 300px */
+  max-height: 100%; /* or a specific height, e.g. 200px */
+  object-fit: cover; /* or contain, depending on your needs */
+  width:500px;
+}

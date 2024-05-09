@@ -10,11 +10,16 @@
           <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
           <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
         </div>
-      </div>
-      <input type="file" (change)="uploadFile($event)">
-<button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
+      </div>  
     </div>
+    <div>
     <app-chat></app-chat>
+    </div><br>
+    <mat-divider></mat-divider><br>
+    <div class="fileUpload">
+    <input type="file" (change)="uploadFile($event)">
+    <button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
+    </div>
   </div>
 
 <!-- Only show the following content if the user is a doctor -->
@@ -54,7 +59,13 @@
             <div class="child2">
               <h1>child2</h1>
               <!-- file-upload.component.html -->
-
+              <button (click)="viewRecords=true">view records</button>
+              <button (click)="viewRecords=false">close</button>
+              <div *ngIf="viewRecords">
+                <div *ngFor="let record of results">
+                  <img src="{{ record.past_records }}" alt="Past Records" class="image-size">
+                </div>
+              </div>
             </div>
           </div>
           <div class="col">

@@ -41,7 +41,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
  
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService) {
 
     this.getCurrentUserRole();
     
@@ -77,15 +77,11 @@ export class VideocallComponent implements OnInit, OnDestroy {
   sendFileToBackend() {
     const fileData = {
       past_records: this.selectedFile,
-      patient: this.videoData.patient,
-      doctor: this.videoData.doctor
     };
   
     const formData = new FormData();
     formData.append('past_records', this.selectedFile);
-    formData.append('patient', this.videoData.patient);
-    formData.append('doctor', this.videoData.doctor);
-  
+
   
     this.uploadService.uploadFile(formData).subscribe((res: any) => {
       console.log('File sent to backend:', res);
@@ -118,6 +114,10 @@ export class VideocallComponent implements OnInit, OnDestroy {
         "Can you describe your current location or any recent travel history?"
     ]
   };
+
+
+  results :any= [];
+  viewRecords:boolean=false;
   
   ngOnInit(): void {
 
@@ -128,6 +128,11 @@ export class VideocallComponent implements OnInit, OnDestroy {
         this.loading = false; // Set loading to false after 5 seconds
       }, 5000);
     });
+
+
+    this.recordsService.getRecords().subscribe((res:any)=>{
+      this.results = res.results;
+    })
 
     this.callService.localStream$
       .pipe(filter(res => !!res))

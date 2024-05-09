@@ -23,11 +23,6 @@
 
 
 
-
-
-
-
-
 <div class="booking" *ngIf="!onupdateAppointment">
   <label>For appointment booking:</label><br>
   <mat-form-field>
@@ -36,9 +31,6 @@
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="onBookAppointment()">Book Appointment</button>
 </div>
-<br>
-<br>
-
 
 <div class="updating" *ngIf="onupdateAppointment">
   <h1>Update appointment:</h1>
@@ -49,31 +41,33 @@
   <button mat-raised-button color="primary" (click)="onSubmitUpdatedAppointment()">Update</button>
 </div>
 
-
 <div class="appointments" *ngIf="presentAppointments">
-  
-  <mat-card *ngFor="let bookedAppoint of bookedAppointments" class="appointment-card">
-    <div class="appointment-details">
-   
-      <div class="schedule-time">
-        <span class="label"><b>Scheduled Time:</b></span>
-        <span class="value">{{ bookedAppoint.start | date: 'EEEE, MMMM d, y, h:mm a' }}</span>
-      </div>
-      <div class="end-time">
-        <span class="label"><b>Ending Time:</b></span>
-        <span class="value">{{ bookedAppoint.end | date: 'EEEE, MMMM d, y, h:mm a' }}</span>
-      </div>
-      <p>{{ bookedAppoint.status }}</p>
-    </div>
-    <div class="actions" class="buttonsAppoint">
-      <button mat-raised-button color="primary" class="action-button" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update </button>
-      <button mat-raised-button color="warn" class="action-button" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete </button>
-      <button mat-raised-button color="primary" class="join-button" routerLink='/doctor/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
-    </div>
-  </mat-card>
-  
-  
-</div>
-    
+  <mat-table [dataSource]="bookedAppointments" class="mat-elevation-z8">
+    <ng-container matColumnDef="start">
+      <mat-header-cell *matHeaderCellDef>Scheduled Time</mat-header-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.start | date: 'EEEE, MMMM d, y, h:mm a' }}</mat-cell>
+    </ng-container>
 
-    
+    <ng-container matColumnDef="end">
+      <mat-header-cell *matHeaderCellDef>Ending Time</mat-header-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.end | date: 'EEEE, MMMM d, y, h:mm a' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.status }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let bookedAppoint; let row = dataIndex">
+        <button mat-raised-button color="primary" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update</button>
+        <button mat-raised-button color="warn" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete</button>
+        <button mat-raised-button color="primary" routerLink='/doctor/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['start', 'end', 'status', 'actions']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['start', 'end', 'status', 'actions']"></mat-row>
+  </mat-table>
+</div>

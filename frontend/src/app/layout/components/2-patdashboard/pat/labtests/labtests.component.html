@@ -27,53 +27,8 @@
   
   
   
-  <!-- search.component.html -->
-  <div class="container">
-    <!-- Left side - City selection -->
-    <div class="city">
-      <mat-form-field>
-        <mat-label><mat-icon>location_on</mat-icon>Select City</mat-label>
-        <mat-select [(ngModel)]="selectedCity">
-          <mat-option *ngFor="let city of cities" [value]="city">
-            {{city}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+
   
-    <!-- Right side - Search input -->
-  
-    <div >
-    <mat-form-field class="searchBar" appearance="fill">
-      <input  matInput type="text" placeholder="Search for medicines..." 
-      [matAutocomplete]="auto">
-    
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let suggestion of searchSuggestions" [value]="suggestion">
-          {{suggestion}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    </div>
-  
-  <!-- Search button -->
-  <div class="searchButton">
-   <button mat-flat-button color="accent" class="larger-button" (click)="search()">
-    <mat-icon >search</mat-icon>
-    </button>
-  </div>
-  
-  </div>
-  
-  
-  
- 
-   <!-- Display the filtered tests -->
-   <ul>
-    <li *ngFor="let test of filteredTests">
-      {{ test.name }} ({{ test.price }})
-    </li>
-  </ul>
   
   
   
