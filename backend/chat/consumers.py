@@ -2,8 +2,6 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
-from patient.models import Appointment
-
 
 class ChatConsumer(WebsocketConsumer):
     connected_users = 0
