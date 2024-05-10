@@ -9,12 +9,14 @@ import { PatientService } from 'src/app/architecture/services/patient/patient.se
 export class BodychartComponent implements OnInit {
   showInfoPanel: boolean = false;
   infoText: string = '';
+  responseData:any=''
 
   constructor(private vMetrices:PatientService){}
 
   ngOnInit(): void {
     this.vMetrices.getMetrices().subscribe((res:any)=>{
       console.log("hi iam visuals",res);
+      this.responseData = res; // store the response data in a component property
     })
   }
 
@@ -22,11 +24,11 @@ export class BodychartComponent implements OnInit {
     this.showInfoPanel = true;
     // Example information for body parts
     switch (bodyPart) {
-      case 'Head':
-        this.infoText = 'This is the head.';
+      case 'Chest':
+        this.infoText = this.responseData.symptoms.find((symptom:any) => symptom.body_part === 'Chest').symptoms.map((symptom:any) => symptom.symptom).join(', ');
         break;
-      case 'Stomach':
-        this.infoText = 'This is the Stomach.';
+      case 'Arms, Jaw, Back':
+        this.infoText = this.responseData.symptoms.find((symptom:any) => symptom.body_part === 'Arms, Jaw, Back').symptoms.map((symptom :any)=> symptom.symptom).join(', ');
         break;
       // Add more cases for other body parts
     }

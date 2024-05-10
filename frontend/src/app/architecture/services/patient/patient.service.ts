@@ -17,14 +17,12 @@ export class PatientService {
 
   getPatient() {
     console.log("hi i am getting patient for u (service)");
-    return this.http.get(`${environment.api}/auth/profile/`, {
-      context: withCache()
-    });
+    return this.http.get(`${environment.api}/auth/profile/`, {context: withCache()});
   }
 
   getMetrices()
   {
-    return this.http.get(`${environment.api}/dashboard/`);
+    return this.http.get(`${environment.api}/dashboard/`, {context: withCache()});
   }
 
   uploadFile(formData: FormData) {
