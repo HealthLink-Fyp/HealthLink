@@ -118,6 +118,18 @@ export class VideocallComponent implements OnInit, OnDestroy {
 
   results :any= [];
   viewRecords:boolean=false;
+
+  
+  isImage(url: string): boolean {
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const fileExtension = this.getFileExtension(url);
+    return imageExtensions.includes(fileExtension);
+  }
+
+  getFileExtension(url: string): string {
+    const urlParts = url.split('.');
+    return urlParts[urlParts.length - 1];
+  }
   
   ngOnInit(): void {
 

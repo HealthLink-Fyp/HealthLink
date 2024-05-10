@@ -63,7 +63,15 @@
               <button (click)="viewRecords=false">close</button>
               <div *ngIf="viewRecords">
                 <div *ngFor="let record of results">
-                  <img src="{{ record.past_records }}" alt="Past Records" class="image-size">
+                  <img *ngIf="record.past_records && isImage(record.past_records)" 
+                       src="{{ record.past_records }}" 
+                       alt="Past Records" 
+                       class="image-size">
+                  <a *ngIf="record.past_records && !isImage(record.past_records)" 
+                     href="{{ record.past_records }}" 
+                     target="_blank">
+                    <i class="fa fa-file-pdf" aria-hidden="true"></i> {{ getFileExtension(record.past_records) }}
+                  </a>
                 </div>
               </div>
             </div>

@@ -22,6 +22,11 @@ export class PatientService {
     });
   }
 
+  getMetrices()
+  {
+    return this.http.get(`${environment.api}/dashboard/`);
+  }
+
   uploadFile(formData: FormData) {
     return this.http.post(`${environment.api}/records/`, formData);
   }
