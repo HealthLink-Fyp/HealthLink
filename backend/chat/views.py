@@ -123,7 +123,7 @@ class CallTranscriptView(APIView):
 
         # Patient cannot send transcription
         if request.user.role == "patient" and hasattr(request.user, "patient"):
-            raise PatientNotAllowed("Send transcription")
+            raise PatientNotAllowed()
 
         transcription = request.data.get("transcription")
 
