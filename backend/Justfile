@@ -4,36 +4,36 @@ set positional-arguments
 # Django commands
 
 serve:
-  python manage.py runserver
+  python3 manage.py runserver
 
 testall:
-  python manage.py test
+  python3 manage.py test
 
 @test file:
-  python manage.py test tests.test_$1
+  python3 manage.py test tests.test_$1
 
 migration:
-  python manage.py makemigrations
+  python3 manage.py makemigrations
 
 @migrations app:
-  python manage.py makemigrations $1
+  python3 manage.py makemigrations $1
 
 migrate:
-  python manage.py migrate --run-syncdb
+  python3 manage.py migrate --run-syncdb
 
 admin:
-  python manage.py createsuperuser
+  python3 manage.py createsuperuser
 
 shell:
-  python manage.py shell --no-startup
+  python3 manage.py shell --no-startup
 
 # django-extensions commands
 
 erd:
-  python manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o erd.png
+  python3 manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o erd.png
 
 reset:
-  python manage.py reset_db --noinput patient 
+  python3 manage.py reset_db --noinput patient 
 
 # MKDocs commands
 

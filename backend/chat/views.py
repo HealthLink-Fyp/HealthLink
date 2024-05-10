@@ -116,43 +116,36 @@ class CallView(APIView):
 class CallTranscriptView(APIView):
     authentication_classes = [JWTAuthentication]
 
-    def validate_data(self, data, data_type, name):
-        """
-        Validate the data based on the data type.
-        """
-        if not data or not isinstance(data, data_type):
-            raise InvalidData(name)
-
     def post(self, request):
         """
         Send the transcription to the chatbot.
         """
-        call_id = request.data.get("call_id")
-        patient_id = request.data.get("patient_id")
-        transcription = request.data.get("transcription")
-
-        # Validate the data
-        self.validate_data(call_id, int, "Call ID")
-        self.validate_data(patient_id, int, "Patient ID")
-        self.validate_data(transcription, str, "Transcription")
 
         # Patient cannot send transcription
         if request.user.role == "patient" and hasattr(request.user, "patient"):
             raise PatientNotAllowed("Send transcription")
 
-        # Check if the call exists
-        try:
-            call = Call.objects.get(call_id=call_id)
-        except Call.DoesNotExist:
-            raise NotFound("Call")
-
-        # Check if the call ID and patient ID match
-        if not call or call.patient_id != patient_id:
-            raise InvalidData("Call ID or Patient ID")
+        transcription = request.data.get("transcription")
 
         # Check if the transcription is empty
-        if call.patient_id != patient_id:
-            raise InvalidData("Provided Patient ID does not match or")
+        if not transcription or not isinstance(transcription, str):
+            raise InvalidData("Transcription")
+
+        doctor = request.user.doctor
+
+        # Check if the doctor exists
+        if not doctor:
+            raise NotFound("Doctor")
+
+        call = Call.objects.filter(doctor=doctor).last()
+
+        # Check if the call exists
+        if not call:
+            raise NotFound("Call")
+
+        # Check if the call belongs to the patient
+        if request.user.role == "doctor" and call.doctor != request.user.doctor:
+            raise NotFound("Active Call for doctor")
 
         response = send_transcription_to_chatbot(transcription)
 
