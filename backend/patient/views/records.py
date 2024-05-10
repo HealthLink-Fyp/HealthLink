@@ -46,14 +46,31 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         user = self.request.user
         user = self.validate_user(user)
 
+        doctor_notes = self.request.data.get("doctor_notes", None)
+        past_records = self.request.data.get("past_records", None)
+
         if user.role == "patient":
             call = Call.objects.filter(patient=user.patient).last()
-            if call:
-                serializer.save(patient=user.patient, doctor=call.doctor)
+            if call and doctor_notes or past_records:
+                serializer.save(
+                    patient=user.patient,
+                    doctor=call.doctor,
+                    doctor_notes=doctor_notes,
+                    past_records=past_records,
+                )
+            else:
+                raise NotFound("Active/past call or doctor notes and past records")
         elif user.role == "doctor":
             call = Call.objects.filter(doctor=user.doctor).last()
-            if call:
-                serializer.save(doctor=user.doctor)
+            if call and doctor_notes or past_records:
+                serializer.save(
+                    patient=call.patient,
+                    doctor=user.doctor,
+                    doctor_notes=doctor_notes,
+                    past_records=past_records,
+                )
+            else:
+                raise NotFound("Active/past call or doctor notes and past records")
 
     def perform_update(self, serializer):
         """

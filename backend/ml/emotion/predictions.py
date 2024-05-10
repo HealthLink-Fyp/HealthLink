@@ -10,6 +10,9 @@ from keras.models import load_model  # noqa: E402
 
 
 class EmotionPredictor:
+    model = None
+    face_cascade = None
+
     def __init__(self):
         self.SIZE = 48
         self.OBJECTS = (
@@ -25,13 +28,17 @@ class EmotionPredictor:
         self.face_path = pathlib.Path("ml/emotion/face.xml")
 
     def load_model(self):
-        if not self.model_path.exists():
-            raise FileNotFoundError("Model file not found")
-        return load_model(str(self.model_path))
+        if EmotionPredictor.model is None:
+            if not self.model_path.exists():
+                raise FileNotFoundError("Model file not found")
+            EmotionPredictor.model = load_model(str(self.model_path))
+        return EmotionPredictor.model
 
     def load_cascade(self):
-        if not self.face_path.exists():
-            raise FileNotFoundError("Face cascade file not found")
+        if EmotionPredictor.face_cascade is None:
+            if not self.face_path.exists():
+                raise FileNotFoundError("Face cascade file not found")
+            EmotionPredictor.face_cascade = cv2.CascadeClassifier(str(self.face_path))
         return cv2.CascadeClassifier(str(self.face_path))
 
     def detect_single_face(self, image: bytes) -> np.ndarray:

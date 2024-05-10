@@ -44,13 +44,13 @@ class AppointmentView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         if user.role == "patient" and hasattr(user, "patient"):
             if appointment_id:
                 queryset = Appointment.objects.filter(
-                    patient=user.patient, id=appointment_id
+                    patient=user.patient, appointment_id=appointment_id
                 )
             queryset = Appointment.objects.filter(patient=user.patient)
         elif user.role == "doctor" and hasattr(user, "doctor"):
             if appointment_id:
                 queryset = Appointment.objects.filter(
-                    doctor=user.doctor, id=appointment_id
+                    doctor=user.doctor, appointment_id=appointment_id
                 )
             queryset = Appointment.objects.filter(doctor=user.doctor)
         else:
