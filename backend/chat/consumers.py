@@ -1,6 +1,7 @@
 import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from channels.exceptions import StopConsumer
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -78,6 +79,8 @@ class ChatConsumer(WebsocketConsumer):
             self.notify_user_leave()
 
             ChatConsumer.connected_users -= 1
+
+            raise StopConsumer()
 
     def receive(self, text_data):
         """
