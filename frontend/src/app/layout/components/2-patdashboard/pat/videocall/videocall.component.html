@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <!-- Call Buttons Row -->
+  <div class="row justify-content-center align-items-center p-2">
+    <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(false)">Start Call</button>
+    <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join Call</button>
+    <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)" (click)="endCall()">End Call</button>
+  </div>
+
+  <!-- Video Section -->
+  <div class="row justify-content-center">
+    <div class="col text-center">
+      <div id="video-wrapper">
+        <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
+        <video #localVideo id="local-video" autoplay playsinline muted="true"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Component -->
+  <div class="row justify-content-center mt-4">
+    <app-chat1></app-chat1>
+  </div>
+
+  <!-- Divider and File Upload Section -->
+  <div class="row justify-content-center mt-4">
+    <mat-divider class="w-75"></mat-divider>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="fileUpload">
+      <input type="file" (change)="uploadFile($event)">
+      <button mat-raised-button color="primary" (click)="sendFileToBackend()">Upload Medical Record</button>
+    </div>
+  </div>
+</div>

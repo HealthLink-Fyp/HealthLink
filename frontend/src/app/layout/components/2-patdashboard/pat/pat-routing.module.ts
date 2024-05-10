@@ -10,6 +10,8 @@ import { MstoreComponent } from './mstore/mstore.component';
 import { LabtestsComponent } from './labtests/labtests.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MedrecordComponent } from './medrecord/medrecord.component';
+import { VideocallComponent } from './videocall/videocall.component';
+import { ChatComponent } from '../../3-docdashboard/chat/chat.component';
 
 
 
@@ -24,7 +26,9 @@ const routes: Routes = [
   {path:'medicalStore',component:MstoreComponent},
   {path:'labTests',component:LabtestsComponent},
   {path:'settings',component:SettingsComponent},
-  {path:'medRecords',component:MedrecordComponent}
+  {path:'medRecords',component:MedrecordComponent},
+  {path:'videoCall',component:VideocallComponent},
+  {path:'chat',component:ChatComponent}
 ];
 
 @NgModule({

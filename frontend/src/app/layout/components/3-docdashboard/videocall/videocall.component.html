@@ -1,29 +1,7 @@
-<div *ngIf="currentUserRole === 'patient'" class="container-fluid">
-    <div class="row p-2">
-      <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(false)">Start Call</button>
-      <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join Call</button>
-      <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)" (click)="endCall()">End Call</button>
-    </div>
-    <div class="row">
-      <div class="col text-center">
-        <div id="video-wrapper">
-          <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
-          <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
-        </div>
-      </div>  
-    </div>
-    <div>
-    <app-chat></app-chat>
-    </div><br>
-    <mat-divider></mat-divider><br>
-    <div class="fileUpload">
-    <input type="file" (change)="uploadFile($event)">
-    <button mat-raised-button color="primary" (click)="sendFileToBackend()">upload medical record</button>
-    </div>
-  </div>
+
 
 <!-- Only show the following content if the user is a doctor -->
-<div *ngIf="currentUserRole === 'doctor'">
+<div >
   <!-- Additional content for doctors only -->
   <mat-card class="parent">
     <mat-card-content class="child">
@@ -57,7 +35,7 @@
         <div class="row">
           <div class="col">
             <div class="child2">
-              <h1>child2</h1>
+              <h1></h1>
               <!-- file-upload.component.html -->
               <button (click)="viewRecords=true">view records</button>
               <button (click)="viewRecords=false">close</button>
@@ -139,7 +117,7 @@
         <div class="row">
           <div class="col">
             <div class="child3">
-              <h1>child3</h1>
+              <h1>chating</h1>
           
                <app-chat></app-chat>
   
@@ -147,7 +125,7 @@
           </div>
           <div class="col">
             <div class="child3">
-              <h1>child3</h1>
+              <h1></h1>
               <div>
                 <h2>live possible causes:</h2>
                 <ul class="stream-list">
@@ -169,7 +147,7 @@
           </div>
           <div class="col">
             <div class="child3">
-              <h1>child3</h1>
+              <h1></h1>
               <mat-card class="custom-note-card">
                 <mat-card-header>
                   <mat-card-title>Consultation Note</mat-card-title>

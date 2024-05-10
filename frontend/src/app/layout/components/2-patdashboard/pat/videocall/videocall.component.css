@@ -1,0 +1,42 @@
+.container-fluid {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#video-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.fileUpload {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Additional Styles */
+.m-2 {
+  margin: 10px;
+}
+
+.w-75 {
+  width: 75%;
+}

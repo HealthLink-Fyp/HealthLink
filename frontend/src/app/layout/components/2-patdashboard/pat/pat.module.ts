@@ -17,11 +17,15 @@ import { MstoreComponent } from './mstore/mstore.component';
 import { LabtestsComponent } from './labtests/labtests.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MedrecordComponent } from './medrecord/medrecord.component';
+import { VideocallComponent } from './videocall/videocall.component';
+import { ChatComponent } from './chat/chat.component';
+import { DialogComponent } from './videocall/dialog/dialog.component';
+
 
 
 
 @NgModule({
-  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent, MedrecordComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent, MedrecordComponent,VideocallComponent,ChatComponent,DialogComponent],
   imports: [
     CommonModule,
     PatRoutingModule,

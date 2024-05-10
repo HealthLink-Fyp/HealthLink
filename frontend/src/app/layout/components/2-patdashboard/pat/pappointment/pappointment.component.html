@@ -63,7 +63,7 @@
       <mat-cell *matCellDef="let bookedAppoint; let row = dataIndex">
         <button mat-raised-button color="primary" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update</button>
         <button mat-raised-button color="warn" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete</button>
-        <button mat-raised-button color="primary" routerLink='/doctor/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
+        <button mat-raised-button color="primary" routerLink='/patient/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
       </mat-cell>
     </ng-container>
 
