@@ -118,8 +118,4 @@ def validate_response(response: str) -> dict:
     elif extra_keys:
         return {"error": f"Invalid response from OpenAi, extra keys {extra_keys}"}
 
-    # response_json["likely_diagnoses"] = [
-    #     diagnosis for diagnosis in response_json["likely_diagnoses"]
-    # ]
-
     return response_json
