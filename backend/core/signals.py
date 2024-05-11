@@ -1,6 +1,6 @@
 from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
-from healthlink.scripts.populate import check_initial_data, populate_medical_data
+from healthlink.dbm.populate import check_initial_data, populate_medical_data
 
 from django.contrib.auth.models import User
 

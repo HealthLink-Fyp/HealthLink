@@ -14,7 +14,7 @@ def populate_medical_data():
     """
     import json
 
-    with open("healthlink/scripts/data/medical_tests.json") as file:
+    with open("healthlink/dbm/data/medical_tests.json") as file:
         medical_tests = json.load(file)
 
     for medical_test in medical_tests:
@@ -23,7 +23,7 @@ def populate_medical_data():
     if MedicalTest.objects.count() == len(medical_tests):
         return f"{len(medical_tests)} medical tests added to the database."
 
-    with open("healthlink/scripts/data/medicines.json") as file:
+    with open("healthlink/dbm/data/medicines.json") as file:
         medicines = json.load(file)
 
     for medicine in medicines:
