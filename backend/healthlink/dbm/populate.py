@@ -1,35 +1,70 @@
-from patient.models import MedicineShop, MedicalTest
+import os
+import json
+from patient.serializers import MedicineShopSerializer, MedicalTestSerializer
+from core.serializers import (
+    UserSerializer,
+    DoctorProfileSerializer,
+    PatientProfileSerializer,
+)
+
+# Paths and serializers
+PATH = "healthlink/dbm/data/medical_data.json"
+SERIALIZERS = [
+    MedicineShopSerializer,
+    MedicalTestSerializer,
+    UserSerializer,
+    DoctorProfileSerializer,
+    PatientProfileSerializer,
+]
 
 
-def check_initial_data():
+def check_initial_data() -> bool:
     """
     Check if the initial data is already present in the database.
     """
-    return MedicineShop.objects.exists() and MedicalTest.objects.exists()
+    return all(serializer.Meta.model.objects.exists() for serializer in SERIALIZERS)
 
 
-def populate_medical_data():
+def load_JSON(file: str) -> dict:
+    """
+    Load the JSON file.
+    """
+    try:
+        with open(file, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        print(f"Error: Invalid JSON in {file}")
+        return {}
+
+
+def populate_medical_data() -> None:
     """
     Populate the medical data in the database.
     """
-    import json
 
-    with open("healthlink/dbm/data/medical_tests.json") as file:
-        medical_tests = json.load(file)
+    # Check if the required files are present
+    if not os.path.isfile(PATH):
+        raise FileNotFoundError(f"File not found: {PATH}")
 
-    for medical_test in medical_tests:
-        MedicalTest.objects.create(**medical_test)
+    # Create a dictionary of serializers
+    serializer_dict = {
+        serializer.Meta.model.__name__: serializer for serializer in SERIALIZERS
+    }
 
-    if MedicalTest.objects.count() == len(medical_tests):
-        return f"{len(medical_tests)} medical tests added to the database."
-
-    with open("healthlink/dbm/data/medicines.json") as file:
-        medicines = json.load(file)
-
-    for medicine in medicines:
-        MedicineShop.objects.create(**medicine)
-
-    if MedicineShop.objects.count() == len(medicines):
-        return f"{len(medicines)} medicines added to the database."
-
-    return "Failed to add medical data to the database."
+    # Load the data
+    data = load_JSON(PATH)
+    for key, items in data.items():
+        serializer_class = serializer_dict.get(key)
+        if serializer_class and not serializer_class.Meta.model.objects.exists():
+            print(f"Populating {key} using {serializer_class.__name__} to database.")
+            if serializer_class == DoctorProfileSerializer:
+                for item in items:
+                    serializer = serializer_class(data=item)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
+            else:
+                serializer = serializer_class(data=items, many=True)
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+        else:
+            print(f"Warning: {key} already exists in the database.")
