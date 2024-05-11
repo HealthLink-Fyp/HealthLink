@@ -64,20 +64,24 @@ class LoginView(APIView):
         """
         Login the user
         """
+        username = request.data.get("username", "").strip().lower()
         email = request.data.get("email", "").strip().lower()
         password = request.data.get("password", "")
 
-        # Check if the email and password are provided
-        if not email or not password:
-            raise InvalidData("Email and password")
+        # Email or username, both can be used to login so at least one should be present
+        if not email and not username or not password:
+            raise InvalidData("Email or username and password")
 
-        # Check if the email is valid
-        try:
-            validate_email(email)
-        except Exception:
-            raise InvalidData("Email")
+        if email:
+            # Check if the email is valid
+            try:
+                validate_email(email)
+            except Exception:
+                raise InvalidData("Email")
 
-        user = User.objects.filter(email=email).first()
+            user = User.objects.filter(email=email).first()
+        elif username:
+            user = User.objects.filter(username=username).first()
 
         # Check if the user exists
         if not user:

@@ -1,14 +1,14 @@
-import os
-import json
 from patient.serializers import MedicineShopSerializer, MedicalTestSerializer
 from core.serializers import (
     UserSerializer,
     DoctorProfileSerializer,
     PatientProfileSerializer,
 )
+import os
+import json
 
 # Paths and serializers
-PATH = "healthlink/dbm/data/medical_data.json"
+PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), "medical_data.json")
 SERIALIZERS = [
     MedicineShopSerializer,
     MedicalTestSerializer,

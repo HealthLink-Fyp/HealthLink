@@ -49,28 +49,36 @@ class MedicalRecordView(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
         doctor_notes = self.request.data.get("doctor_notes", None)
         past_records = self.request.data.get("past_records", None)
 
+        if not doctor_notes and not past_records:
+            raise NotFound("Doctor notes or past records")
+
         if user.role == "patient":
             call = Call.objects.filter(patient=user.patient).last()
-            if call and doctor_notes or past_records:
-                serializer.save(
-                    patient=user.patient,
-                    doctor=call.doctor,
-                    doctor_notes=doctor_notes,
-                    past_records=past_records,
-                )
-            else:
-                raise NotFound("Active/past call or doctor notes and past records")
+
+            # Check if the call exists
+            if call is None:
+                raise NotFound("Active/Recent call")
+
+            serializer.save(
+                patient=user.patient,
+                doctor=call.doctor,
+                doctor_notes=doctor_notes,
+                past_records=past_records,
+            )
+
         elif user.role == "doctor":
             call = Call.objects.filter(doctor=user.doctor).last()
-            if call and doctor_notes or past_records:
-                serializer.save(
-                    patient=call.patient,
-                    doctor=user.doctor,
-                    doctor_notes=doctor_notes,
-                    past_records=past_records,
-                )
-            else:
-                raise NotFound("Active/past call or doctor notes and past records")
+
+            # Check if the call exists
+            if call is None:
+                raise NotFound("Active/Recent call")
+
+            serializer.save(
+                patient=call.patient,
+                doctor=user.doctor,
+                doctor_notes=doctor_notes,
+                past_records=past_records,
+            )
 
     def perform_update(self, serializer):
         """
