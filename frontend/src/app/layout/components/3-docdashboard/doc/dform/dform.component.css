@@ -1,42 +1,28 @@
-.container {
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius:10px;
-    background-image:url('https://images6.alphacoders.com/379/379570.png');
-    background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
-    background-size: cover; /* Optional: scale the background image to cover the entire element */
-   
-  }
-  
-  .card {
-    width: 400px;
-    margin-top: 20px;
-      margin-bottom: 20px;
-      box-shadow: 
-      1px 20px 4px rgba(0, 0, 0, 0.1),      /* Inner shadow */
-       9px 16px 6px rgba(0, 0, 0, 0.15),     /* Darker shadow with a bit more spread */
-        0px 20px 16px rgba(0, 0, 0, 0.2);     /* Darkest shadow with more spread */
-        transition: transform 0.3s ease; /* Add transition for smooth effect */
-        
-        background-image: url('https://img.freepik.com/free-vector/simple-blue-blank-background-vector-business_53876-169282.jpg');
-        background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
-        background-size: cover; /* Optional: scale the background image to cover the entire element */
-  }
-  
-  mat-form-field {    
-     width:300px;
-     display: flex;
-     margin-left:30px;
-  }
-  
-  
-  
-  button {
-    width: 100%;
-   
-  }
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Set your desired background color */
+}
+
+.card {
+  width: 400px; /* Set your desired width */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Set your desired background color */
+  background-image: url('https://img.freepik.com/free-vector/simple-blue-blank-background-vector-business_53876-169282.jpg');
+  background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
+  background-size: cover; /* Optional: scale the background image to cover the entire element */
+  left: 419px;
+	position: relative;
+	right: -419px;
+	top: 5px;
+}
+
   
   .mat-mdc-card-title
   {
