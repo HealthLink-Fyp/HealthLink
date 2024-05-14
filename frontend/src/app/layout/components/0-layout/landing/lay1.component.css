@@ -1,39 +1,32 @@
-.parent {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Make sure the parent container takes up the full height of the viewport */
-  
-  }
 
+  
+  
+  /* actual css */
+
+  *
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+html,body
+{
+    height:100%;
+    width:100%;
+}
+
+#main
+{
+    height:100%;
+    width:100%;
+}
+
+
+
+
+@media(max-width:850px)
+{
  
-  
-  .child {
-    flex-grow: 1; /* Each child will grow to fit content */
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  
-  .header {
-    
-    order: -1; /* Push the header to the top */
-  }
-  
-  .body {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1; /* Body takes up remaining space */
-  }
-  
-  .child2 {
- 
-    flex-grow: 1; /* Expand to fill available space */
-  }
-  
-  .child3 {
-   
-    flex-grow: 1; /* Expand to fill available space */
-  }
-  
-  
-  
+}

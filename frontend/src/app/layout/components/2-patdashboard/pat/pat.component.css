@@ -61,8 +61,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content:space-evenly;
-    margin:30px;
+    justify-content: space-evenly;
+    margin: 30px;
 
 }
 
@@ -75,8 +75,8 @@
     flex-direction: row;
     align-items: center;
     position: relative;
-  
-    
+
+
 
 }
 
@@ -129,25 +129,95 @@
 
 /* visual metrices */
 
-.vmetrices
-{
-    display:flex;
+.vmetrices {
+    display: flex;
     flex-direction: row;
     margin-top: 80px;
-    margin-bottom:80px;
+    margin-bottom: 80px;
 }
 
-.barparent{
+.barparent {
     height: 350px;
     width: 800px;
-    }
-
-
-.barchart
-{
-   
-        height: 100vh;
-        position: relative;
-        
 }
 
+
+.barchart {
+
+    height: 100vh;
+    position: relative;
+
+}
+
+
+@media(max-width:850px) {
+    .welcomediv {
+        flex-direction: column;
+        
+    }
+
+    .welcomediv{
+        flex-direction: column;
+    }
+
+    .wcard {
+        margin: 10px;
+    }
+
+    .wimage {
+        width: 100%;
+        height: 150px;
+    }
+
+    .wname {
+        font-size: 20px;
+    }
+
+    .bcrumb {
+        font-size: 18px;
+    }
+
+    .breadcrumb {
+        flex-direction: column;
+        position: static;
+    }
+
+    .metricCards {
+        flex-direction: column;
+    }
+
+    .mcard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mname {
+        font-size: 14px;
+    }
+
+    .mscore {
+        font-size: 14px;
+    }
+
+    .mstat {
+        font-size: 10px;
+    }
+
+    .mimage {
+        height: 60px;
+    }
+
+    .vmetrices {
+        flex-direction: column;
+    }
+
+    .barparent {
+        height: 200px;
+        width: 100%;
+    }
+
+    .barchart {
+        margin-bottom:50px;
+        height: 30%;
+    }
+}

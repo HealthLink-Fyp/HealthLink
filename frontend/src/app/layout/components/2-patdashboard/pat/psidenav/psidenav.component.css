@@ -53,3 +53,10 @@
   }
   
   
+  @media(max-width:850px)
+  {
+    .toolbar h1
+    {
+      font-size:2vmin;
+    }
+  }

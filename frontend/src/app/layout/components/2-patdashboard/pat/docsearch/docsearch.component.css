@@ -170,6 +170,16 @@
     margin-left:5px;
   }
   
+
+
+  @media(max-width:850px)
+  {
+
+    .container{
+      
+      width:50%;
+    }
+  }
   
   
   

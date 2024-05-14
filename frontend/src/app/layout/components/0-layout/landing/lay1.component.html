@@ -1,38 +1,51 @@
-<mat-card class="parent">
-    <mat-card-content class="child">
-  
-      <div class="header">
-  
-        <div class="topnav">
-            <app-landing></app-landing><br>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>Document</title>
+</head>
+<body>
+     <div id="main">
+     
+            <div class="topnav">
+                <app-landing></app-landing><br>
+            </div>
+      
+      
+          <div class="body">
+            
+      
+             <div class="searchbar">
+              <app-searchbar></app-searchbar><br>
+              <mat-divider ></mat-divider><br>
+             </div>
+      
+             <div class="cards">
+              <app-card1></app-card1><br>
+              <mat-divider></mat-divider><br>
+             </div>
+      
+             <div class="swipe">
+              <app-swipe></app-swipe><br>
+              <mat-divider></mat-divider><br>
+             </div>
+
+          </div>     
+      
+          <div class="footer">
+            <app-footer></app-footer>     
+          </div>
       </div>
-  
-      <div class="body">
-        <div class="child2">
-  
-         <div class="searchbar">
-          <app-searchbar></app-searchbar><br>
-          <mat-divider ></mat-divider><br>
-         </div>
-  
-         <div class="cards">
-          <app-card1></app-card1><br>
-          <mat-divider></mat-divider><br>
-         </div>
-  
-         <div>
-          <app-swipe></app-swipe><br>
-          <mat-divider></mat-divider><br>
-         </div>
-     </div>
-  </div>
-  
-      <div class="footer">
-        <app-footer></app-footer>     
-      </div>
-  
-    </mat-card-content>
-  </mat-card>
+     
+     
+ 
+</body>
+</html>
+
+
+
+
+
   
   

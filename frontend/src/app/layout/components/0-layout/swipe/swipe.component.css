@@ -1,11 +1,4 @@
-.slider {
-    overflow: hidden;
-    position: relative;
-    left: 30%;
-    width: 40%; /* Adjust width as needed */
-    max-width: 100%; /* Ensure slider doesn't exceed the width of its container */
-    max-height:100%;
-  }
+
   
   .slides {
     display: flex;
@@ -24,5 +17,44 @@
   }
   
   
+
+
+  /* actual css */
+
+  *
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+html,body
+{
+    height:100%;
+    width:100%;
+}
+
+#main
+{
+    height:100%;
+    width:100%;
+
+    overflow: hidden;
+    position: relative;
+    left: 30%;
+    width: 40%; /* Adjust width as needed */
+
+}
+
+
+@media(max-width:720px)
+{
+  #main
+{
+    width:50vmax;
+    margin-right:1000px;
+  
+}
+}
   
   
