@@ -15,10 +15,7 @@
     max-width: 250px; /* sets a maximum width for the cards to prevent them from expanding too much on 
                           larger screens. */
     max-height: 100%; /* sets a maximum height for the cards */
-    box-shadow: 
-    1px 20px 4px rgba(0, 0, 0, 0.1),      /* Inner shadow */
-     9px 16px 6px rgba(0, 0, 0, 0.15),     /* Darker shadow with a bit more spread */
-      0px 20px 16px rgba(0, 0, 0, 0.2);     /* Darkest shadow with more spread */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease; /* Add transition for smooth effect */
 
       
