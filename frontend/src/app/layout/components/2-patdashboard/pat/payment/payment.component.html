@@ -1,18 +1,33 @@
-<div class="content" role="main">
-    <h1>Payment for the amount of {{ amount }}</h1>
-  
-    <google-pay-button
-      environment="TEST"
-      [paymentRequest]="{
-        apiVersion: paymentRequest.apiVersion,
-        apiVersionMinor: paymentRequest.apiVersionMinor,
-        allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
-        merchantInfo: paymentRequest.merchantInfo,
-        transactionInfo: paymentRequest.transactionInfo,
-        callbackIntents: ['PAYMENT_AUTHORIZATION']
-      }"
-      (loadpaymentdata)="onLoadPaymentData($event)"
-      (error)="onError($event)"
-      [paymentAuthorizedCallback]="onPaymentDataAuthorized"
-    ></google-pay-button>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Payment Method</title>
+   
+</head>
+<body>
+    <div class="container">
+        <div class="content" role="main">
+            <h1>Payment for the amount of {{ amount }}</h1>
+            <google-pay-button
+                environment="TEST"
+                [paymentRequest]="{
+                    apiVersion: paymentRequest.apiVersion,
+                    apiVersionMinor: paymentRequest.apiVersionMinor,
+                    allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
+                    merchantInfo: paymentRequest.merchantInfo,
+                    transactionInfo: paymentRequest.transactionInfo,
+                    callbackIntents: ['PAYMENT_AUTHORIZATION']
+                }"
+                (loadpaymentdata)="onLoadPaymentData($event)"
+                (error)="onError($event)"
+                [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+            ></google-pay-button>
+        </div>
+        <div *ngIf="paymentDone" class="payment-done">
+            <button (click)="onPaymentDone()">Done</button>
+        </div>
+    </div>
+</body>
+</html>

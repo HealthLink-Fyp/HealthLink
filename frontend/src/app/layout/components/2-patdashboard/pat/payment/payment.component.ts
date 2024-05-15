@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit {
+
+  constructor(private router:Router,private route:ActivatedRoute){}
+
+  paymentDone:boolean=false;
+
+  ngOnInit(): void {
+    this.doctorId=this.route.snapshot.paramMap.get('doctorId');
+    console.log("doctor id is coming in payment component",this.doctorId);
+  }
   amount = '100.00';
+
+  doctorId:any="";
 
   paymentRequest: google.payments.api.PaymentDataRequest = {
     apiVersion: 2,
@@ -53,14 +66,24 @@ export class PaymentComponent {
     console.error('error', event.error);
   };
 
+
+
+  onPaymentDone()
+  {
+    console.log(this.doctorId);
+    this.router.navigate(['/patient/appointments', this.doctorId]);
+  }
+
   onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (
     paymentData
   ) => {
     console.log('Pyament authorized', paymentData);
-   
+     this.paymentDone=true;
     return {
       transactionState: 'SUCCESS',
+     
     };
-    
+   
+   
   };
 }

@@ -30,7 +30,8 @@ const routes: Routes = [
   {path:'medRecords',component:MedrecordComponent},
   {path:'videoCall',component:VideocallComponent},
   {path:'chat',component:ChatComponent},
-  {path:'payment',component:PaymentComponent}
+  {path:'payment',component:PaymentComponent},
+  {path:'payment/:doctorId',component:PaymentComponent}
 ];
 
 @NgModule({
