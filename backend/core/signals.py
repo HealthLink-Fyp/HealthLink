@@ -1,6 +1,6 @@
 from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
-from healthlink.scripts.populate import check_initial_data, populate_medical_data
+from healthlink.dbm.populate import check_initial_data, populate_medical_data
 
 from django.contrib.auth.models import User
 
@@ -11,7 +11,11 @@ def populate_data(sender, **kwargs):
     Populate the medical data in the database after the migration.
     """
 
-    populate_medical_data() if not check_initial_data() else None
+    if not check_initial_data():
+        populate_medical_data()
+
+    print("Data population complete.")
+    post_migrate.disconnect(populate_data)
 
 
 @receiver(post_save, sender=User)

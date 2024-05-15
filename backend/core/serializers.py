@@ -66,6 +66,7 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         fields = (
             "user",
             "full_name",
+            "sex",
             "city",
             "specialization",
             "qualification",
@@ -121,8 +122,8 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
             {
                 "doctor": doctor,
                 "day": day,
-                "start_time": availability_data.get("start"),
-                "end_time": availability_data.get("end"),
+                "start_time": start_time,
+                "end_time": end_time,
             }
             for day in days
         ]

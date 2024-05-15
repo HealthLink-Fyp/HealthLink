@@ -119,6 +119,7 @@ class DoctorProfile(models.Model):
         User, on_delete=models.CASCADE, primary_key=True, related_name="doctor"
     )
     full_name = models.CharField(max_length=255, null=True, blank=True)
+    sex = models.BooleanField(null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     specialization = models.CharField(
         max_length=255, choices=SPECIALIZATION_CHOICES, db_index=True
@@ -141,6 +142,12 @@ class DoctorProfile(models.Model):
     def save(self, *args, **kwargs):
         self.full_name = f"{self.user.first_name} {self.user.last_name}"
         self.city = self.user.city
+
+        if not self.profile_photo_url:
+            if self.sex:
+                self.profile_photo_url = "profile_photos/m.jpg"
+            else:
+                self.profile_photo_url = "profile_photos/f.jpg"
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -184,7 +191,7 @@ class PatientProfile(models.Model):
     full_name = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     age = models.IntegerField()
-    sex = models.BooleanField()
+    sex = models.BooleanField(null=True, blank=True)
     blood_group = models.CharField(max_length=255)
     weight = models.IntegerField(default=1)
     height = models.IntegerField(default=1)
