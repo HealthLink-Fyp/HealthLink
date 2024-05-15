@@ -1,0 +1,18 @@
+<div class="content" role="main">
+    <h1>Payment for the amount of {{ amount }}</h1>
+  
+    <google-pay-button
+      environment="TEST"
+      [paymentRequest]="{
+        apiVersion: paymentRequest.apiVersion,
+        apiVersionMinor: paymentRequest.apiVersionMinor,
+        allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
+        merchantInfo: paymentRequest.merchantInfo,
+        transactionInfo: paymentRequest.transactionInfo,
+        callbackIntents: ['PAYMENT_AUTHORIZATION']
+      }"
+      (loadpaymentdata)="onLoadPaymentData($event)"
+      (error)="onError($event)"
+      [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+    ></google-pay-button>
+  </div>

@@ -12,6 +12,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MedrecordComponent } from './medrecord/medrecord.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { ChatComponent } from '../../3-docdashboard/chat/chat.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path:'settings',component:SettingsComponent},
   {path:'medRecords',component:MedrecordComponent},
   {path:'videoCall',component:VideocallComponent},
-  {path:'chat',component:ChatComponent}
+  {path:'chat',component:ChatComponent},
+  {path:'payment',component:PaymentComponent}
 ];
 
 @NgModule({

@@ -20,16 +20,19 @@ import { MedrecordComponent } from './medrecord/medrecord.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { ChatComponent } from './chat/chat.component';
 import { DialogComponent } from './videocall/dialog/dialog.component';
+import { PaymentComponent } from './payment/payment.component';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
 
 
 
 
 @NgModule({
-  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent, MedrecordComponent,VideocallComponent,ChatComponent,DialogComponent],
+  declarations: [BarchartComponent,BodychartComponent,DocsearchComponent,PappointmentComponent,PformComponent,PsidenavComponent,PtabsComponent,PatComponent, MstoreComponent, LabtestsComponent,SettingsComponent, MedrecordComponent,VideocallComponent,ChatComponent,DialogComponent, PaymentComponent],
   imports: [
     CommonModule,
     PatRoutingModule,
     MaterialModule,
+    GooglePayButtonModule,
    
     NgxEchartsModule.forRoot({
       /**
