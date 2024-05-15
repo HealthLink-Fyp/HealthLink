@@ -61,7 +61,8 @@ mat-card.mat-mdc-card.mdc-card.cardsearch.ng-star-inserted {
   border: 0.666667px solid #CCCCCC;
   border-radius: 8px;
   bottom: -144px;
-  box-shadow: rgba(0, 0, 0, 0.1) 10px 8px 4px 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
+  
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -85,7 +86,8 @@ mat-card.mat-mdc-card.mdc-card.cardsearch.ng-star-inserted {
   border: 0.666667px solid #CCCCCC;
   border-radius: 4px;
   width:300px;
-  box-shadow: rgba(0, 0, 0, 0.1) 10px 8px 4px 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
+  
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -102,7 +104,8 @@ mat-card.mat-mdc-card.mdc-card.cardsearch.ng-star-inserted {
   background-color: #FFFFFF;
   border-radius: 4px;
   bottom: -214px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
+  
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
