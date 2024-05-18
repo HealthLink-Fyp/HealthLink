@@ -8,11 +8,8 @@
     pkgs.nodejs_18
     pkgs.poetry
     pkgs.just
-    pkgs.opencv
     pkgs.docker
     pkgs.docker-compose
-    pkgs.cloudflared
-    
   ];
 
   env = {};

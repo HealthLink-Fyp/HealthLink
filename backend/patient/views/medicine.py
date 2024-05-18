@@ -6,8 +6,6 @@ from patient.serializers import MedicineShopSerializer
 from rest_framework.response import Response
 
 
-from rest_framework.response import Response
-
 
 class MedicineListView(ListAPIView):
     """

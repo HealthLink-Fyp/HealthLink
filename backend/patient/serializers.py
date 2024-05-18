@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from .models import Appointment, MedicalRecord, MedicineShop, MedicalTest
 
-import secrets
-
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
