@@ -27,6 +27,12 @@ admin:
 shell:
   python3 manage.py shell --no-startup
 
+poetry_req:
+  poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
+
+@add package:
+  poetry add $1 && poetry_req
+
 # django-extensions commands
 
 erd:
