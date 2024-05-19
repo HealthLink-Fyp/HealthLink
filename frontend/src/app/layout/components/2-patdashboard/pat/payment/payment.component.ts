@@ -2,6 +2,8 @@ import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
+
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -9,9 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PaymentComponent implements OnInit {
 
+  //i want to convert all this code into ngrx
+
   constructor(private router:Router,private route:ActivatedRoute){}
 
   paymentDone:boolean=false;
+
+
 
   ngOnInit(): void {
     this.doctorId=this.route.snapshot.paramMap.get('doctorId');
@@ -75,7 +81,7 @@ export class PaymentComponent implements OnInit {
   }
 
   onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (
-    paymentData
+    paymentData:any
   ) => {
     console.log('Pyament authorized', paymentData);
      this.paymentDone=true;

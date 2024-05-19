@@ -8,14 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+
+  //i want to convert all this code into ngrx
+
+  
   message = '';
 
   amWho = '';
 
+ 
+
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) {
+
+  }
+
+  
 
   ngOnInit(): void {
     this.authService.user().subscribe({
