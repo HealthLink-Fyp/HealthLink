@@ -20,6 +20,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
   public isCallStarted$: Observable<boolean>;
   public peerId: string; 
 
+  // this property accesses the local video element (Alice's video) in the HTML template using the @ViewChild decorator.
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement> | null = null;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
 
@@ -146,9 +147,12 @@ export class VideocallComponent implements OnInit, OnDestroy {
       this.results = res.results;
     })
 
-    this.callService.localStream$
-      .pipe(filter(res => !!res))
-      .subscribe(stream => {
+    // The code sets up video elements for Alice and Dr. Bob's video consultation, subscribing to 
+    // callService observables to display the streams when available.
+
+     this.callService.localStream$   //Gets the observable for Alice's video stream.
+      .pipe(filter(res => !!res))   //Filters out any null or undefined values from the stream.
+      .subscribe(stream => {        //Subscribes to the filtered stream and sets up the local video element to display the stream.
         if (this.localVideo) {
           this.localVideo.nativeElement.srcObject = stream;
         }
@@ -181,12 +185,18 @@ export class VideocallComponent implements OnInit, OnDestroy {
     this.callService.destroyPeer();
   }
 
+  
+  // If joinCall is true, it sets peerId to undefined and joinCall to true; if joinCall is false, it sets peerId to this.peerId and joinCall to false.
+
   public showModal(joinCall: boolean): void {
     let dialogData: DialogData = joinCall ? ({ peerId: undefined, joinCall: true }) : ({ peerId: this.peerId, joinCall: false });
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: dialogData
     });
+
+//     If joinCall is true, it establishes a media call with the peer.
+ // If joinCall is false, it enables call answering.
 
     dialogRef.afterClosed()
       .pipe(

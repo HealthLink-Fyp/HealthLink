@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y python3-opencv && apt-get clean && rm -
 # Copy requirements and install python dependencies
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m spacy download en_core_web_lg
 
 # Copy application code
 COPY . .

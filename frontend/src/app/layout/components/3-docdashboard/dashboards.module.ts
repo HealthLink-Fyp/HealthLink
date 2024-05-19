@@ -28,6 +28,7 @@ import { ChatComponent } from './chat/chat.component';
 import { TodoComponent } from './doc/todo/todo.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -45,6 +46,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AboutComponent,
     ChatComponent,
     TodoComponent,
+    SettingsComponent,
 
 
 

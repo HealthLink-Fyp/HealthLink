@@ -1,8 +1,4 @@
-.container {
-    display: flex;                /* will make it flex and diplay the things in row */
-    flex-direction: column;       /* will make things appear in vertical way */
-    align-items: center;          /* will algin all the things in container to the center */
-  } 
+
 
  .logo-image
   {
@@ -47,3 +43,41 @@
 
   
   
+  /* actual css */
+
+  *
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+html,body
+{
+    height:100%;
+    width:100%;
+}
+
+#main
+{
+    height:100%;
+    width:100%;
+
+    display: flex;                /* will make it flex and diplay the things in row */
+    flex-direction: column;       /* will make things appear in vertical way */
+    align-items: center;          /* will algin all the things in container to the center */
+}
+
+
+@media(max-width:720px)
+{
+  .site-info{
+      width:50vmax;
+  }
+
+  .footer-links
+  {
+     margin-left:5px;
+     margin-right:5px;
+  }
+}

@@ -15,10 +15,7 @@
     max-width: 250px; /* sets a maximum width for the cards to prevent them from expanding too much on 
                           larger screens. */
     max-height: 100%; /* sets a maximum height for the cards */
-    box-shadow: 
-    1px 20px 4px rgba(0, 0, 0, 0.1),      /* Inner shadow */
-     9px 16px 6px rgba(0, 0, 0, 0.15),     /* Darker shadow with a bit more spread */
-      0px 20px 16px rgba(0, 0, 0, 0.2);     /* Darkest shadow with more spread */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease; /* Add transition for smooth effect */
 
       
@@ -78,3 +75,16 @@
  * ---------------------------------------------- */
 
 @-webkit-keyframes slide-in-blurred-left{0%{-webkit-transform:translateX(-1000px) scaleX(2.5) scaleY(.2);transform:translateX(-1000px) scaleX(2.5) scaleY(.2);-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-filter:blur(40px);filter:blur(40px);opacity:0}100%{-webkit-transform:translateX(0) scaleY(1) scaleX(1);transform:translateX(0) scaleY(1) scaleX(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-filter:blur(0);filter:blur(0);opacity:1}}@keyframes slide-in-blurred-left{0%{-webkit-transform:translateX(-1000px) scaleX(2.5) scaleY(.2);transform:translateX(-1000px) scaleX(2.5) scaleY(.2);-webkit-transform-origin:100% 50%;transform-origin:100% 50%;-webkit-filter:blur(40px);filter:blur(40px);opacity:0}100%{-webkit-transform:translateX(0) scaleY(1) scaleX(1);transform:translateX(0) scaleY(1) scaleX(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-filter:blur(0);filter:blur(0);opacity:1}}
+
+
+@media(max-width:720px)
+{
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:  center; /* Center align the cards */
+     
+  }
+
+}

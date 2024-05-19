@@ -1,15 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './architecture/auth/auth/auth.component';
-import { LoginComponent } from './architecture/auth/login/login.component';
-import { RegisterComponent } from './architecture/auth/register/register.component';
-import { ForgotComponent } from './architecture/auth/auth/forgot/forgot.component';
-import { ResetComponent } from './architecture/auth/auth/reset/reset.component';
-import { DoctorComponent } from './architecture/doctor/doctor.component';
-import { PatientComponent } from './architecture/patient/patient.component';
-import { DashboardComponent as doctorDashBoard } from './architecture/doctor/dashboard/dashboard/dashboard.component';
-import { DashboardComponent as patientDashBoard } from './architecture/patient/dashboard/dashboard/dashboard.component';
-
 
 
 // my name is aitq

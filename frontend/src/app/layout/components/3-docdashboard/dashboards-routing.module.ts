@@ -10,6 +10,7 @@ import { DappointmentComponent } from './doc/dappointment/dappointment.component
 import { AboutComponent } from './doc/about/about.component';
 import { ChatComponent } from './chat/chat.component';
 import { TodoComponent } from './doc/todo/todo.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'about/:doctorId',component:AboutComponent},
   {path:'chat',component:ChatComponent},
   {path:'todo',component:TodoComponent},
+  {path:'settings',component:SettingsComponent}
 
  
 ];

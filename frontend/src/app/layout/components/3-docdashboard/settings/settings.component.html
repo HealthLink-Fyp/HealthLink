@@ -1,0 +1,39 @@
+<div class="container">
+    <mat-card class="parent">
+      <b>Update Personal Information</b>
+    </mat-card>
+  
+    <mat-card class="card">
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="updateDoctorProfile()">
+          <mat-icon>person</mat-icon>
+          Update Personal Information
+        </button>
+      </div>
+  
+      <div class="button-container">
+        <button mat-raised-button color="accent" (click)="updateDoctorForm()">
+          <mat-icon>edit</mat-icon>
+          Update Medical Form
+        </button>
+      </div>
+  
+      <div class="button-container">
+        <button mat-raised-button color="warn" (click)="onDeleteDoctor()">
+          <mat-icon>delete</mat-icon>
+          Delete Account
+        </button>
+      </div>
+  
+      <div class="button-container">
+        <button mat-raised-button color="warn" (click)="onDeleteDoctorForm()">
+          <mat-icon>delete_outline</mat-icon>
+          Delete Medical Form
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  
+
+
+  

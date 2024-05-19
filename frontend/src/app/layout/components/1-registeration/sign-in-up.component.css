@@ -14,11 +14,8 @@
     width: 400px;
     margin-top: 20px;
       margin-bottom: 20px;
-      box-shadow: 
-      1px 20px 4px rgba(0, 0, 0, 0.1),      /* Inner shadow */
-       9px 16px 6px rgba(0, 0, 0, 0.15),     /* Darker shadow with a bit more spread */
-        0px 20px 16px rgba(0, 0, 0, 0.2);     /* Darkest shadow with more spread */
-        transition: transform 0.3s ease; /* Add transition for smooth effect */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease; /* Add transition for smooth effect */
         
         background-image: url('https://img.freepik.com/free-vector/simple-blue-blank-background-vector-business_53876-169282.jpg');
         background-repeat: no-repeat; /* Optional: prevent the background image from repeating */
