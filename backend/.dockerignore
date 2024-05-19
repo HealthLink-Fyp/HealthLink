@@ -1,0 +1,11 @@
+poetry.lock
+pyproject.toml
+Justfile
+/prod_data
+__pycache__/
+*.sql
+*.sqlite3
+*.pyc
+db.sqlite3
+/media
+/static
