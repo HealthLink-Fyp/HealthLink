@@ -37,8 +37,8 @@
             <div class="child2">
               <h1></h1>
               <!-- file-upload.component.html -->
-              <button (click)="viewRecords=true">view records</button>
-              <button (click)="viewRecords=false">close</button>
+              <button mat-button color="primary" (click)="viewRecords=true">view records</button>
+              <button mat-button color="warn" (click)="viewRecords=false">close</button>
               <div *ngIf="viewRecords">
                 <div *ngFor="let record of results">
                   <img *ngIf="record.past_records && isImage(record.past_records)" 
@@ -96,9 +96,15 @@
               
               <div>
                 <h2>Follow-up Questions:</h2>
-                <ul class="stream-list">
-                  <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li>
-                </ul>
+                <mat-card>
+                  <mat-card-content>
+                    <ul class="stream-list">
+                      <!-- <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li> -->
+                      <textarea matInput *ngFor="let question of transResponse.followup_questions" class="full-width"></textarea>
+                    </ul>
+                  </mat-card-content>
+                </mat-card>
+                
                 <ul *ngIf="loading">
                   <li>
                     <div class="loading">
@@ -117,10 +123,25 @@
         <div class="row">
           <div class="col">
             <div class="child3">
-              <h1>chating</h1>
-          
-               <app-chat></app-chat>
-  
+            chat
+            <mat-card class="custom-note-card">
+              <mat-card-header>
+                <mat-card-title>Consultation Note</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Note</mat-label>
+                  <textarea matInput placeholder="Type your note here" class="full-width" [(ngModel)]="notesSave"></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onSendDocNotes()">Save</button>
+              </mat-card-content>
+            </mat-card>
+            </div>
+          </div>
+          <div class="col">
+            <div class="child3">
+              <h1></h1>
+           
             </div>
           </div>
           <div class="col">
@@ -143,23 +164,6 @@
                   </li>
                 </ul>
               </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="child3">
-              <h1></h1>
-              <mat-card class="custom-note-card">
-                <mat-card-header>
-                  <mat-card-title>Consultation Note</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Note</mat-label>
-                    <textarea matInput placeholder="Type your note here" class="full-width" [(ngModel)]="notesSave"></textarea>
-                  </mat-form-field>
-                  <button mat-raised-button color="primary" (click)="onSendDocNotes()">Save</button>
-                </mat-card-content>
-              </mat-card>
               
             </div>
           </div>
