@@ -1,6 +1,8 @@
 import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from .models import Chat
+from core.models import DoctorProfile, PatientProfile
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -10,6 +12,9 @@ class ChatConsumer(WebsocketConsumer):
         super().__init__(*args, **kwargs)
         self.room_name = None
         self.room_group_name = None
+        self.user = None
+        self.doctor = None
+        self.patient = None
         self.user = None
 
     def is_authenticated(self, user):
@@ -34,14 +39,28 @@ class ChatConsumer(WebsocketConsumer):
             },
         )
 
+    def chat_room_create(self, doctor_id: int, patient_id: int):
+        """
+        Create a chat room.
+        """
+
+        self.room_name = f"chat_{doctor_id}_{patient_id}"
+        self.room_group_name = f"chat_group_{self.room_name}"
+
+        self.chat_room = (
+            Chat.objects.filter(room_name=self.room_name).order_by("-created").first()
+        )
+
+        if not self.chat_room:
+            self.chat_room = Chat.objects.create(room_name=self.room_name)
+
     def connect(self):
         """
         Called when the websocket is handshaking as part of the connection process.
         """
-
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"chat_{self.room_name}"
         self.user = self.scope.get("user")
+
+        role = self.user.role
 
         self.accept()
 
@@ -54,6 +73,22 @@ class ChatConsumer(WebsocketConsumer):
         if ChatConsumer.connected_users >= 2 and self.user.role == "patient":
             self.close(code=4001, reason="Chat room is full.")
             return
+
+        if role == "doctor":
+            doctor_id = self.user.id
+            patient_id = self.scope["url_route"]["kwargs"]["user_id"]
+            self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
+            self.chat_room.doctor = self.user.doctor
+            self.chat_room.patient = PatientProfile.objects.get(user__id=patient_id)
+
+        elif role == "patient":
+            doctor_id = self.scope["url_route"]["kwargs"]["user_id"]
+            patient_id = self.user.id
+            self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
+            self.chat_room.patient = self.user.patient
+            self.chat_room.doctor = DoctorProfile.objects.get(user__id=doctor_id)
+
+        self.chat_room.save()
 
         ChatConsumer.connected_users += 1
 
@@ -106,6 +141,16 @@ class ChatConsumer(WebsocketConsumer):
                     "message": message,
                 },
             )
+
+            # Save the message to the database
+            if message:
+                Chat.objects.create(
+                    room_name=self.room_name,
+                    doctor=self.chat_room.doctor,
+                    patient=self.chat_room.patient,
+                    message=message,
+                )
+
         except Exception as e:
             print(f"An error occurred: {e}")
 
@@ -119,7 +164,6 @@ class ChatConsumer(WebsocketConsumer):
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
     def notify_user_join(self):
         """
         Notify the users in the group when a user joins the chat room.
@@ -127,9 +171,7 @@ class ChatConsumer(WebsocketConsumer):
 
         join_message = {
             "type": "chat_message",
-            "user": self.user.username,
-            "profile": self.user.role,
-            "message": f"{self.user.username} has joined the chat room.",
+            "message": f"{str(self.user.role.capitalize())} {str(self.user.username).capitalize()}, has joined the chat room.",
         }
         self.send(text_data=json.dumps(join_message))
 
@@ -140,8 +182,6 @@ class ChatConsumer(WebsocketConsumer):
 
         leave_message = {
             "type": "chat_message",
-            "user": self.user.username,
-            "profile": self.user.role,
-            "message": f"{self.user.username} has left the chat room.",
+            "message": f"{str(self.user.role.capitalize())} {str(self.user.username).capitalize()}, has left the chat room.",
         }
         self.send(text_data=json.dumps(leave_message))

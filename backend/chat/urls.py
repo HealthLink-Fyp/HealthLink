@@ -6,4 +6,5 @@ urlpatterns = [
     path("calls/transcript/", views.CallTranscriptView.as_view()),
     path("calls/emotion/", views.CallEmotionView.as_view()),
     path("dashboard/", views.DashboardReportView.as_view()),
+    path("chat/", views.ChatView.as_view()),
 ]
