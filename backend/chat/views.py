@@ -158,13 +158,22 @@ class CallTranscriptView(APIView):
             patient = user.patient
             call = Call.objects.filter(patient=patient).last()
             role = "patient"
+            # Check if the call exists
+            if not call:
+                raise NotFound("Call")
+            # Check if the active call is for the patient
             if call.patient != patient:
                 raise NotFound("Active Call for patient")
             doctor = None
+
         elif user.role == "doctor" and hasattr(user, "doctor"):
             doctor = user.doctor
             call = Call.objects.filter(doctor=doctor).last()
             role = "doctor"
+            # Check if the call exists
+            if not call:
+                raise NotFound("Call")
+            # Check if the active call is for the doctor
             if call.doctor != doctor:
                 raise NotFound("Active Call for doctor")
             patient = None
@@ -172,10 +181,6 @@ class CallTranscriptView(APIView):
         # Check if the doctor exists
         if (not doctor) and (not patient):
             raise NotFound("Doctor or Patient")
-
-        # Check if the call exists
-        if not call:
-            raise NotFound("Call")
 
         transcription = request.data.get("transcription")
 

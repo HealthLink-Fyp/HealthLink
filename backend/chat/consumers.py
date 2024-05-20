@@ -2,6 +2,7 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Chat
+from core.models import DoctorProfile, PatientProfile
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -38,14 +39,28 @@ class ChatConsumer(WebsocketConsumer):
             },
         )
 
+    def chat_room_create(self, doctor_id: int, patient_id: int):
+        """
+        Create a chat room.
+        """
+
+        self.room_name = f"chat_{doctor_id}_{patient_id}"
+        self.room_group_name = f"chat_group_{self.room_name}"
+
+        self.chat_room = (
+            Chat.objects.filter(room_name=self.room_name).order_by("-created").first()
+        )
+
+        if not self.chat_room:
+            self.chat_room = Chat.objects.create(room_name=self.room_name)
+
     def connect(self):
         """
         Called when the websocket is handshaking as part of the connection process.
         """
-
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"chat_{self.room_name}"
         self.user = self.scope.get("user")
+
+        role = self.user.role
 
         self.accept()
 
@@ -59,24 +74,21 @@ class ChatConsumer(WebsocketConsumer):
             self.close(code=4001, reason="Chat room is full.")
             return
 
-        role = self.user.role
-        try:
-            self.chat_room = (
-                Chat.objects.filter(room_name=self.room_name)
-                .order_by("-created")
-                .first()
-            )
-        except Chat.DoesNotExist:
-            self.chat_room = Chat.objects.create(room_name=self.room_name)
-
         if role == "doctor":
-            self.doctor = self.user.doctor
-            self.chat_room.doctor = self.doctor
-            self.chat_room.save()
-        elif self.user.role == "patient":
-            self.patient = self.user.patient
-            self.chat_room.patient = self.patient
-            self.chat_room.save()
+            doctor_id = self.user.id
+            patient_id = self.scope["url_route"]["kwargs"]["user_id"]
+            self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
+            self.chat_room.doctor = self.user.doctor
+            self.chat_room.patient = PatientProfile.objects.get(user__id=patient_id)
+
+        elif role == "patient":
+            doctor_id = self.scope["url_route"]["kwargs"]["user_id"]
+            patient_id = self.user.id
+            self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
+            self.chat_room.patient = self.user.patient
+            self.chat_room.doctor = DoctorProfile.objects.get(user__id=doctor_id)
+
+        self.chat_room.save()
 
         ChatConsumer.connected_users += 1
 
