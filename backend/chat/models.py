@@ -2,6 +2,9 @@ from django.db import models
 from core.models import PatientProfile, DoctorProfile
 
 
+# class Chat(models.Model):
+
+
 class Call(models.Model):
     call_id = models.AutoField(primary_key=True)
     patient = models.ForeignKey(

@@ -4,7 +4,12 @@ set positional-arguments
 # Django commands
 
 serve:
-  python3 manage.py runserver
+  poetry run python3 manage.py runserver
+
+ngrok:
+  pipx run pyngrok http --domain=monster-open-mistakenly.ngrok-free.app 8000
+
+run: serve ngrok
 
 testall:
   python3 manage.py test
@@ -58,10 +63,10 @@ fsetup:
 
 # Aggregate commands
 
-run: migrate testall serve
+# run: migrate testall serve
 
-db: migration migrate
+# db: migration migrate
 
-rdb: reset db
+# rdb: reset db
 
-all: bsetup fsetup run
+# all: bsetup fsetup run

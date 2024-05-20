@@ -11,7 +11,7 @@ from ml.openai.chat import (
     send_transcription_to_chatbot,
     send_transcription_to_chatbot_v2,
 )
-from backend.ml.emotion.predictions_v2 import EmotionPredictor
+from ml.emotion.predictions_v2 import EmotionPredictor
 from patient.models import Appointment
 
 from healthlink.utils.exceptions import (

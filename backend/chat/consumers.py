@@ -80,8 +80,6 @@ class ChatConsumer(WebsocketConsumer):
 
             ChatConsumer.connected_users -= 1
 
-            raise StopConsumer()
-
     def receive(self, text_data):
         """
         Called when a message is received from the WebSocket.

@@ -10,7 +10,7 @@
     pkgs.just
     pkgs.docker
     pkgs.docker-compose
-    pkgs.openssh
+    pkgs.pipx
   ];
 
   env = { };

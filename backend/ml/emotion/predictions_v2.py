@@ -1,12 +1,8 @@
 import os
 import cv2
 import numpy as np
-import pathlib
 from typing import Tuple
-
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
-import tensorflow as tf  # noqa: F401, E402
+import tflite_runtime.interpreter as tflite
 
 
 class EmotionPredictor:
@@ -20,8 +16,8 @@ class EmotionPredictor:
         "surprise",
         "neutral",
     )
-    model_path = "ml/emotion/model.tflite"
-    face_path = pathlib.Path("ml/emotion/face.xml")
+    model_path: str = "ml/emotion/model.tflite"
+    face_path: str = "ml/emotion/face.xml"
 
     def __init__(self):
         self._model = None
@@ -33,16 +29,14 @@ class EmotionPredictor:
         if self._model is None:
             if not os.path.exists(self.model_path):
                 raise FileNotFoundError("Model file not found")
-            self._model = tf.lite.Interpreter(self.model_path, [])
+            self._model = tflite.Interpreter(self.model_path, [])
             self._model.allocate_tensors()
 
     def _load_cascade(self):
         if self._face_cascade is None:
-            if not self.face_path.exists():
+            if not os.path.exists(self.face_path):
                 raise FileNotFoundError("Face cascade file not found")
-            self._face_cascade = cv2.CascadeClassifier(str(self.face_path))
-
-        return cv2.CascadeClassifier(str(self.face_path))
+            self._face_cascade = cv2.CascadeClassifier(self.face_path)
 
     def detect_single_face(self, image: bytes) -> np.ndarray:
         image = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
@@ -79,8 +73,8 @@ class EmotionPredictor:
         raise ValueError("Invalid prediction")
 
 
-print("Running predictions")
-predictor = EmotionPredictor()
-with open("ml/emotion/test.jpg", "rb") as f:
-    print("Prediction:")
-    print(predictor.predict(f.read()))
+# print("Running predictions")
+# predictor = EmotionPredictor()
+# with open("ml/emotion/test.jpg", "rb") as f:
+#     print("Prediction:")
+#     print(predictor.predict(f.read()))
