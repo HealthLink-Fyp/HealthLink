@@ -12,25 +12,25 @@ ngrok:
 run: serve ngrok
 
 testall:
-  python3 manage.py test
+  poetry run python3 manage.py test
 
 @test file:
-  python3 manage.py test tests.test_$1
+  poetry run python3 manage.py test tests.test_$1
 
 migration:
-  python3 manage.py makemigrations
+  poetry run python3 manage.py makemigrations
 
 @migrations app:
-  python3 manage.py makemigrations $1
+  poetry run python3 manage.py makemigrations $1
 
 migrate:
-  python3 manage.py migrate --run-syncdb
+  poetry run python3 manage.py migrate --run-syncdb
 
 admin:
-  python3 manage.py createsuperuser
+  poetry run python3 manage.py createsuperuser
 
 shell:
-  python3 manage.py shell --no-startup
+  poetry run python3 manage.py shell --no-startup
 
 lock:
   poetry lock && poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
@@ -41,10 +41,10 @@ lock:
 # django-extensions commands
 
 erd:
-  python3 manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o healthlink/erd.png
+  poetry run python3 manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o healthlink/erd.png
 
 reset:
-  python3 manage.py reset_db --noinput patient 
+  poetry run python3 manage.py reset_db --noinput patient 
 
 # MKDocs commands
 
@@ -65,7 +65,7 @@ fsetup:
 
 # run: migrate testall serve
 
-# db: migration migrate
+db: migration migrate
 
 # rdb: reset db
 

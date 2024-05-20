@@ -1,19 +1,18 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-from core.authentication import JWTAuthentication
+from rest_framework.parsers import MultiPartParser
 
-# import datetime
+# Local Imports
+from patient.models import Appointment
 from chat.models import Call, LLMResponse
 from chat.serializers import CallSerializer
-
+from core.authentication import JWTAuthentication
+from ml.emotion.predictions_v2 import EmotionPredictor
 from ml.openai.chat import (
     send_transcription_to_chatbot,
     send_transcription_to_chatbot_v2,
 )
-from ml.emotion.predictions_v2 import EmotionPredictor
-from patient.models import Appointment
-
 from healthlink.utils.exceptions import (
     NotFound,
     PatientNotAllowed,
@@ -25,7 +24,11 @@ from healthlink.utils.exceptions import (
     # MissedAppointment,
 )
 
-from rest_framework.parsers import MultiPartParser
+
+# Django Imports
+from django.core.cache import cache
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.conf import settings
 
 
 class CallView(APIView):
@@ -121,9 +124,29 @@ class CallTranscriptView(APIView):
         Send the transcription to the chatbot.
         """
 
+        user = request.user
+
         # Patient cannot send transcription
-        if request.user.role == "patient" and hasattr(request.user, "patient"):
-            raise PatientNotAllowed()
+        if user.role == "patient" and hasattr(user, "patient"):
+            patient = user.patient
+            call = Call.objects.filter(patient=patient).last()
+            if call.patient != patient:
+                raise NotFound("Active Call for patient")
+            doctor = None
+        elif user.role == "doctor" and hasattr(user, "doctor"):
+            doctor = user.doctor
+            call = Call.objects.filter(doctor=doctor).last()
+            if call.doctor != doctor:
+                raise NotFound("Active Call for doctor")
+            patient = None
+
+        # Check if the doctor exists
+        if (not doctor) and (not patient):
+            raise NotFound("Doctor or Patient")
+
+        # Check if the call exists
+        if not call:
+            raise NotFound("Call")
 
         transcription = request.data.get("transcription")
 
@@ -131,21 +154,24 @@ class CallTranscriptView(APIView):
         if not transcription or not isinstance(transcription, str):
             raise InvalidData("Transcription")
 
-        doctor = request.user.doctor
+        role = request.data.get("role")
 
-        # Check if the doctor exists
-        if not doctor:
-            raise NotFound("Doctor")
+        # Check if the role is empty
+        if not role or not isinstance(role, str):
+            raise InvalidData("Role")
 
-        call = Call.objects.filter(doctor=doctor).last()
-
-        # Check if the call exists
-        if not call:
-            raise NotFound("Call")
-
-        # Check if the call belongs to the patient
-        if request.user.role == "doctor" and call.doctor != request.user.doctor:
-            raise NotFound("Active Call for doctor")
+        # Store the transcriptions as a list in the cache
+        if cache.get("transcription") is not None:
+            if len(cache.get("transcription")) == 1:
+                transcriptions = cache.get("transcription")
+                transcriptions.append(transcription)
+                cache.delete("transcription")
+                transcription = " ".join(transcriptions)
+        else:
+            transcriptions = []
+            transcriptions.append(transcription)
+            cache.set("transcription", transcriptions, timeout=1000)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         response = send_transcription_to_chatbot(transcription)
 
