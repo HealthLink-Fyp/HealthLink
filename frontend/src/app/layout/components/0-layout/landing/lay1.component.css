@@ -1,14 +1,7 @@
-
-  
-  
-  /* actual css */
-
-  *
-{
+* {
     padding:0;
     margin:0;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 html,body
@@ -21,12 +14,58 @@ html,body
 {
     height:100%;
     width:100%;
+    position: relative;
+
+}
+
+#content {
+    height: calc(100% - 100px);
+    width: 100%;
+    display: flex;
+
+}
+
+#left {
+    height: 100%;
+    width: 50%;
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#left h2 {
+    font-size: 6vw;
+    margin: 2vw;
+
+}
+
+#left p {
+    font-size: 1.5vw;
+    margin-top: 4vw;
+    margin-bottom: 5vw;
+    text-align: center;
+}
+
+#right {
+    height: 80%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#right img {
+    height: 80%;
+    width: 80%;
+    object-fit: contain;
+
 }
 
 
 
-
-@media(max-width:850px)
-{
- 
-}
