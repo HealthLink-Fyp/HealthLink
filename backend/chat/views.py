@@ -60,7 +60,7 @@ class CallView(APIView):
 
         # Patient cannot create a call
         if user.role == "patient" and hasattr(user, "patient"):
-            raise PatientNotAllowed("Create call")
+            raise PatientNotAllowed()
 
         appointment = self.get_latest_appointment(user)
         self.validate_appointment(appointment)

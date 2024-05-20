@@ -1,7 +1,6 @@
 import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
-from channels.exceptions import StopConsumer
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -119,6 +118,7 @@ class ChatConsumer(WebsocketConsumer):
             self.send(text_data=json.dumps(event))
         except Exception as e:
             print(f"An error occurred: {e}")
+
 
     def notify_user_join(self):
         """
