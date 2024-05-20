@@ -7,6 +7,7 @@ import { TranscribeService } from 'src/app/architecture/services/call/transcribe
 import { SharedService } from 'src/app/architecture/services/shared.service';
 import { CaptureImgService } from 'src/app/architecture/services/emotions/capture-img.service';
 
+
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
@@ -42,10 +43,17 @@ export class DialogComponent {
     
   }
 
-  
-public startService(){
 
-  this.service.start()
+
+  transcription: any = ''
+
+public startService(){
+//i want to receiver somwthing and return
+
+this.service.start(true); // Indicate that the caller is the patient
+  
+
+  
 
 }
 
