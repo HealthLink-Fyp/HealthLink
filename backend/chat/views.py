@@ -5,8 +5,8 @@ from rest_framework.parsers import MultiPartParser
 
 # Local Imports
 from patient.models import Appointment
-from chat.models import Call, LLMResponse
-from chat.serializers import CallSerializer
+from chat.models import Call, LLMResponse, Chat
+from chat.serializers import CallSerializer, ChatSerializer
 from core.authentication import JWTAuthentication
 from ml.emotion.predictions_v2 import EmotionPredictor
 from ml.openai.chat import (
@@ -27,8 +27,35 @@ from healthlink.utils.exceptions import (
 
 # Django Imports
 from django.core.cache import cache
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.conf import settings
+
+
+class ChatView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request):
+        """
+        Get the chat messages history based on the user role.
+        """
+        user = request.user
+
+        if user.role == "patient" and hasattr(user, "patient"):
+            patient = user.patient
+            doctor = request.data.get("doctor")
+            if (not doctor) or (not patient):
+                raise InvalidData("Doctor or Patient")
+            chat = Chat.objects.filter(patient=patient, doctor=doctor)
+        elif user.role == "doctor" and hasattr(user, "doctor"):
+            doctor = user.doctor
+            patient = request.data.get("patient")
+            if (not doctor) or (not patient):
+                raise InvalidData("Doctor or Patient")
+            chat = Chat.objects.filter(patient=patient, doctor=doctor)
+
+        if not chat:
+            raise NotFound("Chat")
+
+        serializer = ChatSerializer(chat, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CallView(APIView):
@@ -130,12 +157,14 @@ class CallTranscriptView(APIView):
         if user.role == "patient" and hasattr(user, "patient"):
             patient = user.patient
             call = Call.objects.filter(patient=patient).last()
+            role = "patient"
             if call.patient != patient:
                 raise NotFound("Active Call for patient")
             doctor = None
         elif user.role == "doctor" and hasattr(user, "doctor"):
             doctor = user.doctor
             call = Call.objects.filter(doctor=doctor).last()
+            role = "doctor"
             if call.doctor != doctor:
                 raise NotFound("Active Call for doctor")
             patient = None
@@ -154,36 +183,44 @@ class CallTranscriptView(APIView):
         if not transcription or not isinstance(transcription, str):
             raise InvalidData("Transcription")
 
-        role = request.data.get("role")
-
-        # Check if the role is empty
-        if not role or not isinstance(role, str):
-            raise InvalidData("Role")
-
-        # Store the transcriptions as a list in the cache
         if cache.get("transcription") is not None:
-            if len(cache.get("transcription")) == 1:
-                transcriptions = cache.get("transcription")
-                transcriptions.append(transcription)
+            transcriptions = cache.get("transcription")
+            transcriptions.append((transcription, role))
+            cache.set("transcription", transcriptions, timeout=1000)
+
+            if len(transcriptions) > 2 and role != "doctor":
+                """
+                Don't send the transcriptions to the chatbot.
+                As the patient is not the last one to send the transcription.
+                """
+                transcriptions.append(transcriptions.pop(1))
+                cache.set("transcription", transcriptions, timeout=1000)
+
+            if len(transcriptions) >= 2 and role == "doctor":
+                """
+                Send the transcriptions to the chatbot.
+                As the doctor is the last one to send the transcription.
+                """
+                transcription = " ".join([t[0] for t in transcriptions])
+                response = send_transcription_to_chatbot(transcription)
+
+                # Check if the response from the chatbot is an error
+                if "error" in response:
+                    raise BadRequest(response["error"])
+
+                LLMResponse.objects.create(
+                    call=call, transcription=transcription, response=response
+                )
+
                 cache.delete("transcription")
-                transcription = " ".join(transcriptions)
+
+                return Response(response, status=status.HTTP_200_OK)
         else:
             transcriptions = []
-            transcriptions.append(transcription)
+            transcriptions.append((transcription, role))
             cache.set("transcription", transcriptions, timeout=1000)
-            return Response(status=status.HTTP_204_NO_CONTENT)
 
-        response = send_transcription_to_chatbot(transcription)
-
-        # Check if the response from the chatbot is an error
-        if "error" in response:
-            raise BadRequest(response["error"])
-
-        LLMResponse.objects.create(
-            call=call, transcription=transcription, response=response
-        )
-
-        return Response(response, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class DashboardReportView(APIView):

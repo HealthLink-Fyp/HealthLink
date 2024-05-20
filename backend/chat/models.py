@@ -2,7 +2,17 @@ from django.db import models
 from core.models import PatientProfile, DoctorProfile
 
 
-# class Chat(models.Model):
+class Chat(models.Model):
+    chat_id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(
+        PatientProfile, on_delete=models.CASCADE, null=True, blank=True
+    )
+    doctor = models.ForeignKey(
+        DoctorProfile, on_delete=models.CASCADE, null=True, blank=True
+    )
+    message = models.TextField()
+    room_name = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
 
 
 class Call(models.Model):
