@@ -28,4 +28,6 @@ class JwtAuthMiddleware(BaseMiddleware):
             scope["user"] = await self.get_user(jwt_token[0])
         else:
             scope["user"] = None
+
+        print(f"User: {scope['user']}")
         return await super().__call__(scope, receive, send)
