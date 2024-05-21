@@ -26,6 +26,13 @@ export class ChatComponent implements OnInit {
       this.bookedAppointments = uniqueDoctors;
     });
   }
+
+  saveDocId(docId: any) {
+    console.log('Book Appointment clicked for ID:', docId);
+    this.dr_id=docId;
+
+    // Save the appointment ID here using a service or API call
+  }
  
   newMessage = '';
   messages: string[] = [];
