@@ -3,7 +3,7 @@ from .models import Appointment, MedicalRecord, MedicineShop, MedicalTest
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(source="doctor.full_name", read_only=True)
+    doctor_name = serializers.CharField(source="doctor.full_name", read_only=True)
 
     class Meta:
         model = Appointment
@@ -11,7 +11,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
 
 class MedicalRecordSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(source="doctor.full_name", read_only=True)
+    doctor_name = serializers.CharField(source="doctor.full_name", read_only=True)
 
     class Meta:
         model = MedicalRecord
