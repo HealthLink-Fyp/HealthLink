@@ -62,7 +62,7 @@ export class TranscribeService {
 
 
   sendTextToBackend() {
-    if (this.text.split(' ').length >= 50) {
+    if (this.text.split(' ').length >= 30) {
       this.data.transcription=this.text;
       this.http.post(`${environment.api}/calls/transcript/`, this.data).subscribe((res: any) => {
         console.log("The data before sending is here : ",this.data)

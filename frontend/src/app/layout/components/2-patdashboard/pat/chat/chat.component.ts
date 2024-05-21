@@ -21,13 +21,16 @@ export class ChatComponent {
     });
   }
 
+
+  dr_id:any=''
+  
   constructor(private authService:AuthService) {
 
     this.getCurrentUserRole();
     
     const token = localStorage.getItem('token');
-    this.chatSocket = new WebSocket(`${environment.testApi}${token}`);
-   
+    this.chatSocket = new WebSocket(`${environment.testApi} / ${this.dr_id}  /?token= ${token}`);
+   console.log()
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
