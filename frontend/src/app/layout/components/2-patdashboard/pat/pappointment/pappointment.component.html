@@ -2,72 +2,121 @@
 
 <div>
   <mat-toolbar class="toolbar" color="primary">
-    <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
+    <h1>
+      <button mat-icon-button><mat-icon>menu</mat-icon></button>
+    </h1>
     <h1><a class="nav-link" (click)="goBack()">Back</a></h1>
     <h1 class="jello-vertical">HealthLink 360</h1>
-  
 
-    <h1><a class="nav-link"  (click)="presentAppointments=true" routerLink="#">Show Appointments</a></h1>
-    <h1><a class="nav-link"  >Video Consult</a></h1>
+    <h1>
+      <a class="nav-link" (click)="presentAppointments = true" routerLink="#"
+        >Show Appointments</a
+      >
+    </h1>
+    <h1><a class="nav-link">Video Consult</a></h1>
     <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
     <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
-  
-    
   </mat-toolbar>
+</div>
 
-</div>   
-
-<br>
-<br>
-<br>
-
-
+<br />
+<br />
+<br />
 
 <div class="booking" *ngIf="!onupdateAppointment">
-  <label>For appointment booking:</label><br>
+  <label>For appointment booking:</label><br />
   <mat-form-field>
     <mat-label>Start</mat-label>
-    <input matInput type="datetime-local" [(ngModel)]="appointmentData.start">
+    <input matInput type="datetime-local" [(ngModel)]="appointmentData.start" />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onBookAppointment()">Book Appointment</button>
+  <button mat-raised-button color="primary" (click)="onBookAppointment()">
+    Book Appointment
+  </button>
 </div>
 
 <div class="updating" *ngIf="onupdateAppointment">
   <h1>Update appointment:</h1>
   <mat-form-field>
     <mat-label>Start</mat-label>
-    <input matInput type="datetime-local" [(ngModel)]="appointmentData.start">
+    <input matInput type="datetime-local" [(ngModel)]="appointmentData.start" />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onSubmitUpdatedAppointment()">Update</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmitUpdatedAppointment()"
+  >
+    Update
+  </button>
 </div>
 
 <div class="appointments" *ngIf="presentAppointments">
   <mat-table [dataSource]="bookedAppointments" class="mat-elevation-z8">
     <ng-container matColumnDef="start">
       <mat-header-cell *matHeaderCellDef>Scheduled Time</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.start | date: 'EEEE, MMMM d, y, h:mm a' }}</mat-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{
+        bookedAppoint.start | date : "EEEE, MMMM d, y, h:mm a"
+      }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="end">
       <mat-header-cell *matHeaderCellDef>Ending Time</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.end | date: 'EEEE, MMMM d, y, h:mm a' }}</mat-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{
+        bookedAppoint.end | date : "EEEE, MMMM d, y, h:mm a"
+      }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">{{ bookedAppoint.status }}</mat-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{
+        bookedAppoint.appointment_status
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="payment">
+      <mat-header-cell *matHeaderCellDef>Payment</mat-header-cell>
+      <mat-cell *matCellDef="let bookedAppoint">{{
+        bookedAppoint.payment_status
+      }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let bookedAppoint; let row = dataIndex">
-        <button mat-raised-button color="primary" (click)="onUpdateAppointment(bookedAppoint.appointment_id, bookedAppoint.doctor)">Update</button>
-        <button mat-raised-button color="warn" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete</button>
-        <button mat-raised-button color="primary" routerLink='/patient/videoCall' *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="
+            onUpdateAppointment(
+              bookedAppoint.appointment_id,
+              bookedAppoint.doctor
+            )
+          "
+        >
+          Update
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="onDeleteAppointment(bookedAppoint.appointment_id)"
+        >
+          Delete
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          routerLink="/patient/videoCall"
+          *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)"
+        >
+          Join
+        </button>
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['start', 'end', 'status', 'actions']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['start', 'end', 'status', 'actions']"></mat-row>
+    <mat-header-row
+      *matHeaderRowDef="['start', 'end', 'status', 'actions']"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['start', 'end', 'status', 'actions']"
+    ></mat-row>
   </mat-table>
 </div>

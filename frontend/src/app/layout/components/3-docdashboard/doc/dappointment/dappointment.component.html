@@ -1,62 +1,87 @@
 <!-- topbar code -->
 
 <div>
-    <mat-toolbar class="toolbar" color="primary">
-      <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
-      <h1 class="jello-vertical">HealthLink 360</h1>
-     
-      <h1><a class="nav-link"  (click)="onbookedAppointments() " routerLink="#">Show Appointments</a></h1>
-      <h1><a class="nav-link"  >Video Consult</a></h1>
-      <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
-      <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
-    
-      
-    </mat-toolbar>
-  
-  </div>   
-  
-  <br>
-  <br>
-  <br>
+  <mat-toolbar class="toolbar" color="primary">
+    <h1>
+      <button mat-icon-button><mat-icon>menu</mat-icon></button>
+    </h1>
+    <h1 class="jello-vertical">HealthLink 360</h1>
 
+    <h1>
+      <a class="nav-link" (click)="onbookedAppointments()" routerLink="#"
+        >Show Appointments</a
+      >
+    </h1>
+    <h1><a class="nav-link">Video Consult</a></h1>
+    <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
+    <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+  </mat-toolbar>
+</div>
 
-  <mat-table [dataSource]="bookedAppointments" class="mat-elevation-z8">
-    <!-- Scheduled Time Column -->
-    <ng-container matColumnDef="scheduledTime">
-      <mat-header-cell *matHeaderCellDef>Scheduled Time</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">
-        <span>{{ bookedAppoint.start | date: 'EEEE, MMMM d, y, h:mm a' }}</span>
-      </mat-cell>
-    </ng-container>
-  
-    <!-- Ending Time Column -->
-    <ng-container matColumnDef="endingTime">
-      <mat-header-cell *matHeaderCellDef>Ending Time</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">
-        <span>{{ bookedAppoint.end | date: 'EEEE, MMMM d, y, h:mm a' }}</span>
-      </mat-cell>
-    </ng-container>
-  
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">
-        <span>{{ bookedAppoint.status }}</span>
-      </mat-cell>
-    </ng-container>
-  
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell *matCellDef="let bookedAppoint">
-        <button mat-raised-button color="warn" (click)="onDeleteAppointment(bookedAppoint.appointment_id)">Delete</button>
-        <button mat-raised-button color="primary" [routerLink]="['/doctor/videoCall', bookedAppoint.patient, bookedAppoint.doctor]" *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)">Join</button>
-      </mat-cell>
-    </ng-container>
-  
-    <!-- Table Rows -->
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-  
-  
+<br />
+<br />
+<br />
+
+<mat-table [dataSource]="bookedAppointments" class="mat-elevation-z10">
+  <!-- Scheduled Time Column -->
+  <ng-container matColumnDef="scheduledTime">
+    <mat-header-cell *matHeaderCellDef>Scheduled Time</mat-header-cell>
+    <mat-cell *matCellDef="let bookedAppoint">
+      <span>{{ bookedAppoint.start | date : "EEEE, MMMM d, y, h:mm a" }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Ending Time Column -->
+  <ng-container matColumnDef="endingTime">
+    <mat-header-cell *matHeaderCellDef>Ending Time</mat-header-cell>
+    <mat-cell *matCellDef="let bookedAppoint">
+      <span>{{ bookedAppoint.end | date : "EEEE, MMMM d, y, h:mm a" }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let bookedAppoint">
+      <span>{{ bookedAppoint.appointment_status }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Payment Column -->
+  <ng-container matColumnDef="payment">
+    <mat-header-cell *matHeaderCellDef>Payment</mat-header-cell>
+    <mat-cell *matCellDef="let bookedAppoint">
+      <span>{{ bookedAppoint.payment_status }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let bookedAppoint">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onDeleteAppointment(bookedAppoint.appointment_id)"
+      >
+        Delete
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="[
+          '/doctor/videoCall',
+          bookedAppoint.patient,
+          bookedAppoint.doctor
+        ]"
+        *ngIf="isJoinVisible(bookedAppoint.start, bookedAppoint.expiresAt)"
+      >
+        Join
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Table Rows -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
