@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { environment } from 'src/environment/environment';
@@ -16,14 +17,16 @@ export class ChatComponent implements OnInit {
   }
 
   onbookedAppointments() {
-    this.patientService.getbookedAppointments().subscribe(
-      (response: any) => {
-        this.bookedAppointments = response;    
-      }
-    );
+    this.patientService.getbookedAppointments().subscribe((appointments: any) => {
+      const uniqueDoctors = Array.from(appointments.reduce((map:any, a:any) => {
+        map.set(a.doctor, { id: a.doctor, name: a.doctor_name });
+        return map;
+      }, new Map()).values());
+      console.log('Unique Doctors:', uniqueDoctors); 
+      this.bookedAppointments = uniqueDoctors;
+    });
   }
-
-
+ 
   newMessage = '';
   messages: string[] = [];
 
