@@ -14,6 +14,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.onbookedAppointments();
     console.log("here are book appointments in chat patient : ",this.bookedAppointments)
+    
   }
 
   onbookedAppointments() {
@@ -30,33 +31,15 @@ export class ChatComponent implements OnInit {
   saveDocId(docId: any) {
     console.log('Book Appointment clicked for ID:', docId);
     this.dr_id=docId;
-
-    // Save the appointment ID here using a service or API call
-  }
- 
-  newMessage = '';
-  messages: string[] = [];
-
-  chatSocket: WebSocket;
-
-  currentUserRole: string='';
-
-  getCurrentUserRole() {
-    this.authService.user().subscribe((user: any) => {
-      this.currentUserRole = user.role;
-    });
+    this.createWebSocketConnection();
   }
 
-  bookedAppointments:any[] = []; 
+  tokeny:any=''
 
-  dr_id:any=''
-
-  constructor(private authService:AuthService, private patientService:PatientService) {
-
-    this.getCurrentUserRole();
-    
+  createWebSocketConnection() {
     const token = localStorage.getItem('token');
-    this.chatSocket = new WebSocket(`${environment.testApi} / ${this.dr_id}  /?token= ${token}`);
+    this.tokeny=token;
+    this.chatSocket = new WebSocket(`${environment.testApi}/${this.dr_id}/?token= ${token}`);
    console.log()
 
     this.chatSocket.onopen = (e) => {
@@ -72,6 +55,35 @@ export class ChatComponent implements OnInit {
       const message = `${data.user}: ${data.message}`;
       this.messages.push(message);
     };
+  }
+
+  newMessage = '';
+  messages: string[] = [];
+
+  chatSocket!: WebSocket;
+
+  currentUserRole: string='';
+
+  getCurrentUserRole() {
+    this.authService.user().subscribe((user: any) => {
+      this.currentUserRole = user.role;
+    });
+  }
+
+  bookedAppointments:any[] = []; 
+
+  dr_id:any=''
+
+  chats:any[]=[];
+
+  constructor(private authService:AuthService, private patientService:PatientService) {
+    
+    this.patientService.getChatHistory(this.tokeny).subscribe(
+      (res:any)=>{
+        this.chats=res;
+      }
+    )
+    this.getCurrentUserRole();
   }
 
   sendMessage(): void {
