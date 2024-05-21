@@ -1,3 +1,23 @@
+<div >
+  <mat-card *ngFor="let appointment of bookedAppointments" >
+    <mat-card-content>
+      <p> {{ appointment.doctor }}</p>
+     
+      <!-- View Profile and Book Appointment buttons -->
+      <div >
+        <button mat-button color="primary" >View Profile</button>
+
+        <button mat-button color="accent" >Book Appointment</button>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  </div>
+
+
+
+
+
 <div class="container mt-5">
   <h3>Chat With Doctor</h3>
   <div class="row chat-container">

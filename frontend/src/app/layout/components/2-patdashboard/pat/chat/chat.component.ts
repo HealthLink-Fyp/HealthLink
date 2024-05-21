@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/architecture/services/auth.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { environment } from 'src/environment/environment';
 
 @Component({
@@ -7,7 +8,22 @@ import { environment } from 'src/environment/environment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
+
+  ngOnInit(): void {
+    this.onbookedAppointments();
+    console.log("here are book appointments in chat patient : ",this.bookedAppointments)
+  }
+
+  onbookedAppointments() {
+    this.patientService.getbookedAppointments().subscribe(
+      (response: any) => {
+        this.bookedAppointments = response;    
+      }
+    );
+  }
+
+
   newMessage = '';
   messages: string[] = [];
 
@@ -21,10 +37,11 @@ export class ChatComponent {
     });
   }
 
+  bookedAppointments:any[] = []; 
 
   dr_id:any=''
-  
-  constructor(private authService:AuthService) {
+
+  constructor(private authService:AuthService, private patientService:PatientService) {
 
     this.getCurrentUserRole();
     
