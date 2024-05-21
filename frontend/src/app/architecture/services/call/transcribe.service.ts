@@ -10,15 +10,16 @@ declare var webkitSpeechRecognition: any;
 })
 export class TranscribeService {
 
-  recognition = new webkitSpeechRecognition();
-  public doctorText = '';
-  public patientText = '';
+  recognition =  new webkitSpeechRecognition();
+  public text = '';
   tempWords: string | undefined;
-  public isDoctor!: boolean;
 
-  constructor(private http: HttpClient, private sharedService: SharedService) {}
+  constructor(private http:HttpClient,private sharedService:SharedService) {
+   
+   }
 
   init() {
+
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
@@ -27,54 +28,50 @@ export class TranscribeService {
         .map((result: any) => result[0].transcript)
         .join('');
       this.tempWords = transcript;
+      // console.log(transcript);
     });
   }
 
-  start(isDoctor: boolean) {
-    this.isDoctor = isDoctor; // Set whether the caller is a doctor or patient
+  start() {
     this.recognition.start();
     console.log("Speech recognition started");
 
-    this.recognition.addEventListener('end', () => {
-      this.wordConcat();
+    this.recognition.addEventListener('end', (condition: any) => {
+      this.wordConcat()
+      
       this.recognition.start(); // Restart the recognition
-    });
+    }
+    );
   }
 
   wordConcat() {
     if (this.tempWords) {
-      if (this.isDoctor) {
-        this.doctorText += ' ' + this.tempWords + '.';
-      } else {
-        this.patientText += ' ' + this.tempWords + '.';
-      }
+      this.text = this.text + ' ' + this.tempWords + '.';
       console.log(this.tempWords);
       this.tempWords = '';
       this.sendTextToBackend();
     }
+
   }
 
-  data = {
+   data = {
     transcription: '',
     patient_id: '',
     call_id: ''
   };
 
-  sendTextToBackend() {
-    const combinedText = this.doctorText + ' ' + this.patientText;
 
-    if (combinedText.split(' ').length >= 100) {
-      this.data.transcription = combinedText;
+  sendTextToBackend() {
+    if (this.text.split(' ').length >= 50) {
+      this.data.transcription=this.text;
       this.http.post(`${environment.api}/calls/transcript/`, this.data).subscribe((res: any) => {
-        console.log("The data before sending is here:", this.data);
-        console.log("The text is successfully sent to backend", res);
+        console.log("The data before sending is here : ",this.data)
+        console.log("The text is successfully sent to backend", res)
         this.sharedService.setResponseData(res);
-      });
-      console.log("Sending text to backend API:", combinedText);
-      console.log("patient bola ha : ",this.doctorText);
-      console.log("doctor bola ha : ",this.patientText);
-      this.doctorText = '';
-      this.patientText = '';
+      })
+      console.log("Sending text to backend API:", this.text);
+      this.text = ''; // Reset the 'text' variable after sending to the API
     }
   }
-}
+  }
+   

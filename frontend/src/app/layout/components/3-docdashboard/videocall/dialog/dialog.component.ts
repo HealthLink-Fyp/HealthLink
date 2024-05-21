@@ -50,7 +50,7 @@ export class DialogComponent {
 public startService(){
 //i want to receiver somwthing and return
 
-this.service.start(true); // Indicate that the caller is the patient
+this.service.start(); // Indicate that the caller is the patient
   
 
   
