@@ -1,16 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, NgZoneOptions, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-docsearch',
   templateUrl: './docsearch.component.html',
   styleUrls: ['./docsearch.component.css']
 })
-export class DocsearchComponent {
+export class DocsearchComponent implements OnInit {
 
-  constructor(private patientService:PatientService, private router:Router, private authService:AuthService){}
+
+  currentUserRole: string='';
+
+  getCurrentUserRole() {
+    this.authService.user().subscribe((user: any) => {
+      this.currentUserRole = user.role;
+    });
+  }
+
+
+
+  constructor(private patientService:PatientService, private router:Router, private authService:AuthService, private location: Location,private http: HttpClient){
+   
+    this.getCurrentUserRole();
+  
+  }
+
+  ngOnInit(): void {
+
+    console.log("i am ngoniit");
+  }
+
+  
+  
+
+ 
+
+
+
+
+
+
+  // if the user who visiting this components have token in his headers then check the boolean value to true otherwise false
+ 
+
+
+
+
+  goBack(): void {
+    this.location.back();
+  }
 
 
   searchQuery:string='';          // stores the words  that user types in search

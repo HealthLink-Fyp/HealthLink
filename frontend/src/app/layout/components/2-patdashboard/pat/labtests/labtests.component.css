@@ -1,73 +1,41 @@
 /* top bar css */
 
-.toolbar {
-    display: flex;
-    flex-wrap: wrap;  
-    height:50px; 
-  }
-  
-  .toolbar h1 {
-    margin-right: 20px;
-  }
-  
-  
-  
-                    /* targets the last h1 element inside an element with the class .
-                           toolbar and pushes it to the far right side by applying margin-left: auto; */
-                        
-  .nav-link{
-    color: inherit; /* Inherit the color from its parent element */
-   text-decoration: none; /* Remove underline */
-  
-  
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /* search.component.css */
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    justify-content:center;
-    gap:1em;
-    align-items:center;
-  
-  }
-  
-  
-  .larger-button .mat-icon {
-    font-size: 24px; /* Adjust the font size to your desired value */
-    margin-left:5px;
-  }
-  
-  
-  
-  
-  
-  
-   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+.toolbar h1:nth-last-child(2) {
+  margin-left: auto;
+}
+
+/* targets the last h1 element inside an element with the class .
+                         toolbar and pushes it to the far right side by applying margin-left: auto; */
+
+.nav-link {
+  color: inherit;
+  /* Inherit the color from its parent element */
+  text-decoration: none;
+  /* Remove underline */
+
+
+}
+
+
+
+#nav {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 1vw;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 0px rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+
+#nav h1 {
+  margin-top: 0.25vw;
+  margin-right: 2.5vw;
+  font-size: 1.3vw;
+}
+
   
   
   /* cards.component.css */

@@ -1,21 +1,22 @@
 <div>
-    <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar class="toolbar" >
       <h1><button (click)="drawer.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button></h1>
       <h1 >HealthLink 360</h1>
      
-      <h1><a class="nav-link"   routerLink="#">Find Doctors</a></h1>
-      <h1><a class="nav-link"  routerLink="/doctor/appointments">Video Consult</a></h1>
-      <h1><a class="nav-link" routerLink="#">Medicines</a></h1>
-      <h1><a class="nav-link" routerLink="#">Lab Tests</a></h1>
+      <h1><a class="nav-link"   routerLink="/patient/docsearch">Find Doctors</a></h1>
+      <h1><a class="nav-link" routerLink="/patient/medicalStore">Medicines</a></h1>
+      <h1><a class="nav-link" routerLink="/patient/labTests">Lab Tests</a></h1>
+      
       
       <h1><div class="whole">
-        <div class="notifications">
+        <!-- <div class="notifications">
             <mat-icon style=" position: relative;left: -8px;top: 14px;">notifications_active</mat-icon>
-        </div>
+        </div> -->
       <div class="profile">
-        <h2 class="pname">Dr . {{doctorData.full_name}}</h2>
-        <img src="https://cdn.openart.ai/stable_diffusion/554ba8635f8930a93702f1f8ace22de9c8a1dbed_2000x2000.webp" alt="Avatar" class="avatar">
-      </div>
+        <h2 class="pname"> {{doctorData.full_name}}</h2>
+        <img src="https://png.pngtree.com/png-vector/20230516/ourmid/pngtree-anxious-doctor-see-medical-report-and-thinking-confused-her-hand-in-vector-png-image_7099159.png" alt="Avatar" class="avatar">
+        
+    </div>
     </div></h1>
       
       
@@ -35,7 +36,7 @@
         <mat-list-item>
             <button routerLink="/doctor/appointments" mat-button><mat-icon>assignment</mat-icon> Appointments</button>
         </mat-list-item>
-        <mat-list-item>
+        <!-- <mat-list-item>
             <button routerLink="slider" mat-button><mat-icon>receipt</mat-icon> Prescriptions</button>
         </mat-list-item>
         <mat-list-item>
@@ -43,7 +44,7 @@
         </mat-list-item>
         <mat-list-item>
             <button mat-button><mat-icon> attach_money</mat-icon> Billing</button>
-        </mat-list-item>
+        </mat-list-item> -->
         <mat-list-item>
             <button routerLink="/doctor/chat" mat-button><mat-icon> chat</mat-icon> Chat</button>
         </mat-list-item>

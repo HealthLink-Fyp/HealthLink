@@ -1,6 +1,9 @@
 .toolbar {
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
   }
   
   .toolbar h1 {

@@ -1,19 +1,16 @@
 <!-- topbar code -->
 
-<div>
-  <mat-toolbar class="toolbar" color="primary">
-    <h1><button  mat-icon-button><mat-icon>menu</mat-icon></button></h1>
-    <h1 class="jello-vertical">HealthLink 360</h1>
-   
-    <h1><a class="nav-link"   routerLink="/find-doctors">Find Doctors</a></h1>
-    <h1><a class="nav-link"  routerLink="/find-doctors">Video Consult</a></h1>
-    <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
-    <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
-  
-    
-  </mat-toolbar>
+<!-- topbar code -->
+<div id="nav" class="toolbar" color="primary">
+  <h1><img src="https://i.ibb.co/NKnJZ5L/download.png" alt="logo" width="40" height="40" style="background-color: transparent; margin-top: 0.25vw; margin-left: 0.5vw;" /></h1>
+  <!-- <h1 class="jello-vertical">HealthLink 360</h1> -->
 
-</div>   
+
+  <h1><a class="nav-link" (click)="goBack()">Back</a></h1>
+  <h1><a class="nav-link" routerLink="/patient/medicalStore">Medicines</a></h1>
+  <h1><a class="nav-link" routerLink="/patient/labTests">Lab Tests</a></h1>
+ 
+</div> 
 
 <br>
 <br>
@@ -103,7 +100,9 @@
     <!-- View Profile and Book Appointment buttons -->
     <div class="button-container">
       <button mat-button color="primary"  [routerLink]="['/doctor/about',data.user]">View Profile</button>
+     <div *ngIf="currentUserRole=='patient'">
       <button mat-button color="accent" [routerLink]="['/patient/payment',data.user]">Book Appointment</button>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

@@ -16,7 +16,7 @@ export class BarchartComponent {
     ],
 
     title: {
-      text: 'Recovery Rate'
+      text: 'Recovery Rate (Coming Soon)'
     },
     tooltip: {
       trigger: 'axis',
