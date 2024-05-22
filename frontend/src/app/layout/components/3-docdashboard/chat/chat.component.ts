@@ -1,33 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/architecture/services/auth.service';
+import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { environment } from 'src/environment/environment';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'app-chat1',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
-  newMessage = '';
-  messages: string[] = [];
+export class ChatComponent implements OnInit {
 
-  chatSocket: WebSocket;
-
-  currentUserRole: string='';
-
-  getCurrentUserRole() {
-    this.authService.user().subscribe((user: any) => {
-      this.currentUserRole = user.role;
-    });
+  ngOnInit(): void {
+   
+    
   }
 
-  constructor(private authService:AuthService) {
+ 
+  savePatId(patId: any) {
+    console.log('Book Appointment clicked for ID:', patId);
+    this.pat_id=patId;
+    this.createWebSocketConnection();
+  }
 
-    this.getCurrentUserRole();
-    
+  tokeny:any=''
+
+  createWebSocketConnection() {
     const token = localStorage.getItem('token');
-    this.chatSocket = new WebSocket(`${environment.testApi}${token}`);
-   
+    this.tokeny=token;
+    this.chatSocket = new WebSocket(`${environment.testApi}/${this.pat_id}/?token= ${token}`);
+   console.log()
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
@@ -42,6 +44,38 @@ export class ChatComponent {
       const message = `${data.user}: ${data.message}`;
       this.messages.push(message);
     };
+  }
+
+  newMessage = '';
+  messages: string[] = [];
+
+  chatSocket!: WebSocket;
+
+  currentUserRole: string='';
+
+  getCurrentUserRole() {
+    this.authService.user().subscribe((user: any) => {
+      this.currentUserRole = user.role;
+    });
+  }
+
+  bookedAppointments:any[] = []; 
+
+  pat_id:any=''
+
+  chats:any[]=[];
+
+  constructor(private authService:AuthService, private patientService:PatientService) {
+    
+    this.patientService.getChatHistory(this.tokeny).subscribe(
+      (res:any)=>{
+        this.chats=res;
+        console.log("the patient chat towards doctor",res)
+      }
+      
+    )
+    this.getCurrentUserRole();
+   
   }
 
   sendMessage(): void {

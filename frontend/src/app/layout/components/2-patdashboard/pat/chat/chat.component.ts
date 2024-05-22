@@ -93,6 +93,8 @@ export class ChatComponent implements OnInit {
     }
   }
 
+ 
+
   removeMessage(message: string): void {
     const index = this.messages.indexOf(message);
     if (index !== -1) {

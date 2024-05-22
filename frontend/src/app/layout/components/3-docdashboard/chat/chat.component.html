@@ -1,25 +1,30 @@
-<div class="container mt-5">
+<div>
   <h3>Chat With Doctor</h3>
-  <div class="row chat-container">
+  <div>
     <!-- Chat Input Section -->
-    <div class="col-lg-4 chat-input-col">
-      <mat-card class="chat-input">
-        <mat-form-field appearance="fill" class="mb-3">
+    <div>
+      <mat-card>
+        <mat-form-field>
           <textarea matInput placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+        <button mat-raised-button (click)="sendMessage()">Send</button>
       </mat-card>
     </div>
-
     <!-- Chat Messages Section -->
-    <div class="col-lg-8 chat-messages-col">
-      <div class="chat-messages">
-        <div *ngFor="let message of messages" class="chat-message">
-          <mat-card class="message-card">
+    
+    <div>
+      <div>
+        <div *ngFor="let message of messages">
+          <mat-card>
             <p>{{ message }}</p>
           </mat-card>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<div *ngFor="let chat of chats">
+  <p>{{chat}}</p>
 </div>
