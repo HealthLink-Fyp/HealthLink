@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/architecture/services/auth.service';
+import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+
 import { environment } from 'src/environment/environment';
 
 @Component({
@@ -12,9 +14,22 @@ import { environment } from 'src/environment/environment';
 export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
-   
+    this.onbookedAppointments();
+    console.log("here are book appointments in chat patient : ",this.bookedAppointments)
     
   }
+
+  onbookedAppointments() {
+    this.doctorService.getbookedAppointments().subscribe((appointments: any) => {
+      const uniqueDoctors = Array.from(appointments.reduce((map:any, a:any) => {
+        map.set(a.doctor, { id: a.doctor, name: a.doctor_name });
+        return map;
+      }, new Map()).values());
+      console.log('Unique Doctors:', uniqueDoctors); 
+      this.bookedAppointments = uniqueDoctors;
+    });
+  }
+
 
  
   savePatId(patId: any) {
@@ -65,7 +80,7 @@ export class ChatComponent implements OnInit {
 
   chats:any[]=[];
 
-  constructor(private authService:AuthService, private patientService:PatientService) {
+  constructor(private authService:AuthService,private doctorService:DoctorService, private patientService:PatientService) {
     
     this.patientService.getChatHistory(this.tokeny).subscribe(
       (res:any)=>{
