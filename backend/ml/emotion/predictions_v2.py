@@ -71,10 +71,3 @@ class EmotionPredictor:
         if isinstance(predictions, np.ndarray):
             return self.OBJECTS[np.argmax(predictions)]
         raise ValueError("Invalid prediction")
-
-
-# print("Running predictions")
-# predictor = EmotionPredictor()
-# with open("ml/emotion/test.jpg", "rb") as f:
-#     print("Prediction:")
-#     print(predictor.predict(f.read()))

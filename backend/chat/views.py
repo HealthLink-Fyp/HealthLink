@@ -52,7 +52,7 @@ class ChatView(APIView):
             chat = Chat.objects.filter(patient=patient, doctor=doctor)
 
         if not chat:
-            raise NotFound("Chat")
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         serializer = ChatSerializer(chat, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -29,5 +29,4 @@ class JwtAuthMiddleware(BaseMiddleware):
         else:
             scope["user"] = None
 
-        print(f"User: {scope['user']}")
         return await super().__call__(scope, receive, send)
