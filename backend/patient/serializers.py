@@ -4,6 +4,7 @@ from .models import Appointment, MedicalRecord, MedicineShop, MedicalTest
 
 class AppointmentSerializer(serializers.ModelSerializer):
     doctor_name = serializers.CharField(source="doctor.full_name", read_only=True)
+    patient_name = serializers.CharField(source="patient.full_name", read_only=True)
 
     class Meta:
         model = Appointment

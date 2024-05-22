@@ -15,18 +15,18 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.onbookedAppointments();
-    console.log("here are book appointments in chat patient : ",this.bookedAppointments)
+    console.log("here are book appointments in chat doctor : ",this.bookedAppointments)
     
   }
 
   onbookedAppointments() {
     this.doctorService.getbookedAppointments().subscribe((appointments: any) => {
-      const uniqueDoctors = Array.from(appointments.reduce((map:any, a:any) => {
-        map.set(a.doctor, { id: a.doctor, name: a.doctor_name });
+      const uniquePatients = Array.from(appointments.reduce((map:any, a:any) => {
+        map.set(a.patient, { id: a.patient, name: a.doctor_name });
         return map;
       }, new Map()).values());
-      console.log('Unique Doctors:', uniqueDoctors); 
-      this.bookedAppointments = uniqueDoctors;
+      console.log('Unique patients:', uniquePatients); 
+      this.bookedAppointments = uniquePatients;
     });
   }
 
@@ -35,6 +35,7 @@ export class ChatComponent implements OnInit {
   savePatId(patId: any) {
     console.log('Book Appointment clicked for ID:', patId);
     this.pat_id=patId;
+    this.getChatHistory();
     this.createWebSocketConnection();
   }
 
@@ -77,12 +78,27 @@ export class ChatComponent implements OnInit {
   bookedAppointments:any[] = []; 
 
   pat_id:any=''
-
+ 
   chats:any[]=[];
+
+  getChatHistory()
+  { 
+    const patientData = {
+      patient: this.pat_id
+    };
+   
+    this.patientService.getChatHistory(patientData).subscribe(
+      (res:any)=>{
+        this.chats=res;
+        console.log("the patient chat towards doctor",res)
+      }
+      
+    )
+  }
 
   constructor(private authService:AuthService,private doctorService:DoctorService, private patientService:PatientService) {
     
-    this.patientService.getChatHistory(this.tokeny).subscribe(
+    this.patientService.getChatHistory(this.pat_id).subscribe(
       (res:any)=>{
         this.chats=res;
         console.log("the patient chat towards doctor",res)
