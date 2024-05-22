@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   onbookedAppointments() {
     this.doctorService.getbookedAppointments().subscribe((appointments: any) => {
       const uniquePatients = Array.from(appointments.reduce((map:any, a:any) => {
-        map.set(a.patient, { id: a.patient, name: a.doctor_name });
+        map.set(a.patient, { id: a.patient, name: a.patient_name });
         return map;
       }, new Map()).values());
       console.log('Unique patients:', uniquePatients); 
@@ -41,6 +41,8 @@ export class ChatComponent implements OnInit {
 
   tokeny:any=''
 
+
+  
   createWebSocketConnection() {
     const token = localStorage.getItem('token');
     this.tokeny=token;
@@ -58,7 +60,7 @@ export class ChatComponent implements OnInit {
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       const message = `${data.user}: ${data.message}`;
-      this.messages.push(message);
+      // this.messages.push(message);
     };
   }
 

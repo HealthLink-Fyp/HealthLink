@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/architecture/services/auth.service';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { environment } from 'src/environment/environment';
+import { NotifyService } from '../../../notification/notify.service';
 
 @Component({
   selector: 'app-chat1',
@@ -34,10 +35,26 @@ export class ChatComponent implements OnInit {
   saveDocId(docId: any) {
     console.log('Book Appointment clicked for ID:', docId);
     this.dr_id=docId;
+    this.getChatHistory();
     this.createWebSocketConnection();
   }
 
   tokeny:any=''
+
+  getChatHistory()
+  { 
+    const doctorData = {
+      doctor: this.dr_id
+    };
+   
+    this.patientService.getChatHistory(doctorData).subscribe(
+      (res:any)=>{
+        this.chats=res;
+        console.log("the patient chat towards doctor",res)
+      }
+      
+    )
+  }
 
   createWebSocketConnection() {
     const token = localStorage.getItem('token');
@@ -56,7 +73,8 @@ export class ChatComponent implements OnInit {
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       const message = `${data.user}: ${data.message}`;
-      this.messages.push(message);
+      console.log("who is this : ",data.user)
+      // this.messages.push(message);
     };
   }
 
@@ -79,7 +97,7 @@ export class ChatComponent implements OnInit {
 
   chats:any[]=[];
 
-  constructor(private authService:AuthService, private patientService:PatientService, private doctorService:DoctorService) {
+  constructor(private authService:AuthService, private patientService:PatientService, private doctorService:DoctorService,private notifyService:NotifyService) {
     
     this.patientService.getChatHistory(this.tokeny).subscribe(
       (res:any)=>{
