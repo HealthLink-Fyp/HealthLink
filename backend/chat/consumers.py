@@ -46,7 +46,7 @@ class ChatConsumer(WebsocketConsumer):
         """
 
         self.room_name = f"chat_{doctor_id}_{patient_id}"
-        self.room_group_name = f"chat_group_{self.room_name}"
+        self.room_group_name = f"grp_{self.room_name}"
 
         self.chat_room = (
             Chat.objects.filter(room_name=self.room_name).order_by("-created").first()
@@ -80,6 +80,7 @@ class ChatConsumer(WebsocketConsumer):
             patient_id = self.scope["url_route"]["kwargs"]["user_id"]
             self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
             self.chat_room.doctor = self.user.doctor
+            print("\npatient_id: ", patient_id)
             self.chat_room.patient = PatientProfile.objects.get(user__id=patient_id)
 
         elif role == "patient":
