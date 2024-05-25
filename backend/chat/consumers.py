@@ -16,7 +16,6 @@ class ChatConsumer(WebsocketConsumer):
         self.user = None
         self.doctor = None
         self.patient = None
-        self.user = None
 
     def is_authenticated(self, user):
         """
@@ -144,8 +143,7 @@ class ChatConsumer(WebsocketConsumer):
                 self.room_group_name,
                 {
                     "type": "chat_message",
-                    "user": getattr(self.user, "username", "Anonymous"),
-                    "message": message,
+                    "message": f"{str(self.user.capitalize())}: {message}"
                 },
             )
 
