@@ -14,4 +14,4 @@ def get_fake_anonymizer() -> PresidioAnonymizer:
     }
     anonymizer = PresidioAnonymizer()
     anonymizer.add_operators(phone_number_operator)
-    return anonymizer
+    return anonymizer.anonymize

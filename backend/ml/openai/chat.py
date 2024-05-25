@@ -2,10 +2,29 @@ from langchain_core.prompts.prompt import PromptTemplate
 from langchain_openai import ChatOpenAI
 from .utils import get_fake_anonymizer
 from .prompt import prompt_template, prompt_template_dashboard
+import os
+import dotenv
 import json
 
+# Load the LLM model configuration
+dotenv.load_dotenv()
 
-def prompt_chain(anonymizer=None, prompt=None):
+# Load the LLM model configuration from environment variables
+MODEL_NAME = os.getenv("MODEL_NAME", "deepseek-chat")
+API_KEY = os.getenv("API_KEY", "sk-ce808733b8474062ba622b73f3b634cb")
+BASE_URL = os.getenv("BASE_URL", "https://api.deepseek.com/v1")
+
+# Initialize the anonymizer and prompt templates
+ANONYMIZER = get_fake_anonymizer()
+PROMPT = PromptTemplate.from_template(prompt_template)
+PROMPT_DASHBOARD = PromptTemplate.from_template(prompt_template_dashboard)
+
+
+def chat_model(
+    model_name: str = MODEL_NAME,
+    api_key: str = API_KEY,
+    base_url: str = BASE_URL,
+) -> ChatOpenAI:
     """
     Create a chain of functions to process the transcription
     """
@@ -14,35 +33,42 @@ def prompt_chain(anonymizer=None, prompt=None):
         "response_format": {"type": "json_object"},
     }
 
-    chatopenai = ChatOpenAI(
+    model = ChatOpenAI(
         temperature=0.5,
-        base_url="https://api.deepseek.com/v1",
-        model_name="deepseek-chat",
+        base_url=base_url,
+        model_name=model_name,
         model_kwargs=model_kwargs,
-        api_key="sk-ce808733b8474062ba622b73f3b634cb",
+        api_key=api_key,
     )
+    
+    return model
 
-    if prompt:
-        if anonymizer is None:
-            chain = {"anonymized_text": chatopenai} | prompt | chatopenai
-        else:
-            chain = {"anonymized_text": anonymizer.anonymize} | prompt | chatopenai
-    else:
-        raise ValueError("Prompt is required")
 
-    return chain
+def prompt_response(transcription: str, model: dict) -> dict:
+    """
+    Send the transcription to the chatbot and get the response
+    """
+
+    chain = {"anonymized_text": ANONYMIZER} | PROMPT | model
+
+    response = chain.invoke(transcription)
+    
+    return response
 
 
 def send_transcription_to_chatbot(transcription: str) -> dict:
     """
     Send the transcription to the chatbot and get the response
     """
+    if not PROMPT:
+        return {"error": "Prompt is None"}
+    
+    if not ANONYMIZER:
+        return {"error": "Anonymizer is None"}
 
-    anonymizer = get_fake_anonymizer()
-    prompt = PromptTemplate.from_template(prompt_template)
-    chain = prompt_chain(anonymizer=anonymizer, prompt=prompt)
+    model = chat_model()
 
-    response = chain.invoke(transcription)
+    response = prompt_response(transcription=transcription, model=model)
 
     # Check for response presence and status code
     if response is None:
@@ -57,11 +83,15 @@ def send_transcription_to_chatbot_v2(llm_response: str) -> dict:
     Send the transcription to the chatbot and get the response
     """
 
-    anonymizer = get_fake_anonymizer()
-    prompt = PromptTemplate.from_template(prompt_template_dashboard)
-    chain = prompt_chain(anonymizer=anonymizer, prompt=prompt)
+    if not PROMPT_DASHBOARD:
+        return {"error": "Prompt is None"}
+    
+    if not ANONYMIZER:
+        return {"error": "Anonymizer is None"}
+    
+    model = chat_model()
 
-    response = chain.invoke(llm_response)
+    response = prompt_response(llm_response, model)
 
     # Check for response presence and status code
     if response is None:

@@ -5,7 +5,7 @@ description = "HealthLink, A telemedicine plateform."
 authors = ["Faisal Fida <69955157+faisal-fida@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
-
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
@@ -31,10 +31,11 @@ django-extensions = "^3.2.3"
 pillow = "^10.3.0"
 pytest = "^8.0.1"
 werkzeug = "^3.0.1"
+ruff = "^0.4.5"
 
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.3.1"
+ruff = "^0.4.5"
 mkdocs-material = "^9.5.15"
 mkdocs-material-extensions = "^1.3.1"
 
