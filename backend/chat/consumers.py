@@ -143,7 +143,7 @@ class ChatConsumer(WebsocketConsumer):
                 self.room_group_name,
                 {
                     "type": "chat_message",
-                    "message": f"{str(self.user.full_name).capitalize()}: {message}"
+                    "message": f"{str(self.user.username).capitalize()}: {message}"
                 },
             )
 
