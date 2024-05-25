@@ -36,7 +36,7 @@ export class DialogComponent {
     this.CallService.peerIdGet().subscribe((response:any)=>{
       console.log("i m getting the peer id in dialog component")
       this.data.peerId = response.peer_id; // Set the initial value of the input field to the peerId value
-      this.imageCaptureService.startImageCapture();
+    
     })
    
 

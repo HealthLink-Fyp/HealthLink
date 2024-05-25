@@ -1,52 +1,27 @@
-<div >
-  <mat-card *ngFor="let appointment of bookedAppointments" >
-    <mat-card-content>
-      <p> {{ appointment.name }}</p>
-     
-      <!-- View Profile and Book Appointment buttons -->
-      <div >
-
-
-        <button mat-button color="accent" (click)="savePatId(appointment.id)">Show Chat</button>
-
-      </div>
-    </mat-card-content>
-  </mat-card>
-  </div>
-
-
-
-
-
-
-
-<div>
-  <h3>Chat With Doctor</h3>
-  <div>
-    <!-- Chat Input Section -->
-    <div>
-      <mat-card>
-        <mat-form-field>
-          <textarea matInput placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
-        </mat-form-field>
-        <button mat-raised-button (click)="sendMessage()">Send</button>
-      </mat-card>
-    </div>
-    <!-- Chat Messages Section -->
-    
-    <div>
-      <div>
-        <div *ngFor="let message of messages">
-          <mat-card>
-            <p>{{ message }}</p>
-          </mat-card>
-        </div>
-      </div>
+<div class="user-list">
+  <div class="user-card" *ngFor="let appointment of bookedAppointments">
+    <div class="user-details">
+      <p>{{ appointment.name }}</p>
+      <button class="chat-button" (click)="savePatId(appointment.id)">Show Chat</button>
     </div>
   </div>
 </div>
 
+<div class="chat-history" *ngFor="let chat of chats">  
+  <p>{{ chat.message }}</p>
+</div>
 
-<div *ngFor="let chat of chats">
-  <p>{{chat.message}}</p>
+
+  
+  <div class="chat-messages-section">
+    <div class="message-card" *ngFor="let message of messages">
+      <p>{{ message }}</p>
+    </div>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-input-section">
+      <textarea class="chat-input" placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
+      <button class="send-button" (click)="sendMessage()">Send</button>
+    </div>
 </div>

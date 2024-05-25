@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
       const data = JSON.parse(e.data);
       const message = `${data.user}: ${data.message}`;
       console.log("who is this : ",data.user)
-      // this.messages.push(message);
+      this.messages.push(message);
     };
   }
 

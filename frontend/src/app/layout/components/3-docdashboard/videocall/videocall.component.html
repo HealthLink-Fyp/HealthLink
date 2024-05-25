@@ -96,14 +96,9 @@
               
               <div>
                 <h2>Follow-up Questions:</h2>
-                <mat-card>
-                  <mat-card-content>
-                    <ul class="stream-list">
-                      <!-- <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li> -->
-                      <textarea matInput *ngFor="let question of transResponse.followup_questions" class="full-width"></textarea>
-                    </ul>
-                  </mat-card-content>
-                </mat-card>
+                <ul class="stream-list">
+                  <li *ngFor="let question of transResponse.followup_questions">{{ question }}</li>
+                </ul>
                 
                 <ul *ngIf="loading">
                   <li>
@@ -139,9 +134,9 @@
             </div>
           </div>
           <div class="col">
-            <div class="child3">
+            <div  class="child3">
               <h1></h1>
-           
+                 {{emotions}}
             </div>
           </div>
           <div class="col">

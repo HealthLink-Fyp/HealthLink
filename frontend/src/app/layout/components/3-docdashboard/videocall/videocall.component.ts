@@ -35,6 +35,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
  
 
 
+
   constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService) {
 
     
@@ -124,7 +125,15 @@ export class VideocallComponent implements OnInit, OnDestroy {
     return urlParts[urlParts.length - 1];
   }
   
+  emotions:any=''
+
   ngOnInit(): void {
+
+
+    this.sharedService.onResponseEmoteAvailable().subscribe((res:any)=>{
+         this.emotions=res;
+         console.log("the emotions emiting are : ",res)
+    })
 
     this.sharedService.onResponseAvailable().subscribe((data) => {
       this.loading = true; // Set loading to true when a new response is received
