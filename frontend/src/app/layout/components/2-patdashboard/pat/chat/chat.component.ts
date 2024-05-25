@@ -72,7 +72,7 @@ export class ChatComponent implements OnInit {
 
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      const message = `${data.user}: ${data.message}`;
+      const message = data.message
       console.log("who is this : ",data.user)
       this.messages.push(message);
     };
