@@ -79,11 +79,10 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-left: 15px;
   }
   
   .message-card {
-    padding: 10px;
- 
     border-radius: 5px;
    
   }

@@ -108,6 +108,7 @@ class ChatConsumer(WebsocketConsumer):
 
         if self.is_authenticated(self.user):
             # Remove the user from the group
+            print("grp: ", self.room_group_name)
             async_to_sync(self.channel_layer.group_discard)(
                 self.room_group_name, self.channel_name
             )
@@ -139,11 +140,14 @@ class ChatConsumer(WebsocketConsumer):
             ):
                 message = f"Anonymous: {message}"
 
+
+            message = f"{str(self.user.username).capitalize()}: {message}"
+
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
                     "type": "chat_message",
-                    "message": f"{str(self.user.username).capitalize()}: {message}"
+                    "message": message,
                 },
             )
 

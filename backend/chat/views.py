@@ -42,13 +42,13 @@ class ChatView(APIView):
             patient = user.patient
             doctor = request.data.get("doctor")
             if (not doctor) or (not patient):
-                raise InvalidData("Doctor or Patient")
+                raise InvalidData(f"Doctor {doctor} or Patient {patient}")
             chat = Chat.objects.filter(patient=patient, doctor=doctor)
         elif user.role == "doctor" and hasattr(user, "doctor"):
             doctor = user.doctor
             patient = request.data.get("patient")
             if (not doctor) or (not patient):
-                raise InvalidData("Doctor or Patient")
+                raise InvalidData(f"Doctor {doctor} or Patient {patient}")
             chat = Chat.objects.filter(patient=patient, doctor=doctor)
 
         if not chat:

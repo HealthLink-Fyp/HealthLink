@@ -7,21 +7,23 @@
   </div>
 </div>
 
-<div class="chat-history" *ngFor="let chat of chats">  
-  <p>{{ chat.message }}</p>
-</div>
-
-
-  
+<div class="chat-container">
   <div class="chat-messages-section">
     <div class="message-card" *ngFor="let message of messages">
       <p>{{ message }}</p>
     </div>
   </div>
 
-  <div class="chat-container">
+  <div class="message-card" *ngFor="let chat of chats">
+    <p>{{ chat.message }}</p>
+  </div>
+
+ 
     <div class="chat-input-section">
       <textarea class="chat-input" placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
       <button class="send-button" (click)="sendMessage()">Send</button>
     </div>
+    
 </div>
+
+

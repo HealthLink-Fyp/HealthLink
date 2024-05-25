@@ -28,6 +28,7 @@ export class SignInUpComponent implements OnInit {
       this.isUpdateMode = params['updateMode'] || false;
       if (this.isUpdateMode) {
         this.getUserDataFields();
+        console.log("update mode on")
       }
     });
   }

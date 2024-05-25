@@ -13,6 +13,19 @@ import { environment } from 'src/environment/environment';
 })
 export class ChatComponent implements OnInit {
 
+  constructor(private authService:AuthService,private doctorService:DoctorService, private patientService:PatientService) {
+    
+   
+   
+  }
+
+  newMessage = '';
+  messages: string[] = [];
+ chatSocket!: WebSocket;
+ bookedAppointments:any[] = []; 
+ pat_id:any=''
+  chats:any[]=[];
+
   ngOnInit(): void {
     this.onbookedAppointments();
     console.log("here are book appointments in chat doctor : ",this.bookedAppointments)
@@ -59,29 +72,23 @@ export class ChatComponent implements OnInit {
 
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      const message = `${data.message}`;
+      const message = data.message
       this.messages.push(message);
     };
   }
 
-  newMessage = '';
-  messages: string[] = [];
-
-  chatSocket!: WebSocket;
-
-  currentUserRole: string='';
-
-  getCurrentUserRole() {
-    this.authService.user().subscribe((user: any) => {
-      this.currentUserRole = user.role;
-    });
+  disconnect() {
+    if (this.chatSocket) {
+      this.chatSocket.close();
+    }
   }
 
-  bookedAppointments:any[] = []; 
+  ngOnDestroy() {
+    this.disconnect();
+    console.log("websocket connectiion closed")
+  }
 
-  pat_id:any=''
  
-  chats:any[]=[];
 
   getChatHistory()
   { 
@@ -98,18 +105,8 @@ export class ChatComponent implements OnInit {
     )
   }
 
-  constructor(private authService:AuthService,private doctorService:DoctorService, private patientService:PatientService) {
-    
-    this.patientService.getChatHistory(this.pat_id).subscribe(
-      (res:any)=>{
-        this.chats=res;
-        console.log("the patient chat towards doctor",res)
-      }
-      
-    )
-    this.getCurrentUserRole();
-   
-  }
+
+  
 
   sendMessage(): void {
     if (this.newMessage.trim()) {

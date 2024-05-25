@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/architecture/services/auth.service';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { environment } from 'src/environment/environment';
-import { NotifyService } from '../../../notification/notify.service';
+
 
 @Component({
   selector: 'app-chat1',
@@ -12,6 +12,18 @@ import { NotifyService } from '../../../notification/notify.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+
+  
+  constructor(private authService:AuthService, private patientService:PatientService, private doctorService:DoctorService) {
+  
+  }
+
+  newMessage = '';
+  messages: string[] = [];
+  chatSocket!: WebSocket;
+  bookedAppointments:any[] = []; 
+  dr_id:any=''
+  chats:any[]=[];
 
   ngOnInit(): void {
     this.onbookedAppointments();
@@ -41,21 +53,7 @@ export class ChatComponent implements OnInit {
 
   tokeny:any=''
 
-  getChatHistory()
-  { 
-    const doctorData = {
-      doctor: this.dr_id
-    };
-   
-    this.patientService.getChatHistory(doctorData).subscribe(
-      (res:any)=>{
-        this.chats=res;
-        console.log("the patient chat towards doctor",res)
-      }
-      
-    )
-  }
-
+ 
   createWebSocketConnection() {
     const token = localStorage.getItem('token');
     this.tokeny=token;
@@ -73,38 +71,40 @@ export class ChatComponent implements OnInit {
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       const message = data.message
-      console.log("who is this : ",data.user)
       this.messages.push(message);
     };
   }
 
-  newMessage = '';
-  messages: string[] = [];
+  
 
-  chatSocket!: WebSocket;
 
-  currentUserRole: string='';
-
-  getCurrentUserRole() {
-    this.authService.user().subscribe((user: any) => {
-      this.currentUserRole = user.role;
-    });
+  disconnect() {
+    if (this.chatSocket) {
+      this.chatSocket.close();
+    }
   }
 
-  bookedAppointments:any[] = []; 
+  ngOnDestroy() {
+    this.disconnect();
+    console.log("websocket connectiion closed")
+  }
 
-  dr_id:any=''
+ 
 
-  chats:any[]=[];
 
-  constructor(private authService:AuthService, private patientService:PatientService, private doctorService:DoctorService,private notifyService:NotifyService) {
-    
-    this.patientService.getChatHistory(this.tokeny).subscribe(
+  getChatHistory()
+  { 
+    const doctorData = {
+      doctor: this.dr_id
+    };
+   
+    this.patientService.getChatHistory(doctorData).subscribe(
       (res:any)=>{
         this.chats=res;
+        console.log("the patient chat towards doctor",res)
       }
+      
     )
-    this.getCurrentUserRole();
   }
 
   sendMessage(): void {

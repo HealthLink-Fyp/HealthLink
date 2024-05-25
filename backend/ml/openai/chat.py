@@ -19,7 +19,7 @@ def prompt_chain(anonymizer=None, prompt=None):
         base_url="https://api.deepseek.com/v1",
         model_name="deepseek-chat",
         model_kwargs=model_kwargs,
-        api_key="sk-ce808733b8474062ba622b73f3b634cb",
+        api_key="sk-9135a0b4105e46ff9bc36dcf6ba37dac",
     )
 
     if prompt:
