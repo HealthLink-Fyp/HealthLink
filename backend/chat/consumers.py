@@ -87,6 +87,7 @@ class ChatConsumer(WebsocketConsumer):
             patient_id = self.user.id
             self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
             self.chat_room.patient = self.user.patient
+            print("\npatient_id: ", doctor_id)
             self.chat_room.doctor = DoctorProfile.objects.get(user__id=doctor_id)
 
         self.chat_room.save()
