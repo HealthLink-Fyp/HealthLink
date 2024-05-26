@@ -11,6 +11,10 @@ CORS_ALLOW_CREDENTIALS = True
 # Quick and dirty way to enable all hosts for development
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = ["https://organic-doodle-7v95g6qq45vwhr5wx-4200.app.github.dev"]
+CORS_ORIGIN_WHITELIST = ["https://organic-doodle-7v95g6qq45vwhr5wx-4200.app.github.dev"]
+
+
 # URLs for frontend and backend
 # if os.environ.get("CODESPACES") == "true":  # noqa
 #     CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")  # noqa

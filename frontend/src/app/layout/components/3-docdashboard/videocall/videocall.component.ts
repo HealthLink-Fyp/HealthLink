@@ -150,8 +150,10 @@ export class VideocallComponent implements OnInit, OnDestroy {
 
     this.recordsService.getRecords().subscribe((res:any)=>{
       this.results = res.results.map((record: any) => {
-        if (record.past_records && record.past_records.includes('localhost:8000')) {
-          record.past_records = record.past_records.replace('localhost:8000', window.location.origin);
+        if (record.past_records && record.past_records.includes('http://localhost:8000')) {
+        const backendUrl=window.location.origin.replace("-4200", "-8000");
+        record.past_records = record.past_records.replace('http://localhost:8000', backendUrl);
+       
         }
         return record;
       });
