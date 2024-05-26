@@ -130,12 +130,17 @@ export class VideocallComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
 
-    this.sharedService.onResponseEmoteAvailable().subscribe((res:any)=>{
-         this.emotions=res;
-         console.log("the emotions emiting are : ",res)
-    })
+  
 
     this.sharedService.onResponseAvailable().subscribe((data) => {
+      if (
+        data.key_points.length === 0 &&
+        data.likely_diagnoses.length === 0 &&
+        data.followup_questions.length === 0
+      ) {
+        return; // Exit the function if there is no data
+      }
+    
       this.loading = true; // Set loading to true when a new response is received
       setTimeout(() => {
         this.transResponse = data;
@@ -143,11 +148,14 @@ export class VideocallComponent implements OnInit, OnDestroy {
       }, 5000);
     });
 
-
     this.recordsService.getRecords().subscribe((res:any)=>{
-      this.results = res.results;
+      this.results = res.results.map((record: any) => {
+        if (record.past_records && record.past_records.includes('localhost:8000')) {
+          record.past_records = record.past_records.replace('localhost:8000', window.location.origin);
+        }
+        return record;
+      });
     })
-
     this.callService.localStream$
       .pipe(filter(res => !!res))
       .subscribe(stream => {

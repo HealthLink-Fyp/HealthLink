@@ -16,7 +16,7 @@ export class EmotifyService {
     console.log("image sended ot backend",formData)
     return this.http.post(`${environment.api}/calls/emotion/`, formData).subscribe((response:any)=>{
 console.log(response);
-this.sharedService.setEmoteData(response);
+
     });
   }
 }

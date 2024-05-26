@@ -10,27 +10,7 @@ export class SharedService {
  
   constructor(private http: HttpClient) { }
 
-  
-  
- 
 
-
-
-  private responseEm: any;
-  private responseEmoteAvailable = new EventEmitter<any>();
-
-  setEmoteData(data: any) {
-    this.responseEm= data;
-    this.responseEmoteAvailable.emit(data);
-  }
-
-  getResponseEmoteData(): any {
-    return this.responseEm;
-  }
-
-  onResponseEmoteAvailable(): EventEmitter<any> {
-    return this.responseEmoteAvailable;
-  }
 
 
 
@@ -39,6 +19,7 @@ export class SharedService {
   
   setResponseData(data: any) {
     this.response = data;
+
     this.responseAvailable.emit(data);
   }
 
@@ -47,6 +28,10 @@ export class SharedService {
   }
 
   onResponseAvailable(): EventEmitter<any> {
-    return this.responseAvailable;
+    if (this.responseAvailable) {
+      return this.responseAvailable;
+    } else {
+      return new EventEmitter<any>();
+    }
   }
 }

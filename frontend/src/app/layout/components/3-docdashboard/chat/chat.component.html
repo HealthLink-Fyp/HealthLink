@@ -8,14 +8,15 @@
 </div>
 
 <div class="chat-container">
+
+
   <div class="chat-messages-section">
+  <div class="message-card" *ngFor="let chat of chats">
+    <p>{{ chat.message }}</p>
+  </div>
     <div class="message-card" *ngFor="let message of messages">
       <p>{{ message }}</p>
     </div>
-  </div>
-
-  <div class="message-card" *ngFor="let chat of chats">
-    <p>{{ chat.message }}</p>
   </div>
 
  
