@@ -68,6 +68,7 @@ export class TranscribeService {
         console.log("The data before sending is here : ",this.data)
         console.log("The text is successfully sent to backend", res)
         if(res!=null){
+          
         this.sharedService.setResponseData(res);
         }
       })

@@ -131,6 +131,8 @@ export class VideocallComponent implements OnInit, OnDestroy {
   
   emotions:any=''
 
+  AllAi:boolean=true;
+
   ngOnInit(): void {
 
 
@@ -147,6 +149,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
     
       this.loading = true; // Set loading to true when a new response is received
       setTimeout(() => {
+        this.AllAi=false;
         this.transResponse = data;
         this.loading = false; // Set loading to false after 5 seconds
       }, 5000);

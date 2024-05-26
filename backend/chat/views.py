@@ -201,7 +201,7 @@ class CallTranscriptView(APIView):
                 transcriptions.append(transcriptions.pop(1))
                 cache.set("transcription", transcriptions, timeout=1000)
 
-            if len(transcriptions) >= 2 and role == "doctor":
+            if len(transcriptions) >= 1 and role == "doctor":
                 """
                 Send the transcriptions to the chatbot.
                 As the doctor is the last one to send the transcription.

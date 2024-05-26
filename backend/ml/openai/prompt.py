@@ -25,8 +25,7 @@ Example:
 ["Occipital neuralgia", "5%"]]
 
 
-3. followup_questions (list of questions): Structured inquiries used by healthcare providers to gather specific details and pertinent information from patients during consultations, aimed at understanding their medical history, symptoms, and potential risk factors. These questions should be tailored to the context of the transcript not generic.
-
+3. followup_questions (list of questions): Structured inquiries used by healthcare providers to gather specific details and pertinent information from patients during consultations, aimed at understanding their medical history, symptoms, and potential risk factors. These questions should be tailored to the context of the transcript not generic.The length of each question should be minimum 7 words and maximum 10 words.
 
 
 Here is the Transcript of conversation, just give me output in JSON format, nothing else:
