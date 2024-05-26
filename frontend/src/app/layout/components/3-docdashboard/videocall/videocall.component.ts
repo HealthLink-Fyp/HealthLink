@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/architecture/services/auth.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-videocall',
@@ -24,6 +25,9 @@ export class VideocallComponent implements OnInit, OnDestroy {
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
 
  
+  goBack(): void {
+    this.location.back();
+  }
 
 
   videoData: any = {
@@ -36,7 +40,7 @@ export class VideocallComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService) {
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService, private location: Location) {
 
     
     this.isCallStarted$ = this.callService.isCallStarted$;
