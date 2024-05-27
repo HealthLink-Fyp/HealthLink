@@ -35,6 +35,9 @@ shell:
 lock:
   poetry lock && poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
 
+build:
+  docker build -t backend .
+
 @add package:
   poetry add $1 && lock
 

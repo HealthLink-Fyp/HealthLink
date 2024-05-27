@@ -5,10 +5,7 @@ from rest_framework.response import Response
 # Local Imports
 from chat.models import Call, LLMResponse
 from core.authentication import JWTAuthentication
-from ml.openai.chat import (
-    send_transcription_to_chatbot,
-    send_transcription_to_chatbot_v2,
-)
+from ml.openai.chat import send_transcription_to_chatbot
 
 from healthlink.utils.exceptions import InvalidData, NotFound, BadRequest
 
@@ -52,12 +49,11 @@ class CallTranscriptView(APIView):
         if not transcription or not isinstance(transcription, str):
             raise InvalidData("Transcription")
 
-        # For
         self.add_transcription_to_cache(transcription, role)
 
         transcriptions = self.get_transcriptions_from_cache()
 
-        if len(transcriptions) >= 1 and role != "doctor":
+        if len(transcriptions) >= 2 and role != "doctor":
             transcriptions.append(transcriptions.pop(1))
             cache.set("transcription", transcriptions, timeout=1000)
 
@@ -84,36 +80,15 @@ class CallTranscriptView(APIView):
         if "error" in response:
             raise BadRequest(response["error"])
 
+        response_text = self.json_to_paragraph(response)
+
         LLMResponse.objects.create(
-            call=call, transcription=transcription_text, response=response
+            call=call,
+            transcription=transcription_text,
+            response=response,
+            response_text=response_text,
         )
         cache.delete("transcription")
-
-        return Response(response, status=status.HTTP_200_OK)
-
-
-class DashboardReportView(APIView):
-    authentication_classes = [JWTAuthentication]
-
-    def get(self, request):
-        """
-        Send the medical report to the chatbot.
-        """
-
-        patient = request.user.patient
-
-        llm_responses = LLMResponse.objects.filter(call__patient=patient)
-
-        if not llm_responses:
-            raise NotFound("LLM Responses")
-
-        llm_data = ""
-
-        for llm_response in llm_responses:
-            if isinstance(llm_response.response, dict):
-                llm_data += self.json_to_paragraph(llm_response.response)
-
-        response = send_transcription_to_chatbot_v2(llm_data)
 
         return Response(response, status=status.HTTP_200_OK)
 

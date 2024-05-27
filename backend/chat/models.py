@@ -33,4 +33,5 @@ class LLMResponse(models.Model):
     call = models.ForeignKey(Call, on_delete=models.CASCADE)
     transcription = models.TextField()
     response = models.JSONField(null=True, blank=True)
+    response_text = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, db_index=True)

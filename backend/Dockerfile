@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # Install dependencies
-RUN apt-get update && apt-get install -y python3-opencv && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install python dependencies
 COPY requirements.txt ./
