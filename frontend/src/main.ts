@@ -6,3 +6,4 @@ platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch((err) => console.error(err));
 //testing o testing b -adil
+//testing o testing b -adil
