@@ -1,18 +1,18 @@
 <div>
-    <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar class="toolbar" >
       <h1><button (click)="drawer.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button></h1>
       <h1 >HealthLink 360</h1>
       <h1><a class="nav-link"   routerLink="/patient/docsearch">Find Doctors</a></h1>
-      <h1><a class="nav-link"  routerLink="/call">Video Consult</a></h1>
+      <!-- <h1><a class="nav-link"  routerLink="/call">Video Consult</a></h1> -->
       <h1><a class="nav-link" routerLink="/patient/medicalStore">Medicines</a></h1>
       <h1><a class="nav-link" routerLink="/patient/labTests">Lab Tests</a></h1>
       <h1><div class="whole">
-        <div class="notifications">
+        <!-- <div class="notifications">
             <mat-icon style=" position: relative;left: -8px;top: 14px;">notifications_active</mat-icon>
-        </div>
+        </div> -->
       <div class="profile">
         <h2 class="pname">{{patientData.full_name}}</h2>
-        <img src="https://cdn.openart.ai/stable_diffusion/554ba8635f8930a93702f1f8ace22de9c8a1dbed_2000x2000.webp" alt="Avatar" class="avatar">
+        <img src="https://static.vecteezy.com/system/resources/previews/038/050/662/non_2x/bandage-wrapped-head-man-cheerful-2d-avatar-illustration-asian-patient-band-aid-cartoon-character-face-portrait-positive-attitude-flat-color-user-profile-image-isolated-on-white-background-vector.jpg" alt="Avatar" class="avatar">
       </div>
     </div></h1>
       
@@ -33,15 +33,15 @@
         <mat-list-item>
             <button routerLink="/patient/appointments" mat-button><mat-icon>assignment</mat-icon> Appointments</button>
         </mat-list-item>
-        <mat-list-item>
+        <!-- <mat-list-item>
             <button routerLink="slider" mat-button><mat-icon>receipt</mat-icon> Prescriptions</button>
-        </mat-list-item>
+        </mat-list-item> -->
         <mat-list-item>
             <button routerLink="/patient/medRecords" mat-button><mat-icon>restore_page</mat-icon> Medical Record</button>
         </mat-list-item>
-        <mat-list-item>
+        <!-- <mat-list-item>
             <button routerLink="/patient/payment" mat-button><mat-icon> attach_money</mat-icon> Billing</button>
-        </mat-list-item>
+        </mat-list-item> -->
         <mat-list-item>
             <button mat-button routerLink="/patient/chat"><mat-icon> chat</mat-icon> Chat</button>
         </mat-list-item>

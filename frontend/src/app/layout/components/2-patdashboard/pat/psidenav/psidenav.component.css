@@ -1,6 +1,9 @@
 .toolbar {
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
   }
   
   .toolbar h1 {
@@ -31,6 +34,10 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border :1px solid rgb(244, 237, 237)
+  }
+  
+  .name {
     position: relative;
     left: 11px;
     top: -3px;

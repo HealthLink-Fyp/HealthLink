@@ -16,7 +16,6 @@ class ChatConsumer(WebsocketConsumer):
         self.user = None
         self.doctor = None
         self.patient = None
-        self.user = None
 
     def is_authenticated(self, user):
         """
@@ -46,6 +45,7 @@ class ChatConsumer(WebsocketConsumer):
         """
 
         self.room_name = f"chat_{doctor_id}_{patient_id}"
+        self.room_group_name = f"grp_{self.room_name}"
         self.room_group_name = f"grp_{self.room_name}"
 
         self.chat_room = (
@@ -89,6 +89,7 @@ class ChatConsumer(WebsocketConsumer):
             patient_id = self.user.id
             self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
             self.chat_room.patient = self.user.patient
+            print("\npatient_id: ", doctor_id)
             self.chat_room.doctor = DoctorProfile.objects.get(user__id=doctor_id)
 
         self.chat_room.save()
@@ -109,6 +110,7 @@ class ChatConsumer(WebsocketConsumer):
 
         if self.is_authenticated(self.user):
             # Remove the user from the group
+            print("grp: ", self.room_group_name)
             async_to_sync(self.channel_layer.group_discard)(
                 self.room_group_name, self.channel_name
             )
@@ -140,11 +142,13 @@ class ChatConsumer(WebsocketConsumer):
             ):
                 message = f"Anonymous: {message}"
 
+
+            message = f"{str(self.user.username).capitalize()}: {message}"
+
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
                     "type": "chat_message",
-                    "user": getattr(self.user, "username", "Anonymous"),
                     "message": message,
                 },
             )

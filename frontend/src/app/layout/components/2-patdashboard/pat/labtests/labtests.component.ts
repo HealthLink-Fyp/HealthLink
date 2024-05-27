@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-labtests',
@@ -13,7 +14,11 @@ totalRecords = 0;
 filteredTests:any = [];
 searchTerm = '';
 
-constructor(private labService:PatientService){}
+constructor(private labService:PatientService, private location: Location){}
+
+goBack(): void {
+  this.location.back();
+}
 
 ngOnInit(): void {
   this.getTests(0);

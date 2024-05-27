@@ -62,12 +62,15 @@ export class TranscribeService {
 
 
   sendTextToBackend() {
-    if (this.text.split(' ').length >= 50) {
+    if (this.text.split(' ').length >= 30) {
       this.data.transcription=this.text;
       this.http.post(`${environment.api}/calls/transcript/`, this.data).subscribe((res: any) => {
         console.log("The data before sending is here : ",this.data)
         console.log("The text is successfully sent to backend", res)
+        if(res!=null){
+          
         this.sharedService.setResponseData(res);
+        }
       })
       console.log("Sending text to backend API:", this.text);
       this.text = ''; // Reset the 'text' variable after sending to the API

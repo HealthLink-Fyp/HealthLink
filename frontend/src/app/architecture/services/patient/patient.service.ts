@@ -29,8 +29,13 @@ export class PatientService {
     return this.http.post(`${environment.api}/records/`, formData);
   }
 
+  
   getRecords() {
     return this.http.get(`${environment.api}/records/`);
+  }
+
+  getChatHistory(body: any) {
+    return this.http.post(`${environment.api}/chat/`, body);
   }
 
   updatePatientProfile(body:any)

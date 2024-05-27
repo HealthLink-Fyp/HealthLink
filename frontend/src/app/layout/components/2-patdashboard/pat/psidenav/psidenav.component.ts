@@ -32,6 +32,7 @@ logout() {
   this.authService.logout().subscribe(() => {
     this.authService.accessToken = '';
     AuthService.authEmitter.emit(false);
+    localStorage.removeItem('token');
   });
 }
 

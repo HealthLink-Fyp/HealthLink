@@ -59,10 +59,10 @@ export class VideocallComponent implements OnInit, OnDestroy {
 
     console.log("information to unlock sending peer id in vid ts : ",this.videoData);
 
-    this.callService.peerIdSend(this.videoData).subscribe((response:any)=>{
-         console.log("the peer id have been sent vid ts.",response)
-         this.sendCallIdToTranscribeService(response.call_id,response.patient);
-    })
+    // this.callService.peerIdSend(this.videoData).subscribe((response:any)=>{
+    //      console.log("the peer id have been sent vid ts.",response)
+    //      this.sendCallIdToTranscribeService(response.call_id,response.patient);
+    // })
     
   }
 

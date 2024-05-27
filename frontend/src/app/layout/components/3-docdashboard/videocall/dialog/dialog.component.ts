@@ -7,6 +7,7 @@ import { TranscribeService } from 'src/app/architecture/services/call/transcribe
 import { SharedService } from 'src/app/architecture/services/shared.service';
 import { CaptureImgService } from 'src/app/architecture/services/emotions/capture-img.service';
 
+
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
@@ -35,17 +36,24 @@ export class DialogComponent {
     this.CallService.peerIdGet().subscribe((response:any)=>{
       console.log("i m getting the peer id in dialog component")
       this.data.peerId = response.peer_id; // Set the initial value of the input field to the peerId value
-      this.imageCaptureService.startImageCapture();
+    
     })
    
 
     
   }
 
-  
-public startService(){
 
-  this.service.start()
+
+  transcription: any = ''
+
+public startService(){
+//i want to receiver somwthing and return
+
+this.service.start(); // Indicate that the caller is the patient
+  
+
+  
 
 }
 

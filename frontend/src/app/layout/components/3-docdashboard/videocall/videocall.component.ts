@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/architecture/services/auth.service';
 import { SharedService } from 'src/app/architecture/services/shared.service';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-videocall',
@@ -24,6 +25,9 @@ export class VideocallComponent implements OnInit, OnDestroy {
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement> | null=null;
 
  
+  goBack(): void {
+    this.location.back();
+  }
 
 
   videoData: any = {
@@ -35,7 +39,8 @@ export class VideocallComponent implements OnInit, OnDestroy {
  
 
 
-  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService) {
+
+  constructor(public dialog: MatDialog, private callService: CallService, private route:ActivatedRoute, private transcribeService:TranscribeService, private authService:AuthService, private sharedService:SharedService,private doctorService:DoctorService,private uploadService:PatientService, private recordsService: PatientService, private location: Location) {
 
     
     this.isCallStarted$ = this.callService.isCallStarted$;
@@ -124,21 +129,42 @@ export class VideocallComponent implements OnInit, OnDestroy {
     return urlParts[urlParts.length - 1];
   }
   
+  emotions:any=''
+
+  AllAi:boolean=true;
+
   ngOnInit(): void {
 
+
+  
+
     this.sharedService.onResponseAvailable().subscribe((data) => {
+      if (
+        data.key_points.length === 0 &&
+        data.likely_diagnoses.length === 0 &&
+        data.followup_questions.length === 0
+      ) {
+        return; // Exit the function if there is no data
+      }
+    
       this.loading = true; // Set loading to true when a new response is received
       setTimeout(() => {
+        this.AllAi=false;
         this.transResponse = data;
         this.loading = false; // Set loading to false after 5 seconds
       }, 5000);
     });
 
-
     this.recordsService.getRecords().subscribe((res:any)=>{
-      this.results = res.results;
+      this.results = res.results.map((record: any) => {
+        if (record.past_records && record.past_records.includes('http://localhost:8000')) {
+        const backendUrl=window.location.origin.replace("-4200", "-8000");
+        record.past_records = record.past_records.replace('http://localhost:8000', backendUrl);
+       
+        }
+        return record;
+      });
     })
-
     this.callService.localStream$
       .pipe(filter(res => !!res))
       .subscribe(stream => {

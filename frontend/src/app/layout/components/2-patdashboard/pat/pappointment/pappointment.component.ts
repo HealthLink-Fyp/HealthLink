@@ -79,9 +79,11 @@ export class PappointmentComponent implements OnInit {
         });
         
         // Sort appointments by latest appointment
-        this.bookedAppointments.data.sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
-      }
-    );
+        this.bookedAppointments.data.sort((a, b) => {
+        return new Date(b.start).getTime() - new Date(a.start).getTime();
+      });
+    }
+  );
   }
 
   onUpdateAppointment(appointId:any,docId:any) {

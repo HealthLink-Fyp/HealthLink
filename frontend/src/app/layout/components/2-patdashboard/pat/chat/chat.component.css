@@ -1,57 +1,84 @@
-/* Global container styles */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
-  /* Chat container styles using flexbox */
-  .chat-container {
+  .user-list {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Align items at the start of the cross axis */
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-  }
-  
-  /* Chat input column */
-  .chat-input-col {
-    flex: 1 0 300px; /* Flex-grow: 1, Flex-shrink: 0, Flex-basis: 300px */
-    margin-right: 20px; /* Spacing between chat input and messages */
-  }
-  
-  /* Chat messages column */
-  .chat-messages-col {
-    flex: 2 1 auto; /* Flex-grow: 2, Flex-shrink: 1, Flex-basis: auto */
-  }
-  
-  /* Chat input card */
-  .chat-input {
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
-  
-  }
-  
-  /* Chat message card */
-  .message-card {
+    flex-direction: column;
+    gap: 10px;
     padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.2);
-  
   }
   
-  /* Chat message content */
-  .chat-message p {
+  .user-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .user-details p {
     margin: 0;
   }
   
-  /* Responsive layout adjustments */
-  @media (max-width: 768px) {
-    .chat-container {
-      flex-direction: column; /* Stack columns vertically on smaller screens */
-    }
-    .chat-input-col {
-      margin-right: 0; /* Remove right margin on chat input column */
-      margin-bottom: 20px; /* Add bottom margin for spacing */
-    }
+  .chat-button {
+    padding: 5px 10px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .chat-button:hover {
+    background-color: #115293;
+  }
+  
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .chat-input-section {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+  
+  .send-button {
+    padding: 10px 20px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #115293;
+  }
+  
+  .chat-messages-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 15px;
+  }
+  
+  .message-card {
+    border-radius: 5px;
   }
   

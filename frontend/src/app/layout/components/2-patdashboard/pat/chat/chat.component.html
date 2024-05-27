@@ -1,25 +1,29 @@
-<div class="container mt-5">
-  <h3>Chat With Doctor</h3>
-  <div class="row chat-container">
-    <!-- Chat Input Section -->
-    <div class="col-lg-4 chat-input-col">
-      <mat-card class="chat-input">
-        <mat-form-field appearance="fill" class="mb-3">
-          <textarea matInput placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
-      </mat-card>
-    </div>
-
-    <!-- Chat Messages Section -->
-    <div class="col-lg-8 chat-messages-col">
-      <div class="chat-messages">
-        <div *ngFor="let message of messages" class="chat-message">
-          <mat-card class="message-card">
-            <p>{{ message }}</p>
-          </mat-card>
-        </div>
-      </div>
+<div class="user-list">
+  <div class="user-card" *ngFor="let appointment of bookedAppointments">
+    <div class="user-details">
+      <p>{{ appointment.name }}</p>
+      <button class="chat-button" (click)="saveDocId(appointment.id)">Chat</button>
     </div>
   </div>
 </div>
+
+<div class="chat-container">
+
+  
+  <div class="chat-messages-section">
+  <div class="message-card" *ngFor="let chat of chats">
+    <p>{{ chat.message }}</p>
+  </div>
+
+  <div class="message-card" *ngFor="let message of messages">
+    <p>{{ message }}</p>
+  </div>
+  </div>
+
+  <div class="chat-input-section">
+    <textarea class="chat-input" placeholder="Enter your message" [(ngModel)]="newMessage" rows="3"></textarea>
+    <button class="send-button" (click)="sendMessage()">Send</button>
+  </div>
+</div>
+
+

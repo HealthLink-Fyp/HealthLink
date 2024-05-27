@@ -19,7 +19,7 @@ export class TranscriptionComponent {
   }
 
   startService(){
-    this.service.start()
+    // this.service.start()
   }
 
   stopService(){

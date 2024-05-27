@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-mstore',
@@ -11,7 +12,11 @@ export class MstoreComponent implements OnInit {
   medicines:any = [];
   totalResults = 0;
 
-  constructor(private medicineService:PatientService){}
+  constructor(private medicineService:PatientService, private location: Location){}
+
+  goBack(): void {
+    this.location.back();
+  }
 
   ngOnInit(): void {
        this.getMedicines(0);

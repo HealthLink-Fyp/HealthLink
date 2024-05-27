@@ -22,6 +22,7 @@ import { ChatComponent } from './chat/chat.component';
 import { DialogComponent } from './videocall/dialog/dialog.component';
 import { PaymentComponent } from './payment/payment.component';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { LandingModule } from '../../topnav/landing.module';
 
 
 
@@ -32,6 +33,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
     CommonModule,
     PatRoutingModule,
     MaterialModule,
+    LandingModule,
     GooglePayButtonModule,
    
     NgxEchartsModule.forRoot({

@@ -6,14 +6,20 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  
+
+ 
+  constructor(private http: HttpClient) { }
+
+
+
+
+
   private response: any;
   private responseAvailable = new EventEmitter<any>();
-
-  constructor() { }
-
+  
   setResponseData(data: any) {
     this.response = data;
+
     this.responseAvailable.emit(data);
   }
 
@@ -22,6 +28,10 @@ export class SharedService {
   }
 
   onResponseAvailable(): EventEmitter<any> {
-    return this.responseAvailable;
+    if (this.responseAvailable) {
+      return this.responseAvailable;
+    } else {
+      return new EventEmitter<any>();
+    }
   }
 }
