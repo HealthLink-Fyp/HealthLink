@@ -1,21 +1,18 @@
 <!-- topbar code -->
 
 <div>
-  <mat-toolbar class="toolbar" color="primary">
-    <h1>
-      <button mat-icon-button><mat-icon>menu</mat-icon></button>
-    </h1>
+  <mat-toolbar class="toolbar">
+   
     <h1><a class="nav-link" (click)="goBack()">Back</a></h1>
-    <h1 class="jello-vertical">HealthLink 360</h1>
 
     <h1>
-      <a class="nav-link" (click)="presentAppointments = true" routerLink="#"
+      <a class="nav-link" (click)="presentAppointments = true" 
         >Show Appointments</a
       >
     </h1>
-    <h1><a class="nav-link">Video Consult</a></h1>
-    <h1><a class="nav-link" routerLink="/find-doctors">Medicines</a></h1>
-    <h1><a class="nav-link" routerLink="/find-doctors">Lab Tests</a></h1>
+    <!-- <h1><a class="nav-link">Video Consult</a></h1> -->
+    <h1><a class="nav-link" routerLink="/patient/medicalStore">Medicines</a></h1>
+    <h1><a class="nav-link" routerLink="/patient/labTests">Lab Tests</a></h1>
   </mat-toolbar>
 </div>
 

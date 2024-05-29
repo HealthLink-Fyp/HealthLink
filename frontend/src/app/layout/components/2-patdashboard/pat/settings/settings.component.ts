@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +10,12 @@ import { PatientService } from 'src/app/architecture/services/patient/patient.se
 })
 export class SettingsComponent {
 
-  constructor(private patientService:PatientService,private router:Router){}
+  constructor(private patientService:PatientService,private router:Router, private location: Location){}
+
+  goBack(): void {
+    this.location.back();
+  }
+
 
 
   updatePatientForm()

@@ -20,7 +20,7 @@
   /* Inherit the color from its parent element */
   text-decoration: none;
   /* Remove underline */
-
+  cursor:pointer
 
 }
 

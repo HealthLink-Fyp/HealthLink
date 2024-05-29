@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-dappointment',
@@ -13,12 +14,17 @@ export class DappointmentComponent {
 
   bookedAppointments:any[] = []; 
 
-  constructor(private doctorService:DoctorService){}
+  constructor(private doctorService:DoctorService, private location: Location){}
   
   ngOnInit(): void {
     this.onbookedAppointments();
    
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
   
 
   onbookedAppointments() {
