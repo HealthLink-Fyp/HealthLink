@@ -12,9 +12,9 @@
             background-color: #E5E7EB;
         }
         .container {
-            padding: 50px;
+            padding: 100px;
             background-color: #F9FAFB;
-            max-width: 800px;
+            max-width: 300px;
             margin: 50px auto;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -24,21 +24,14 @@
             display: flex;
             align-items: center;
             margin-bottom: 24px;
-            /* horizental center  */
-            flex-wrap: wrap;
-        }
-        .status-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: #10B981;
-            flex-shrink: 0;
         }
         .status-title {
             font-size: 1.5rem;
             font-weight: 600;
             color: #10B981;
             margin-left: 8px;
+            margin: 0 auto;
+
         }
         .status-list {
             border-top: 1px solid #E5E7EB;
@@ -49,6 +42,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+
         }
         .status-item h4 {
             margin: 5px; 
@@ -62,36 +56,35 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="status-icon"></div>
             <h1 class="status-title">All systems operational</h1>
         </div>
         
         <div class="status-list">
             <div class="status-item">
-                <h4>API Status</h4>
-                <span>Operational</span>
+                <h4>Title</h4>
+                <span>{{ api_info.title }}</span>
             </div>
             <div class="status-item">
-                <h4>API Uptime</h4>
-                <span>(green)</span>
+                <h4>Version</h4>
+                <span>{{ api_info.version }}</span>
             </div>
             <div class="status-item">
-                <h4>Database Connection</h4>
-                <span>(green)</span>
-            </div>
-            <div class="status-item">
-                <h4>API Endpoints</h4>
-                <span>(green)</span>
+                <h4>Uptime</h4>
+                <span>{{ api_info.uptime }}</span>
             </div>
             <div class="status-item">
                 <h4>Authentication</h4>
-                <span>(green)</span>
+                <span>{{ api_info.authentication }}</span>
             </div>
             <div class="status-item">
-                <h4>API Response Time</h4>
-                <span>250ms (green)</span>
-            </div>
+                <h4>Endpoint</h4>
+                <span>{{ api_info.endpoint }}</span>
         </div>
+            <div class="status-item">
+                <h4>Database Connection</h4>
+                <span>{{ api_info.db_connection }}</span>
+                </div>
+      
     </div>
 </body>
 </html>

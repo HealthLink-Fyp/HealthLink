@@ -1,11 +1,9 @@
 from langchain_core.prompts.prompt import PromptTemplate
-from langchain_openai import ChatOpenAI
 from .utils import get_fake_anonymizer
 from .prompt import prompt_template, prompt_template_dashboard
 import os
 import dotenv
 import json
-import openai
 
 # Load the LLM model configuration
 dotenv.load_dotenv()
@@ -25,7 +23,7 @@ def chat_model(
     model_name: str = MODEL_NAME,
     api_key: str = API_KEY,
     base_url: str = BASE_URL,
-) -> ChatOpenAI:
+):
     """
     Create a chain of functions to process the transcription
     """
@@ -34,14 +32,26 @@ def chat_model(
         "response_format": {"type": "json_object"},
     }
 
-    model = ChatOpenAI(
-        temperature=0.5,
-        base_url=base_url,
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        api_key=api_key,
-    )
-    
+    if MODEL_NAME == "deepseek-chat":
+        from langchain_openai import ChatOpenAI
+
+        model = ChatOpenAI(
+            temperature=0.5,
+            base_url=base_url,
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+            api_key=api_key,
+        )
+    else:
+        from langchain_groq import ChatGroq
+
+        model = ChatGroq(
+            temperature=0.5,
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+            api_key=api_key,
+        )
+
     return model
 
 
@@ -53,7 +63,7 @@ def prompt_response(transcription: str, model: dict) -> dict:
     chain = {"anonymized_text": ANONYMIZER} | PROMPT | model
 
     response = chain.invoke(transcription)
-    
+
     return response
 
 
@@ -63,7 +73,7 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
     """
     if not PROMPT:
         return {"error": "Prompt is None"}
-    
+
     if not ANONYMIZER:
         return {"error": "Anonymizer is None"}
 
@@ -71,9 +81,8 @@ def send_transcription_to_chatbot(transcription: str) -> dict:
 
     try:
         response = prompt_response(transcription=transcription, model=model)
-    except openai.APIStatusError:
-        return {'detail': 'Insufficient Balance for DeepSeek Model'}
-
+    except Exception as e:
+        return {"error": f"Error in llm model api call: {e}"}
 
     # Check for response presence and status code
     if response is None:

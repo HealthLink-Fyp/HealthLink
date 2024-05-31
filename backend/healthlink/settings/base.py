@@ -20,7 +20,6 @@ DEBUG = False
 # Secret Key: For cryptographic signing or hashing
 SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
-
 # Application definition
 INSTALLED_APPS = [
     "daphne",
@@ -63,7 +62,7 @@ ROOT_URLCONF = "healthlink.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
