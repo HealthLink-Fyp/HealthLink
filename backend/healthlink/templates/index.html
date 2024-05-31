@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #E5E7EB;
+        }
+        .container {
+            padding: 50px;
+            background-color: #F9FAFB;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            /* horizental center  */
+            flex-wrap: wrap;
+        }
+        .status-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #10B981;
+            flex-shrink: 0;
+        }
+        .status-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #10B981;
+            margin-left: 8px;
+        }
+        .status-list {
+            border-top: 1px solid #E5E7EB;
+            padding-top: 24px;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .status-item h4 {
+            margin: 5px; 
+        }
+        .status-item span {
+            font-size: 0.875rem;
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="status-icon"></div>
+            <h1 class="status-title">All systems operational</h1>
+        </div>
+        
+        <div class="status-list">
+            <div class="status-item">
+                <h4>API Status</h4>
+                <span>Operational</span>
+            </div>
+            <div class="status-item">
+                <h4>API Uptime</h4>
+                <span>(green)</span>
+            </div>
+            <div class="status-item">
+                <h4>Database Connection</h4>
+                <span>(green)</span>
+            </div>
+            <div class="status-item">
+                <h4>API Endpoints</h4>
+                <span>(green)</span>
+            </div>
+            <div class="status-item">
+                <h4>Authentication</h4>
+                <span>(green)</span>
+            </div>
+            <div class="status-item">
+                <h4>API Response Time</h4>
+                <span>250ms (green)</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

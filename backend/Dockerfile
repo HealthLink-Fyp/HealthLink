@@ -1,12 +1,16 @@
 FROM python:3.11-slim
 
 # Install dependencies
-RUN apt-get update && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install python dependencies
 COPY requirements.txt ./
+RUN apt-get update && apt-get clean && apt-get autoremove
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python3 -m spacy download en_core_web_lg
+RUN pip install gunicorn
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1   
+ENV DJANGO_SETTINGS_MODULE healthlink.settings.local
+ENV PORT 8000
 
 # Copy application code
 COPY . .
@@ -17,8 +21,5 @@ RUN python3 manage.py makemigrations && python3 manage.py migrate --run-syncdb
 # Expose port 8000
 EXPOSE 8000
 
-# Set environment variable for unbuffered Python output
-ENV PYTHONUNBUFFERED 1
-
 # Define the default command to run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application", "--timeout", "300"]
