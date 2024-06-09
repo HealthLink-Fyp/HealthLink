@@ -10,7 +10,7 @@
 .cache
 .git/
 
-__pycache__
+**/__pycache__
 poetry.lock
 pyproject.toml
 Justfile
@@ -18,3 +18,4 @@ Dockerfile
 
 healthlink/media
 healthlink/static
+tests/
