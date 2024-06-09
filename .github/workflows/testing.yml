@@ -38,16 +38,10 @@ jobs:
           python3 -m spacy download en_core_web_lg
         working-directory: backend
 
-      - name: Lint with flake8
+      - name: Lint and format with ruff
         run: |
-          pip install flake8
-          flake8 .
-        working-directory: backend
-
-      - name: Refactor with black
-        run: |
-          pip install black
-          black .
+          pip install ruff
+          ruff check .
         working-directory: backend
 
       - name: Run Django tests
