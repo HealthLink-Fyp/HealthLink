@@ -3,16 +3,17 @@ FROM python:3.11-slim
 # Set work directory
 WORKDIR /drf
 
-# Install dependencies
-COPY requirements.txt .
+# Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential \
-    && pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt \
-    && python3 -m spacy download en_core_web_lg \
-    && pip install gunicorn \
     && apt-get purge -y --auto-remove build-essential \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install gunicorn
     
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1   
@@ -23,11 +24,14 @@ ENV PORT 8000
 COPY . .
 
 # Django essentials
-RUN python manage.py collectstatic --noinput \
-    && python manage.py migrate --noinput
+RUN python manage.py makemigrations --noinput \
+    && python manage.py migrate --run-syncdb --noinput \
+    && python manage.py collectstatic --noinput
 
 # Expose port 8000
 EXPOSE 8000
 
 # Define the default command to run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application", "--timeout", "300"]
+
+
