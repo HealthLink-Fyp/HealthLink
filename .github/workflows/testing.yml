@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: 3.11
       - run: python3 -m pip install --upgrade pip
-      - run: cd backend
-      - run: pip install -r requirements.txt
+      - run: ls
+      - run: pip install -r backend/requirements.txt
       - run: python3 manage.py test
