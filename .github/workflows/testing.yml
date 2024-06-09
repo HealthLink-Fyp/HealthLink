@@ -18,24 +18,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Python and install dependencies
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11.0'
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip
-          restore-keys: |
-            ${{ runner.os }}-pip
-      
-      - name: Install dependencies
+          cache: 'pip'
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python3 -m spacy download en_core_web_lg
+          python -m spacy download en_core_web_lg
         working-directory: backend
 
       - name: Lint and format with ruff
