@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     branches:
-      - backend/deploy
+      - gh-pages
 permissions:
   contents: write
 jobs:
