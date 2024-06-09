@@ -10,14 +10,46 @@ permissions:
 
 jobs:
   test:
+    
     runs-on: ubuntu-latest
+    working-directory: backend
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11, 3.12]
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v2
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.11.1
-      - run: python3 -m pip install --upgrade pip
-      - run: python3 --version
-      - run: pip --version
-      - run: pip install -r backend/requirements.txt
-      - run: python3 backend/manage.py test
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip
+          restore-keys: |
+            ${{ runner.os }}-pip
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          python3 -m spacy download en_core_web_lg
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 .
+
+      - name: Refactor with black
+        run: |
+          pip install black
+          black .
+
+      - name: Run Django tests
+        run: python3 manage.py test

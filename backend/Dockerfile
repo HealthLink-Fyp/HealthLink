@@ -12,6 +12,7 @@ RUN apt-get update \
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip \
+    && python -m spacy download en_core_web_lg \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install gunicorn
     
