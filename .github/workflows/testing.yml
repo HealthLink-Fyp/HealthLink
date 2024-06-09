@@ -1,0 +1,5 @@
+name: Django Testing
+on:
+  push:
+    branches:
+      - develop
