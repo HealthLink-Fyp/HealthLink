@@ -6,11 +6,6 @@ set positional-arguments
 serve:
   poetry run python3 manage.py runserver
 
-ngrok:
-  pipx run pyngrok http --domain=monster-open-mistakenly.ngrok-free.app 8000
-
-run: serve ngrok
-
 testall:
   poetry run python3 manage.py test
 

@@ -3,6 +3,7 @@ FROM python:3.11-slim
 # Install dependencies
 COPY requirements.txt ./
 RUN apt-get update && apt-get clean && apt-get autoremove
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python3 -m spacy download en_core_web_lg
 RUN pip install gunicorn
@@ -15,8 +16,11 @@ ENV PORT 8000
 # Copy application code
 COPY . .
 
-# Perform database migrations
-RUN python3 manage.py makemigrations && python3 manage.py migrate --run-syncdb
+# Static files
+RUN python manage.py collectstatic --noinput
+
+# Migrate database
+RUN python manage.py migrate --noinput
 
 # Expose port 8000
 EXPOSE 8000
