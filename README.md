@@ -1,5 +1,4 @@
-![./docs/static/chatgpt-v2.gif](https://www.youtube-nocookie.com/embed/-y33IMSOaTU?yt:stretch=16:9&vq=hd1080p&loop=1&playlist=-y33IMSOaTU&color=white&iv_load_policy=1&rel=0&showinfo=0&autohide=0&controls=1&modestbranding=1)
-
+[./docs/static/chatgpt-v2.gif](https://www.youtube-nocookie.com/embed/-y33IMSOaTU?yt:stretch=16:9&vq=hd1080p&loop=1&playlist=-y33IMSOaTU&color=white&iv_load_policy=1&rel=0&showinfo=0&autohide=0&controls=1&modestbranding=1)
 
 ---
 
