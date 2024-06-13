@@ -4,7 +4,7 @@
 
 <video src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_30mb.mp4"></video>
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/y33IMSOaTU/0.jpg)](https://www.youtube.com/watch?v=y33IMSOaTU)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/y33IMSOaTU/0.jpg)](https://streamable.com/qul7a8)
 
 
 ---
