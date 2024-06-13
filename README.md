@@ -1,5 +1,6 @@
 [YouTube Video](https://streamable.com/qul7a8)
 
+[<img src="https://img.youtube.com/vi/y33IMSOaTU/maxresdefault.jpg" width="50%">](https://youtu.be/y33IMSOaTU)
 
 <video src="https://streamable.com/qul7a8"></video>
 
