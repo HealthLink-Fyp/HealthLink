@@ -1,12 +1,3 @@
-[YouTube Video](https://streamable.com/qul7a8)
-
-[<img src="https://t4.ftcdn.net/jpg/05/61/21/23/360_F_561212302_6ZqXdzti24zuwMXzlX34uqyjDrnIwa5h.jpg" width="50%">](https://youtu.be/y33IMSOaTU)
-
-<video src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_30mb.mp4"></video>
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/y33IMSOaTU/0.jpg)](https://streamable.com/qul7a8)
-
-
 ---
 
 **Documentation**: <a href="https://healthlink-fyp.github.io/HealthLink/" target="_blank">https://healthlink-fyp.github.io/HealthLink</a>
