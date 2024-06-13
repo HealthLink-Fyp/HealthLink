@@ -13,6 +13,7 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt \
+    && python -m spacy download en_core_web_lg \
     && pip install gunicorn
     
 # Set environment variables
@@ -31,7 +32,8 @@ RUN python manage.py makemigrations --noinput \
 # Expose port 8000
 EXPOSE 8000
 
-# Define the default command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application", "--timeout", "300"]
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
+# Define the default command to run the application
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application", "--timeout", "300"]
 

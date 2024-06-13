@@ -15,8 +15,8 @@ class EmotionPredictor:
         "surprise",
         "neutral",
     )
-    model_path: str = "ml/emotion/model.tflite"
-    face_path: str = "ml/emotion/face.xml"
+    model_path: str = os.path.join(os.path.dirname(__file__), "model.tflite")
+    face_path: str = os.path.join(os.path.dirname(__file__), "face.xml")
 
     def __init__(self):
         self._model = None

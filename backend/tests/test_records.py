@@ -49,6 +49,7 @@ class MedicalRecordTests(DoctorApiTest, PatientApiTest):
     def test_delete_medical_record(self):
         self.create_medical_record()
         url = reverse("medical-record")
+        print(self.response.data)
         record_id = self.response.data["record_id"]
         url = reverse("medical-record-detail", kwargs={"pk": record_id})
         response = self.client.delete(url)
