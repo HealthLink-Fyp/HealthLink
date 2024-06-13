@@ -5,20 +5,20 @@ WORKDIR /drf
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential \
-    && apt-get purge -y --auto-remove build-essential \
+    && apt-get install -y --no-install-recommends gcc build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip \
+    && pip install psycopg2-binary \
     && pip install --no-cache-dir -r requirements.txt \
     && python -m spacy download en_core_web_lg \
-    && pip install gunicorn
-    
+    && pip install gunicorn 
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1   
-ENV DJANGO_SETTINGS_MODULE healthlink.settings.local
+ENV DJANGO_SETTINGS_MODULE healthlink.settings.prod
 ENV PORT 8000
 
 # Copy application code
@@ -29,11 +29,7 @@ RUN python manage.py makemigrations --noinput \
     && python manage.py migrate --run-syncdb --noinput \
     && python manage.py collectstatic --noinput
 
-# Expose port 8000
 EXPOSE 8000
 
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-# Define the default command to run the application
-# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application", "--timeout", "300"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "healthlink.wsgi:application"]
 

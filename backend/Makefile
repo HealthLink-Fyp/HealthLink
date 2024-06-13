@@ -1,8 +1,8 @@
 .PHONY: serve testall test migration migrations migrate admin shell lock build add erd reset docs bsetup fsetup db
 
 serve:
-	# poetry run python3 manage.py runserver
-	poetry run gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
+	poetry run python3 manage.py runserver
+	# poetry run gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
 
 testall:
 	poetry run python3 manage.py test
@@ -26,7 +26,7 @@ lock:
 	poetry lock && poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
 
 build:
-	docker build --no-cache --rm -t backend .
+	docker build -t backend .
 
 add:
 	poetry add $(package) && make lock
