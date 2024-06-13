@@ -1,24 +1,10 @@
----
-hide:
-  - navigation
-  - toc
-  - badges
----
+[![HealthLink is a cutting-edge web application designed to bridge the communication gap between patients and doctors.](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-y33IMSOaTU)](https://www.youtube.com/watch?v=-y33IMSOaTU)
 
-
-<p align="center">
-  <a href="https://github.com/HealthLink-Fyp/HealthLink"><img src="https://i.ibb.co/hDkTLSg/1.jpg" alt="FastAPI" width="400"></a>
-</p>
-<p align="center">
-    <em>HealthLink is a cutting-edge web application designed to bridge the communication gap between patients and doctors.</em>
-</p>
 
 
 ---
 
 **Documentation**: <a href="https://healthlink-fyp.github.io/HealthLink/" target="_blank">https://healthlink-fyp.github.io/HealthLink</a>
-
-**Source Code**: <a href="https://github.com/HealthLink-Fyp/HealthLink" target="_blank">https://github.com/HealthLink-Fyp/HealthLink</a>
 
 ---
 
