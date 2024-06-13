@@ -2,7 +2,7 @@
 
 serve:
 	# poetry run python3 manage.py runserver
-	gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
+	poetry run gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
 
 testall:
 	poetry run python3 manage.py test

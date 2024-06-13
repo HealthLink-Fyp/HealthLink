@@ -2,7 +2,6 @@ import os
 import cv2
 import numpy as np
 from typing import Tuple
-import tflite_runtime.interpreter as tflite
 
 
 class EmotionPredictor:
@@ -22,13 +21,16 @@ class EmotionPredictor:
     def __init__(self):
         self._model = None
         self._face_cascade = None
-        self._load_model()
         self._load_cascade()
 
     def _load_model(self):
         if self._model is None:
             if not os.path.exists(self.model_path):
                 raise FileNotFoundError("Model file not found")
+            try:
+                import tflite_runtime.interpreter as tflite
+            except ImportError:
+                raise ImportError("Tensorflow Lite not installed")
             self._model = tflite.Interpreter(self.model_path, [])
             self._model.allocate_tensors()
 
@@ -61,6 +63,7 @@ class EmotionPredictor:
         raise ValueError("Invalid image, unable to preprocess")
 
     def predict(self, image: bytes) -> str:
+        self._load_model()
         face_image = self.detect_single_face(image)
         preprocessed = self.preprocessing(face_image)
         input_details = self._model.get_input_details()
