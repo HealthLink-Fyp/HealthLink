@@ -1,8 +1,8 @@
 [YouTube Video](https://streamable.com/qul7a8)
 
-[<img src="https://t4.ftcdn.net/jpg/05/61/21/23/360_F_561212302_6ZqXdzti24zuwMXzlX34uqyjDrnIwa5h.jpg" width="100%">](https://youtu.be/y33IMSOaTU)
+[<img src="https://t4.ftcdn.net/jpg/05/61/21/23/360_F_561212302_6ZqXdzti24zuwMXzlX34uqyjDrnIwa5h.jpg" width="50%">](https://youtu.be/y33IMSOaTU)
 
-<video src="https://streamable.com/qul7a8"></video>
+<video src="https://cdn-cf-east.streamable.com/video/mp4/qul7a8.mp4?Expires=1718543389112&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ&Signature=cTBtPBBnOziuCHeF4T9GNgDqLT0Zk-VTFTCJ5SOuSCwUMifj52gzx3K6VqqpCwEcsg7yFryxIGkqgHPXTXBWqFXHqJrMw~EcObCmEB-nxEK6vC6C8rAWXvVJAFzKpNDUE9GU0rZE6b1UV4CRjhHhiUUIBhI1QIpQ31kw8gXyHJ2gQmlIa0jxmFWiBpwG0IryZTEpXNQYx0l6R8ZXd8Nyejdk8oo3dMu43BpYei13PtmA5WJoOyvVfRdn1OBfxZ6-90qgsomrZms3VgF4rQLlaz06IEwxmDikM~PKk5ajZBBduWjxmZ~xxD8ZWUQg9tqqgcJyowoL47O63qkMkYRaPg__"></video>
 
 ---
 
