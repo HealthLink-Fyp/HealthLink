@@ -1,9 +1,4 @@
 
-
-**Documentation**: <a href="https://healthlink-fyp.github.io/HealthLink/" target="_blank">https://healthlink-fyp.github.io/HealthLink</a>
-
----
-
 HealthLink is built using the following technologies:
 
 * **Frontend**: Angular, TypeScript, RxJS, Angular Material
