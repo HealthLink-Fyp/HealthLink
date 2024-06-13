@@ -25,8 +25,6 @@ CORS_ORIGIN_WHITELIST = ["https://organic-doodle-7v95g6qq45vwhr5wx-4200.app.gith
 #     BACKEND_URL = "http://localhost:8000"
 #     FRONTEND_URL = "http://localhost:4200"
 
-API_URL = "http://127.0.0.1:8000/"
-
 # Variables
 JWT_REFRESH_SECRET = "secret"
 JWT_ACCESS_SECRET = "secret"

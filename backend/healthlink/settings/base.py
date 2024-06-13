@@ -4,13 +4,10 @@
 import os
 from pathlib import Path
 
-# Third party imports
-import dotenv
 
 # Django imports
 from django.core.management.utils import get_random_secret_key
 
-dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 

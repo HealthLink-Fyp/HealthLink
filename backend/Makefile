@@ -1,7 +1,8 @@
 .PHONY: serve testall test migration migrations migrate admin shell lock build add erd reset docs bsetup fsetup db
 
 serve:
-	poetry run python3 manage.py runserver
+	# poetry run python3 manage.py runserver
+	gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
 
 testall:
 	poetry run python3 manage.py test
