@@ -10,11 +10,9 @@ RUN apt-get update \
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip \
-    && pip install psycopg2-binary \
+RUN pip install --upgrade pip \ 
     && pip install --no-cache-dir -r requirements.txt \
-    && python -m spacy download en_core_web_lg \
-    && pip install gunicorn 
+    && python -m spacy download en_core_web_lg
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1   
@@ -26,8 +24,8 @@ COPY . .
 
 # Django essentials
 RUN python manage.py makemigrations --noinput \
-    && python manage.py migrate --run-syncdb --noinput \
-    && python manage.py collectstatic --noinput
+    && python manage.py collectstatic --noinput \
+    && python manage.py migrate --run-syncdb --noinput
 
 EXPOSE 8000
 

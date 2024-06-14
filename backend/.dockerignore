@@ -16,6 +16,7 @@ pyproject.toml
 Justfile
 Dockerfile
 
-healthlink/media
-healthlink/static
+media/
+staticfiles/
 tests/
+static/
