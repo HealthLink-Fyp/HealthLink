@@ -9,7 +9,7 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Debug: For showing errors and debugging
 DEBUG = False
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -46,6 +47,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
+
+
+# Storage Settings
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # Django Auth Backend
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
@@ -65,6 +77,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "django.template.context_processors.static",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -108,13 +121,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
-
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
 
 MEDIA_URL = "/media/"
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
 MEDIA_ROOT = BASE_DIR / "media"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
