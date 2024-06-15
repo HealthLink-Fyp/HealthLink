@@ -82,7 +82,7 @@ class DoctorProfileSerializer(AvailabilityDataMixin, serializers.ModelSerializer
         )
 
     def to_representation(self, instance):
-        data = super().to_representation(instance)
+        data = super().to_representation(instance)  # Call the parent method
         data["availability_data"] = self.get_availability_data(instance)
         return data
 

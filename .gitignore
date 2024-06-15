@@ -5,3 +5,6 @@ __pycache__/
 *.sqlite3
 backend/.env
 backend/staticfiles
+backend/media
+backend/static
+backend/*/migrations/*

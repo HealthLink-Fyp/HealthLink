@@ -19,7 +19,7 @@ urlpatterns = [
     path("auth/user/", UserView.as_view(), name="user"),
     path("auth/refresh/", RefreshView.as_view(), name="refresh"),
     path("auth/logout/", LogoutView.as_view(), name="logout"),
-    path("auth/forgot/", ForgotView.as_view(), name="forgot"),
+    path("auth/forget/", ForgotView.as_view(), name="forgot"),
     path("auth/reset/", ResetView.as_view(), name="reset"),
     # views/profile
     path("auth/profile/", ProfileView.as_view(), name="profile"),

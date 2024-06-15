@@ -188,6 +188,8 @@ class LogoutView(APIView):
 
         UserToken.objects.filter(token=refresh_token).delete()
 
+        #! TODO: Blacklist the refresh token
+
         response = Response()
         response.delete_cookie(key="refresh_token")
         response.data = {"message": "Success"}
@@ -204,7 +206,6 @@ class ForgotView(APIView):
 
         user = User.objects.filter(email=email).first()
 
-        # Check if the user exists
         if not user:
             raise NotFound("User")
 
@@ -229,19 +230,16 @@ class ResetView(APIView):
         token = request.data.get("token")
         password = request.data.get("password")
 
-        # Check for password strength
         if len(password) < 8:
             raise InvalidData("Password")
 
         user_reset = UserForgot.objects.filter(token=token).first()
 
-        # Check if the token is valid
         if not user_reset:
             raise InvalidToken()
 
         user = User.objects.filter(email=user_reset.email).first()
 
-        # Check if the user exists
         if not user:
             raise NotFound("User")
 

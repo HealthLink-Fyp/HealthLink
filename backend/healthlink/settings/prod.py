@@ -3,8 +3,11 @@
 from .base import *  # noqa
 import os
 
+import sentry_sdk
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = bool(os.environ.get("DEBUG", False))
 
 # Cors settings
 cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
@@ -42,10 +45,11 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": os.environ.get("REDIS_URL"),
         "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "ssl_cert_reqs": None,
         },
     }
 }
+
 
 # Rest Framework settings
 REST_FRAMEWORK = {
@@ -64,18 +68,14 @@ REST_FRAMEWORK = {
 # Timezone for pakistan
 TIME_ZONE = "Asia/Karachi"
 
-# Database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
-        "OPTIONS": {
-            "sslmode": os.environ.get("POSTGRES_SSLMODE"),
-            "options": "endpoint=" + os.environ.get("POSTGRES_ENDPOINT"),
-        },
-    }
-}
+# Sentry Configuration
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)

@@ -51,12 +51,3 @@ REST_FRAMEWORK = {
 
 # Timezone for pakistan
 TIME_ZONE = "Asia/Karachi"
-
-
-# Database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # noqa
-    }
-}
