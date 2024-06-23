@@ -66,6 +66,16 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 ## Frameworks
 <table><tr>
+
+  <td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/994/4aGjtNQv.png' alt='Django'>
+  <br>
+  <sub>Django</sub>
+  <br>
+  <sub></sub>
+</td>
+
+  
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
   <br>
@@ -194,6 +204,13 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <sub></sub>
 </td>
 
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/1336/xWMRvm_5_400x400.png' alt='Postman'>
+  <br>
+  <sub>Postman</sub>
+  <br>
+  <sub></sub>
+</td>
 
 </tr>
 </table>
