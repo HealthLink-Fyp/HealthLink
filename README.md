@@ -7,7 +7,8 @@ HealthLink is built using the following technologies:
 * **Deployment**: Docker, AWS, GitHub Actions
 * **API Documentation**: MKDocs, Material for MkDocs
 
-<script src="https://asciinema.org/a/665190.js" id="asciicast-665190" async="true"></script>
+![tests](https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/dc1fc3cb-6cb9-4062-9509-0b2bcc5a0698)
+
 
 ## Features
 
