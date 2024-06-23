@@ -18,7 +18,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 ## Behind HealthLink
 
-<div style="display: flex;">
+<div>
     <h2>Languages</h2>
     <table valign="top">
       <tr>
