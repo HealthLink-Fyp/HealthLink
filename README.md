@@ -1,4 +1,4 @@
-## What is HealthLink?
+## HealthLink?
 
 HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, Video/Audio Call, Chat, Call Transcription, LLM-powered video call, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
 
@@ -14,7 +14,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 >
   
 </br>
-## How HealthLink is built?
+
+## Behind HealthLink
 
 <div align="center">
   
