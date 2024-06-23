@@ -16,220 +16,297 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </br>
 
 ## Behind HealthLink
-
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-
-  
-  <div style="flex: 1; min-width: 250px;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around">
+  <div style="flex: 1; min-width: 250px">
     <!-- Languages -->
     <h2>Languages</h2>
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'>
-  <br>
-  <sub>Python</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'>
-  <br>
-  <sub>TypeScript</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/2303/New_Project__20_.png' alt='Jinja'>
-  <br>
-  <sub>Jinja</sub>
-  <br>
-  <sub></sub>
-</td>
-
-
-</tr>
-</table>
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/993/pUBY5pVj.png"
+            alt="Python"
+          />
+          <br />
+          <sub>Python</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1612/bynNY5dJ.jpg"
+            alt="TypeScript"
+          />
+          <br />
+          <sub>TypeScript</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/2303/New_Project__20_.png"
+            alt="Jinja"
+          />
+          <br />
+          <sub>Jinja</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
   </div>
-
- <div style="flex: 1; min-width: 250px;">
+  <div style="flex: 1; min-width: 250px">
     <!-- Frameworks -->
     <h2>Frameworks</h2>
-<table><tr>
-
-  <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
-  <br>
-  <sub>Angular</sub>
-  <br>
-  <sub></sub>
-</td>
-
-  <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/994/4aGjtNQv.png' alt='Django'>
-  <br>
-  <sub>Django</sub>
-  <br>
-  <sub></sub>
-</td>
-</tr>
-</table>
-
- </div>
-
- <div style="flex: 1; min-width: 250px;">
-    <!-- Data -->
-    <h2>Data</h2>
-<table>
-
-<tr>
-
-  <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png' alt='Redis'>
-  <br>
-  <sub>Redis</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1028/ASOhU5xJ.png' alt='PostgreSQL'>
-  <br>
-  <sub>PostgreSQL</sub>
-  <br>
-  <sub></sub>
-</td>
-
-
-</tr>
-</table>
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg"
+            alt="Angular"
+          />
+          <br />
+          <sub>Angular</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/994/4aGjtNQv.png"
+            alt="Django"
+          />
+          <br />
+          <sub>Django</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
   </div>
-
-  <div style="flex: 1; min-width: 250px;">
-    <!-- DevOps -->
-    <h2>DevOps</h2>
-<table><tr>
-  <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'>
-  <br>
-  <sub>Docker</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1046/git.png' alt='Git'>
-  <br>
-  <sub>Git</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'>
-  <br>
-  <sub>GitHub Actions</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png' alt='pytest'>
-  <br>
-  <sub>pytest</sub>
-  <br>
-  <sub></sub>
-</td>
-
-
-
-</tr>
-</table>
- </div>
-
-  <div style="flex: 1; min-width: 250px;">
+  <div style="flex: 1; min-width: 250px">
     <!-- AI & Machine Learning -->
     <h2>AI & Machine Learning</h2>
-<table><tr>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/4717/FtFnqC38_400x400.png' alt='TensorFlow'>
-  <br>
-  <sub>TensorFlow</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/104866/default_df54ef6519475dcfbaf279696c11805b976ebfaf.png' alt='Mixtral'>
-  <br>
-  <sub>Mixtral</sub>
-  <br>
-  <sub></sub>
-</td>
-
-
-  <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg' alt='LangChain'>
-  <br>
-  <sub>LangChain</sub>
-  <br>
-  <sub></sub>
-</td>
-
-
-
-
-</tr>
-</table>
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/4717/FtFnqC38_400x400.png"
+            alt="TensorFlow"
+          />
+          <br />
+          <sub>TensorFlow</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/104866/default_df54ef6519475dcfbaf279696c11805b976ebfaf.png"
+            alt="Mixtral"
+          />
+          <br />
+          <sub>Mixtral</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg"
+            alt="LangChain"
+          />
+          <br />
+          <sub>LangChain</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="flex: 1; min-width: 250px">
+    <!-- DevOps -->
+    <h2>DevOps</h2>
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/586/n4u37v9t_400x400.png"
+            alt="Docker"
+          />
+          <br />
+          <sub>Docker</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1046/git.png"
+            alt="Git"
+          />
+          <br />
+          <sub>Git</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/11563/actions.png"
+            alt="GitHub Actions"
+          />
+          <br />
+          <sub>GitHub Actions</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png"
+            alt="pytest"
+          />
+          <br />
+          <sub>pytest</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <div style="flex: 1; min-width: 250px;">
+  <div style="flex: 1; min-width: 250px">
+    <!-- Data -->
+    <h2>Data</h2>
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png"
+            alt="Redis"
+          />
+          <br />
+          <sub>Redis</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1028/ASOhU5xJ.png"
+            alt="PostgreSQL"
+          />
+          <br />
+          <sub>PostgreSQL</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="flex: 1; min-width: 250px">
     <!-- Other -->
     <h2>Other</h2>
-<table>
-<tr><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1336/xWMRvm_5_400x400.png' alt='Postman'>
-  <br>
-  <sub>Postman</sub>
-  <br>
-  <sub></sub>
-</td><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/6417/jwt-icon.png' alt='JWT'>
-  <br>
-  <sub>JWT</sub>
-  <br>
-  <sub></sub>
-</td><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/191/default_9262326592c97828a2a4299dec085a3674dd05f4.png' alt='Sentry'>
-  <br>
-  <sub>Sentry</sub>
-  <br>
-  <sub></sub>
-</td><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/154/default_53605d3093005bd7853e04a258c0d4746e803e29.jpg' alt='Jira'>
-  <br>
-  <sub>Jira</sub>
-  <br>
-  <sub></sub>
-</td><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/3511/cof_orange_hex.jpg' alt='Ubuntu'>
-  <br>
-  <sub>Ubuntu</sub>
-  <br>
-  <sub></sub>
-</td><td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1075/celery.png' alt='Celery'>
-  <br>
-  <sub>Celery</sub>
-  <br>
-  <sub></sub>
-</td></tr></table>
- </div>
-
-
-
-
+    <table>
+      <tr>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1336/xWMRvm_5_400x400.png"
+            alt="Postman"
+          />
+          <br />
+          <sub>Postman</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/6417/jwt-icon.png"
+            alt="JWT"
+          />
+          <br />
+          <sub>JWT</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/191/default_9262326592c97828a2a4299dec085a3674dd05f4.png"
+            alt="Sentry"
+          />
+          <br />
+          <sub>Sentry</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/154/default_53605d3093005bd7853e04a258c0d4746e803e29.jpg"
+            alt="Jira"
+          />
+          <br />
+          <sub>Jira</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/3511/cof_orange_hex.jpg"
+            alt="Ubuntu"
+          />
+          <br />
+          <sub>Ubuntu</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1075/celery.png"
+            alt="Celery"
+          />
+          <br />
+          <sub>Celery</sub>
+          <br />
+          <sub></sub>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <br/>
