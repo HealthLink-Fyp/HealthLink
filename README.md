@@ -3,9 +3,15 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 
 
 <p align="center">
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="60%" align="center"/>
+<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
 </p>
+
 ## How HealthLink is built?
+
+* **Frontend**:
+<p align="center">
+<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/236b7c24-4f99-45de-820d-1b05c2307a68" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
+</p>
 
 * **Frontend**: Angular, TypeScript, RxJS, Angular Material
 * **Backend**: Django, Django REST framework, PostgreSQL, Redis, Celery
