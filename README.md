@@ -6,14 +6,12 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 <img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
 </p>
 
-## How HealthLink is built?
 
 <div align="center">
 
-# Tech Stack File
-![](https://img.stackshare.io/repo.svg "repo") [HealthLink-Fyp/HealthLink](https://github.com/HealthLink-Fyp/HealthLink)![](https://img.stackshare.io/public_badge.svg "public")
-<br/><br/>
-|138<br/>Tools used|06/23/24 <br/>Report generated|
+# How HealthLink is built?
+
+|Tools used<br/> 138|Updated on<br/> 06/23/24|
 |------|------|
 </div>
 
