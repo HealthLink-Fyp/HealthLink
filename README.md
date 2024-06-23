@@ -13,30 +13,9 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 <div align="center">
   
 ## Languages
-<table><tr>
-  <td align=''>
-  <img width='60' height='60' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
-  <br>
-  <sub>CSS 3</sub>
-  <br>
-  <sub></sub>
-</td>
+<table>
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'>
-  <br>
-  <sub>JavaScript</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/2303/New_Project__20_.png' alt='Jinja'>
-  <br>
-  <sub>Jinja</sub>
-  <br>
-  <sub></sub>
-</td>
+<tr>
 
 <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'>
@@ -53,6 +32,15 @@ HealthLink is a robust healthcare management system offering patient and doctor 
   <br>
   <sub></sub>
 </td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/2303/New_Project__20_.png' alt='Jinja'>
+  <br>
+  <sub>Jinja</sub>
+  <br>
+  <sub></sub>
+</td>
+
 
 </tr>
 </table>
