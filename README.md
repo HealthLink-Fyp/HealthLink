@@ -291,7 +291,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 
 > [!NOTE]
-> HealthLink comes with 66% test coverage and 100% test coverage for critical components.
+> HealthLink comes with 66% test coverage for the non critical parts of the application. The critical parts of the application have 100% test coverage.
 
 ![tests](https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/6b05b57c-0cda-4ace-8821-dd1a8d53c071)
 
