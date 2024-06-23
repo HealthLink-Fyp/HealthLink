@@ -1,4 +1,8 @@
-## What is HealthLink?
+<div align="center">
+  
+  ## What is HealthLink?
+</div>
+
 HealthLink is a robust healthcare management system offering patient and doctor dashboards, AI-powered chatbot, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
 
 
@@ -13,7 +17,9 @@ HealthLink is a robust healthcare management system offering patient and doctor 
   
 </div>
 
-## <img src='https://img.stackshare.io/languages.svg'/> Languages
+<div align="center">
+  
+## Languages
 <table><tr>
   <td align=''>
   <img width='60' height='60' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
@@ -58,7 +64,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 </tr>
 </table>
 
-## <img src='https://img.stackshare.io/frameworks.svg'/> Frameworks
+## Frameworks
 <table><tr>
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
@@ -87,7 +93,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 </tr>
 </table>
 
-## <img src='https://img.stackshare.io/databases.svg'/> Data
+## Data
 <table><tr>
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png' alt='Redis'>
@@ -108,7 +114,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 </tr>
 </table>
 
-## <img src='https://img.stackshare.io/devops.svg'/> DevOps
+## DevOps
 <table><tr>
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'>
@@ -192,7 +198,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 </tr>
 </table>
 
-
+</div>
 
 <br/>
 
