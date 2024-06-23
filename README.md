@@ -2,9 +2,9 @@
 HealthLink is a robust healthcare management system offering patient and doctor dashboards, AI-powered chatbot, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
 
 
-
+<p align="center">
 <img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="60%" align="center"/>
-
+</p>
 ## How HealthLink is built?
 
 * **Frontend**: Angular, TypeScript, RxJS, Angular Material
