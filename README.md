@@ -8,12 +8,14 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 
 
 <div align="center">
-# How HealthLink is built?
+  
+## How HealthLink is built?
+  
 </div>
 
 ## <img src='https://img.stackshare.io/languages.svg'/> Languages
 <table><tr>
-  <td align='center'>
+  <td align=''>
   <img width='60' height='60' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
   <br>
   <sub>CSS 3</sub>
@@ -193,16 +195,20 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 
 
 <br/>
+
 <div align='center'>
 
+  ## HealthLink 98% test coverage
+</div>
 
-## HealthLink 98% test coverage
 ![tests](https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/6b05b57c-0cda-4ace-8821-dd1a8d53c071)
 
 
 
-
+<div align='center'>
+  
 ## Features
+</div>
 
 * **Patient Dashboard**: Patients can view their medical history, prescriptions, and appointments.
 
