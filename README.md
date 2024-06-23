@@ -14,7 +14,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 ## <img src='https://img.stackshare.io/languages.svg'/> Languages
 <table><tr>
   <td align='center'>
-  <img width='48' height='36' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
+  <img width='48' height='48' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
   <br>
   <sub>CSS 3</sub>
   <br>
@@ -22,9 +22,9 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 </td>
 
 <td align='center'>
-  <img width='36' height='36' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'>
+  <img width='72' height='72' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'>
   <br>
-  <sub><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></sub>
+  <sub>JavaScript</sub>
   <br>
   <sub></sub>
 </td>
