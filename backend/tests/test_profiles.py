@@ -1,7 +1,7 @@
 from .base import AuthenticatedApiTest
 from django.urls import reverse
 from rest_framework import status
-from .variables import doctor_profile_data, patient_profile_data
+from .helpers.variables import doctor_profile_data, patient_profile_data
 
 
 class ProfileTests(AuthenticatedApiTest):

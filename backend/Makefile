@@ -1,26 +1,26 @@
 .PHONY: serve testall test migration migrations migrate admin shell lock build add erd reset docs bsetup fsetup db
 
 serve:
-	poetry run python3 manage.py runserver
-	# poetry run gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
+	python3 manage.py runserver
+	# gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
 
 testall:
-	poetry run python3 manage.py test
+	python3 manage.py test
 
 test:
-	poetry run python3 manage.py test tests.test_$(file)
+	python3 manage.py test tests.test_$(app)
 
 migration:
-	poetry run python3 manage.py makemigrations
+	python3 manage.py makemigrations
 
 migrate:
-	poetry run python3 manage.py migrate --run-syncdb
+	python3 manage.py migrate --run-syncdb
 
 admin:
-	poetry run python3 manage.py createsuperuser
+	python3 manage.py createsuperuser
 
 shell:
-	poetry run python3 manage.py shell --no-startup
+	python3 manage.py shell --no-startup
 
 lock:
 	poetry lock && poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
@@ -33,10 +33,10 @@ add:
 
 # django-extensions commands
 erd:
-	poetry run python3 manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o healthlink/erd.png
+	python3 manage.py graph_models -a -g -I DoctorProfile,PatientProfile,Appointment,MedicalRecord,MedicineShop,MedicalTest,Call -o healthlink/erd.png
 
 reset:
-	poetry run python3 manage.py reset_db --noinput patient
+	python3 manage.py reset_db --noinput patient
 
 # MKDocs commands
 docs:

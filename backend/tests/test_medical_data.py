@@ -4,8 +4,14 @@ from rest_framework import status
 from patient.models import MedicineShop, MedicalTest
 from .base import BaseApiTest
 
+from .helpers import shop_data
+
 
 class MedicineShopTest(BaseApiTest):
+    def setUp(self):
+        super().setUp()
+        shop_data.add_medicines()
+
     def test_get_medicine_shop(self):
         url = reverse("medicine-shop")
         response = self.client.get(url)
@@ -23,6 +29,10 @@ class MedicineShopTest(BaseApiTest):
 
 
 class MedicalTestTest(BaseApiTest):
+    def setUp(self):
+        super().setUp()
+        shop_data.add_medical_tests()
+
     def test_get_medical_test(self):
         url = reverse("medical-test")
         response = self.client.get(url)

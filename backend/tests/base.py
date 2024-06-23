@@ -3,7 +3,7 @@ from rest_framework.test import APIClient, APITestCase
 
 from core.models import DoctorProfile, PatientProfile
 
-from .variables import (
+from .helpers.variables import (
     user_profile_data,
     doctor_profile_data,
     patient_profile_data,

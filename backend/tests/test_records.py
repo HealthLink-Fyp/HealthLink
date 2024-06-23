@@ -1,7 +1,9 @@
 from .base import PatientApiTest, DoctorApiTest
 from django.urls import reverse
 from rest_framework import status
-from .variables import get_record_prescription_data, record_data
+from .helpers.variables import get_record_prescription_data, record_data
+
+from chat.models import Call
 
 
 class MedicalRecordTests(DoctorApiTest, PatientApiTest):
@@ -9,6 +11,7 @@ class MedicalRecordTests(DoctorApiTest, PatientApiTest):
         super().setUp()
         self.create_doctor()
         self.create_patient()
+        Call.objects.create(peer_id=1234, doctor=self.doctor, patient=self.patient)
 
     def create_medical_record(self):
         url = reverse("medical-record")
@@ -49,7 +52,6 @@ class MedicalRecordTests(DoctorApiTest, PatientApiTest):
     def test_delete_medical_record(self):
         self.create_medical_record()
         url = reverse("medical-record")
-        print(self.response.data)
         record_id = self.response.data["record_id"]
         url = reverse("medical-record-detail", kwargs={"pk": record_id})
         response = self.client.delete(url)
