@@ -71,21 +71,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <sub></sub>
 </td>
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/4230/aSzYQa43_400x400.jpg' alt='ECharts'>
-  <br>
-  <sub>ECharts</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1796/984368.png' alt='RxJS'>
-  <br>
-  <sub>RxJS</sub>
-  <br>
-  <sub></sub>
-</td>
 
 </tr>
 </table>
@@ -150,22 +135,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </td>
 
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/831/7c0b595409af531b9cdeb07f8c513e8b.png' alt='Jasmine'>
-  <br>
-  <sub>Jasmine</sub>
-  <br>
-  <sub></sub>
-</td>
-
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1420/TidYGd6a.png' alt='Karma'>
-  <br>
-  <sub>Karma</sub>
-  <br>
-  <sub></sub>
-</td>
-
 
 </tr>
 </table>
@@ -198,21 +167,15 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <sub></sub>
 </td>
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/2179/default_332f874a2edb2686f578aa6389313efcea1eec41.png' alt='NumPy'>
-  <br>
-  <sub>NumPy</sub>
-  <br>
-  <sub></sub>
-</td>
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg' alt='OpenAI'>
-  <br>
-  <sub>OpenAI</sub>
-  <br>
-  <sub></sub>
-</td>
+
+
+</tr>
+</table>
+
+## Other
+
+<table><tr>
 
 <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/1336/xWMRvm_5_400x400.png' alt='Postman'>
@@ -221,13 +184,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <br>
   <sub></sub>
 </td>
-
-</tr>
-</table>
-
-## Other
-
-<table><tr>
 
 <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/6417/jwt-icon.png' alt='JWT'>
