@@ -56,18 +56,17 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 <table><tr>
 
   <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/994/4aGjtNQv.png' alt='Django'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
   <br>
-  <sub>Django</sub>
+  <sub>Angular</sub>
   <br>
   <sub></sub>
 </td>
 
-  
   <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/994/4aGjtNQv.png' alt='Django'>
   <br>
-  <sub>Angular</sub>
+  <sub>Django</sub>
   <br>
   <sub></sub>
 </td>
@@ -92,7 +91,10 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </table>
 
 ## Data
-<table><tr>
+<table>
+
+<tr>
+
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png' alt='Redis'>
   <br>
@@ -102,12 +104,13 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </td>
 
 <td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/1839/q5uAkmy7.png' alt='SQLAlchemy'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/1028/ASOhU5xJ.png' alt='PostgreSQL'>
   <br>
-  <sub>SQLAlchemy</sub>
+  <sub>PostgreSQL</sub>
   <br>
   <sub></sub>
 </td>
+
 
 </tr>
 </table>
@@ -138,6 +141,14 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <sub></sub>
 </td>
 
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png' alt='pytest'>
+  <br>
+  <sub>pytest</sub>
+  <br>
+  <sub></sub>
+</td>
+
 
 <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/831/7c0b595409af531b9cdeb07f8c513e8b.png' alt='Jasmine'>
@@ -155,19 +166,30 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
   <sub></sub>
 </td>
 
-<td align='center'>
-  <img width='60' height='60' src='https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png' alt='pytest'>
-  <br>
-  <sub>pytest</sub>
-  <br>
-  <sub></sub>
-</td>
 
 </tr>
 </table>
 
-## Other
+## AI & Machine Learning
 <table><tr>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/4717/FtFnqC38_400x400.png' alt='TensorFlow'>
+  <br>
+  <sub>TensorFlow</sub>
+  <br>
+  <sub></sub>
+</td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/104866/default_df54ef6519475dcfbaf279696c11805b976ebfaf.png' alt='Mixtral'>
+  <br>
+  <sub>Mixtral</sub>
+  <br>
+  <sub></sub>
+</td>
+
+
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg' alt='LangChain'>
   <br>
@@ -202,6 +224,57 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 </tr>
 </table>
+
+## Other
+
+<table><tr>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/6417/jwt-icon.png' alt='JWT'>
+  <br>
+  <sub>JWT</sub>
+  <br>
+  <sub></sub>
+</td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/191/default_9262326592c97828a2a4299dec085a3674dd05f4.png' alt='Sentry'>
+  <br>
+  <sub>Sentry</sub>
+  <br>
+  <sub></sub>
+</td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/154/default_53605d3093005bd7853e04a258c0d4746e803e29.jpg' alt='Jira'>
+  <br>
+  <sub>Jira</sub>
+  <br>
+  <sub></sub>
+</td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/3511/cof_orange_hex.jpg' alt='Ubuntu'>
+  <br>
+  <sub>Ubuntu</sub>
+  <br>
+  <sub></sub>
+</td>
+
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/1075/celery.png' alt='Celery'>
+  <br>
+  <sub>Celery</sub>
+  <br>
+  <sub></sub>
+</td>
+
+  </tr>
+</table>
+
+
+
+
 
 </div>
 
