@@ -20,7 +20,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 <div>
     <h2>Languages & Frameworks</h2>
-    <table valign="top">
+    <table align="center">
       <tr>
         <td>
           <img
@@ -59,6 +59,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
           <sub></sub>
         </td>
         <td>
+          </td>
+        <td>
           <img
             width="60"
             height="60"
@@ -84,9 +86,9 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-    <!-- AI & Machine Learning -->
-    <h2>AI & Machine Learning</h2>
-    <table>
+    <!-- Machine Learning & Data -->
+    <h2>Machine Learning & Data</h2>
+    <table align="center">
       <tr>
         <td>
           <img
@@ -124,11 +126,37 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
           <br />
           <sub></sub>
         </td>
+        <td>
+        </td>
+              <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png"
+            alt="Redis"
+          />
+          <br />
+          <sub>Redis</sub>
+          <br />
+          <sub></sub>
+        </td>
+        <td>
+          <img
+            width="60"
+            height="60"
+            src="https://img.stackshare.io/service/1028/ASOhU5xJ.png"
+            alt="PostgreSQL"
+          />
+          <br />
+          <sub>PostgreSQL</sub>
+          <br />
+          <sub></sub>
+        </td>
       </tr>
     </table>
     <!-- DevOps -->
     <h2>DevOps</h2>
-    <table>
+    <table align="center">
       <tr>
         <td>
           <img
@@ -180,39 +208,9 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-    <!-- Data -->
-    <h2>Data</h2>
-    <table>
-      <tr>
-        <td>
-          <img
-            width="60"
-            height="60"
-            src="https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png"
-            alt="Redis"
-          />
-          <br />
-          <sub>Redis</sub>
-          <br />
-          <sub></sub>
-        </td>
-        <td>
-          <img
-            width="60"
-            height="60"
-            src="https://img.stackshare.io/service/1028/ASOhU5xJ.png"
-            alt="PostgreSQL"
-          />
-          <br />
-          <sub>PostgreSQL</sub>
-          <br />
-          <sub></sub>
-        </td>
-      </tr>
-    </table>
     <!-- Other -->
     <h2>Other</h2>
-    <table>
+    <table align="center">
       <tr>
         <td>
           <img
