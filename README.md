@@ -8,19 +8,15 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 
 
 <div align="center">
-
 # How HealthLink is built?
-
-|Tools used<br/> 138|Updated on<br/> 06/23/24|
-|------|------|
 </div>
 
-## <img src='https://img.stackshare.io/languages.svg'/> Languages (5)
+## <img src='https://img.stackshare.io/languages.svg'/> Languages
 <table><tr>
   <td align='center'>
-  <img width='36' height='36' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
+  <img width='48' height='36' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
   <br>
-  <sub><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3">CSS 3</a></sub>
+  <sub>CSS 3</sub>
   <br>
   <sub></sub>
 </td>
