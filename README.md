@@ -1,10 +1,10 @@
 ## What is HealthLink? 
 
-HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, Video/Audio Call, Chat, Call Transcription, LLM-powered video call, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
+HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, *Video/Audio Call*, *Chat*, Call Transcription, *LLM-powered video call*, secure appointment scheduling, e-prescriptions, telemedicine, and integrated *payment solutions*, all deployed on [Fly](fly.io) using *Docker* with *CI/CD* and responsive design.
 
 </br>
 <p align="center">
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
+<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="50%"/>
 </p>
 
 </br>
@@ -15,8 +15,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 
 </br>
-
-## Behind HealthLink
 
 <div>
     <h4 align="center">Languages & Frameworks</h4>
@@ -291,7 +289,9 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 <br/>
 
 
-  ## HealthLink 66% test coverage
+
+> [!NOTE]
+> HealthLink comes with 66% test coverage and 100% test coverage for critical components.
 
 ![tests](https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/6b05b57c-0cda-4ace-8821-dd1a8d53c071)
 
