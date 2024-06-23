@@ -2,13 +2,14 @@
 
 HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, Video/Audio Call, Chat, Call Transcription, LLM-powered video call, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
 
-> [!IMPORTANT]
-> HealthLink is designed to assist doctors, not replace them. It provides tools and information that help doctors make more informed decisions, enhancing the quality of patient care.
->
+
 <p align="center">
 <img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
 </p>
 
+> [!IMPORTANT]
+> HealthLink is designed to assist doctors, not replace them. It provides tools and information that help doctors make more informed decisions, enhancing the quality of patient care.
+>
   
 ## How HealthLink is built?
 
