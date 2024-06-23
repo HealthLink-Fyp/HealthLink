@@ -25,9 +25,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </br>
 
 ## Behind HealthLink
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around">
-  <div style="flex: 1; min-width: 250px">
-    <!-- Languages -->
+
     <h2>Languages</h2>
     <table>
       <tr>
@@ -69,8 +67,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
-  <div style="flex: 1; min-width: 250px">
+
     <!-- Frameworks -->
     <h2>Frameworks</h2>
     <table>
@@ -101,8 +98,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
-  <div style="flex: 1; min-width: 250px">
+
+
     <!-- AI & Machine Learning -->
     <h2>AI & Machine Learning</h2>
     <table>
@@ -145,8 +142,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
-  <div style="flex: 1; min-width: 250px">
+    
+
     <!-- DevOps -->
     <h2>DevOps</h2>
     <table>
@@ -201,9 +198,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
+    
 
-  <div style="flex: 1; min-width: 250px">
     <!-- Data -->
     <h2>Data</h2>
     <table>
@@ -234,9 +230,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
+    
 
-  <div style="flex: 1; min-width: 250px">
     <!-- Other -->
     <h2>Other</h2>
     <table>
@@ -315,8 +310,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
         </td>
       </tr>
     </table>
-  </div>
-</div>
+
 
 <br/>
 
