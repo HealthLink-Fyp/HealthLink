@@ -1,14 +1,21 @@
-## What is HealthLink?
+## What is HealthLink? 
 
-HealthLink is a robust healthcare management system offering patient and doctor dashboards, AI-powered chatbot, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
+HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, Video/Audio Call, Chat, Call Transcription, LLM-powered video call, secure appointment scheduling, e-prescriptions, telemedicine, and integrated payment solutions, all deployed on AWS with CI/CD and responsive design. It enhances healthcare interaction with features like notifications, feedback, video/voice consultations, and comprehensive medical history access.
 
-
+</br>
 <p align="center">
 <img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
 </p>
 
+</br>
+
+> [!IMPORTANT]
+> HealthLink is designed to assist doctors, not replace them. It provides tools and information that help doctors make more informed decisions, enhancing the quality of patient care.
+>
   
-## How HealthLink is built?
+</br>
+
+## Behind HealthLink
 
 <div align="center">
   
@@ -47,6 +54,16 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 
 ## Frameworks
 <table><tr>
+
+  <td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/994/4aGjtNQv.png' alt='Django'>
+  <br>
+  <sub>Django</sub>
+  <br>
+  <sub></sub>
+</td>
+
+  
   <td align='center'>
   <img width='60' height='60' src='https://img.stackshare.io/service/3745/cb8U-gL6_400x400.jpg' alt='Angular'>
   <br>
@@ -175,6 +192,13 @@ HealthLink is a robust healthcare management system offering patient and doctor 
   <sub></sub>
 </td>
 
+<td align='center'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/1336/xWMRvm_5_400x400.png' alt='Postman'>
+  <br>
+  <sub>Postman</sub>
+  <br>
+  <sub></sub>
+</td>
 
 </tr>
 </table>
@@ -184,7 +208,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 <br/>
 
 
-  ## HealthLink 98% test coverage
+  ## HealthLink 66% test coverage
 
 ![tests](https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/6b05b57c-0cda-4ace-8821-dd1a8d53c071)
 
