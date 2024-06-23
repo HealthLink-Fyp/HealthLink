@@ -14,7 +14,7 @@ HealthLink is a robust healthcare management system offering patient and doctor 
 ## <img src='https://img.stackshare.io/languages.svg'/> Languages
 <table><tr>
   <td align='center'>
-  <img width='48' height='48' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
+  <img width='60' height='60' src='https://img.stackshare.io/service/6727/css.png' alt='CSS 3'>
   <br>
   <sub>CSS 3</sub>
   <br>
