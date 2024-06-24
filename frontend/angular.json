@@ -14,7 +14,8 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "baseHref": "/HealthLink/",
-            "repo": "https://github.com/HealthLink-Fyp/HealthLink.git"
+            "repo": "https://github.com/HealthLink-Fyp/HealthLink.git",
+            "outputPath": "dist/health360-front/browser/"
           }
         },
         "build": {

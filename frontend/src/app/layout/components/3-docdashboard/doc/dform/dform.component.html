@@ -85,79 +85,85 @@
 </div> -->
 
 <div class="bounce-in-left">
-<div class="card">
-  <form [formGroup]="form" (submit)="submit()">
-    <h1>Doctor Form:</h1>
+  <div class="card">
+    <form [formGroup]="form" (submit)="submit()">
+      <h1>Doctor Form:</h1>
 
-    <div>
-      <label>Please select your specialization</label>
-      <select formControlName="specialization">
-        <option *ngFor="let choice of SPECIALIZATION_CHOICES" [value]="choice[0]">
-          {{ choice[1] }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label>Please select your qualification</label>
-      <select formControlName="qualification">
-        <option *ngFor="let choice of QUALIFICATION_CHOICES" [value]="choice[0]">
-          {{ choice[1] }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label>Please tell your experience years:</label>
-      <input type="text" formControlName="experience_years" />
-    </div>
-
-    <div>
-      <label>Please tell your city:</label>
-      <input type="text" formControlName="city" />
-    </div>
-
-    <div>
-      <label>Please tell your available timings:</label>
-      <input type="time" formControlName="available_timings" />
-    </div>
-
-    <div formGroupName="availability_data">
-      <div *ngFor="let day of availableDays">
-        <input type="checkbox" [value]="day" (change)="onChange($event)">
-        <label>{{ day }}</label>
+      <div>
+        <label>Specialization</label>
+        <select formControlName="specialization">
+          <option
+            *ngFor="let choice of SPECIALIZATION_CHOICES"
+            [value]="choice[0]"
+          >
+            {{ choice[1] }}
+          </option>
+        </select>
       </div>
 
       <div>
-        <label>Available Start Time:</label>
-        <input type="time" formControlName="start" />
+        <label>Qualification</label>
+        <select formControlName="qualification">
+          <option
+            *ngFor="let choice of QUALIFICATION_CHOICES"
+            [value]="choice[0]"
+          >
+            {{ choice[1] }}
+          </option>
+        </select>
       </div>
 
       <div>
-        <label>Available end Time:</label>
-        <input type="time" formControlName="end" />
+        <label>Experience</label>
+        <input type="text" formControlName="experience_years" />
       </div>
-    </div>
 
-    <div>
-      <label>Please tell us your consultation fees:</label>
-      <input type="number" formControlName="consultation_fees" />
-    </div>
+      <div>
+        <label>City</label>
+        <input type="text" formControlName="city" />
+      </div>
 
-    <div>
-      <label>Please tell us a little about yourself:</label>
-      <input type="text" formControlName="summary" />
-    </div>
+      <div>
+        <label>Availability</label>
+        <input type="time" formControlName="available_timings" />
+      </div>
 
-    <div>
-      <label>Please set your wait time:</label>
-      <input type="number" formControlName="wait_time" />
-    </div>
+      <div formGroupName="availability_data">
+        <div *ngFor="let day of availableDays">
+          <input type="checkbox" [value]="day" (change)="onChange($event)" />
+          <label>{{ day }}</label>
+        </div>
 
-    <button type="submit">{{isUpdateMode ? 'Update' : 'Submit'}}</button>
-  </form>
-  <button (click)="Done()">Already filled</button>
+        <div>
+          <label>Start Time</label>
+          <input type="time" formControlName="start" />
+        </div>
 
-  <button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>
-</div>
+        <div>
+          <label>End Time</label>
+          <input type="time" formControlName="end" />
+        </div>
+      </div>
+
+      <div>
+        <label>Consultation Fees</label>
+        <input type="number" formControlName="consultation_fees" />
+      </div>
+
+      <div>
+        <label>Summary</label>
+        <input type="text" formControlName="summary" />
+      </div>
+
+      <div>
+        <label>Wait Time</label>
+        <input type="number" formControlName="wait_time" />
+      </div>
+
+      <button type="submit">{{ isUpdateMode ? "Update" : "Submit" }}</button>
+    </form>
+    <button (click)="Done()">Already filled</button>
+
+    <button *ngIf="isUpdateMode" (click)="toggleUpdateMode()">Cancel</button>
+  </div>
 </div>

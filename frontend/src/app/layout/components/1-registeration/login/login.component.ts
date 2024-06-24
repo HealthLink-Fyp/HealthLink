@@ -7,10 +7,11 @@ import { NotifyService } from '../../notification/notify.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  form: FormGroup;
+  // form: FormGroup;
+  public form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,11 +22,20 @@ export class LoginComponent {
     this.form = this.createForm();
   }
 
+  ngOnInit(): void {
+    this.updateForm();
+  }
+
   private createForm(): FormGroup {
     return this.formBuilder.group({
       email: '',
-      password: ''
+      password: '',
     });
+  }
+
+  updateForm(): void {
+    this.form.get('email')?.setValue('ahmed@mail.com');
+    this.form.get('password')?.setValue('ahmed');
   }
 
   submit(): void {
@@ -33,7 +43,7 @@ export class LoginComponent {
       (res: any) => {
         if (res.access_token) {
           this.authService.accessToken = res.access_token;
-          this.notifyService.showSuccess("Logged in successfully!");
+          this.notifyService.showSuccess('Logged in successfully!');
           AuthService.authEmitter.emit(true);
           this.router.navigate(['/auth']);
           localStorage.setItem('token', res.access_token);
@@ -41,16 +51,17 @@ export class LoginComponent {
           this.notifyService.showError('Wrong Credentials! Try again');
         }
       },
-      error => {
+      (error) => {
         console.error('Error:', error);
-        this.notifyService.showError('Wrong Credentials! Try again');
+        if (error.status === 401) {
+          this.notifyService.showError('Wrong Credentials! Try again');
+        } else {
+          this.notifyService.showError('Something went wrong! Try again');
+        }
       }
     );
   }
 }
-
-
-
 
 // Scalability & Maintainability:
 

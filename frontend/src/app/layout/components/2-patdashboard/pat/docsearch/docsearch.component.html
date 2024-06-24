@@ -82,7 +82,6 @@
   </div>
 
   <div *ngIf="onClickSearchBtnBool">
-    <!-- Display auto search results as cards -->
     <div *ngIf="searchResults && searchResults.length > 0">
       <br /><br />
       <mat-card class="cardsearch" *ngFor="let result of searchResults">
@@ -92,22 +91,21 @@
         </mat-card-header>
         <mat-card-content>
           <p>City: {{ result.city }}</p>
-          <p>start time : {{ result.start | date : "fullDate" }}</p>
-          <!-- Add more details here as desired -->
+          <p>Time: {{ result.start | Date : "fullDate" }}</p>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
 
-  <!-- Display  after clicking on search results using Material cards -->
-  <div
+  <!-- Display All Doctors -->
+
+  <!-- <div
     *ngIf="afterSearchData && afterSearchData.length > 0"
     class="searchResultsContainer"
   >
     <mat-card *ngFor="let data of afterSearchData" class="searchResultCard">
       <mat-card-content>
         <p>{{ data.full_name }}</p>
-        <!-- View Profile and Book Appointment buttons -->
         <div class="button-container">
           <button
             mat-button
@@ -128,5 +126,5 @@
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
+  </div> -->
 </div>

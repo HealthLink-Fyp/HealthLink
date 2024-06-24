@@ -63,6 +63,10 @@ export class PatientService {
     );
   }
 
+  allDoctors() {
+    return this.http.get(`${environment.api}/search/doctors/`);
+  }
+
   afterDoctorsSearched(query: string, city: string) {
     const params = { search: query, city: city };
     return this.http.get(`${environment.api}/search/doctors/`, {

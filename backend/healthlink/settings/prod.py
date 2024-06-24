@@ -9,19 +9,14 @@ import sentry_sdk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", False))
 
-# Cors settings
-cors_allowed_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
-if cors_allowed_origins:
-    CORS_ALLOWED_ORIGINS = cors_allowed_origins.split(",")
-else:
-    CORS_ALLOW_ALL_ORIGINS = True
-
-# Hosts settings
+# Security settings
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
-CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", "").split(",")
+CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
 
 # JWT settings
 JWT_REFRESH_SECRET = os.getenv("JWT_REFRESH_SECRET")

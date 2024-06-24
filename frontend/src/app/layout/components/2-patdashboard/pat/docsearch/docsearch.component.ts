@@ -106,6 +106,11 @@ searchDoctors()
   )
   }
 
+  this.patientService.allDoctors().subscribe((response:any)=>{
+    this.doctors=response.results;
+    console.log(this.doctors);
+  }
+
   // for clearing auto complete search reuslts
 
   clearSearchResults()
