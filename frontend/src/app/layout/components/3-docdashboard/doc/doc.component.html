@@ -1,113 +1,128 @@
 <!-- breadcrumb code -->
 
 <div class="breadcrumb">
-    <mat-icon style="position: relative;left: -7px;top: 3px;">home</mat-icon><h1>></h1><p class="bcrumb">Dashboard</p>
+  <mat-icon style="position: relative; left: -7px; top: 3px">home</mat-icon>
+  <h1>></h1>
+  <p class="bcrumb">Dashboard</p>
 </div>
-
 
 <!-- welcome card -->
 
 <div class="welcomediv">
-<div class="wcard">
-    <img lazyLoad  src="https://www.einfosoft.com/templates/admin/cliniva/source/light/assets/images/pages/welcome.png" alt="" class="wimage">
-    <div >
-        <h4> Welcome back <div class="wname">{{doctorData.full_name}}</div></h4>
-        <p>
-            We would like to take this opportunity to welcome you to our practice and to
-             thank you for choosing our physicians to participate in your healthcare. We look forward to 
-             providing you with personalized, comprehensive health care focusing on wellness and prevention.
-            </p>
+  <div class="wcard">
+    <img
+      lazyLoad
+      src="https://www.einfosoft.com/templates/admin/cliniva/source/light/assets/images/pages/welcome.png"
+      alt=""
+      class="wimage"
+    />
+    <div>
+      <h4>
+        Welcome back
+        <div class="wname">{{ doctorData.full_name }}</div>
+      </h4>
+      <p>
+        We would like to take this opportunity to welcome you to our practice
+        and to thank you for choosing our physicians to participate in your
+        healthcare. We look forward to providing you with personalized,
+        comprehensive health care focusing on wellness and prevention.
+      </p>
     </div>
-</div>
+  </div>
 </div>
 
 <!-- patient health metrices cards -->
 
 <div class="metricCards">
-<div class="metric">
+  <div class="metric">
     <div class="mcard">
-     
-       <img lazyLoad class="mimage" src="https://static.vecteezy.com/system/resources/thumbnails/014/495/856/small/hand-injury-icon-outline-style-vector.jpg">
-    
-       <div >
-        <h4 class="mname"> Patients<div class="mscore">{{ uniquePatientCount}}</div></h4>
+      <img
+        lazyLoad
+        class="mimage"
+        src="https://static.vecteezy.com/system/resources/thumbnails/014/495/856/small/hand-injury-icon-outline-style-vector.jpg"
+      />
+
+      <div>
+        <h4 class="mname">
+          Patients
+          <div class="mscore">{{ uniquePatientCount }}</div>
+        </h4>
         <p class="mstat">
-            <mat-icon >trending_up</mat-icon>10% Higher Then Last Month
-            </p>
+          <mat-icon>trending_up</mat-icon>10% Higher Then Last Month
+        </p>
+      </div>
     </div>
+  </div>
 
-    </div>
-
-</div>
-
-<div class="metric">
+  <div class="metric">
     <div class="mcard">
-        <img lazyLoad class="mimage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMxH5C9m86wP6ThD7Fkleg6rfUZY4FgqSAb0-ZtGmH5Q&s">
-    
-       <div >
-        <h4 class="mname"> Appointments <div class="mscore">{{totalAppointments}}</div></h4>
+      <img
+        lazyLoad
+        class="mimage"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMxH5C9m86wP6ThD7Fkleg6rfUZY4FgqSAb0-ZtGmH5Q&s"
+      />
+
+      <div>
+        <h4 class="mname">
+          Appointments
+          <div class="mscore">{{ totalAppointments }}</div>
+        </h4>
         <p class="mstat">
-            <mat-icon >trending_up</mat-icon>10% Higher Then Last Month
-            </p>
+          <mat-icon>trending_up</mat-icon>10% Higher Then Last Month
+        </p>
+      </div>
     </div>
-        </div>
+  </div>
 
-</div>
-
-<div class="metric">
+  <div class="metric">
     <div class="mcard">
-        <img lazyLoad class="mimage" src="https://play-lh.googleusercontent.com/umhQAisu6vYe9oEiNSqr02H2nkT3iPtgYFye2E-VKZraV9Wcsk_kPSln7KnHiDRXHXo=w240-h480-rw">
-        
-       <div >
-        <h4 class="mname"> Blood Pressure <div class="mscore">110/70</div></h4>
+      <img
+        lazyLoad
+        class="mimage"
+        src="https://play-lh.googleusercontent.com/umhQAisu6vYe9oEiNSqr02H2nkT3iPtgYFye2E-VKZraV9Wcsk_kPSln7KnHiDRXHXo=w240-h480-rw"
+      />
+
+      <div>
+        <h4 class="mname">
+          Blood Pressure
+          <div class="mscore">110/70</div>
+        </h4>
         <p class="mstat">
-            <mat-icon >trending_up</mat-icon>10% Higher Then Last Month
-            </p>
+          <mat-icon>trending_up</mat-icon>10% Higher Then Last Month
+        </p>
+      </div>
     </div>
+  </div>
 
-    </div>
-
-</div>
-
-<div class="metric">
+  <div class="metric">
     <div class="mcard">
-        <img lazyLoad class="mimage" src="https://static.vecteezy.com/system/resources/thumbnails/021/495/923/small_2x/internet-explorer-browser-logo-brand-symbol-design-software-illustration-free-vector.jpg">
-    
-       <div >
-        <h4 class="mname">Hooked Meeting <div class="mscore">{{totalAppointments}}</div></h4>
+      <img
+        lazyLoad
+        class="mimage"
+        src="https://static.vecteezy.com/system/resources/thumbnails/021/495/923/small_2x/internet-explorer-browser-logo-brand-symbol-design-software-illustration-free-vector.jpg"
+      />
+
+      <div>
+        <h4 class="mname">
+          Hooked Meeting
+          <div class="mscore">{{ totalAppointments }}</div>
+        </h4>
         <p class="mstat">
-            <mat-icon >trending_up</mat-icon>10% Higher Then Last Month
-            </p>
+          <mat-icon>trending_up</mat-icon>10% Higher Then Last Month
+        </p>
+      </div>
     </div>
-
-    </div>
-
-</div>
+  </div>
 </div>
 
 <div class="vmetrices">
-   
- 
-        <div class="bodychart">
-        <app-todo></app-todo>
-        </div>
-    
-        <div class="barparent">
-        <div class="barchart">
-            <div echarts [options]="option"></div>
-        </div>
-       </div>
-    
+  <div class="barparent">
+    <div class="barchart">
+      <div echarts [options]="option"></div>
     </div>
-
-
-
+  </div>
+</div>
 
 <!-- <div class="appointmentsTab">
     <app-dtabs></app-dtabs>
  </div> -->
-
-
-
-
-

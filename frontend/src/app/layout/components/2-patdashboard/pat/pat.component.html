@@ -1,24 +1,34 @@
 <!-- breadcrumb code -->
 
 <div class="breadcrumb">
-    <mat-icon style="position: relative;left: -7px;top: 3px;">home</mat-icon><h1>></h1><p class="bcrumb">Dashboard</p>
+  <mat-icon style="position: relative; left: -7px; top: 3px">home</mat-icon>
+  <h1>></h1>
+  <p class="bcrumb">Dashboard</p>
 </div>
-
 
 <!-- welcome card -->
 
 <div class="welcomediv">
-<div class="wcard">
-    <img lazyLoad  src="https://www.einfosoft.com/templates/admin/cliniva/source/light/assets/images/pages/welcome.png" alt="" class="wimage">
-    <div >
-        <h4> Welcome back <div class="wname">{{patientData.full_name}}</div></h4>
-        <p>
-            We would like to take this opportunity to welcome you to our practice and to
-             thank you for choosing our physicians to participate in your healthcare. We look forward to 
-             providing you with personalized, comprehensive health care focusing on wellness and prevention.
-            </p>
+  <div class="wcard">
+    <img
+      lazyLoad
+      src="https://www.einfosoft.com/templates/admin/cliniva/source/light/assets/images/pages/welcome.png"
+      alt=""
+      class="wimage"
+    />
+    <div>
+      <h4>
+        Welcome back
+        <div class="wname">{{ patientData.full_name }}</div>
+      </h4>
+      <p>
+        We would like to take this opportunity to welcome you to our practice
+        and to thank you for choosing our physicians to participate in your
+        healthcare. We look forward to providing you with personalized,
+        comprehensive health care focusing on wellness and prevention.
+      </p>
     </div>
-</div>
+  </div>
 </div>
 
 <!-- patient health metrices cards -->
@@ -86,25 +96,13 @@
 </div> -->
 
 <div class="vmetrices">
-   
-    <div class="bodychart">
-      
-    <app-bodychart></app-bodychart>
-    </div>
-
-    <div class="barparent">
+  <div class="barparent">
     <div class="barchart">
-        <app-barchart></app-barchart>
+      <app-barchart></app-barchart>
     </div>
-   </div>
-
+  </div>
 </div>
 
 <div class="appointmentsTab">
-    <app-ptabs></app-ptabs>
- </div>
-
-
-
-
-
+  <app-ptabs></app-ptabs>
+</div>

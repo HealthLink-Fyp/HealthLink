@@ -129,25 +129,14 @@
 
 /* visual metrices */
 
-.vmetrices {
-    display: flex;
-    flex-direction: row;
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
 
 .barparent {
-    height: 350px;
-    width: 800px;
-}
-
-
-.barchart {
-
-    height: 100vh;
-    position: relative;
+    margin: 100px;
+    width: 100%;
+    height: 100%;
 
 }
+
 
 
 @media(max-width:850px) {

@@ -26,6 +26,7 @@
     "@angular/router": "^16.2.0",
     "@google-pay/button-angular": "^3.1.0",
     "@ngneat/cashew": "^4.1.0",
+    "angular-cli-ghpages": "^2.0.1",
     "echarts": "^5.5.0",
     "ngx-echarts": "^17.1.0",
     "ngx-skeleton-loader": "^7.0.0",

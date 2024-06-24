@@ -16,20 +16,16 @@ export class PatientService {
   }
 
   getPatient() {
-    console.log("hi i am getting patient for u (service)");
-    return this.http.get(`${environment.api}/auth/profile/`, {context: withCache()});
-  }
-
-  getMetrices()
-  {
-    return this.http.get(`${environment.api}/dashboard/`, {context: withCache()});
+    // console.log("hi i am getting patient for u (service)");
+    return this.http.get(`${environment.api}/auth/profile/`, {
+      context: withCache(),
+    });
   }
 
   uploadFile(formData: FormData) {
     return this.http.post(`${environment.api}/records/`, formData);
   }
 
-  
   getRecords() {
     return this.http.get(`${environment.api}/records/`);
   }
@@ -38,70 +34,64 @@ export class PatientService {
     return this.http.post(`${environment.api}/chat/`, body);
   }
 
-  updatePatientProfile(body:any)
-  {
-    return this.http.put(`${environment.api}/auth/profile/`,body);
+  updatePatientProfile(body: any) {
+    return this.http.put(`${environment.api}/auth/profile/`, body);
   }
 
-  
-  deletePatient()
-  {
+  deletePatient() {
     return this.http.delete(`${environment.api}/auth/user/`);
   }
 
-  delPatForm()
-  {
+  delPatForm() {
     return this.http.delete(`${environment.api}/auth/profile/`);
   }
 
-  updateAppointment(body:any,pkAppointment: any)
-  {
-    return this.http.put(`${environment.api}/appointment/${pkAppointment}/`,body);
+  updateAppointment(body: any, pkAppointment: any) {
+    return this.http.put(
+      `${environment.api}/appointment/${pkAppointment}/`,
+      body
+    );
   }
 
-  delAppointment(pkAppointment: any)
-  {
+  delAppointment(pkAppointment: any) {
     return this.http.delete(`${environment.api}/appointment/${pkAppointment}/`);
   }
 
-
-
   searchDoctors(query: string) {
     return this.http.get(
-      `${environment.api}/search/doctors/autocomplete/?search=${query}`,
+      `${environment.api}/search/doctors/autocomplete/?search=${query}`
     );
   }
 
   afterDoctorsSearched(query: string, city: string) {
     const params = { search: query, city: city };
-    return this.http.get(`${environment.api}/search/doctors/`, { params: params });
+    return this.http.get(`${environment.api}/search/doctors/`, {
+      params: params,
+    });
   }
-  
-  getDoctorProfile(userId:number) {
+
+  getDoctorProfile(userId: number) {
     return this.http.get(`${environment.api}/doctors/${userId}/`);
   }
-  
-  makeAppointment(body:any)
-  {
-    return this.http.post(`${environment.api}/appointment/`,body);
+
+  makeAppointment(body: any) {
+    return this.http.post(`${environment.api}/appointment/`, body);
   }
 
-  getbookedAppointments()
-  {
-    return this.http.get(`${environment.api}/appointment/`)
+  getbookedAppointments() {
+    return this.http.get(`${environment.api}/appointment/`);
   }
 
-  getbookedAppointment(body:any)
-  {
-    return this.http.get(`${environment.api}/appointment/`,body);
+  getbookedAppointment(body: any) {
+    return this.http.get(`${environment.api}/appointment/`, body);
   }
 
   getMedicines(limit: number, offset: number) {
     return this.http.get(`${environment.api}/medicines/`, {
       params: {
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -109,8 +99,8 @@ export class PatientService {
     return this.http.get(`${environment.api}/tests/`, {
       params: {
         limit: limit,
-        offset: offset
-      }
+        offset: offset,
+      },
     });
   }
 }

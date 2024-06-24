@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 ngOnInit(): void {
   this.patientService.getPatient().subscribe((res:any)=>{
     this.patientData=res;
-    console.log("coming from dashboard",this.patientData);
+    // console.log("coming from dashboard",this.patientData);
   }
   )
 

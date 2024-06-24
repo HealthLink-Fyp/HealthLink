@@ -24,7 +24,7 @@ export class PsidenavComponent implements OnInit {
 ngOnInit(): void {
   this.patientser.getPatient().subscribe((res: any) => {
     this.patientData = res;
-    console.log("coming from dashboard", this.patientData);
+    // console.log("coming from dashboard", this.patientData);
   });
 }
 

@@ -5,18 +5,20 @@ import { DoctorService } from 'src/app/architecture/services/doctor/doctor.servi
 @Component({
   selector: 'app-dsidenav',
   templateUrl: './dsidenav.component.html',
-  styleUrls: ['./dsidenav.component.css']
+  styleUrls: ['./dsidenav.component.css'],
 })
 export class DsidenavComponent implements OnInit {
+  doctorData: any = {};
 
-  doctorData:any={};
+  constructor(
+    private doctorService: DoctorService,
+    private authService: AuthService
+  ) {}
 
-  constructor(private doctorService:DoctorService, private authService:AuthService){}
-  
   ngOnInit(): void {
     this.doctorService.getDoctor().subscribe((res: any) => {
       this.doctorData = res;
-      console.log("coming from dashboard", this.doctorData);
+      // console.log("coming from dashboard", this.doctorData);
     });
   }
 
@@ -26,5 +28,4 @@ export class DsidenavComponent implements OnInit {
       AuthService.authEmitter.emit(false);
     });
   }
-
 }

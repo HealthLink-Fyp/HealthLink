@@ -104,7 +104,7 @@ class UserForgot(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255)
-    token = models.CharField(editable=False, unique=True)
+    token = models.CharField(editable=False, unique=True, max_length=255)
 
 
 ##------------- Doctor Profile Model --------------##

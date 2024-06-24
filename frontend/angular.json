@@ -10,10 +10,18 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/HealthLink/",
+            "repo": "https://github.com/HealthLink-Fyp/HealthLink.git"
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/health360-front",
+            "baseHref": "/HealthLink/",
+            "outputPath": "dist/health360-front/browser/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],

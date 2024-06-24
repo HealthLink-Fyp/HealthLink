@@ -28,7 +28,6 @@
 
 <div *ngIf="afterSearchData && afterSearchData.length > 0">
   <div *ngFor="let data of afterSearchData  ">
-    <p>data coming from complete search</p>
     <p>{{data.full_name}}</p>
       <button (click)="viewDoctor(data.user)">view Profile</button>
       <button (click)="onAppointment(data.user)">Book Appointment</button>

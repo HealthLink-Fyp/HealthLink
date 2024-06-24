@@ -21,7 +21,7 @@ export class DocComponent implements OnInit{
   ngOnInit(): void {
     this.doctorService.getDoctor().subscribe((res: any) => {
       this.doctorData = res;
-      console.log("coming from dashboard", this.doctorData);
+      // console.log("coming from dashboard", this.doctorData);
     });
   
     this.doctorService.getbookedAppointments().subscribe((appointments: any) => {
