@@ -19,8 +19,16 @@
 
 <br>
 
+### Login Credentials
+
+| **Role**   | **Email**           | **Password** |
+|------------|---------------------|--------------|
+| Doctor | `ahmed@mail.com`    | `ahmed`      |
+| Patient| `ali@mail.com`      | `ali`        |
+
 </div>
 
+<br><br>
 
 > [!NOTE]
 > The backend may take around 10-15 seconds to boot up due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980). Please wait a moment for it. 😊
