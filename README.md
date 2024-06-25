@@ -4,19 +4,13 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 <br>
 
-
-
 ## Demo 🔽
 
-
-
 <div align="center">
-
 
 [**Access HealthLink Frontend**](https://healthlink-fyp.github.io/HealthLink/)
 
 [**Access HealthLink Backend**](https://healthlink.fly.dev/)
-
 
 </div>
 
@@ -25,14 +19,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 > [!NOTE]
 > Due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980), the backend may take around 10-15 seconds to boot up. Please wait a moment before making your final judgement. 😊
 
-
-
-> [!IMPORTANT]
-> HealthLink is designed to assist doctors, not replace them. It provides tools and information that help doctors make more informed decisions, enhancing the quality of patient care.
->
-
 <br>
-
 
 <div align="center">
 
@@ -43,14 +30,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 </div>
 
 
-
-
-
-<p align="center">
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" data-canonical-src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/42304076-4b3c-49bd-a648-a2ae7987e22c" width="40%"/>
-</p>
-
-</br>
 
 <div>
     <h4 align="center">Languages & Frameworks</h4>
@@ -382,3 +361,6 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 * **E-Prescription**: Doctors can generate e-prescriptions for patients.
 
+> [!IMPORTANT]
+> HealthLink is designed to assist doctors, not replace them. It provides tools and information that help doctors make more informed decisions, enhancing the quality of patient care.
+>
