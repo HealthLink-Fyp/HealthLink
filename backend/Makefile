@@ -2,8 +2,7 @@
 
 serve:
 	python3 manage.py runserver
-	# gunicorn --bind 0.0.0.0:8000 healthlink.wsgi:application
-
+	
 testall:
 	python3 manage.py test
 
