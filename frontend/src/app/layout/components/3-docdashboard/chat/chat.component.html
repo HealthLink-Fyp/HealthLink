@@ -46,28 +46,21 @@
       <div
         class="contact-card"
         *ngFor="let appointment of bookedAppointments"
+        [class.selected]="appointment.id === selectedAppointmentId"
         (click)="savePatId(appointment.id)"
       >
         <div class="contact-card-content">
-          <img [src]="randomPicture()" alt="profile picture" />
+          <img
+            src="assets/avatars/{{ appointment.id }}.jpg"
+            alt="profile picture"
+          />
           <h3>{{ appointment.name }}</h3>
         </div>
       </div>
     </div>
   </aside>
   <section class="chat-section">
-    <header class="chat-header">
-      <h2>
-        <span class="contact-avatar">
-          <span class="status-indicator"></span>
-          <span class="avatar-initial">U</span>
-        </span>
-        <div>
-          <span class="status-text">Online</span>
-        </div>
-      </h2>
-    </header>
-    <main class="chat-main">
+    <main class="chat-main" #chatContainer>
       <div class="message received" *ngFor="let chat of chats">
         <div class="message-content" *ngIf="chat.message">
           <p>{{ chat.message }}</p>
@@ -79,25 +72,13 @@
         </div>
       </div>
     </main>
-    <footer class="chat-footer">
-      <button class="icon-button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-          <line x1="9" x2="9.01" y1="9" y2="9"></line>
-          <line x1="15" x2="15.01" y1="9" y2="9"></line>
-        </svg>
+    <footer class="chat-footer" *ngIf="selectedAppointmentId">
+      <button
+        class="icon-button"
+        (click)="sendEmoji()"
+        style="font-size: 1.5rem; cursor: pointer"
+      >
+        👍
       </button>
       <input
         type="text"

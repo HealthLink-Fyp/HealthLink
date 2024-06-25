@@ -13,10 +13,12 @@ body {
   background-color: white;
 }
 
+
+
 .container {
   display: flex;
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   overflow: hidden;
@@ -38,7 +40,6 @@ body {
 .icon-button {
   background: none;
   border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,10 +47,6 @@ body {
   height: 40px;
   border-radius: 50%;
   transition: background 0.3s;
-}
-
-.icon-button:hover {
-  background-color: #f0f0f0;
 }
 
 .icon {
@@ -92,6 +89,12 @@ body {
   align-items: center;
   background-color: #F0F0F0;
   cursor: pointer;
+}
+
+.contact-card.selected {
+  background-color: #f0f0f0; /* Subtle change in background color */
+  border-right: 4px solid #00BFA5; /* Solid left border for selection indication, using WhatsApp's green color */
+  padding-right: 5px; /* Adjust padding to accommodate the new border without shifting content too much */
 }
 
 .contact-card:hover {
@@ -174,6 +177,10 @@ body {
   overflow-y: auto;
 }
 
+.chat-main::-webkit-scrollbar {
+  display: none;
+}
+
 .message {
   display: flex;
   margin-bottom: 16px;
@@ -226,3 +233,4 @@ body {
 .send-button:hover {
   background-color: #1976d2;
 }
+

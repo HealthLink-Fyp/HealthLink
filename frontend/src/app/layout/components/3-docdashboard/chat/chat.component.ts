@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { ElementRef, ViewChild, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { DoctorService } from 'src/app/architecture/services/doctor/doctor.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
-
 import { environment } from 'src/environment/environment';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-chat1',
@@ -15,8 +14,11 @@ export class ChatComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private doctorService: DoctorService,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private zone: NgZone
   ) {}
+
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
   newMessage = '';
   messages: string[] = [];
@@ -25,6 +27,7 @@ export class ChatComponent implements OnInit {
   pat_id: any = '';
   chats: any[] = [];
   profilePicture: string = '';
+  selectedAppointmentId: number | null = null;
 
   ngOnInit(): void {
     this.onbookedAppointments();
@@ -42,18 +45,16 @@ export class ChatComponent implements OnInit {
             }, new Map())
             .values()
         );
-        console.log('Unique patients:', appointments);
+        console.log('Unique appointments:', appointments);
         this.bookedAppointments = uniquePatients;
       });
   }
 
-  randomPicture() {
-    const random = Math.floor(Math.random() * 8) + 1;
-    return `assets/avatars/avatar0${random}.jpg`;
-  }
-
   savePatId(patId: any) {
-    console.log('Book Appointment clicked for ID:', patId);
+    if (this.chatSocket && this.chatSocket.readyState === WebSocket.OPEN) {
+      this.chatSocket.close(); // Close existing connection
+    }
+    this.selectedAppointmentId = patId;
     this.pat_id = patId;
     this.getChatHistory();
     this.createWebSocketConnection();
@@ -62,12 +63,14 @@ export class ChatComponent implements OnInit {
   tokeny: any = '';
 
   createWebSocketConnection() {
+    if (this.chatSocket && this.chatSocket.readyState === WebSocket.OPEN) {
+      return; // Prevent creating a new connection if one is already open
+    }
     const token = localStorage.getItem('token');
     this.tokeny = token;
     this.chatSocket = new WebSocket(
       `${environment.testApi}/${this.pat_id}/?token= ${token}`
     );
-    console.log();
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
@@ -80,8 +83,29 @@ export class ChatComponent implements OnInit {
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       const message = data.message;
+      if (message.includes('joined')) {
+        this.messages = [];
+      }
+
       this.messages.push(message);
+      console.log('Message received:', message, this.messages);
+      this.scrollToBottom();
     };
+  }
+
+  scrollToBottom(): void {
+    this.zone.runOutsideAngular(() => {
+      setTimeout(() => {
+        try {
+          this.chatContainer.nativeElement.scrollTop =
+            this.chatContainer.nativeElement.scrollHeight;
+        } catch (err) {}
+      });
+    });
+  }
+
+  sendEmoji(): void {
+    this.sendMessage('👍');
   }
 
   disconnect() {
@@ -102,15 +126,19 @@ export class ChatComponent implements OnInit {
 
     this.patientService.getChatHistory(patientData).subscribe((res: any) => {
       this.chats = res;
-      console.log('the patient chat towards doctor', res);
     });
   }
 
-  sendMessage(): void {
+  sendMessage(message: string | null = null): void {
+    if (message) {
+      this.newMessage = message;
+    }
+
     if (this.newMessage.trim()) {
       this.chatSocket.send(this.newMessage);
       this.newMessage = '';
     }
+    this.scrollToBottom();
   }
 
   removeMessage(message: string): void {

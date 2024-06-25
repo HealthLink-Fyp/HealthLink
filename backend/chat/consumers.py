@@ -81,7 +81,7 @@ class ChatConsumer(WebsocketConsumer):
             print("\n User ID:", patient_id)
             self.chat_room_create(doctor_id=doctor_id, patient_id=patient_id)
             self.chat_room.doctor = self.user.doctor
-            
+
             self.chat_room.patient = PatientProfile.objects.get(user__id=patient_id)
 
         elif role == "patient":
@@ -109,8 +109,6 @@ class ChatConsumer(WebsocketConsumer):
         """
 
         if self.is_authenticated(self.user):
-            # Remove the user from the group
-            print("grp: ", self.room_group_name)
             async_to_sync(self.channel_layer.group_discard)(
                 self.room_group_name, self.channel_name
             )
@@ -142,15 +140,11 @@ class ChatConsumer(WebsocketConsumer):
             ):
                 message = f"Anonymous: {message}"
 
-
             message = f"{str(self.user.username).capitalize()}: {message}"
 
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
-                {
-                    "type": "chat_message",
-                    "message": message,
-                },
+                {"type": "chat_message", "message": message},
             )
 
             # Save the message to the database
