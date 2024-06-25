@@ -9,58 +9,65 @@ import { environment } from 'src/environment/environment';
 @Component({
   selector: 'app-chat1',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-
-  constructor(private authService:AuthService,private doctorService:DoctorService, private patientService:PatientService) {
-    
-   
-   
-  }
+  constructor(
+    private authService: AuthService,
+    private doctorService: DoctorService,
+    private patientService: PatientService
+  ) {}
 
   newMessage = '';
   messages: string[] = [];
- chatSocket!: WebSocket;
- bookedAppointments:any[] = []; 
- pat_id:any=''
-  chats:any[]=[];
+  chatSocket!: WebSocket;
+  bookedAppointments: any[] = [];
+  pat_id: any = '';
+  chats: any[] = [];
+  profilePicture: string = '';
 
   ngOnInit(): void {
     this.onbookedAppointments();
-    console.log("here are book appointments in chat doctor : ",this.bookedAppointments)
-    
   }
 
   onbookedAppointments() {
-    this.doctorService.getbookedAppointments().subscribe((appointments: any) => {
-      const uniquePatients = Array.from(appointments.reduce((map:any, a:any) => {
-        map.set(a.patient, { id: a.patient, name: a.patient_name });
-        return map;
-      }, new Map()).values());
-      console.log('Unique patients:', uniquePatients); 
-      this.bookedAppointments = uniquePatients;
-    });
+    this.doctorService
+      .getbookedAppointments()
+      .subscribe((appointments: any) => {
+        const uniquePatients = Array.from(
+          appointments
+            .reduce((map: any, a: any) => {
+              map.set(a.patient, { id: a.patient, name: a.patient_name });
+              return map;
+            }, new Map())
+            .values()
+        );
+        console.log('Unique patients:', appointments);
+        this.bookedAppointments = uniquePatients;
+      });
   }
 
+  randomPicture() {
+    const random = Math.floor(Math.random() * 8) + 1;
+    return `assets/avatars/avatar0${random}.jpg`;
+  }
 
- 
   savePatId(patId: any) {
     console.log('Book Appointment clicked for ID:', patId);
-    this.pat_id=patId;
+    this.pat_id = patId;
     this.getChatHistory();
     this.createWebSocketConnection();
   }
 
-  tokeny:any=''
+  tokeny: any = '';
 
-
-  
   createWebSocketConnection() {
     const token = localStorage.getItem('token');
-    this.tokeny=token;
-    this.chatSocket = new WebSocket(`${environment.testApi}/${this.pat_id}/?token= ${token}`);
-   console.log()
+    this.tokeny = token;
+    this.chatSocket = new WebSocket(
+      `${environment.testApi}/${this.pat_id}/?token= ${token}`
+    );
+    console.log();
 
     this.chatSocket.onopen = (e) => {
       console.log('Chat socket successfully connected.');
@@ -72,7 +79,7 @@ export class ChatComponent implements OnInit {
 
     this.chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      const message = data.message
+      const message = data.message;
       this.messages.push(message);
     };
   }
@@ -85,28 +92,19 @@ export class ChatComponent implements OnInit {
 
   ngOnDestroy() {
     this.disconnect();
-    console.log("websocket connectiion closed")
+    console.log('websocket connectiion closed');
   }
 
- 
-
-  getChatHistory()
-  { 
+  getChatHistory() {
     const patientData = {
-      patient: this.pat_id
+      patient: this.pat_id,
     };
-   
-    this.patientService.getChatHistory(patientData).subscribe(
-      (res:any)=>{
-        this.chats=res;
-        console.log("the patient chat towards doctor",res)
-      }
-      
-    )
+
+    this.patientService.getChatHistory(patientData).subscribe((res: any) => {
+      this.chats = res;
+      console.log('the patient chat towards doctor', res);
+    });
   }
-
-
-  
 
   sendMessage(): void {
     if (this.newMessage.trim()) {

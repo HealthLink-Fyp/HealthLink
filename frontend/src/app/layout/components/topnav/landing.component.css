@@ -1,239 +1,74 @@
-.toolbar h1:nth-last-child(2) {
-    margin-left: auto;
-}
-
-/* targets the last h1 element inside an element with the class .
-                           toolbar and pushes it to the far right side by applying margin-left: auto; */
-
-.nav-link {
-    color: inherit;
-    /* Inherit the color from its parent element */
-    text-decoration: none;
-    /* Remove underline */
-
-
-}
-
-
-/* animations */
-
-/* for logo */
-
-.jello-vertical:hover {
-    -webkit-animation: jello-vertical .1s both;
-    animation: jello-vertical .9s both
-}
-
-
-@-webkit-keyframes jello-vertical {
-    0% {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1)
-    }
-
-    30% {
-        -webkit-transform: scale3d(.75, 1.25, 1);
-        transform: scale3d(.75, 1.25, 1)
-    }
-
-    40% {
-        -webkit-transform: scale3d(1.25, .75, 1);
-        transform: scale3d(1.25, .75, 1)
-    }
-
-    50% {
-        -webkit-transform: scale3d(.85, 1.15, 1);
-        transform: scale3d(.85, 1.15, 1)
-    }
-
-    65% {
-        -webkit-transform: scale3d(1.05, .95, 1);
-        transform: scale3d(1.05, .95, 1)
-    }
-
-    75% {
-        -webkit-transform: scale3d(.95, 1.05, 1);
-        transform: scale3d(.95, 1.05, 1)
-    }
-
-    100% {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1)
-    }
-}
-
-@keyframes jello-vertical {
-    0% {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1)
-    }
-
-    30% {
-        -webkit-transform: scale3d(.75, 1.25, 1);
-        transform: scale3d(.75, 1.25, 1)
-    }
-
-    40% {
-        -webkit-transform: scale3d(1.25, .75, 1);
-        transform: scale3d(1.25, .75, 1)
-    }
-
-    50% {
-        -webkit-transform: scale3d(.85, 1.15, 1);
-        transform: scale3d(.85, 1.15, 1)
-    }
-
-    65% {
-        -webkit-transform: scale3d(1.05, .95, 1);
-        transform: scale3d(1.05, .95, 1)
-    }
-
-    75% {
-        -webkit-transform: scale3d(.95, 1.05, 1);
-        transform: scale3d(.95, 1.05, 1)
-    }
-
-    100% {
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1)
-    }
-}
-
-
-/* for signup/singin button */
-
-.heartbeat:hover {
-    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
-    animation: heartbeat 1.5s ease-in-out infinite both
-}
-
-@-webkit-keyframes heartbeat {
-    from {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: center center;
-        transform-origin: center center;
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    10% {
-        -webkit-transform: scale(.91);
-        transform: scale(.91);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    17% {
-        -webkit-transform: scale(.98);
-        transform: scale(.98);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    33% {
-        -webkit-transform: scale(.87);
-        transform: scale(.87);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    45% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-}
-
-@keyframes heartbeat {
-    from {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: center center;
-        transform-origin: center center;
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    10% {
-        -webkit-transform: scale(.91);
-        transform: scale(.91);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    17% {
-        -webkit-transform: scale(.98);
-        transform: scale(.98);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    33% {
-        -webkit-transform: scale(.87);
-        transform: scale(.87);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    45% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-}
-
-
-
-
-/* my actual css */
-
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
 }
 
 html,
 body {
     height: 100%;
     width: 100%;
+    background-color: #f8f9fa;
 }
+
+
+
+
+.nav-link {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vw;
+    background-color: #f8f9fa;
+    text-decoration: none;
+    color: black;
+}
+
 
 #main {
     height: 100%;
     width: 100%;
-
 }
 
 #nav {
     display: flex;
+    justify-content: space-between;
+    padding: 1.5vw;
+    background-color: #f8f9fa;
+    
+}
+
+#nav div.left {
+    display: flex;
     flex-wrap: wrap;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    padding: 1vw;
-    width: 100%;
-    height: 85px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 0px rgba(0, 0, 0, 0.05);
     align-items: center;
+    width: 100%;
+    justify-content: flex-start;
 }
 
-#nav h1 {
-    margin-top: 0.25vw;
-    margin-right: 2.5vw;
-    font-size: 1.3vw;
+#nav div.left h1 {
+    margin-right: 1vw;
+}
+
+#nav div.right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+#nav div.right h1 {
+    margin-right: 1vw;
+}
+
+#nav div.center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 
 
-
-@media(max-width:850px) {
-    #nav { flex-direction: column; padding: 2vw; align-items: center; /* center items horizontally */ } #nav h1 { font-size: 3vw; /* increase font size even more */ margin-right: 0; text-align: center; /* center text horizontally */ } #nav a { font-size: 2vw; /* increase font size for links too */ padding: 1vw; /* add some padding for links */ }
-
-    #features {
-        display: none;
-    }
-
-
-}

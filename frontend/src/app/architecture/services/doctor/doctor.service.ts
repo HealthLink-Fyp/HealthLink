@@ -19,40 +19,31 @@ export class DoctorService {
     return this.http.get(`${environment.api}/auth/profile/`);
   }
 
-  
   getChatHistory(body: any) {
     return this.http.post(`${environment.api}/chat/`, body);
   }
 
-  sendNotes(body:any)
-  {
+  sendNotes(body: any) {
     return this.http.post(`${environment.api}/records/`, body);
   }
 
-  getbookedAppointments()
-  {
-    return this.http.get(`${environment.api}/appointment/`)
+  getbookedAppointments() {
+    return this.http.get(`${environment.api}/appointment/`);
   }
 
-  delAppointment(pkAppointment: any)
-  {
+  delAppointment(pkAppointment: any) {
     return this.http.delete(`${environment.api}/appointment/${pkAppointment}/`);
   }
 
-  updateDoctorProfile(body:any)
-  {
-    return this.http.put(`${environment.api}/auth/profile/`,body);
+  updateDoctorProfile(body: any) {
+    return this.http.put(`${environment.api}/auth/profile/`, body);
   }
 
-  deleteDoctor()
-  {
+  deleteDoctor() {
     return this.http.delete(`${environment.api}/auth/user/`);
   }
 
-  delDocForm()
-  {
+  delDocForm() {
     return this.http.delete(`${environment.api}/auth/profile/`);
   }
-
-  
 }

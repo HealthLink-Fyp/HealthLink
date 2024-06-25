@@ -42,6 +42,10 @@ export class PatientService {
     return this.http.delete(`${environment.api}/auth/user/`);
   }
 
+  getAllDoctors() {
+    return this.http.get(`${environment.api}/search/doctors/`);
+  }
+
   delPatForm() {
     return this.http.delete(`${environment.api}/auth/profile/`);
   }

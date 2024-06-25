@@ -1,142 +1,135 @@
-import { Component, NgZoneOptions, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/architecture/services/auth.service';
 import { PatientService } from 'src/app/architecture/services/patient/patient.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Component({
   selector: 'app-docsearch',
   templateUrl: './docsearch.component.html',
-  styleUrls: ['./docsearch.component.css']
+  styleUrls: ['./docsearch.component.css'],
 })
 export class DocsearchComponent implements OnInit {
+  allDoctors: any[] = []; // Store all doctors
+  currentUserRole: string = '';
+  searchQuery: string = '';
+  searchResults: any[] = [];
+  selectedCity: string = '';
+  afterSearchData: any[] = [];
+  searchSuggestions: string[] = [
+    'Dentist',
+    'Gynecologist',
+    'General Physician',
+    'Dermatologist',
+    'Ear-nose-throat Specialist',
+    'Homoeopath',
+    'Ayurveda',
+  ];
+  cities: string[] = [
+    'Karachi',
+    'Lahore',
+    'Islamabad',
+    'Rawalpindi',
+    'Faisalabad',
+    'Multan',
+    'Hyderabad',
+    'Quetta',
+    'Peshawar',
+    'Gujranwala',
+    'Sialkot',
+    'Abbottabad',
+    'Bahawalpur',
+    'Sargodha',
+    'Sukkur',
+    'Larkana',
+    'Nawabshah',
+    'Mirpur Khas',
+    'Rahim Yar Khan',
+    'Sahiwal',
+    'Okara',
+    'Wah Cantonment',
+    'Dera Ghazi Khan',
+    'Mingora',
+    'Kamoke',
+    'Shekhupura',
+    'Mardan',
+    'Kasur',
+    'Gujrat',
+    'Chiniot',
+    'Jhang',
+    'Sadiqabad',
+    'Sheikhupura',
+    'Attock',
+    'Jhelum',
+    'Jacobabad',
+    'Khanewal',
+    'Muzaffargarh',
+    'Khanpur',
+  ];
 
+  constructor(
+    private patientService: PatientService,
+    private router: Router,
+    private authService: AuthService,
+    private location: Location,
+    private http: HttpClient
+  ) {}
 
-  currentUserRole: string='';
+  ngOnInit(): void {
+    this.getCurrentUserRole();
+    this.loadAllDoctors();
+  }
 
+  loadAllDoctors() {
+    this.patientService.getAllDoctors().subscribe({
+      next: (response: any) => {
+        this.allDoctors = response.results;
+        this.searchResults = this.allDoctors;
+      },
+      error: (error) => {
+        console.error('Error fetching doctors:', error);
+      },
+      complete: () => {
+        console.log('Doctor loading complete');
+      },
+    });
+  }
   getCurrentUserRole() {
     this.authService.user().subscribe((user: any) => {
       this.currentUserRole = user.role;
     });
   }
 
+  searchDoctors() {
+    let query = this.searchQuery.toLowerCase();
+    let city = this.selectedCity;
 
-
-  constructor(private patientService:PatientService, private router:Router, private authService:AuthService, private location: Location,private http: HttpClient){
-   
-    this.getCurrentUserRole();
-  
+    this.searchResults = this.allDoctors.filter((doctor) => {
+      // Match doctor name and city with search query and selected city
+      // Adjust the condition based on your data structure
+      let matchesQuery = doctor.full_name.toLowerCase().includes(query);
+      let matchesCity = city ? doctor.city === city : true;
+      return matchesQuery && matchesCity;
+    });
   }
 
-  ngOnInit(): void {
-
-    console.log("i am ngoniit");
+  doctorsSearched() {
+    this.patientService
+      .afterDoctorsSearched(this.searchQuery, this.selectedCity)
+      .subscribe((response: any) => {
+        this.afterSearchData = response.results;
+      });
   }
-
-  
-  
-
- 
-
-
-
-
-
-
-  // if the user who visiting this components have token in his headers then check the boolean value to true otherwise false
- 
-
-
-
 
   goBack(): void {
     this.location.back();
   }
 
-
-  searchQuery:string='';          // stores the words  that user types in search
-  searchResults:any[]=[];          //stores the automcomplete searchResults of doctors
-  selectedCity:string='';          //stores that city in which user wants to search doctor
-  bookedAppointments:any[] = []; 
-
-  onClickSearchBtnBool:boolean=true;
-
-  appointmentData: any = {
-    start:'',
-    doctor:'',
-    patient:''
-  };
-
-  cities:string[]=[
-    'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Quetta', 'Peshawar', 'Gujranwala', 'Sialkot', 'Abbottabad', 'Bahawalpur', 'Sargodha', 'Sukkur', 'Larkana', 'Nawabshah', 'Mirpur Khas', 'Rahim Yar Khan', 'Sahiwal', 'Okara', 'Wah Cantonment', 'Dera Ghazi Khan', 'Mingora', 'Kamoke', 'Shekhupura', 'Mardan', 'Kasur', 'Gujrat', 'Chiniot', 'Jhang', 'Sadiqabad', 'Sheikhupura', 'Attock', 'Jhelum', 'Jacobabad', 'Khanewal', 'Muzaffargarh', 'Khanpur'
-    ]
-
-  search()
-  {
-    
+  onBookAppointment(docId: any) {
+    this.router.navigate([
+      '/dashboard/patient/appointment/booking',
+      { doctorId: docId },
+    ]);
   }
-
-  searchSuggestions: string[] = [
-    "Dentist",
-    "Gynecologist",
-    "General Physician",
-    "Dermatologist",
-    "Ear-nose-throat Specialist",
-    "Homoeopath",
-    "Ayurveda"
-];
-
-searchDoctors()
-{          
-  this.onClickSearchBtnBool=true;                                
-  //if userpresses backspace and clear the search bar then remove the search results showing on the screen
-  if(this.searchQuery===''){
-    this.clearSearchResults();
-    return                                // after that don't go further and don't make any more calls
-  }
-
- this.patientService.searchDoctors(this.searchQuery).subscribe(
-    (response:any)=>{
-        this.searchResults=response
-        console.log(this.searchResults)
-    },
-  )
-  }
-
-  this.patientService.allDoctors().subscribe((response:any)=>{
-    this.doctors=response.results;
-    console.log(this.doctors);
-  }
-
-  // for clearing auto complete search reuslts
-
-  clearSearchResults()
-  {
-    this.searchResults=[];
-  }
-
-   //array that stores all results of doctor after clicking on search button
-
-   afterSearchData:any[]=[];
-
-  doctorsSearched()
-    {
-      this.onClickSearchBtnBool=false;
-
-      this.patientService.afterDoctorsSearched(this.searchQuery,this.selectedCity).subscribe((response:any)=>{
-           this.afterSearchData=response.results;
-           console.log('data came after search is : ',this.afterSearchData);
-      })
-    }
-
-  
-
-   
-    onBookAppointment(docId:any)
-    {
-     this.router.navigate(['/dashboard/patient/appointment/booking']);
-    }
 }

@@ -1,91 +1,111 @@
-<select [(ngModel)]="selectedCity">
-  <option>Select city</option>
-  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-</select>
+<div class="dashboard-component">
+  <select [(ngModel)]="selectedCity" class="search-section">
+    <option>Select city</option>
+    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+  </select>
 
-
-<div>
-    <input type="text" [(ngModel)]="searchQuery" (input)="searchDoctors()" placeholder="Search Doctors...">
+  <div class="search-section">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="searchDoctors()"
+      placeholder="Search Doctors..."
+    />
     <button (click)="doctorsSearched()">Search</button>
-    <div *ngIf="searchResults && searchResults.length > 0">
+    <div
+      *ngIf="searchResults && searchResults.length > 0"
+      class="search-results"
+    >
       <ul>
         <li *ngFor="let result of searchResults">
-          <!-- Display search results as desired -->
-          {{ result.full_name }} - {{ result.city }} - {{ result.specialization }}
+          {{ result.full_name }} - {{ result.city }} -
+          {{ result.specialization }}
         </li>
       </ul>
     </div>
-    
+  </div>
+
+  <div class="patient-data">
+    <h1>User ID: {{ patientData.user }}</h1>
+    <p>Age: {{ patientData.age }}</p>
+    <p>Sex: {{ patientData.sex }}</p>
+  </div>
+
+  <div
+    *ngIf="afterSearchData && afterSearchData.length > 0"
+    class="booked-appointments"
+  >
+    <div *ngFor="let data of afterSearchData">
+      <p>{{ data.full_name }}</p>
+      <button (click)="viewDoctor(data.user)" class="view-button">
+        View Profile
+      </button>
+      <button (click)="onAppointment(data.user)" class="book-button">
+        Book Appointment
+      </button>
     </div>
-
-    <div>
-      <h1>User ID: {{ patientData.user }}</h1>
-      <p>Age: {{ patientData.age }}</p>
-      <p>Sex: {{ patientData.sex }}</p>
-    
-      <!-- Display other properties -->
   </div>
 
-<div *ngIf="afterSearchData && afterSearchData.length > 0">
-  <div *ngFor="let data of afterSearchData  ">
-    <p>{{data.full_name}}</p>
-      <button (click)="viewDoctor(data.user)">view Profile</button>
-      <button (click)="onAppointment(data.user)">Book Appointment</button>
-  </div>
-</div>
-
-
-<div *ngIf="onbookAppointment">
-<label>For appointment booking : </label><br>
-  <label for="start">Start:</label>
-  <input type="datetime-local"  [(ngModel)]="appointmentData.start">
-</div>
-
-<div *ngIf="onupdateAppointment">
-  <h1>Update appointment:</h1>
-  <div>
+  <div *ngIf="onbookAppointment" class="appointment-booking">
+    <label>For appointment booking:</label><br />
     <label for="start">Start:</label>
-    <input type="datetime-local" [(ngModel)]="appointmentData.start">
+    <input type="datetime-local" [(ngModel)]="appointmentData.start" />
   </div>
-  <!-- Add other fields as needed -->
-  <button (click)="onSubmitUpdatedAppointment()">Update</button>
+
+  <div *ngIf="onupdateAppointment" class="update-appointment">
+    <h1>Update appointment:</h1>
+    <div>
+      <label for="start">Start:</label>
+      <input type="datetime-local" [(ngModel)]="appointmentData.start" />
+    </div>
+    <button (click)="onSubmitUpdatedAppointment()">Update</button>
+  </div>
+
+  <div class="booked-appointments">
+    <h1>Your booked appointment is:</h1>
+    <div *ngFor="let bookedAppoint of bookedAppointments">
+      <p>{{ bookedAppoint.start }}</p>
+      <p>{{ bookedAppoint.end }}</p>
+      <p>{{ bookedAppoint.status }}</p>
+      <p>
+        <button
+          (click)="
+            onUpdateAppointment(
+              bookedAppoint.appointment_id,
+              bookedAppoint.doctor
+            )
+          "
+          class="update-button"
+        >
+          Update Appointment
+        </button>
+      </p>
+      <p>
+        <button
+          (click)="onDeleteAppointment(bookedAppoint.appointment_id)"
+          class="delete-button"
+        >
+          Delete Appointment
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <div class="update-patient-profile">
+    <button (click)="updatePatientProfile()">
+      Update Patient Personal Info
+    </button>
+  </div>
+
+  <div class="update-patient-form">
+    <button (click)="updatePatientForm()">Update Patient Form</button>
+  </div>
+
+  <div class="delete-patient">
+    <button (click)="onDeletePatient()">Delete Patient</button>
+  </div>
+
+  <div class="delete-patient-form">
+    <button (click)="onDeletePatientForm()">Delete Patient Form</button>
+  </div>
 </div>
-
-
-
-
-
-<div>
-     <h1>Your booked apointment is </h1>
-     <div *ngFor="let bookedAppoint of bookedAppointments">
-         <p>{{bookedAppoint.start}}</p>
-         <p>{{bookedAppoint.end}}</p>
-         <p>{{bookedAppoint.status}}</p>
-         <p>
-          <button (click)="onUpdateAppointment(bookedAppoint.appointment_id,bookedAppoint.doctor)">update appointment</button>
-         </p>
-        
-        <p>
-          <button (click)="onDeleteAppointment(bookedAppoint.appointment_id)">delete appointment</button>
-        </p>
-     </div>
-
-</div>
-
-
-<div>
-  <button (click)="updatePatientProfile()">Update patient personal info</button>
-</div>
-
-<div>
-  <button (click)="updatePatientForm()">Update patient form</button>
-</div>
-
-<div>
-  <button (click)="onDeletePatient()">delete patient</button>
-</div>
-
-<div>
-  <button (click)="onDeletePatientForm()">delete patient form</button>
-</div>
-

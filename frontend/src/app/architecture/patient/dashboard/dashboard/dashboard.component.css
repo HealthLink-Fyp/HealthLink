@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+select, input[type="text"], input[type="datetime-local"], button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #449d44;
+}
+
+/* Dashboard Component */
+.dashboard-component {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(0, 0, 0);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.search-results li {
+    padding: 10px;
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-results li:last-child {
+    border-bottom: none;
+}
+
+/* Patient Data */
+.patient-data {
+    margin-bottom: 20px;
+}
+
+.patient-data h1 {
+    color: #007bff;
+}
+
+/* Appointment Booking */
+.appointment-booking, .update-appointment {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.appointment-booking label, .update-appointment label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Booked Appointments */
+.booked-appointments {
+    margin-top: 20px;
+}
+
+.booked-appointments > div {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Update and Delete Buttons */
+.update-button, .delete-button {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.update-button:hover, .delete-button:hover {
+    opacity: 0.8;
+}
+
+/* Patient Profile Update */
+.update-patient-profile, .update-patient-form, .delete-patient, .delete-patient-form {
+    margin-top: 10px;
+}

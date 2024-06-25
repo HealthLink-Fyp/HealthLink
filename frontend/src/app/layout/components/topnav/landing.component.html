@@ -1,15 +1,47 @@
 <body>
   <div id="main">
     <div id="nav" class="toolbar" color="primary">
-      <h1><img src="https://i.ibb.co/NKnJZ5L/download.png" alt="logo" width="40" height="40" style="background-color: transparent; margin-top: 0.25vw; margin-left: 0.5vw;" /></h1>
-      <!-- <h1 class="jello-vertical">HealthLink 360</h1> -->
+      <div class="left">
+        <h1>
+          <a class="nav-link" routerLink="/account">Find a Doctor</a>
+        </h1>
 
-      <h1><a class="nav-link" routerLink="/patient/medicalStore">Medicines</a></h1>
-      <h1><a class="nav-link" routerLink="/patient/labTests">Lab Tests</a></h1>
-      <h1><a class="nav-link" routerLink="/patient/docsearch">Our Doctors</a></h1>
-      <h1 class="heartbeat">
-        <button color="primary" mat-raised-button routerLink="/account">Login/Signup</button>
-      </h1>
+        <h1>
+          <a class="nav-link" routerLink="/patient/medicalStore">
+            Medical store
+          </a>
+        </h1>
+        <h1>
+          <a class="nav-link" routerLink="/patient/labTests">Lab tests</a>
+        </h1>
+      </div>
+
+      <div class="center">
+        <h1>
+          <img
+            src="https://i.ibb.co/NKnJZ5L/download.png"
+            alt="logo"
+            width="40"
+            height="40"
+            style="
+              background-color: transparent;
+              margin-top: 0.25vw;
+              margin-left: 0.5vw;
+            "
+          />
+        </h1>
+      </div>
+
+      <div class="right">
+        <h1>
+          <a class="nav-link" routerLink="/patient/docsearch">Our Doctors</a>
+        </h1>
+        <h1 class="heartbeat">
+          <button color="primary" mat-raised-button routerLink="/account">
+            Login/Signup
+          </button>
+        </h1>
+      </div>
     </div>
   </div>
 </body>
