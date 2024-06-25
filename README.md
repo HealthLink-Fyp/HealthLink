@@ -25,14 +25,14 @@
 
 #### **Doctor Account**
 
-🩺 **Username:** `ahmed@mail.com`  
-🔑 **Password:** `ahmed`
+Email: `ahmed@mail.com`  
+Password: `ahmed`
 
 
 #### **Patient Account**
 
-👤 **Username:** `ali@mail.com`  
-🔑 **Password:** `ali`
+Email: `ali@mail.com`  
+Password: `ali`
 
 
 
