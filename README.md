@@ -4,18 +4,17 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 <div align="center">
 
-## Access HealthLink
 
-### Frontend
-[**Visit HealthLink Frontend**](https://healthlink-fyp.github.io/HealthLink/)
+## Access HealthLink Frontend
+[**Visit**](https://healthlink-fyp.github.io/HealthLink/)
 
 
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/b493fa90-adcc-4778-91a3-67095a6cec0d" data-canonical-src="https://healthlink-fyp.github.io/HealthLink/" width="100%"/>
+<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/b493fa90-adcc-4778-91a3-67095a6cec0d" data-canonical-src="https://healthlink-fyp.github.io/HealthLink/" width="80%"/>
 
-### Backend
-[**Visit HealthLink Backend**](https://healthlink.fly.dev/)
+### Access HealthLink Backend
+[**Visit**](https://healthlink.fly.dev/)
 
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/eb1fe2dd-ca57-4406-a4a9-bc68737c1e57" data-canonical-src="https://healthlink.fly.dev/" width="100%"/>
+<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/eb1fe2dd-ca57-4406-a4a9-bc68737c1e57" data-canonical-src="https://healthlink.fly.dev/" width="80%"/>
 </p>
 
 *Note: The backend takes around 10-15 seconds to boot up due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980).*
