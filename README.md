@@ -21,7 +21,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 
 > [!NOTE]
-> The backend may take around 10-15 seconds to boot up due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980). Please wait a moment before making your final judgement. 😊
+> The backend may take around 10-15 seconds to boot up due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980). Please wait a moment for it. 😊
 
 
 <br>
