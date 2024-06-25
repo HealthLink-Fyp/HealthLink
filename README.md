@@ -21,15 +21,13 @@
 
 </div>
 
-### Login Credentials
-
-#### **Doctor Account**
+#### Doctor Login
 
 Email: `ahmed@mail.com`  
 Password: `ahmed`
 
 
-#### **Patient Account**
+#### Patient Login
 
 Email: `ali@mail.com`  
 Password: `ali`
