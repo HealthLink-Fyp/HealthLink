@@ -7,7 +7,8 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 # Demo
 
-<img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/b493fa90-adcc-4778-91a3-67095a6cec0d" href="https://healthlink-fyp.github.io/HealthLink/" width="80%"/>
+<a href="https://healthlink-fyp.github.io/HealthLink/"><img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/b493fa90-adcc-4778-91a3-67095a6cec0d" alt="Healthlink Frontend Demo" width="80%"></a>
+
 
 [**Access HealthLink Frontend**](https://healthlink-fyp.github.io/HealthLink/)
 
