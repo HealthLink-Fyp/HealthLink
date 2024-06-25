@@ -1,14 +1,9 @@
 ## What is HealthLink?
 
-- AI-powered telemedicine platform
-- Patient and doctor dashboards
-- Video/Audio calls
-- Chat
-- Call transcription
+- AI-powered telemedicine platform with Patient and doctor dashboards
+- Video/Audio calls, Chat & Call transcription
 - LLM-powered video calls
-- Secure appointment scheduling
-- E-prescriptions
-- Integrated payment solutions
+- Secure appointment scheduling, E-prescriptions & Integrated payment solutions
 - Deployed on [Fly](https://fly.io) using Docker with CI/CD
 
   
