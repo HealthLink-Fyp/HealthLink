@@ -4,10 +4,10 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 <br>
 
+# Demo
+
 <div align="center">
 
-
-# Demo
 
 [**Access HealthLink Frontend**](https://healthlink-fyp.github.io/HealthLink/)
 
