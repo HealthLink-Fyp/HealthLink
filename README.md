@@ -19,14 +19,16 @@
 
 <br>
 
-</div>
+
 
 ### Login Credentials
 
 | **Role**   | **Email**           | **Password** |
 |------------|---------------------|--------------|
-| **Doctor** | `ahmed@mail.com`    | `ahmed`      |
-| **Patient**| `ali@mail.com`      | `ali`        |
+| Doctor | `ahmed@mail.com`    | `ahmed`      |
+| Patient| `ali@mail.com`      | `ali`        |
+
+</div>
 
 <br><br>
 
