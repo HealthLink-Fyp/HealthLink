@@ -23,21 +23,18 @@
 
 ### Login Credentials
 
-<div align="center">
-
 #### **Doctor Account**
 
 🩺 **Username:** `ahmed@mail.com`  
 🔑 **Password:** `ahmed`
 
-<br>
 
 #### **Patient Account**
 
 👤 **Username:** `ali@mail.com`  
 🔑 **Password:** `ali`
 
-</div>
+
 
 
 > [!NOTE]
