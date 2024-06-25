@@ -17,9 +17,10 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 [**Access HealthLink Backend**](https://healthlink.fly.dev/)
 
+
+</div>
+
 <br>
-
-
 
 > [!NOTE]
 > Due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980), the backend may take around 10-15 seconds to boot up. Please wait a moment before making your final judgement. 😊
@@ -28,7 +29,7 @@ HealthLink is an AI Powered telemedicine platform with patient and doctor dashbo
 
 <a href="https://healthlink.fly.dev/"><img src="https://github.com/HealthLink-Fyp/HealthLink/assets/69955157/eb1fe2dd-ca57-4406-a4a9-bc68737c1e57" alt="Healthlink Frontend Demo" width="80%"></a>
 
-</div>
+
 
 
 
