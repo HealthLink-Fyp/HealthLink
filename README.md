@@ -3,12 +3,15 @@
 HealthLink is an AI Powered telemedicine platform with patient and doctor dashboards, *Video/Audio Call*, *Chat*, Call Transcription, *LLM-powered video call*, secure appointment scheduling, e-prescriptions, telemedicine, and integrated *payment solutions*, all deployed on [Fly](fly.io) using *Docker* with *CI/CD* and responsive design.
 
 
-[Visit HealthLink Frontend](https://healthlink-fyp.github.io/HealthLink/)
+## Access HealthLink
 
-[Visit HealthLink Backend](https://healthlink.fly.dev/)
+### Frontend
+[**Visit HealthLink Frontend**](https://healthlink-fyp.github.io/HealthLink/)
 
-Note: Backend takes around 10-15 seconds for booting up due to [fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980)
+### Backend
+[**Visit HealthLink Backend**](https://healthlink.fly.dev/)
 
+*Note: The backend takes around 10-15 seconds to boot up due to [Fly.io cold start](https://community.fly.io/t/whats-the-cold-start-time-for-when-apps-vm-count-is-1/4980).*
 
 
 </br>
